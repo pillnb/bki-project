@@ -142,9 +142,10 @@ exports.Prisma.PegawaiScalarFieldEnum = {
 exports.Prisma.PelatihanScalarFieldEnum = {
   id_pelatihan: 'id_pelatihan',
   nup: 'nup',
-  kualifikasi: 'kualifikasi',
+  nama_pelatihan: 'nama_pelatihan',
   penyelenggara: 'penyelenggara',
   nomor_sertifikat: 'nomor_sertifikat',
+  file_sertifikat: 'file_sertifikat',
   tanggal_awal: 'tanggal_awal',
   masa_berlaku: 'masa_berlaku',
   status: 'status',
@@ -212,6 +213,12 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.StatusPelatihan = exports.$Enums.StatusPelatihan = {
+  ON_GOING: 'ON_GOING',
+  VALID: 'VALID',
+  EXPIRED: 'EXPIRED'
+};
+
 exports.StatusSuratTugas = exports.$Enums.StatusSuratTugas = {
   DIAJUKAN: 'DIAJUKAN',
   MENUNGGU_APPROVAL: 'MENUNGGU_APPROVAL',

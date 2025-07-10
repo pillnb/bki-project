@@ -1,10 +1,11 @@
+import prisma from "@/lib/prisma";
 
 export async function getKualifikasiByNup(nup: string) {
   return await prisma.pelatihan.findMany({
     where: { nup },
     select: {
       id_pelatihan: true,
-      kualifikasi: true,
+      nama_pelatihan: true,
       penyelenggara: true,
       nomor_sertifikat: true,
       tahun: true,
@@ -17,6 +18,7 @@ export async function getKualifikasiByNup(nup: string) {
     orderBy: { tahun: "desc" },
   });
 }
+
 
 export async function getPengalamanKerjaByNup(nup: string) {
   return await prisma.pengalaman_kerja.findMany({

@@ -2,6 +2,7 @@
 import Navbar from "./Navbar";
 import { getPegawaiByNik } from "./data-diri";
 import { getKualifikasiByNup, getPengalamanKerjaByNup } from "../../cv-generator/data-cv";
+import { getTrainingOnGoingByNup } from "../../cv-generator/data-training";
 import { getHistorySuratTugasByNup } from "./history-surat-tugas";
 
 export const dynamic = "force-dynamic";
@@ -31,10 +32,8 @@ export default async function PegawaiDashboard() {
   // Ambil history surat tugas dari database
   const historySuratTugas = nup ? await getHistorySuratTugasByNup(nup) : [];
 
-  const historyTraining = [
-    { nama: "Training A", status: "On Going" },
-    { nama: "Training B", status: "Selesai" },
-  ];
+  // Ambil data training ON_GOING
+  const historyTraining = nup ? await getTrainingOnGoingByNup(nup) : [];
 
   return (
     <div className="min-h-screen bg-[#e9f1fa] pb-10">
@@ -109,7 +108,7 @@ export default async function PegawaiDashboard() {
             <table className="w-full text-sm border rounded">
               <thead>
                 <tr className="bg-blue-100 text-blue-900">
-                  <th className="py-2 px-3 text-left">ID</th>
+                  <th className="py-2 px-3 text-left">No.</th>
                   <th className="py-2 px-3 text-left">Nama Kualifikasi</th>
                   <th className="py-2 px-3 text-left">Penyelenggara</th>
                   <th className="py-2 px-3 text-left">No Sertifikat</th>
@@ -127,20 +126,19 @@ export default async function PegawaiDashboard() {
                 ) : (
                   dataKualifikasi.map((k: any, idx: number) => (
                     <tr key={idx} className="border-b last:border-b-0">
-                      <td className="py-2 px-3 text-black">{k.id_pelatihan ?? '-'}</td>
-                      <td className="py-2 px-3 text-black">{k.kualifikasi}</td>
+                      <td className="py-2 px-3 text-black">{idx + 1}</td>
+                      <td className="py-2 px-3 text-black">{k.nama_pelatihan}</td>
                       <td className="py-2 px-3 text-black">{k.penyelenggara}</td>
                       <td className="py-2 px-3 text-black">{k.nomor_sertifikat}</td>
                       <td className="py-2 px-3 text-black">{k.tahun}</td>
                       <td className="py-2 px-3 text-black">{k.tanggal_awal ? formatDate(k.tanggal_awal) : '-'}</td>
                       <td className="py-2 px-3 text-black">{k.tanggal_akhir ? formatDate(k.tanggal_akhir) : '-'}</td>
                       <td className="py-2 px-3 text-black">{k.masa_berlaku ? formatDate(k.masa_berlaku) : '-'}</td>
-                      <td className="py-2 px-3 text-black">
-                        {k.status === "Sedang Berlangsung" && <span className="px-2 py-1 rounded bg-yellow-100 text-yellow-800 font-semibold text-xs">Sedang Berlangsung</span>}
-                        {k.status === "Valid" && <span className="px-2 py-1 rounded bg-green-100 text-green-800 font-semibold text-xs">Valid</span>}
-                        {k.status === "Expired" && <span className="px-2 py-1 rounded bg-red-100 text-red-800 font-semibold text-xs">Expired</span>}
-                        {k.status === "Belum Berlaku" && <span className="px-2 py-1 rounded bg-gray-100 text-gray-800 font-semibold text-xs">Belum Berlaku</span>}
-                        {!["Sedang Berlangsung","Valid","Expired","Belum Berlaku"].includes(k.status) && <span>{k.status}</span>}
+                      <td className="py-2 px-3 text-black whitespace-nowrap">
+                        {k.status === "ON_GOING" && <span className="inline-block px-2 py-1 rounded bg-yellow-100 text-yellow-800 font-semibold text-xs whitespace-nowrap">On Going</span>}
+                        {k.status === "VALID" && <span className="inline-block px-2 py-1 rounded bg-green-100 text-green-800 font-semibold text-xs whitespace-nowrap">Valid</span>}
+                        {k.status === "EXPIRED" && <span className="inline-block px-2 py-1 rounded bg-red-100 text-red-800 font-semibold text-xs whitespace-nowrap">Expired</span>}
+                        {!["ON_GOING","VALID","EXPIRED"].includes(k.status) && <span className="inline-block whitespace-nowrap">{k.status}</span>}
                       </td>
                       <td className="py-2 px-3 text-black">{k.keterangan_utilisasi}</td>
                     </tr>
@@ -158,7 +156,7 @@ export default async function PegawaiDashboard() {
             <table className="w-full text-sm border rounded">
               <thead>
                 <tr className="bg-blue-100 text-blue-900">
-                  <th className="py-2 px-3 text-left">ID</th>
+                  <th className="py-2 px-3 text-left">No.</th>
                   <th className="py-2 px-3 text-left">Pengalaman Kerja</th>
                   <th className="py-2 px-3 text-left">Perusahaan</th>
                   <th className="py-2 px-3 text-left">Tahun</th>
@@ -170,7 +168,7 @@ export default async function PegawaiDashboard() {
                 ) : (
                   dataPengalaman.map((p: any, idx: number) => (
                     <tr key={idx} className="border-b last:border-b-0">
-                      <td className="py-2 px-3 text-black">{p.id_pengalaman ?? '-'}</td>
+                      <td className="py-2 px-3 text-black">{idx + 1}</td>
                       <td className="py-2 px-3 text-black">{p.pengalaman_kerja}</td>
                       <td className="py-2 px-3 text-black">{p.perusahaan}</td>
                       <td className="py-2 px-3 text-black">{p.tahun}</td>
@@ -229,17 +227,37 @@ export default async function PegawaiDashboard() {
 
         {/* History Training */}
         <div className="bg-white rounded-xl shadow p-6 mb-8">
-          <h3 className="text-lg font-bold text-blue-900 mb-4">History Training</h3>
-          <ul className="divide-y">
-            {historyTraining.map((training, idx) => (
-              <li key={idx} className="flex justify-between py-2">
-                <span>{training.nama}</span>
-                <span className={`px-2 py-1 rounded text-xs font-semibold ${training.status === "On Going" ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800"}`}>
-                  {training.status}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-bold text-blue-900">History Training (On Going)</h3>
+            <a
+              href="/training"
+              className="text-gray-400 hover:underline text-xs font-medium"
+              style={{ border: 'none', padding: 0 }}
+            >
+              Lihat Semua
+            </a>
+          </div>
+          {historyTraining.length === 0 ? (
+            <div className="text-gray-500 italic">Tidak ada training yang sedang berlangsung.</div>
+          ) : (
+            <ul className="divide-y">
+              {historyTraining.map((training: any, idx: number) => (
+                <li key={training.id_pelatihan || idx} className="py-2 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                  <div>
+                    <span className="font-semibold text-blue-900">{training.nama_pelatihan}</span>
+                    <span className="ml-2 text-gray-700">{training.penyelenggara}</span>
+                    <span className="ml-2 text-xs text-gray-500">({training.tanggal_awal ? formatDate(training.tanggal_awal) : '-'})</span>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <span className="px-2 py-1 rounded text-xs font-semibold bg-yellow-100 text-yellow-800">On Going</span>
+                    {training.nomor_sertifikat && (
+                      <span className="text-xs text-gray-500 ml-2">No: {training.nomor_sertifikat}</span>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>

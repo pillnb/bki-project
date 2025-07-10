@@ -30,15 +30,22 @@ model pegawai {
   pengalaman_kerja    pengalaman_kerja[]
 }
 
+enum StatusPelatihan {
+  ON_GOING
+  VALID
+  EXPIRED
+}
+
 model pelatihan {
   id_pelatihan         Int       @id @default(autoincrement())
   nup                  String?
-  kualifikasi          String?
+  nama_pelatihan       String?
   penyelenggara        String?
   nomor_sertifikat     String?
+  file_sertifikat      String?
   tanggal_awal         DateTime? @db.Date
   masa_berlaku         DateTime? @db.Date
-  status               String?
+  status               StatusPelatihan
   keterangan_utilisasi String?
   tahun                Int?
   tanggal_akhir        DateTime? @db.Date
@@ -100,3 +107,5 @@ model PegawaiSuratTugas {
   pegawai      pegawai    @relation(fields: [pegawaiNup], references: [nup])
   suratTugas   SuratTugas @relation(fields: [suratTugasId], references: [id])
 }
+
+

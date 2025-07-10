@@ -94,7 +94,7 @@ export default function KualifikasiForm({ onSubmit, onCancel }: KualifikasiFormP
           <input id="tahun" name="tahun" type="number" value={formData.tahun} onChange={handleChange} className="w-full border rounded px-3 py-2 text-black" required />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label htmlFor="tanggal_awal" className="block text-sm font-medium text-black mb-1">
             Tanggal Awal Pelatihan <span className="text-red-600">*</span>
@@ -107,53 +107,18 @@ export default function KualifikasiForm({ onSubmit, onCancel }: KualifikasiFormP
           </label>
           <input id="tanggal_akhir" name="tanggal_akhir" type="date" value={formData.tanggal_akhir} onChange={handleChange} className="w-full border rounded px-3 py-2 text-black" required />
         </div>
-        <div>
-          <label htmlFor="masa_berlaku" className="block text-sm font-medium text-black mb-1">
-            Tanggal Kadaluarsa (Expired) <span className="text-red-600">*</span>
-          </label>
-          <input id="masa_berlaku" name="masa_berlaku" type="date" value={formData.masa_berlaku} onChange={handleChange} className="w-full border rounded px-3 py-2 text-black" required />
-        </div>
+      </div>
+      <div>
+        <label htmlFor="masa_berlaku" className="block text-sm font-medium text-black mb-1">
+          Tanggal Kadaluarsa (Expired) <span className="text-red-600">*</span>
+        </label>
+        <input id="masa_berlaku" name="masa_berlaku" type="date" value={formData.masa_berlaku} onChange={handleChange} className="w-full border rounded px-3 py-2 text-black" required />
       </div>
       <div>
         <label htmlFor="keterangan_utilisasi" className="block text-sm font-medium text-black mb-1">Keterangan Utilisasi</label>
         <input id="keterangan_utilisasi" name="keterangan_utilisasi" value={formData.keterangan_utilisasi} onChange={handleChange} className="w-full border rounded px-3 py-2 text-black" />
       </div>
-      <div>
-        <label className="block text-sm font-medium text-black mb-1">Status Kualifikasi</label>
-        <div className="flex gap-4 items-center">
-          <label className="inline-flex items-center">
-            <input
-              type="radio"
-              name="status_override"
-              value="Sedang Berlangsung"
-              checked={formData.status_override === "Sedang Berlangsung"}
-              onChange={handleChange}
-            />
-            <span className="ml-2">Sedang Berlangsung</span>
-          </label>
-          <label className="inline-flex items-center">
-            <input
-              type="radio"
-              name="status_override"
-              value="Valid"
-              checked={formData.status_override === "Valid"}
-              onChange={handleChange}
-            />
-            <span className="ml-2">Sudah Selesai (Valid)</span>
-          </label>
-          <label className="inline-flex items-center">
-            <input
-              type="radio"
-              name="status_override"
-              value=""
-              checked={formData.status_override === ""}
-              onChange={handleChange}
-            />
-            <span className="ml-2">Otomatis</span>
-          </label>
-        </div>
-        <p className="text-xs text-gray-500 mt-1">Pilih status jika ingin override status otomatis. Jika tidak, biarkan "Otomatis".</p>
-      </div>
+      {/* Status Kualifikasi dihapus sesuai permintaan */}
       <div className="flex justify-end gap-2 pt-4">
         <button type="button" className="px-4 py-2 rounded bg-gray-200 text-gray-800 font-semibold" onClick={onCancel}>Batal</button>
         <button type="submit" className="px-4 py-2 rounded bg-blue-900 text-white font-semibold">Simpan</button>

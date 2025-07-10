@@ -129,19 +129,18 @@ export default function CVGeneratorPageClient({ initialDataDiri, initialDataKual
                         ) : (
                         initialDataKualifikasi.map((k: any, idx: number) => (
                             <tr key={idx} className="border-b last:border-b-0">
-                            <td className="py-2 px-3 text-black">{k.kualifikasi}</td>
+                            <td className="py-2 px-3 text-black">{k.nama_pelatihan}</td>
                             <td className="py-2 px-3 text-black">{k.penyelenggara}</td>
                             <td className="py-2 px-3 text-black">{k.nomor_sertifikat}</td>
                             <td className="py-2 px-3 text-black">{k.tahun}</td>
                             <td className="py-2 px-3 text-black">{formatDate(k.tanggal_awal)}</td>
                             <td className="py-2 px-3 text-black">{formatDate(k.tanggal_akhir)}</td>
                             <td className="py-2 px-3 text-black">{formatDate(k.masa_berlaku)}</td>
-                            <td className="py-2 px-3 text-black">
-                              {k.status === "Sedang Berlangsung" && <span className="px-2 py-1 rounded bg-yellow-100 text-yellow-800 font-semibold text-xs">Sedang Berlangsung</span>}
-                              {k.status === "Valid" && <span className="px-2 py-1 rounded bg-green-100 text-green-800 font-semibold text-xs">Valid</span>}
-                              {k.status === "Expired" && <span className="px-2 py-1 rounded bg-red-100 text-red-800 font-semibold text-xs">Expired</span>}
-                              {k.status === "Belum Berlaku" && <span className="px-2 py-1 rounded bg-gray-100 text-gray-800 font-semibold text-xs">Belum Berlaku</span>}
-                              {!["Sedang Berlangsung","Valid","Expired","Belum Berlaku"].includes(k.status) && <span>{k.status}</span>}
+                            <td className="py-2 px-3 text-black whitespace-nowrap">
+                              {k.status === "ON_GOING" && <span className="inline-block px-2 py-1 rounded bg-yellow-100 text-yellow-800 font-semibold text-xs whitespace-nowrap">On Going</span>}
+                              {k.status === "VALID" && <span className="inline-block px-2 py-1 rounded bg-green-100 text-green-800 font-semibold text-xs whitespace-nowrap">Valid</span>}
+                              {k.status === "EXPIRED" && <span className="inline-block px-2 py-1 rounded bg-red-100 text-red-800 font-semibold text-xs whitespace-nowrap">Expired</span>}
+                              {!["ON_GOING","VALID","EXPIRED"].includes(k.status) && <span className="inline-block whitespace-nowrap">{k.status}</span>}
                             </td>
                             </tr>
                         ))

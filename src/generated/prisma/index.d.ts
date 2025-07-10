@@ -43,7 +43,16 @@ export type PegawaiSuratTugas = $Result.DefaultSelection<Prisma.$PegawaiSuratTug
  * Enums
  */
 export namespace $Enums {
-  export const StatusSuratTugas: {
+  export const StatusPelatihan: {
+  ON_GOING: 'ON_GOING',
+  VALID: 'VALID',
+  EXPIRED: 'EXPIRED'
+};
+
+export type StatusPelatihan = (typeof StatusPelatihan)[keyof typeof StatusPelatihan]
+
+
+export const StatusSuratTugas: {
   DIAJUKAN: 'DIAJUKAN',
   MENUNGGU_APPROVAL: 'MENUNGGU_APPROVAL',
   SELESAI: 'SELESAI',
@@ -53,6 +62,10 @@ export namespace $Enums {
 export type StatusSuratTugas = (typeof StatusSuratTugas)[keyof typeof StatusSuratTugas]
 
 }
+
+export type StatusPelatihan = $Enums.StatusPelatihan
+
+export const StatusPelatihan: typeof $Enums.StatusPelatihan
 
 export type StatusSuratTugas = $Enums.StatusSuratTugas
 
@@ -2659,12 +2672,13 @@ export namespace Prisma {
   export type PelatihanMinAggregateOutputType = {
     id_pelatihan: number | null
     nup: string | null
-    kualifikasi: string | null
+    nama_pelatihan: string | null
     penyelenggara: string | null
     nomor_sertifikat: string | null
+    file_sertifikat: string | null
     tanggal_awal: Date | null
     masa_berlaku: Date | null
-    status: string | null
+    status: $Enums.StatusPelatihan | null
     keterangan_utilisasi: string | null
     tahun: number | null
     tanggal_akhir: Date | null
@@ -2673,12 +2687,13 @@ export namespace Prisma {
   export type PelatihanMaxAggregateOutputType = {
     id_pelatihan: number | null
     nup: string | null
-    kualifikasi: string | null
+    nama_pelatihan: string | null
     penyelenggara: string | null
     nomor_sertifikat: string | null
+    file_sertifikat: string | null
     tanggal_awal: Date | null
     masa_berlaku: Date | null
-    status: string | null
+    status: $Enums.StatusPelatihan | null
     keterangan_utilisasi: string | null
     tahun: number | null
     tanggal_akhir: Date | null
@@ -2687,9 +2702,10 @@ export namespace Prisma {
   export type PelatihanCountAggregateOutputType = {
     id_pelatihan: number
     nup: number
-    kualifikasi: number
+    nama_pelatihan: number
     penyelenggara: number
     nomor_sertifikat: number
+    file_sertifikat: number
     tanggal_awal: number
     masa_berlaku: number
     status: number
@@ -2713,9 +2729,10 @@ export namespace Prisma {
   export type PelatihanMinAggregateInputType = {
     id_pelatihan?: true
     nup?: true
-    kualifikasi?: true
+    nama_pelatihan?: true
     penyelenggara?: true
     nomor_sertifikat?: true
+    file_sertifikat?: true
     tanggal_awal?: true
     masa_berlaku?: true
     status?: true
@@ -2727,9 +2744,10 @@ export namespace Prisma {
   export type PelatihanMaxAggregateInputType = {
     id_pelatihan?: true
     nup?: true
-    kualifikasi?: true
+    nama_pelatihan?: true
     penyelenggara?: true
     nomor_sertifikat?: true
+    file_sertifikat?: true
     tanggal_awal?: true
     masa_berlaku?: true
     status?: true
@@ -2741,9 +2759,10 @@ export namespace Prisma {
   export type PelatihanCountAggregateInputType = {
     id_pelatihan?: true
     nup?: true
-    kualifikasi?: true
+    nama_pelatihan?: true
     penyelenggara?: true
     nomor_sertifikat?: true
+    file_sertifikat?: true
     tanggal_awal?: true
     masa_berlaku?: true
     status?: true
@@ -2842,12 +2861,13 @@ export namespace Prisma {
   export type PelatihanGroupByOutputType = {
     id_pelatihan: number
     nup: string | null
-    kualifikasi: string | null
+    nama_pelatihan: string | null
     penyelenggara: string | null
     nomor_sertifikat: string | null
+    file_sertifikat: string | null
     tanggal_awal: Date | null
     masa_berlaku: Date | null
-    status: string | null
+    status: $Enums.StatusPelatihan
     keterangan_utilisasi: string | null
     tahun: number | null
     tanggal_akhir: Date | null
@@ -2875,9 +2895,10 @@ export namespace Prisma {
   export type pelatihanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_pelatihan?: boolean
     nup?: boolean
-    kualifikasi?: boolean
+    nama_pelatihan?: boolean
     penyelenggara?: boolean
     nomor_sertifikat?: boolean
+    file_sertifikat?: boolean
     tanggal_awal?: boolean
     masa_berlaku?: boolean
     status?: boolean
@@ -2890,9 +2911,10 @@ export namespace Prisma {
   export type pelatihanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_pelatihan?: boolean
     nup?: boolean
-    kualifikasi?: boolean
+    nama_pelatihan?: boolean
     penyelenggara?: boolean
     nomor_sertifikat?: boolean
+    file_sertifikat?: boolean
     tanggal_awal?: boolean
     masa_berlaku?: boolean
     status?: boolean
@@ -2905,9 +2927,10 @@ export namespace Prisma {
   export type pelatihanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_pelatihan?: boolean
     nup?: boolean
-    kualifikasi?: boolean
+    nama_pelatihan?: boolean
     penyelenggara?: boolean
     nomor_sertifikat?: boolean
+    file_sertifikat?: boolean
     tanggal_awal?: boolean
     masa_berlaku?: boolean
     status?: boolean
@@ -2920,9 +2943,10 @@ export namespace Prisma {
   export type pelatihanSelectScalar = {
     id_pelatihan?: boolean
     nup?: boolean
-    kualifikasi?: boolean
+    nama_pelatihan?: boolean
     penyelenggara?: boolean
     nomor_sertifikat?: boolean
+    file_sertifikat?: boolean
     tanggal_awal?: boolean
     masa_berlaku?: boolean
     status?: boolean
@@ -2931,7 +2955,7 @@ export namespace Prisma {
     tanggal_akhir?: boolean
   }
 
-  export type pelatihanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pelatihan" | "nup" | "kualifikasi" | "penyelenggara" | "nomor_sertifikat" | "tanggal_awal" | "masa_berlaku" | "status" | "keterangan_utilisasi" | "tahun" | "tanggal_akhir", ExtArgs["result"]["pelatihan"]>
+  export type pelatihanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pelatihan" | "nup" | "nama_pelatihan" | "penyelenggara" | "nomor_sertifikat" | "file_sertifikat" | "tanggal_awal" | "masa_berlaku" | "status" | "keterangan_utilisasi" | "tahun" | "tanggal_akhir", ExtArgs["result"]["pelatihan"]>
   export type pelatihanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pegawai?: boolean | pelatihan$pegawaiArgs<ExtArgs>
   }
@@ -2950,12 +2974,13 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id_pelatihan: number
       nup: string | null
-      kualifikasi: string | null
+      nama_pelatihan: string | null
       penyelenggara: string | null
       nomor_sertifikat: string | null
+      file_sertifikat: string | null
       tanggal_awal: Date | null
       masa_berlaku: Date | null
-      status: string | null
+      status: $Enums.StatusPelatihan
       keterangan_utilisasi: string | null
       tahun: number | null
       tanggal_akhir: Date | null
@@ -3385,12 +3410,13 @@ export namespace Prisma {
   interface pelatihanFieldRefs {
     readonly id_pelatihan: FieldRef<"pelatihan", 'Int'>
     readonly nup: FieldRef<"pelatihan", 'String'>
-    readonly kualifikasi: FieldRef<"pelatihan", 'String'>
+    readonly nama_pelatihan: FieldRef<"pelatihan", 'String'>
     readonly penyelenggara: FieldRef<"pelatihan", 'String'>
     readonly nomor_sertifikat: FieldRef<"pelatihan", 'String'>
+    readonly file_sertifikat: FieldRef<"pelatihan", 'String'>
     readonly tanggal_awal: FieldRef<"pelatihan", 'DateTime'>
     readonly masa_berlaku: FieldRef<"pelatihan", 'DateTime'>
-    readonly status: FieldRef<"pelatihan", 'String'>
+    readonly status: FieldRef<"pelatihan", 'StatusPelatihan'>
     readonly keterangan_utilisasi: FieldRef<"pelatihan", 'String'>
     readonly tahun: FieldRef<"pelatihan", 'Int'>
     readonly tanggal_akhir: FieldRef<"pelatihan", 'DateTime'>
@@ -3612,7 +3638,7 @@ export namespace Prisma {
     /**
      * The data needed to create a pelatihan.
      */
-    data?: XOR<pelatihanCreateInput, pelatihanUncheckedCreateInput>
+    data: XOR<pelatihanCreateInput, pelatihanUncheckedCreateInput>
   }
 
   /**
@@ -7450,9 +7476,10 @@ export namespace Prisma {
   export const PelatihanScalarFieldEnum: {
     id_pelatihan: 'id_pelatihan',
     nup: 'nup',
-    kualifikasi: 'kualifikasi',
+    nama_pelatihan: 'nama_pelatihan',
     penyelenggara: 'penyelenggara',
     nomor_sertifikat: 'nomor_sertifikat',
+    file_sertifikat: 'file_sertifikat',
     tanggal_awal: 'tanggal_awal',
     masa_berlaku: 'masa_berlaku',
     status: 'status',
@@ -7586,6 +7613,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusPelatihan'
+   */
+  export type EnumStatusPelatihanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusPelatihan'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusPelatihan[]'
+   */
+  export type ListEnumStatusPelatihanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusPelatihan[]'>
     
 
 
@@ -7751,12 +7792,13 @@ export namespace Prisma {
     NOT?: pelatihanWhereInput | pelatihanWhereInput[]
     id_pelatihan?: IntFilter<"pelatihan"> | number
     nup?: StringNullableFilter<"pelatihan"> | string | null
-    kualifikasi?: StringNullableFilter<"pelatihan"> | string | null
+    nama_pelatihan?: StringNullableFilter<"pelatihan"> | string | null
     penyelenggara?: StringNullableFilter<"pelatihan"> | string | null
     nomor_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
+    file_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
     tanggal_awal?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
     masa_berlaku?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
-    status?: StringNullableFilter<"pelatihan"> | string | null
+    status?: EnumStatusPelatihanFilter<"pelatihan"> | $Enums.StatusPelatihan
     keterangan_utilisasi?: StringNullableFilter<"pelatihan"> | string | null
     tahun?: IntNullableFilter<"pelatihan"> | number | null
     tanggal_akhir?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
@@ -7766,12 +7808,13 @@ export namespace Prisma {
   export type pelatihanOrderByWithRelationInput = {
     id_pelatihan?: SortOrder
     nup?: SortOrderInput | SortOrder
-    kualifikasi?: SortOrderInput | SortOrder
+    nama_pelatihan?: SortOrderInput | SortOrder
     penyelenggara?: SortOrderInput | SortOrder
     nomor_sertifikat?: SortOrderInput | SortOrder
+    file_sertifikat?: SortOrderInput | SortOrder
     tanggal_awal?: SortOrderInput | SortOrder
     masa_berlaku?: SortOrderInput | SortOrder
-    status?: SortOrderInput | SortOrder
+    status?: SortOrder
     keterangan_utilisasi?: SortOrderInput | SortOrder
     tahun?: SortOrderInput | SortOrder
     tanggal_akhir?: SortOrderInput | SortOrder
@@ -7784,12 +7827,13 @@ export namespace Prisma {
     OR?: pelatihanWhereInput[]
     NOT?: pelatihanWhereInput | pelatihanWhereInput[]
     nup?: StringNullableFilter<"pelatihan"> | string | null
-    kualifikasi?: StringNullableFilter<"pelatihan"> | string | null
+    nama_pelatihan?: StringNullableFilter<"pelatihan"> | string | null
     penyelenggara?: StringNullableFilter<"pelatihan"> | string | null
     nomor_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
+    file_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
     tanggal_awal?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
     masa_berlaku?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
-    status?: StringNullableFilter<"pelatihan"> | string | null
+    status?: EnumStatusPelatihanFilter<"pelatihan"> | $Enums.StatusPelatihan
     keterangan_utilisasi?: StringNullableFilter<"pelatihan"> | string | null
     tahun?: IntNullableFilter<"pelatihan"> | number | null
     tanggal_akhir?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
@@ -7799,12 +7843,13 @@ export namespace Prisma {
   export type pelatihanOrderByWithAggregationInput = {
     id_pelatihan?: SortOrder
     nup?: SortOrderInput | SortOrder
-    kualifikasi?: SortOrderInput | SortOrder
+    nama_pelatihan?: SortOrderInput | SortOrder
     penyelenggara?: SortOrderInput | SortOrder
     nomor_sertifikat?: SortOrderInput | SortOrder
+    file_sertifikat?: SortOrderInput | SortOrder
     tanggal_awal?: SortOrderInput | SortOrder
     masa_berlaku?: SortOrderInput | SortOrder
-    status?: SortOrderInput | SortOrder
+    status?: SortOrder
     keterangan_utilisasi?: SortOrderInput | SortOrder
     tahun?: SortOrderInput | SortOrder
     tanggal_akhir?: SortOrderInput | SortOrder
@@ -7821,12 +7866,13 @@ export namespace Prisma {
     NOT?: pelatihanScalarWhereWithAggregatesInput | pelatihanScalarWhereWithAggregatesInput[]
     id_pelatihan?: IntWithAggregatesFilter<"pelatihan"> | number
     nup?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
-    kualifikasi?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
+    nama_pelatihan?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
     penyelenggara?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
     nomor_sertifikat?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
+    file_sertifikat?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
     tanggal_awal?: DateTimeNullableWithAggregatesFilter<"pelatihan"> | Date | string | null
     masa_berlaku?: DateTimeNullableWithAggregatesFilter<"pelatihan"> | Date | string | null
-    status?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
+    status?: EnumStatusPelatihanWithAggregatesFilter<"pelatihan"> | $Enums.StatusPelatihan
     keterangan_utilisasi?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
     tahun?: IntNullableWithAggregatesFilter<"pelatihan"> | number | null
     tanggal_akhir?: DateTimeNullableWithAggregatesFilter<"pelatihan"> | Date | string | null
@@ -8255,12 +8301,13 @@ export namespace Prisma {
   }
 
   export type pelatihanCreateInput = {
-    kualifikasi?: string | null
+    nama_pelatihan?: string | null
     penyelenggara?: string | null
     nomor_sertifikat?: string | null
+    file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
     masa_berlaku?: Date | string | null
-    status?: string | null
+    status: $Enums.StatusPelatihan
     keterangan_utilisasi?: string | null
     tahun?: number | null
     tanggal_akhir?: Date | string | null
@@ -8270,24 +8317,26 @@ export namespace Prisma {
   export type pelatihanUncheckedCreateInput = {
     id_pelatihan?: number
     nup?: string | null
-    kualifikasi?: string | null
+    nama_pelatihan?: string | null
     penyelenggara?: string | null
     nomor_sertifikat?: string | null
+    file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
     masa_berlaku?: Date | string | null
-    status?: string | null
+    status: $Enums.StatusPelatihan
     keterangan_utilisasi?: string | null
     tahun?: number | null
     tanggal_akhir?: Date | string | null
   }
 
   export type pelatihanUpdateInput = {
-    kualifikasi?: NullableStringFieldUpdateOperationsInput | string | null
+    nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
+    file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     masa_berlaku?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPelatihanFieldUpdateOperationsInput | $Enums.StatusPelatihan
     keterangan_utilisasi?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8297,12 +8346,13 @@ export namespace Prisma {
   export type pelatihanUncheckedUpdateInput = {
     id_pelatihan?: IntFieldUpdateOperationsInput | number
     nup?: NullableStringFieldUpdateOperationsInput | string | null
-    kualifikasi?: NullableStringFieldUpdateOperationsInput | string | null
+    nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
+    file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     masa_berlaku?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPelatihanFieldUpdateOperationsInput | $Enums.StatusPelatihan
     keterangan_utilisasi?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8311,24 +8361,26 @@ export namespace Prisma {
   export type pelatihanCreateManyInput = {
     id_pelatihan?: number
     nup?: string | null
-    kualifikasi?: string | null
+    nama_pelatihan?: string | null
     penyelenggara?: string | null
     nomor_sertifikat?: string | null
+    file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
     masa_berlaku?: Date | string | null
-    status?: string | null
+    status: $Enums.StatusPelatihan
     keterangan_utilisasi?: string | null
     tahun?: number | null
     tanggal_akhir?: Date | string | null
   }
 
   export type pelatihanUpdateManyMutationInput = {
-    kualifikasi?: NullableStringFieldUpdateOperationsInput | string | null
+    nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
+    file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     masa_berlaku?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPelatihanFieldUpdateOperationsInput | $Enums.StatusPelatihan
     keterangan_utilisasi?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8337,12 +8389,13 @@ export namespace Prisma {
   export type pelatihanUncheckedUpdateManyInput = {
     id_pelatihan?: IntFieldUpdateOperationsInput | number
     nup?: NullableStringFieldUpdateOperationsInput | string | null
-    kualifikasi?: NullableStringFieldUpdateOperationsInput | string | null
+    nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
+    file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     masa_berlaku?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPelatihanFieldUpdateOperationsInput | $Enums.StatusPelatihan
     keterangan_utilisasi?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8873,6 +8926,13 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type EnumStatusPelatihanFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPelatihan | EnumStatusPelatihanFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPelatihanFilter<$PrismaModel> | $Enums.StatusPelatihan
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -8892,9 +8952,10 @@ export namespace Prisma {
   export type pelatihanCountOrderByAggregateInput = {
     id_pelatihan?: SortOrder
     nup?: SortOrder
-    kualifikasi?: SortOrder
+    nama_pelatihan?: SortOrder
     penyelenggara?: SortOrder
     nomor_sertifikat?: SortOrder
+    file_sertifikat?: SortOrder
     tanggal_awal?: SortOrder
     masa_berlaku?: SortOrder
     status?: SortOrder
@@ -8911,9 +8972,10 @@ export namespace Prisma {
   export type pelatihanMaxOrderByAggregateInput = {
     id_pelatihan?: SortOrder
     nup?: SortOrder
-    kualifikasi?: SortOrder
+    nama_pelatihan?: SortOrder
     penyelenggara?: SortOrder
     nomor_sertifikat?: SortOrder
+    file_sertifikat?: SortOrder
     tanggal_awal?: SortOrder
     masa_berlaku?: SortOrder
     status?: SortOrder
@@ -8925,9 +8987,10 @@ export namespace Prisma {
   export type pelatihanMinOrderByAggregateInput = {
     id_pelatihan?: SortOrder
     nup?: SortOrder
-    kualifikasi?: SortOrder
+    nama_pelatihan?: SortOrder
     penyelenggara?: SortOrder
     nomor_sertifikat?: SortOrder
+    file_sertifikat?: SortOrder
     tanggal_awal?: SortOrder
     masa_berlaku?: SortOrder
     status?: SortOrder
@@ -8939,6 +9002,16 @@ export namespace Prisma {
   export type pelatihanSumOrderByAggregateInput = {
     id_pelatihan?: SortOrder
     tahun?: SortOrder
+  }
+
+  export type EnumStatusPelatihanWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPelatihan | EnumStatusPelatihanFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPelatihanWithAggregatesFilter<$PrismaModel> | $Enums.StatusPelatihan
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusPelatihanFilter<$PrismaModel>
+    _max?: NestedEnumStatusPelatihanFilter<$PrismaModel>
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9339,6 +9412,10 @@ export namespace Prisma {
     connect?: pegawaiWhereUniqueInput
   }
 
+  export type EnumStatusPelatihanFieldUpdateOperationsInput = {
+    set?: $Enums.StatusPelatihan
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
@@ -9618,6 +9695,23 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedEnumStatusPelatihanFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPelatihan | EnumStatusPelatihanFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPelatihanFilter<$PrismaModel> | $Enums.StatusPelatihan
+  }
+
+  export type NestedEnumStatusPelatihanWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPelatihan | EnumStatusPelatihanFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPelatihanWithAggregatesFilter<$PrismaModel> | $Enums.StatusPelatihan
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusPelatihanFilter<$PrismaModel>
+    _max?: NestedEnumStatusPelatihanFilter<$PrismaModel>
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -9728,12 +9822,13 @@ export namespace Prisma {
   }
 
   export type pelatihanCreateWithoutPegawaiInput = {
-    kualifikasi?: string | null
+    nama_pelatihan?: string | null
     penyelenggara?: string | null
     nomor_sertifikat?: string | null
+    file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
     masa_berlaku?: Date | string | null
-    status?: string | null
+    status: $Enums.StatusPelatihan
     keterangan_utilisasi?: string | null
     tahun?: number | null
     tanggal_akhir?: Date | string | null
@@ -9741,12 +9836,13 @@ export namespace Prisma {
 
   export type pelatihanUncheckedCreateWithoutPegawaiInput = {
     id_pelatihan?: number
-    kualifikasi?: string | null
+    nama_pelatihan?: string | null
     penyelenggara?: string | null
     nomor_sertifikat?: string | null
+    file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
     masa_berlaku?: Date | string | null
-    status?: string | null
+    status: $Enums.StatusPelatihan
     keterangan_utilisasi?: string | null
     tahun?: number | null
     tanggal_akhir?: Date | string | null
@@ -9836,12 +9932,13 @@ export namespace Prisma {
     NOT?: pelatihanScalarWhereInput | pelatihanScalarWhereInput[]
     id_pelatihan?: IntFilter<"pelatihan"> | number
     nup?: StringNullableFilter<"pelatihan"> | string | null
-    kualifikasi?: StringNullableFilter<"pelatihan"> | string | null
+    nama_pelatihan?: StringNullableFilter<"pelatihan"> | string | null
     penyelenggara?: StringNullableFilter<"pelatihan"> | string | null
     nomor_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
+    file_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
     tanggal_awal?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
     masa_berlaku?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
-    status?: StringNullableFilter<"pelatihan"> | string | null
+    status?: EnumStatusPelatihanFilter<"pelatihan"> | $Enums.StatusPelatihan
     keterangan_utilisasi?: StringNullableFilter<"pelatihan"> | string | null
     tahun?: IntNullableFilter<"pelatihan"> | number | null
     tanggal_akhir?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
@@ -10347,12 +10444,13 @@ export namespace Prisma {
 
   export type pelatihanCreateManyPegawaiInput = {
     id_pelatihan?: number
-    kualifikasi?: string | null
+    nama_pelatihan?: string | null
     penyelenggara?: string | null
     nomor_sertifikat?: string | null
+    file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
     masa_berlaku?: Date | string | null
-    status?: string | null
+    status: $Enums.StatusPelatihan
     keterangan_utilisasi?: string | null
     tahun?: number | null
     tanggal_akhir?: Date | string | null
@@ -10392,12 +10490,13 @@ export namespace Prisma {
   }
 
   export type pelatihanUpdateWithoutPegawaiInput = {
-    kualifikasi?: NullableStringFieldUpdateOperationsInput | string | null
+    nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
+    file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     masa_berlaku?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPelatihanFieldUpdateOperationsInput | $Enums.StatusPelatihan
     keterangan_utilisasi?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10405,12 +10504,13 @@ export namespace Prisma {
 
   export type pelatihanUncheckedUpdateWithoutPegawaiInput = {
     id_pelatihan?: IntFieldUpdateOperationsInput | number
-    kualifikasi?: NullableStringFieldUpdateOperationsInput | string | null
+    nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
+    file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     masa_berlaku?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPelatihanFieldUpdateOperationsInput | $Enums.StatusPelatihan
     keterangan_utilisasi?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10418,12 +10518,13 @@ export namespace Prisma {
 
   export type pelatihanUncheckedUpdateManyWithoutPegawaiInput = {
     id_pelatihan?: IntFieldUpdateOperationsInput | number
-    kualifikasi?: NullableStringFieldUpdateOperationsInput | string | null
+    nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
+    file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     masa_berlaku?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPelatihanFieldUpdateOperationsInput | $Enums.StatusPelatihan
     keterangan_utilisasi?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
