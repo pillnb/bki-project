@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+model pegawai {
+  nup                 String              @id @unique(map: "unique_nup")
+  nama_pegawai        String
+  status_pegawai      String?
+  jabatan             String?
+  tempat_lahir        String?
+  tanggal_lahir       DateTime?           @db.Date
+  alamat              String?
+  warga_negara        String?
+  agama               String?
+  no_telepon          String?
+  email               String?
+  password            String
+  role                String?             @default("pegawai")
+  username            String?             @unique(map: "idx_pegawai_username")
+  id                  Int                 @unique(map: "unique_id") @default(autoincrement())
+  nik                 String?             @db.VarChar(32)
+  pegawai_surat_tugas PegawaiSuratTugas[]
+  pelatihan           pelatihan[]
+  pengalaman_kerja    pengalaman_kerja[]
+}
+
+model pelatihan {
+  id_pelatihan         Int       @id @default(autoincrement())
+  nup                  String?
+  kualifikasi          String?
+  penyelenggara        String?
+  nomor_sertifikat     String?
+  tanggal_awal         DateTime? @db.Date
+  masa_berlaku         DateTime? @db.Date
+  status               String?
+  keterangan_utilisasi String?
+  tahun                Int?
+  tanggal_akhir        DateTime? @db.Date
+  pegawai              pegawai?  @relation(fields: [nup], references: [nup], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model pengalaman_kerja {
+  id_pengalaman    Int      @id @default(autoincrement())
+  nup              String?
+  tahun            Int?
+  pengalaman_kerja String?
+  perusahaan       String?
+  pegawai          pegawai? @relation(fields: [nup], references: [nup], onDelete: Cascade, onUpdate: NoAction)
+}
+
+enum StatusSuratTugas {
+  DIAJUKAN
+  MENUNGGU_APPROVAL
+  SELESAI
+  DITOLAK
+}
+
+model SuratTugas {
+  id                            Int                 @id @default(autoincrement())
+  nomor_surat                   String?             @unique
+  klien                         String
+  pekerjaan                     String
+  status_pekerjaan              String?
+  no_service_order              String?
+  bidang_pekerjaan              String?
+  peralatan_inspeksi            String[] // Change from String? to String[]
+  kebutuhan_material            String[] // Change from String? to String[]
+  lokasi_pekerjaan              String[] // Change from String to String[]
+  tanggal_berangkat             DateTime? // Make optional to handle empty dates
+  tanggal_kembali               DateTime? // Make optional to handle empty dates
+  transportasi_operasional      Boolean             @default(false)
+  transportasi_ditanggung_klien Boolean             @default(false)
+  transportasi_asal_tujuan      Boolean             @default(false)
+  transportasi_dinas            Boolean             @default(false)
+  tiket                         Boolean             @default(false)
+  penginapan                    Boolean             @default(false)
+  keterangan_lain               String?
+  createdAt                     DateTime            @default(now())
+  updatedAt                     DateTime            @updatedAt
+  spi                           String?
+  wbs                           String?
+  status                        StatusSuratTugas    @default(DIAJUKAN)
+  pegawai_surat_tugas           PegawaiSuratTugas[]
+}
+
+model PegawaiSuratTugas {
+  id           Int        @id @default(autoincrement())
+  suratTugasId Int
+  pegawaiNup   String
+  jabatan      String?
+  approved     Boolean    @default(false)
+  approvedBy   String?
+  approvedAt   DateTime?
+  pegawai      pegawai    @relation(fields: [pegawaiNup], references: [nup])
+  suratTugas   SuratTugas @relation(fields: [suratTugasId], references: [id])
+}
