@@ -3,18 +3,17 @@ import prisma from "@/lib/prisma";
 import { StatusPelatihan } from "@/generated/prisma";
 import { revalidatePath } from "next/cache";
 
-
-
 type KualifikasiData = {
   kualifikasi: string;
   penyelenggara: string;
   nomor_sertifikat: string;
   tanggal_awal: string;
-  tanggal_akhir: string; // new field
+  tanggal_akhir: string;
   masa_berlaku: string;
   keterangan_utilisasi: string;
   tahun: number;
-  status_override?: keyof typeof StatusPelatihan; // optional, for manual status selection
+  lokasi: string; // TAMBAHKAN INI
+  status_override?: keyof typeof StatusPelatihan;
 };
 
 export async function tambahKualifikasi(nup: string, data: KualifikasiData) {
@@ -42,12 +41,31 @@ export async function tambahKualifikasi(nup: string, data: KualifikasiData) {
       status = "EXPIRED";
     }
   }
+    
+  // Simpan ke database
+  await prisma.pelatihan.create({
+    data: {
+      nup,
+      nama_pelatihan: data.kualifikasi,
+      penyelenggara: data.penyelenggara,
+      nomor_sertifikat: data.nomor_sertifikat,
+      tahun: data.tahun,
+      tanggal_awal: tanggalAwalDate.toISOString(),
+      tanggal_akhir: tanggalAkhirDate.toISOString(),
+      masa_berlaku: masaBerlakuDate.toISOString(),
+      lokasi: data.lokasi,
+      keterangan_utilisasi: data.keterangan_utilisasi,
+      status,
+    },
+  });
+  revalidatePath("/cv-generator");
 }
 
 type PengalamanData = {
   pengalaman_kerja: string;
   perusahaan: string;
   tahun: number;
+  lokasi: string; // TAMBAHKAN INI
 };
 
 export async function tambahPengalaman(nup: string, data: PengalamanData) {
@@ -59,6 +77,7 @@ export async function tambahPengalaman(nup: string, data: PengalamanData) {
       pengalaman_kerja: data.pengalaman_kerja,
       perusahaan: data.perusahaan,
       tahun: data.tahun,
+      lokasi: data.lokasi, // TAMBAHKAN INI
     },
   });
   revalidatePath("/cv-generator");

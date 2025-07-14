@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
       nup = nupParam;
     } else {
       // Jika tidak, ambil dari cookie
-      const cookieStore = cookies();
+      const cookieStore = await cookies();
       const nik = cookieStore.get('nik')?.value;
 
       if (!nik) {
@@ -48,13 +48,13 @@ export async function GET(request: NextRequest) {
       id: training.id_pelatihan,
       nama: training.nama_pelatihan,
       penyelenggara: training.penyelenggara,
-      tanggalMulai: training.tanggal_awal.toISOString(),
-      tanggalSelesaiEstimasi: training.tanggal_akhir.toISOString(),
+      tanggalMulai: training.tanggal_awal ? training.tanggal_awal.toISOString() : null,
+      tanggalSelesaiEstimasi: training.tanggal_akhir ? training.tanggal_akhir.toISOString() : null,
       tahun: training.tahun,
       status: training.status,
-      tanggalSelesaiAktual: training.tanggal_akhir?.toISOString(),
+      tanggalSelesaiAktual: training.tanggal_akhir ? training.tanggal_akhir.toISOString() : null,
       noSertifikat: training.nomor_sertifikat,
-      tanggalKadaluarsa: training.masa_berlaku?.toISOString(),
+      tanggalKadaluarsa: training.masa_berlaku ? training.masa_berlaku.toISOString() : null,
       file_url: training.file_sertifikat
     }));
 
@@ -111,13 +111,13 @@ export async function POST(request: NextRequest) {
       id: newTraining.id_pelatihan,
       nama: newTraining.nama_pelatihan,
       penyelenggara: newTraining.penyelenggara,
-      tanggalMulai: newTraining.tanggal_awal.toISOString(),
-      tanggalSelesaiEstimasi: newTraining.tanggal_akhir.toISOString(),
+      tanggalMulai: newTraining.tanggal_awal ? newTraining.tanggal_awal.toISOString() : null,
+      tanggalSelesaiEstimasi: newTraining.tanggal_akhir ? newTraining.tanggal_akhir.toISOString() : null,
       tahun: newTraining.tahun,
       status: newTraining.status,
-      tanggalSelesaiAktual: newTraining.tanggal_akhir?.toISOString(),
+      tanggalSelesaiAktual: newTraining.tanggal_akhir ? newTraining.tanggal_akhir.toISOString() : null,
       noSertifikat: newTraining.nomor_sertifikat,
-      tanggalKadaluarsa: newTraining.masa_berlaku?.toISOString(),
+      tanggalKadaluarsa: newTraining.masa_berlaku ? newTraining.masa_berlaku.toISOString() : null,
     };
 
     return NextResponse.json(mappedResponse, { status: 201 });
@@ -157,13 +157,13 @@ export async function PATCH(request: NextRequest) {
       id: updatedTraining.id_pelatihan,
       nama: updatedTraining.nama_pelatihan,
       penyelenggara: updatedTraining.penyelenggara,
-      tanggalMulai: updatedTraining.tanggal_awal.toISOString(),
-      tanggalSelesaiEstimasi: updatedTraining.tanggal_akhir.toISOString(),
+      tanggalMulai: updatedTraining.tanggal_awal ? updatedTraining.tanggal_awal.toISOString() : null,
+      tanggalSelesaiEstimasi: updatedTraining.tanggal_akhir ? updatedTraining.tanggal_akhir.toISOString() : null,
       tahun: updatedTraining.tahun,
       status: updatedTraining.status,
-      tanggalSelesaiAktual: updatedTraining.tanggal_akhir?.toISOString(),
+      tanggalSelesaiAktual: updatedTraining.tanggal_akhir ? updatedTraining.tanggal_akhir.toISOString() : null,
       noSertifikat: updatedTraining.nomor_sertifikat,
-      tanggalKadaluarsa: updatedTraining.masa_berlaku?.toISOString(),
+      tanggalKadaluarsa: updatedTraining.masa_berlaku ? updatedTraining.masa_berlaku.toISOString() : null,
     };
 
     return NextResponse.json(mappedResponse);

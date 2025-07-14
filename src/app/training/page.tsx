@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export default async function TrainingPage() {
   // 1. Ambil NIK dari cookie, sama seperti di dashboard
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const nik = cookieStore.get("nik")?.value;
 
   // 2. Dapatkan data diri dan NUP pegawai

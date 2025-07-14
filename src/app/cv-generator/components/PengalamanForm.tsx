@@ -6,6 +6,7 @@ interface PengalamanFormProps {
     pengalaman_kerja: string;
     perusahaan: string;
     tahun: number;
+    lokasi: string;
   }) => void;
   onCancel: () => void;
 }
@@ -14,17 +15,19 @@ export default function PengalamanForm({ onSubmit, onCancel }: PengalamanFormPro
   const [pengalaman, setPengalaman] = useState("");
   const [perusahaan, setPerusahaan] = useState("");
   const [tahun, setTahun] = useState("");
+  const [lokasi, setLokasi] = useState("");
 
   return (
     <form
       className="space-y-4"
       onSubmit={e => {
         e.preventDefault();
-        if (!pengalaman || !perusahaan || !tahun) return;
+        if (!pengalaman || !perusahaan || !tahun || !lokasi) return;
         onSubmit({
           pengalaman_kerja: pengalaman,
           perusahaan,
           tahun: parseInt(tahun, 10),
+          lokasi,
         });
       }}
     >
@@ -59,6 +62,17 @@ export default function PengalamanForm({ onSubmit, onCancel }: PengalamanFormPro
           type="number"
           value={tahun}
           onChange={e => setTahun(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-black mb-1">
+          Lokasi (Kota) <span className="text-red-600">*</span>
+        </label>
+        <input
+          className="w-full border rounded px-3 py-2 text-black"
+          value={lokasi}
+          onChange={e => setLokasi(e.target.value)}
           required
         />
       </div>

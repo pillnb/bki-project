@@ -1358,10 +1358,12 @@ export namespace Prisma {
 
   export type PegawaiAvgAggregateOutputType = {
     id: number | null
+    tahun_pend: number | null
   }
 
   export type PegawaiSumAggregateOutputType = {
     id: number | null
+    tahun_pend: number | null
   }
 
   export type PegawaiMinAggregateOutputType = {
@@ -1381,6 +1383,10 @@ export namespace Prisma {
     username: string | null
     id: number | null
     nik: string | null
+    jenjang_pend: string | null
+    pendidikan: string | null
+    tahun_pend: number | null
+    cv_generated_at: Date | null
   }
 
   export type PegawaiMaxAggregateOutputType = {
@@ -1400,6 +1406,10 @@ export namespace Prisma {
     username: string | null
     id: number | null
     nik: string | null
+    jenjang_pend: string | null
+    pendidikan: string | null
+    tahun_pend: number | null
+    cv_generated_at: Date | null
   }
 
   export type PegawaiCountAggregateOutputType = {
@@ -1419,16 +1429,22 @@ export namespace Prisma {
     username: number
     id: number
     nik: number
+    jenjang_pend: number
+    pendidikan: number
+    tahun_pend: number
+    cv_generated_at: number
     _all: number
   }
 
 
   export type PegawaiAvgAggregateInputType = {
     id?: true
+    tahun_pend?: true
   }
 
   export type PegawaiSumAggregateInputType = {
     id?: true
+    tahun_pend?: true
   }
 
   export type PegawaiMinAggregateInputType = {
@@ -1448,6 +1464,10 @@ export namespace Prisma {
     username?: true
     id?: true
     nik?: true
+    jenjang_pend?: true
+    pendidikan?: true
+    tahun_pend?: true
+    cv_generated_at?: true
   }
 
   export type PegawaiMaxAggregateInputType = {
@@ -1467,6 +1487,10 @@ export namespace Prisma {
     username?: true
     id?: true
     nik?: true
+    jenjang_pend?: true
+    pendidikan?: true
+    tahun_pend?: true
+    cv_generated_at?: true
   }
 
   export type PegawaiCountAggregateInputType = {
@@ -1486,6 +1510,10 @@ export namespace Prisma {
     username?: true
     id?: true
     nik?: true
+    jenjang_pend?: true
+    pendidikan?: true
+    tahun_pend?: true
+    cv_generated_at?: true
     _all?: true
   }
 
@@ -1592,6 +1620,10 @@ export namespace Prisma {
     username: string | null
     id: number
     nik: string | null
+    jenjang_pend: string | null
+    pendidikan: string | null
+    tahun_pend: number | null
+    cv_generated_at: Date | null
     _count: PegawaiCountAggregateOutputType | null
     _avg: PegawaiAvgAggregateOutputType | null
     _sum: PegawaiSumAggregateOutputType | null
@@ -1630,6 +1662,10 @@ export namespace Prisma {
     username?: boolean
     id?: boolean
     nik?: boolean
+    jenjang_pend?: boolean
+    pendidikan?: boolean
+    tahun_pend?: boolean
+    cv_generated_at?: boolean
     pegawai_surat_tugas?: boolean | pegawai$pegawai_surat_tugasArgs<ExtArgs>
     pelatihan?: boolean | pegawai$pelatihanArgs<ExtArgs>
     pengalaman_kerja?: boolean | pegawai$pengalaman_kerjaArgs<ExtArgs>
@@ -1653,6 +1689,10 @@ export namespace Prisma {
     username?: boolean
     id?: boolean
     nik?: boolean
+    jenjang_pend?: boolean
+    pendidikan?: boolean
+    tahun_pend?: boolean
+    cv_generated_at?: boolean
   }, ExtArgs["result"]["pegawai"]>
 
   export type pegawaiSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1672,6 +1712,10 @@ export namespace Prisma {
     username?: boolean
     id?: boolean
     nik?: boolean
+    jenjang_pend?: boolean
+    pendidikan?: boolean
+    tahun_pend?: boolean
+    cv_generated_at?: boolean
   }, ExtArgs["result"]["pegawai"]>
 
   export type pegawaiSelectScalar = {
@@ -1691,9 +1735,13 @@ export namespace Prisma {
     username?: boolean
     id?: boolean
     nik?: boolean
+    jenjang_pend?: boolean
+    pendidikan?: boolean
+    tahun_pend?: boolean
+    cv_generated_at?: boolean
   }
 
-  export type pegawaiOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"nup" | "nama_pegawai" | "status_pegawai" | "jabatan" | "tempat_lahir" | "tanggal_lahir" | "alamat" | "warga_negara" | "agama" | "no_telepon" | "email" | "password" | "role" | "username" | "id" | "nik", ExtArgs["result"]["pegawai"]>
+  export type pegawaiOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"nup" | "nama_pegawai" | "status_pegawai" | "jabatan" | "tempat_lahir" | "tanggal_lahir" | "alamat" | "warga_negara" | "agama" | "no_telepon" | "email" | "password" | "role" | "username" | "id" | "nik" | "jenjang_pend" | "pendidikan" | "tahun_pend" | "cv_generated_at", ExtArgs["result"]["pegawai"]>
   export type pegawaiInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pegawai_surat_tugas?: boolean | pegawai$pegawai_surat_tugasArgs<ExtArgs>
     pelatihan?: boolean | pegawai$pelatihanArgs<ExtArgs>
@@ -1727,6 +1775,10 @@ export namespace Prisma {
       username: string | null
       id: number
       nik: string | null
+      jenjang_pend: string | null
+      pendidikan: string | null
+      tahun_pend: number | null
+      cv_generated_at: Date | null
     }, ExtArgs["result"]["pegawai"]>
     composites: {}
   }
@@ -2169,6 +2221,10 @@ export namespace Prisma {
     readonly username: FieldRef<"pegawai", 'String'>
     readonly id: FieldRef<"pegawai", 'Int'>
     readonly nik: FieldRef<"pegawai", 'String'>
+    readonly jenjang_pend: FieldRef<"pegawai", 'String'>
+    readonly pendidikan: FieldRef<"pegawai", 'String'>
+    readonly tahun_pend: FieldRef<"pegawai", 'Int'>
+    readonly cv_generated_at: FieldRef<"pegawai", 'DateTime'>
   }
     
 
@@ -2674,6 +2730,7 @@ export namespace Prisma {
     nup: string | null
     nama_pelatihan: string | null
     penyelenggara: string | null
+    lokasi: string | null
     nomor_sertifikat: string | null
     file_sertifikat: string | null
     tanggal_awal: Date | null
@@ -2689,6 +2746,7 @@ export namespace Prisma {
     nup: string | null
     nama_pelatihan: string | null
     penyelenggara: string | null
+    lokasi: string | null
     nomor_sertifikat: string | null
     file_sertifikat: string | null
     tanggal_awal: Date | null
@@ -2704,6 +2762,7 @@ export namespace Prisma {
     nup: number
     nama_pelatihan: number
     penyelenggara: number
+    lokasi: number
     nomor_sertifikat: number
     file_sertifikat: number
     tanggal_awal: number
@@ -2731,6 +2790,7 @@ export namespace Prisma {
     nup?: true
     nama_pelatihan?: true
     penyelenggara?: true
+    lokasi?: true
     nomor_sertifikat?: true
     file_sertifikat?: true
     tanggal_awal?: true
@@ -2746,6 +2806,7 @@ export namespace Prisma {
     nup?: true
     nama_pelatihan?: true
     penyelenggara?: true
+    lokasi?: true
     nomor_sertifikat?: true
     file_sertifikat?: true
     tanggal_awal?: true
@@ -2761,6 +2822,7 @@ export namespace Prisma {
     nup?: true
     nama_pelatihan?: true
     penyelenggara?: true
+    lokasi?: true
     nomor_sertifikat?: true
     file_sertifikat?: true
     tanggal_awal?: true
@@ -2863,6 +2925,7 @@ export namespace Prisma {
     nup: string | null
     nama_pelatihan: string | null
     penyelenggara: string | null
+    lokasi: string | null
     nomor_sertifikat: string | null
     file_sertifikat: string | null
     tanggal_awal: Date | null
@@ -2897,6 +2960,7 @@ export namespace Prisma {
     nup?: boolean
     nama_pelatihan?: boolean
     penyelenggara?: boolean
+    lokasi?: boolean
     nomor_sertifikat?: boolean
     file_sertifikat?: boolean
     tanggal_awal?: boolean
@@ -2913,6 +2977,7 @@ export namespace Prisma {
     nup?: boolean
     nama_pelatihan?: boolean
     penyelenggara?: boolean
+    lokasi?: boolean
     nomor_sertifikat?: boolean
     file_sertifikat?: boolean
     tanggal_awal?: boolean
@@ -2929,6 +2994,7 @@ export namespace Prisma {
     nup?: boolean
     nama_pelatihan?: boolean
     penyelenggara?: boolean
+    lokasi?: boolean
     nomor_sertifikat?: boolean
     file_sertifikat?: boolean
     tanggal_awal?: boolean
@@ -2945,6 +3011,7 @@ export namespace Prisma {
     nup?: boolean
     nama_pelatihan?: boolean
     penyelenggara?: boolean
+    lokasi?: boolean
     nomor_sertifikat?: boolean
     file_sertifikat?: boolean
     tanggal_awal?: boolean
@@ -2955,7 +3022,7 @@ export namespace Prisma {
     tanggal_akhir?: boolean
   }
 
-  export type pelatihanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pelatihan" | "nup" | "nama_pelatihan" | "penyelenggara" | "nomor_sertifikat" | "file_sertifikat" | "tanggal_awal" | "masa_berlaku" | "status" | "keterangan_utilisasi" | "tahun" | "tanggal_akhir", ExtArgs["result"]["pelatihan"]>
+  export type pelatihanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pelatihan" | "nup" | "nama_pelatihan" | "penyelenggara" | "lokasi" | "nomor_sertifikat" | "file_sertifikat" | "tanggal_awal" | "masa_berlaku" | "status" | "keterangan_utilisasi" | "tahun" | "tanggal_akhir", ExtArgs["result"]["pelatihan"]>
   export type pelatihanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pegawai?: boolean | pelatihan$pegawaiArgs<ExtArgs>
   }
@@ -2976,6 +3043,7 @@ export namespace Prisma {
       nup: string | null
       nama_pelatihan: string | null
       penyelenggara: string | null
+      lokasi: string | null
       nomor_sertifikat: string | null
       file_sertifikat: string | null
       tanggal_awal: Date | null
@@ -3412,6 +3480,7 @@ export namespace Prisma {
     readonly nup: FieldRef<"pelatihan", 'String'>
     readonly nama_pelatihan: FieldRef<"pelatihan", 'String'>
     readonly penyelenggara: FieldRef<"pelatihan", 'String'>
+    readonly lokasi: FieldRef<"pelatihan", 'String'>
     readonly nomor_sertifikat: FieldRef<"pelatihan", 'String'>
     readonly file_sertifikat: FieldRef<"pelatihan", 'String'>
     readonly tanggal_awal: FieldRef<"pelatihan", 'DateTime'>
@@ -3881,6 +3950,7 @@ export namespace Prisma {
     tahun: number | null
     pengalaman_kerja: string | null
     perusahaan: string | null
+    lokasi: string | null
   }
 
   export type Pengalaman_kerjaMaxAggregateOutputType = {
@@ -3889,6 +3959,7 @@ export namespace Prisma {
     tahun: number | null
     pengalaman_kerja: string | null
     perusahaan: string | null
+    lokasi: string | null
   }
 
   export type Pengalaman_kerjaCountAggregateOutputType = {
@@ -3897,6 +3968,7 @@ export namespace Prisma {
     tahun: number
     pengalaman_kerja: number
     perusahaan: number
+    lokasi: number
     _all: number
   }
 
@@ -3917,6 +3989,7 @@ export namespace Prisma {
     tahun?: true
     pengalaman_kerja?: true
     perusahaan?: true
+    lokasi?: true
   }
 
   export type Pengalaman_kerjaMaxAggregateInputType = {
@@ -3925,6 +3998,7 @@ export namespace Prisma {
     tahun?: true
     pengalaman_kerja?: true
     perusahaan?: true
+    lokasi?: true
   }
 
   export type Pengalaman_kerjaCountAggregateInputType = {
@@ -3933,6 +4007,7 @@ export namespace Prisma {
     tahun?: true
     pengalaman_kerja?: true
     perusahaan?: true
+    lokasi?: true
     _all?: true
   }
 
@@ -4028,6 +4103,7 @@ export namespace Prisma {
     tahun: number | null
     pengalaman_kerja: string | null
     perusahaan: string | null
+    lokasi: string | null
     _count: Pengalaman_kerjaCountAggregateOutputType | null
     _avg: Pengalaman_kerjaAvgAggregateOutputType | null
     _sum: Pengalaman_kerjaSumAggregateOutputType | null
@@ -4055,6 +4131,7 @@ export namespace Prisma {
     tahun?: boolean
     pengalaman_kerja?: boolean
     perusahaan?: boolean
+    lokasi?: boolean
     pegawai?: boolean | pengalaman_kerja$pegawaiArgs<ExtArgs>
   }, ExtArgs["result"]["pengalaman_kerja"]>
 
@@ -4064,6 +4141,7 @@ export namespace Prisma {
     tahun?: boolean
     pengalaman_kerja?: boolean
     perusahaan?: boolean
+    lokasi?: boolean
     pegawai?: boolean | pengalaman_kerja$pegawaiArgs<ExtArgs>
   }, ExtArgs["result"]["pengalaman_kerja"]>
 
@@ -4073,6 +4151,7 @@ export namespace Prisma {
     tahun?: boolean
     pengalaman_kerja?: boolean
     perusahaan?: boolean
+    lokasi?: boolean
     pegawai?: boolean | pengalaman_kerja$pegawaiArgs<ExtArgs>
   }, ExtArgs["result"]["pengalaman_kerja"]>
 
@@ -4082,9 +4161,10 @@ export namespace Prisma {
     tahun?: boolean
     pengalaman_kerja?: boolean
     perusahaan?: boolean
+    lokasi?: boolean
   }
 
-  export type pengalaman_kerjaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pengalaman" | "nup" | "tahun" | "pengalaman_kerja" | "perusahaan", ExtArgs["result"]["pengalaman_kerja"]>
+  export type pengalaman_kerjaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pengalaman" | "nup" | "tahun" | "pengalaman_kerja" | "perusahaan" | "lokasi", ExtArgs["result"]["pengalaman_kerja"]>
   export type pengalaman_kerjaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pegawai?: boolean | pengalaman_kerja$pegawaiArgs<ExtArgs>
   }
@@ -4106,6 +4186,7 @@ export namespace Prisma {
       tahun: number | null
       pengalaman_kerja: string | null
       perusahaan: string | null
+      lokasi: string | null
     }, ExtArgs["result"]["pengalaman_kerja"]>
     composites: {}
   }
@@ -4535,6 +4616,7 @@ export namespace Prisma {
     readonly tahun: FieldRef<"pengalaman_kerja", 'Int'>
     readonly pengalaman_kerja: FieldRef<"pengalaman_kerja", 'String'>
     readonly perusahaan: FieldRef<"pengalaman_kerja", 'String'>
+    readonly lokasi: FieldRef<"pengalaman_kerja", 'String'>
   }
     
 
@@ -7467,7 +7549,11 @@ export namespace Prisma {
     role: 'role',
     username: 'username',
     id: 'id',
-    nik: 'nik'
+    nik: 'nik',
+    jenjang_pend: 'jenjang_pend',
+    pendidikan: 'pendidikan',
+    tahun_pend: 'tahun_pend',
+    cv_generated_at: 'cv_generated_at'
   };
 
   export type PegawaiScalarFieldEnum = (typeof PegawaiScalarFieldEnum)[keyof typeof PegawaiScalarFieldEnum]
@@ -7478,6 +7564,7 @@ export namespace Prisma {
     nup: 'nup',
     nama_pelatihan: 'nama_pelatihan',
     penyelenggara: 'penyelenggara',
+    lokasi: 'lokasi',
     nomor_sertifikat: 'nomor_sertifikat',
     file_sertifikat: 'file_sertifikat',
     tanggal_awal: 'tanggal_awal',
@@ -7496,7 +7583,8 @@ export namespace Prisma {
     nup: 'nup',
     tahun: 'tahun',
     pengalaman_kerja: 'pengalaman_kerja',
-    perusahaan: 'perusahaan'
+    perusahaan: 'perusahaan',
+    lokasi: 'lokasi'
   };
 
   export type Pengalaman_kerjaScalarFieldEnum = (typeof Pengalaman_kerjaScalarFieldEnum)[keyof typeof Pengalaman_kerjaScalarFieldEnum]
@@ -7688,6 +7776,10 @@ export namespace Prisma {
     username?: StringNullableFilter<"pegawai"> | string | null
     id?: IntFilter<"pegawai"> | number
     nik?: StringNullableFilter<"pegawai"> | string | null
+    jenjang_pend?: StringNullableFilter<"pegawai"> | string | null
+    pendidikan?: StringNullableFilter<"pegawai"> | string | null
+    tahun_pend?: IntNullableFilter<"pegawai"> | number | null
+    cv_generated_at?: DateTimeNullableFilter<"pegawai"> | Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasListRelationFilter
     pelatihan?: PelatihanListRelationFilter
     pengalaman_kerja?: Pengalaman_kerjaListRelationFilter
@@ -7710,6 +7802,10 @@ export namespace Prisma {
     username?: SortOrderInput | SortOrder
     id?: SortOrder
     nik?: SortOrderInput | SortOrder
+    jenjang_pend?: SortOrderInput | SortOrder
+    pendidikan?: SortOrderInput | SortOrder
+    tahun_pend?: SortOrderInput | SortOrder
+    cv_generated_at?: SortOrderInput | SortOrder
     pegawai_surat_tugas?: PegawaiSuratTugasOrderByRelationAggregateInput
     pelatihan?: pelatihanOrderByRelationAggregateInput
     pengalaman_kerja?: pengalaman_kerjaOrderByRelationAggregateInput
@@ -7735,6 +7831,10 @@ export namespace Prisma {
     password?: StringFilter<"pegawai"> | string
     role?: StringNullableFilter<"pegawai"> | string | null
     nik?: StringNullableFilter<"pegawai"> | string | null
+    jenjang_pend?: StringNullableFilter<"pegawai"> | string | null
+    pendidikan?: StringNullableFilter<"pegawai"> | string | null
+    tahun_pend?: IntNullableFilter<"pegawai"> | number | null
+    cv_generated_at?: DateTimeNullableFilter<"pegawai"> | Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasListRelationFilter
     pelatihan?: PelatihanListRelationFilter
     pengalaman_kerja?: Pengalaman_kerjaListRelationFilter
@@ -7757,6 +7857,10 @@ export namespace Prisma {
     username?: SortOrderInput | SortOrder
     id?: SortOrder
     nik?: SortOrderInput | SortOrder
+    jenjang_pend?: SortOrderInput | SortOrder
+    pendidikan?: SortOrderInput | SortOrder
+    tahun_pend?: SortOrderInput | SortOrder
+    cv_generated_at?: SortOrderInput | SortOrder
     _count?: pegawaiCountOrderByAggregateInput
     _avg?: pegawaiAvgOrderByAggregateInput
     _max?: pegawaiMaxOrderByAggregateInput
@@ -7784,6 +7888,10 @@ export namespace Prisma {
     username?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
     id?: IntWithAggregatesFilter<"pegawai"> | number
     nik?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
+    jenjang_pend?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
+    pendidikan?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
+    tahun_pend?: IntNullableWithAggregatesFilter<"pegawai"> | number | null
+    cv_generated_at?: DateTimeNullableWithAggregatesFilter<"pegawai"> | Date | string | null
   }
 
   export type pelatihanWhereInput = {
@@ -7794,6 +7902,7 @@ export namespace Prisma {
     nup?: StringNullableFilter<"pelatihan"> | string | null
     nama_pelatihan?: StringNullableFilter<"pelatihan"> | string | null
     penyelenggara?: StringNullableFilter<"pelatihan"> | string | null
+    lokasi?: StringNullableFilter<"pelatihan"> | string | null
     nomor_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
     file_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
     tanggal_awal?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
@@ -7810,6 +7919,7 @@ export namespace Prisma {
     nup?: SortOrderInput | SortOrder
     nama_pelatihan?: SortOrderInput | SortOrder
     penyelenggara?: SortOrderInput | SortOrder
+    lokasi?: SortOrderInput | SortOrder
     nomor_sertifikat?: SortOrderInput | SortOrder
     file_sertifikat?: SortOrderInput | SortOrder
     tanggal_awal?: SortOrderInput | SortOrder
@@ -7829,6 +7939,7 @@ export namespace Prisma {
     nup?: StringNullableFilter<"pelatihan"> | string | null
     nama_pelatihan?: StringNullableFilter<"pelatihan"> | string | null
     penyelenggara?: StringNullableFilter<"pelatihan"> | string | null
+    lokasi?: StringNullableFilter<"pelatihan"> | string | null
     nomor_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
     file_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
     tanggal_awal?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
@@ -7845,6 +7956,7 @@ export namespace Prisma {
     nup?: SortOrderInput | SortOrder
     nama_pelatihan?: SortOrderInput | SortOrder
     penyelenggara?: SortOrderInput | SortOrder
+    lokasi?: SortOrderInput | SortOrder
     nomor_sertifikat?: SortOrderInput | SortOrder
     file_sertifikat?: SortOrderInput | SortOrder
     tanggal_awal?: SortOrderInput | SortOrder
@@ -7868,6 +7980,7 @@ export namespace Prisma {
     nup?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
     nama_pelatihan?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
     penyelenggara?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
+    lokasi?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
     nomor_sertifikat?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
     file_sertifikat?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
     tanggal_awal?: DateTimeNullableWithAggregatesFilter<"pelatihan"> | Date | string | null
@@ -7887,6 +8000,7 @@ export namespace Prisma {
     tahun?: IntNullableFilter<"pengalaman_kerja"> | number | null
     pengalaman_kerja?: StringNullableFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableFilter<"pengalaman_kerja"> | string | null
+    lokasi?: StringNullableFilter<"pengalaman_kerja"> | string | null
     pegawai?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
   }
 
@@ -7896,6 +8010,7 @@ export namespace Prisma {
     tahun?: SortOrderInput | SortOrder
     pengalaman_kerja?: SortOrderInput | SortOrder
     perusahaan?: SortOrderInput | SortOrder
+    lokasi?: SortOrderInput | SortOrder
     pegawai?: pegawaiOrderByWithRelationInput
   }
 
@@ -7908,6 +8023,7 @@ export namespace Prisma {
     tahun?: IntNullableFilter<"pengalaman_kerja"> | number | null
     pengalaman_kerja?: StringNullableFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableFilter<"pengalaman_kerja"> | string | null
+    lokasi?: StringNullableFilter<"pengalaman_kerja"> | string | null
     pegawai?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
   }, "id_pengalaman">
 
@@ -7917,6 +8033,7 @@ export namespace Prisma {
     tahun?: SortOrderInput | SortOrder
     pengalaman_kerja?: SortOrderInput | SortOrder
     perusahaan?: SortOrderInput | SortOrder
+    lokasi?: SortOrderInput | SortOrder
     _count?: pengalaman_kerjaCountOrderByAggregateInput
     _avg?: pengalaman_kerjaAvgOrderByAggregateInput
     _max?: pengalaman_kerjaMaxOrderByAggregateInput
@@ -7933,6 +8050,7 @@ export namespace Prisma {
     tahun?: IntNullableWithAggregatesFilter<"pengalaman_kerja"> | number | null
     pengalaman_kerja?: StringNullableWithAggregatesFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableWithAggregatesFilter<"pengalaman_kerja"> | string | null
+    lokasi?: StringNullableWithAggregatesFilter<"pengalaman_kerja"> | string | null
   }
 
   export type SuratTugasWhereInput = {
@@ -8174,6 +8292,10 @@ export namespace Prisma {
     username?: string | null
     id?: number
     nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    cv_generated_at?: Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasCreateNestedManyWithoutPegawaiInput
     pelatihan?: pelatihanCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaCreateNestedManyWithoutPegawaiInput
@@ -8196,6 +8318,10 @@ export namespace Prisma {
     username?: string | null
     id?: number
     nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    cv_generated_at?: Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasUncheckedCreateNestedManyWithoutPegawaiInput
     pelatihan?: pelatihanUncheckedCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedCreateNestedManyWithoutPegawaiInput
@@ -8217,6 +8343,10 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasUpdateManyWithoutPegawaiNestedInput
     pelatihan?: pelatihanUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUpdateManyWithoutPegawaiNestedInput
@@ -8239,6 +8369,10 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     id?: IntFieldUpdateOperationsInput | number
     nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasUncheckedUpdateManyWithoutPegawaiNestedInput
     pelatihan?: pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiNestedInput
@@ -8261,6 +8395,10 @@ export namespace Prisma {
     username?: string | null
     id?: number
     nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    cv_generated_at?: Date | string | null
   }
 
   export type pegawaiUpdateManyMutationInput = {
@@ -8279,6 +8417,10 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type pegawaiUncheckedUpdateManyInput = {
@@ -8298,11 +8440,16 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     id?: IntFieldUpdateOperationsInput | number
     nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type pelatihanCreateInput = {
     nama_pelatihan?: string | null
     penyelenggara?: string | null
+    lokasi?: string | null
     nomor_sertifikat?: string | null
     file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
@@ -8319,6 +8466,7 @@ export namespace Prisma {
     nup?: string | null
     nama_pelatihan?: string | null
     penyelenggara?: string | null
+    lokasi?: string | null
     nomor_sertifikat?: string | null
     file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
@@ -8332,6 +8480,7 @@ export namespace Prisma {
   export type pelatihanUpdateInput = {
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8348,6 +8497,7 @@ export namespace Prisma {
     nup?: NullableStringFieldUpdateOperationsInput | string | null
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8363,6 +8513,7 @@ export namespace Prisma {
     nup?: string | null
     nama_pelatihan?: string | null
     penyelenggara?: string | null
+    lokasi?: string | null
     nomor_sertifikat?: string | null
     file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
@@ -8376,6 +8527,7 @@ export namespace Prisma {
   export type pelatihanUpdateManyMutationInput = {
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8391,6 +8543,7 @@ export namespace Prisma {
     nup?: NullableStringFieldUpdateOperationsInput | string | null
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8405,6 +8558,7 @@ export namespace Prisma {
     tahun?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
+    lokasi?: string | null
     pegawai?: pegawaiCreateNestedOneWithoutPengalaman_kerjaInput
   }
 
@@ -8414,12 +8568,14 @@ export namespace Prisma {
     tahun?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
+    lokasi?: string | null
   }
 
   export type pengalaman_kerjaUpdateInput = {
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
     pegawai?: pegawaiUpdateOneWithoutPengalaman_kerjaNestedInput
   }
 
@@ -8429,6 +8585,7 @@ export namespace Prisma {
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type pengalaman_kerjaCreateManyInput = {
@@ -8437,12 +8594,14 @@ export namespace Prisma {
     tahun?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
+    lokasi?: string | null
   }
 
   export type pengalaman_kerjaUpdateManyMutationInput = {
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type pengalaman_kerjaUncheckedUpdateManyInput = {
@@ -8451,6 +8610,7 @@ export namespace Prisma {
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SuratTugasCreateInput = {
@@ -8760,6 +8920,17 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type PegawaiSuratTugasListRelationFilter = {
     every?: PegawaiSuratTugasWhereInput
     some?: PegawaiSuratTugasWhereInput
@@ -8812,10 +8983,15 @@ export namespace Prisma {
     username?: SortOrder
     id?: SortOrder
     nik?: SortOrder
+    jenjang_pend?: SortOrder
+    pendidikan?: SortOrder
+    tahun_pend?: SortOrder
+    cv_generated_at?: SortOrder
   }
 
   export type pegawaiAvgOrderByAggregateInput = {
     id?: SortOrder
+    tahun_pend?: SortOrder
   }
 
   export type pegawaiMaxOrderByAggregateInput = {
@@ -8835,6 +9011,10 @@ export namespace Prisma {
     username?: SortOrder
     id?: SortOrder
     nik?: SortOrder
+    jenjang_pend?: SortOrder
+    pendidikan?: SortOrder
+    tahun_pend?: SortOrder
+    cv_generated_at?: SortOrder
   }
 
   export type pegawaiMinOrderByAggregateInput = {
@@ -8854,10 +9034,15 @@ export namespace Prisma {
     username?: SortOrder
     id?: SortOrder
     nik?: SortOrder
+    jenjang_pend?: SortOrder
+    pendidikan?: SortOrder
+    tahun_pend?: SortOrder
+    cv_generated_at?: SortOrder
   }
 
   export type pegawaiSumOrderByAggregateInput = {
     id?: SortOrder
+    tahun_pend?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -8926,14 +9111,7 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type EnumStatusPelatihanFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusPelatihan | EnumStatusPelatihanFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusPelatihanFilter<$PrismaModel> | $Enums.StatusPelatihan
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -8941,7 +9119,19 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumStatusPelatihanFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPelatihan | EnumStatusPelatihanFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPelatihanFilter<$PrismaModel> | $Enums.StatusPelatihan
   }
 
   export type PegawaiNullableScalarRelationFilter = {
@@ -8954,6 +9144,7 @@ export namespace Prisma {
     nup?: SortOrder
     nama_pelatihan?: SortOrder
     penyelenggara?: SortOrder
+    lokasi?: SortOrder
     nomor_sertifikat?: SortOrder
     file_sertifikat?: SortOrder
     tanggal_awal?: SortOrder
@@ -8974,6 +9165,7 @@ export namespace Prisma {
     nup?: SortOrder
     nama_pelatihan?: SortOrder
     penyelenggara?: SortOrder
+    lokasi?: SortOrder
     nomor_sertifikat?: SortOrder
     file_sertifikat?: SortOrder
     tanggal_awal?: SortOrder
@@ -8989,6 +9181,7 @@ export namespace Prisma {
     nup?: SortOrder
     nama_pelatihan?: SortOrder
     penyelenggara?: SortOrder
+    lokasi?: SortOrder
     nomor_sertifikat?: SortOrder
     file_sertifikat?: SortOrder
     tanggal_awal?: SortOrder
@@ -9014,28 +9207,13 @@ export namespace Prisma {
     _max?: NestedEnumStatusPelatihanFilter<$PrismaModel>
   }
 
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
   export type pengalaman_kerjaCountOrderByAggregateInput = {
     id_pengalaman?: SortOrder
     nup?: SortOrder
     tahun?: SortOrder
     pengalaman_kerja?: SortOrder
     perusahaan?: SortOrder
+    lokasi?: SortOrder
   }
 
   export type pengalaman_kerjaAvgOrderByAggregateInput = {
@@ -9049,6 +9227,7 @@ export namespace Prisma {
     tahun?: SortOrder
     pengalaman_kerja?: SortOrder
     perusahaan?: SortOrder
+    lokasi?: SortOrder
   }
 
   export type pengalaman_kerjaMinOrderByAggregateInput = {
@@ -9057,6 +9236,7 @@ export namespace Prisma {
     tahun?: SortOrder
     pengalaman_kerja?: SortOrder
     perusahaan?: SortOrder
+    lokasi?: SortOrder
   }
 
   export type pengalaman_kerjaSumOrderByAggregateInput = {
@@ -9314,6 +9494,14 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type PegawaiSuratTugasUpdateManyWithoutPegawaiNestedInput = {
     create?: XOR<PegawaiSuratTugasCreateWithoutPegawaiInput, PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput> | PegawaiSuratTugasCreateWithoutPegawaiInput[] | PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput[]
     connectOrCreate?: PegawaiSuratTugasCreateOrConnectWithoutPegawaiInput | PegawaiSuratTugasCreateOrConnectWithoutPegawaiInput[]
@@ -9414,14 +9602,6 @@ export namespace Prisma {
 
   export type EnumStatusPelatihanFieldUpdateOperationsInput = {
     set?: $Enums.StatusPelatihan
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type pegawaiUpdateOneWithoutPelatihanNestedInput = {
@@ -9609,6 +9789,17 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -9641,17 +9832,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9695,23 +9875,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedEnumStatusPelatihanFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusPelatihan | EnumStatusPelatihanFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusPelatihanFilter<$PrismaModel> | $Enums.StatusPelatihan
-  }
-
-  export type NestedEnumStatusPelatihanWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusPelatihan | EnumStatusPelatihanFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusPelatihanWithAggregatesFilter<$PrismaModel> | $Enums.StatusPelatihan
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatusPelatihanFilter<$PrismaModel>
-    _max?: NestedEnumStatusPelatihanFilter<$PrismaModel>
-  }
-
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -9737,6 +9900,23 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumStatusPelatihanFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPelatihan | EnumStatusPelatihanFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPelatihanFilter<$PrismaModel> | $Enums.StatusPelatihan
+  }
+
+  export type NestedEnumStatusPelatihanWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusPelatihan | EnumStatusPelatihanFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusPelatihan[] | ListEnumStatusPelatihanFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusPelatihanWithAggregatesFilter<$PrismaModel> | $Enums.StatusPelatihan
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusPelatihanFilter<$PrismaModel>
+    _max?: NestedEnumStatusPelatihanFilter<$PrismaModel>
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -9824,6 +10004,7 @@ export namespace Prisma {
   export type pelatihanCreateWithoutPegawaiInput = {
     nama_pelatihan?: string | null
     penyelenggara?: string | null
+    lokasi?: string | null
     nomor_sertifikat?: string | null
     file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
@@ -9838,6 +10019,7 @@ export namespace Prisma {
     id_pelatihan?: number
     nama_pelatihan?: string | null
     penyelenggara?: string | null
+    lokasi?: string | null
     nomor_sertifikat?: string | null
     file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
@@ -9862,6 +10044,7 @@ export namespace Prisma {
     tahun?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
+    lokasi?: string | null
   }
 
   export type pengalaman_kerjaUncheckedCreateWithoutPegawaiInput = {
@@ -9869,6 +10052,7 @@ export namespace Prisma {
     tahun?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
+    lokasi?: string | null
   }
 
   export type pengalaman_kerjaCreateOrConnectWithoutPegawaiInput = {
@@ -9934,6 +10118,7 @@ export namespace Prisma {
     nup?: StringNullableFilter<"pelatihan"> | string | null
     nama_pelatihan?: StringNullableFilter<"pelatihan"> | string | null
     penyelenggara?: StringNullableFilter<"pelatihan"> | string | null
+    lokasi?: StringNullableFilter<"pelatihan"> | string | null
     nomor_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
     file_sertifikat?: StringNullableFilter<"pelatihan"> | string | null
     tanggal_awal?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
@@ -9969,6 +10154,7 @@ export namespace Prisma {
     tahun?: IntNullableFilter<"pengalaman_kerja"> | number | null
     pengalaman_kerja?: StringNullableFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableFilter<"pengalaman_kerja"> | string | null
+    lokasi?: StringNullableFilter<"pengalaman_kerja"> | string | null
   }
 
   export type pegawaiCreateWithoutPelatihanInput = {
@@ -9988,6 +10174,10 @@ export namespace Prisma {
     username?: string | null
     id?: number
     nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    cv_generated_at?: Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaCreateNestedManyWithoutPegawaiInput
   }
@@ -10009,6 +10199,10 @@ export namespace Prisma {
     username?: string | null
     id?: number
     nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    cv_generated_at?: Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasUncheckedCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedCreateNestedManyWithoutPegawaiInput
   }
@@ -10045,6 +10239,10 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUpdateManyWithoutPegawaiNestedInput
   }
@@ -10066,6 +10264,10 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     id?: IntFieldUpdateOperationsInput | number
     nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasUncheckedUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiNestedInput
   }
@@ -10087,6 +10289,10 @@ export namespace Prisma {
     username?: string | null
     id?: number
     nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    cv_generated_at?: Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasCreateNestedManyWithoutPegawaiInput
     pelatihan?: pelatihanCreateNestedManyWithoutPegawaiInput
   }
@@ -10108,6 +10314,10 @@ export namespace Prisma {
     username?: string | null
     id?: number
     nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    cv_generated_at?: Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasUncheckedCreateNestedManyWithoutPegawaiInput
     pelatihan?: pelatihanUncheckedCreateNestedManyWithoutPegawaiInput
   }
@@ -10144,6 +10354,10 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasUpdateManyWithoutPegawaiNestedInput
     pelatihan?: pelatihanUpdateManyWithoutPegawaiNestedInput
   }
@@ -10165,6 +10379,10 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     id?: IntFieldUpdateOperationsInput | number
     nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pegawai_surat_tugas?: PegawaiSuratTugasUncheckedUpdateManyWithoutPegawaiNestedInput
     pelatihan?: pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput
   }
@@ -10229,6 +10447,10 @@ export namespace Prisma {
     username?: string | null
     id?: number
     nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    cv_generated_at?: Date | string | null
     pelatihan?: pelatihanCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaCreateNestedManyWithoutPegawaiInput
   }
@@ -10250,6 +10472,10 @@ export namespace Prisma {
     username?: string | null
     id?: number
     nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    cv_generated_at?: Date | string | null
     pelatihan?: pelatihanUncheckedCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedCreateNestedManyWithoutPegawaiInput
   }
@@ -10344,6 +10570,10 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pelatihan?: pelatihanUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUpdateManyWithoutPegawaiNestedInput
   }
@@ -10365,6 +10595,10 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     id?: IntFieldUpdateOperationsInput | number
     nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pelatihan?: pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiNestedInput
   }
@@ -10446,6 +10680,7 @@ export namespace Prisma {
     id_pelatihan?: number
     nama_pelatihan?: string | null
     penyelenggara?: string | null
+    lokasi?: string | null
     nomor_sertifikat?: string | null
     file_sertifikat?: string | null
     tanggal_awal?: Date | string | null
@@ -10461,6 +10696,7 @@ export namespace Prisma {
     tahun?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
+    lokasi?: string | null
   }
 
   export type PegawaiSuratTugasUpdateWithoutPegawaiInput = {
@@ -10492,6 +10728,7 @@ export namespace Prisma {
   export type pelatihanUpdateWithoutPegawaiInput = {
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10506,6 +10743,7 @@ export namespace Prisma {
     id_pelatihan?: IntFieldUpdateOperationsInput | number
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10520,6 +10758,7 @@ export namespace Prisma {
     id_pelatihan?: IntFieldUpdateOperationsInput | number
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
     nomor_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     file_sertifikat?: NullableStringFieldUpdateOperationsInput | string | null
     tanggal_awal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10534,6 +10773,7 @@ export namespace Prisma {
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type pengalaman_kerjaUncheckedUpdateWithoutPegawaiInput = {
@@ -10541,6 +10781,7 @@ export namespace Prisma {
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiInput = {
@@ -10548,6 +10789,7 @@ export namespace Prisma {
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
+    lokasi?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PegawaiSuratTugasCreateManySuratTugasInput = {

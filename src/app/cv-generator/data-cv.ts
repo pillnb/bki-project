@@ -14,6 +14,7 @@ export async function getKualifikasiByNup(nup: string) {
       masa_berlaku: true,
       status: true,
       keterangan_utilisasi: true,
+      lokasi: true,
     },
     orderBy: { tahun: "desc" },
   });
@@ -28,6 +29,7 @@ export async function getPengalamanKerjaByNup(nup: string) {
       pengalaman_kerja: true,
       perusahaan: true,
       tahun: true,
+      lokasi: true,
     },
     orderBy: { tahun: "desc" },
   });

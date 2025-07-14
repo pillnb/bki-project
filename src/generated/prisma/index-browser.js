@@ -136,7 +136,11 @@ exports.Prisma.PegawaiScalarFieldEnum = {
   role: 'role',
   username: 'username',
   id: 'id',
-  nik: 'nik'
+  nik: 'nik',
+  jenjang_pend: 'jenjang_pend',
+  pendidikan: 'pendidikan',
+  tahun_pend: 'tahun_pend',
+  cv_generated_at: 'cv_generated_at'
 };
 
 exports.Prisma.PelatihanScalarFieldEnum = {
@@ -144,6 +148,7 @@ exports.Prisma.PelatihanScalarFieldEnum = {
   nup: 'nup',
   nama_pelatihan: 'nama_pelatihan',
   penyelenggara: 'penyelenggara',
+  lokasi: 'lokasi',
   nomor_sertifikat: 'nomor_sertifikat',
   file_sertifikat: 'file_sertifikat',
   tanggal_awal: 'tanggal_awal',
@@ -159,7 +164,8 @@ exports.Prisma.Pengalaman_kerjaScalarFieldEnum = {
   nup: 'nup',
   tahun: 'tahun',
   pengalaman_kerja: 'pengalaman_kerja',
-  perusahaan: 'perusahaan'
+  perusahaan: 'perusahaan',
+  lokasi: 'lokasi'
 };
 
 exports.Prisma.SuratTugasScalarFieldEnum = {

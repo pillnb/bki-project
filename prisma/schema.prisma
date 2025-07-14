@@ -25,9 +25,13 @@ model pegawai {
   username            String?             @unique(map: "idx_pegawai_username")
   id                  Int                 @unique(map: "unique_id") @default(autoincrement())
   nik                 String?             @db.VarChar(32)
+  jenjang_pend        String?
+  pendidikan          String?
+  tahun_pend          Int?
   pegawai_surat_tugas PegawaiSuratTugas[]
   pelatihan           pelatihan[]
   pengalaman_kerja    pengalaman_kerja[]
+  cv_generated_at     DateTime? @db.Timestamp(6)
 }
 
 enum StatusPelatihan {
@@ -41,6 +45,7 @@ model pelatihan {
   nup                  String?
   nama_pelatihan       String?
   penyelenggara        String?
+  lokasi               String?
   nomor_sertifikat     String?
   file_sertifikat      String?
   tanggal_awal         DateTime? @db.Date
@@ -58,6 +63,7 @@ model pengalaman_kerja {
   tahun            Int?
   pengalaman_kerja String?
   perusahaan       String?
+  lokasi           String?
   pegawai          pegawai? @relation(fields: [nup], references: [nup], onDelete: Cascade, onUpdate: NoAction)
 }
 

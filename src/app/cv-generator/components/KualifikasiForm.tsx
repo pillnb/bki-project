@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 
-// Interface disesuaikan, 'status' tidak lagi diinput oleh user
 interface KualifikasiFormProps {
   onSubmit: (data: {
     kualifikasi: string;
@@ -12,6 +11,7 @@ interface KualifikasiFormProps {
     masa_berlaku: string;
     keterangan_utilisasi: string;
     tahun: number;
+    lokasi: string; // TAMBAHKAN INI
     status_override?: string;
   }) => void;
   onCancel: () => void;
@@ -25,14 +25,16 @@ export default function KualifikasiForm({ onSubmit, onCancel }: KualifikasiFormP
     tanggal_awal: "",
     tanggal_akhir: "",
     masa_berlaku: "",
+    lokasi: "",
     keterangan_utilisasi: "",
     tahun: new Date().getFullYear().toString(),
     status_override: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type } = e.target;
     if (type === "checkbox") {
+      const checked = (e.target as HTMLInputElement).checked;
       setFormData(prev => ({ ...prev, [name]: checked ? value : "" }));
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
@@ -49,6 +51,7 @@ export default function KualifikasiForm({ onSubmit, onCancel }: KualifikasiFormP
       "tanggal_awal",
       "tanggal_akhir",
       "masa_berlaku",
+      "lokasi",
       "tahun",
     ];
     for (const key of requiredFields) {
@@ -58,7 +61,7 @@ export default function KualifikasiForm({ onSubmit, onCancel }: KualifikasiFormP
       }
     }
     onSubmit({
-      ...formData,
+      ...formData, // INI AKAN MENGIRIM SEMUA DATA TERMASUK LOKASI
       tahun: parseInt(formData.tahun, 10),
       status_override: formData.status_override || undefined,
     });
@@ -114,11 +117,18 @@ export default function KualifikasiForm({ onSubmit, onCancel }: KualifikasiFormP
         </label>
         <input id="masa_berlaku" name="masa_berlaku" type="date" value={formData.masa_berlaku} onChange={handleChange} className="w-full border rounded px-3 py-2 text-black" required />
       </div>
-      <div>
-        <label htmlFor="keterangan_utilisasi" className="block text-sm font-medium text-black mb-1">Keterangan Utilisasi</label>
-        <input id="keterangan_utilisasi" name="keterangan_utilisasi" value={formData.keterangan_utilisasi} onChange={handleChange} className="w-full border rounded px-3 py-2 text-black" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="lokasi" className="block text-sm font-medium text-black mb-1">
+            Lokasi (Kota) <span className="text-red-600">*</span>
+          </label>
+          <input id="lokasi" name="lokasi" value={formData.lokasi} onChange={handleChange} className="w-full border rounded px-3 py-2 text-black" required />
+        </div>
+        <div>
+          <label htmlFor="keterangan_utilisasi" className="block text-sm font-medium text-black mb-1">Keterangan Utilisasi</label>
+          <input id="keterangan_utilisasi" name="keterangan_utilisasi" value={formData.keterangan_utilisasi} onChange={handleChange} className="w-full border rounded px-3 py-2 text-black" />
+        </div>
       </div>
-      {/* Status Kualifikasi dihapus sesuai permintaan */}
       <div className="flex justify-end gap-2 pt-4">
         <button type="button" className="px-4 py-2 rounded bg-gray-200 text-gray-800 font-semibold" onClick={onCancel}>Batal</button>
         <button type="submit" className="px-4 py-2 rounded bg-blue-900 text-white font-semibold">Simpan</button>

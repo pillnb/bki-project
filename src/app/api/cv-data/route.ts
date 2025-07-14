@@ -5,7 +5,7 @@ import { getKualifikasiByNup, getPengalamanKerjaByNup } from "../../cv-generator
 
 export async function GET() {
     try {
-        const cookieStore = cookies();
+        const cookieStore = await cookies();
         const nik = cookieStore.get("nik")?.value;
 
         if (!nik) {
