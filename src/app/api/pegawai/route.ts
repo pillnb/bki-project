@@ -4,12 +4,8 @@ import prisma from '@/lib/prisma'; // Pastikan path ini benar
 export async function GET() {
   try {
     const pegawai = await prisma.pegawai.findMany({
-     where: {
+      where: {
         role: 'pegawai',
-        },
-     select: {
-        nup: true,
-        nama_pegawai: true,
       },
       orderBy: {
         nama_pegawai: 'asc',
