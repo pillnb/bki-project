@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, Eye, Edit, Trash2, Filter } from 'lucide-react';
+import { Search, Eye, Edit, Trash2, Filter, Download } from 'lucide-react'; // Import ikon Download
 
 interface Pegawai {
   nup: string;
@@ -66,11 +66,10 @@ export default function AdminDashboardClient() {
     isOpen: false,
     pegawai: null as Pegawai | null
   });
-  // Pagination state
+  const [isDownloading, setIsDownloading] = useState(false); // State untuk download
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
 
-  // Fetch pegawai data from API on mount
   useEffect(() => {
     async function fetchPegawai() {
       try {
@@ -85,7 +84,6 @@ export default function AdminDashboardClient() {
     fetchPegawai();
   }, []);
 
-  // Filter data berdasarkan pencarian
   useEffect(() => {
     const filtered = pegawaiData.filter(pegawai =>
       pegawai.nama_pegawai?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -94,10 +92,38 @@ export default function AdminDashboardClient() {
       pegawai.nup?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredData(filtered);
-    setCurrentPage(1); // Reset ke halaman 1 saat search berubah
+    setCurrentPage(1);
   }, [searchTerm, pegawaiData]);
 
-  // Pagination logic
+  // --- LOGIKA UNTUK DOWNLOAD DATA ---
+  const handleDownload = async (templateType: 'fq140' | 'fq183') => {
+    setIsDownloading(true);
+    try {
+      const response = await fetch(`/api/download/${templateType}`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Gagal mengunduh file.');
+      }
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Report_${templateType.toUpperCase()}_Personil.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+
+    } catch (error: any) {
+      console.error('Download error:', error);
+      alert(`Gagal mengunduh file: ${error.message}`);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+  // ------------------------------------
+
   const totalRows = filteredData.length;
   const totalPages = Math.ceil(totalRows / rowsPerPage);
   const startIdx = (currentPage - 1) * rowsPerPage;
@@ -126,14 +152,6 @@ export default function AdminDashboardClient() {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('id-ID', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Search and Filter */}
@@ -159,7 +177,7 @@ export default function AdminDashboardClient() {
         </div>
       </div>
 
-      {/* Daftar Pegawai Header & Tambah Pegawai Button (fixed above table) */}
+      {/* Daftar Pegawai Header & Tombol Aksi */}
       <div className="flex items-center justify-between mb-2">
         <div>
           <h3 className="text-lg font-bold text-blue-900">
@@ -169,17 +187,39 @@ export default function AdminDashboardClient() {
             Menampilkan {totalRows === 0 ? 0 : startIdx + 1} - {endIdx} dari {totalRows} data
           </span>
         </div>
-        <Link
-          href="/dashboard/admin/tambah-pegawai"
-          className="inline-flex items-center px-4 py-2 bg-blue-900 text-white font-bold rounded-lg hover:bg-blue-800 transition shadow"
-        >
-          <span className="mr-2">Tambah Pegawai</span>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
-        </Link>
+        
+        {/* --- KELOMPOK TOMBOL AKSI TERMASUK DOWNLOAD --- */}
+        <div className="flex items-center space-x-2">
+            <Link
+                href="/dashboard/admin/tambah-pegawai"
+                className="inline-flex items-center px-4 py-2 bg-blue-900 text-white font-bold rounded-lg hover:bg-blue-800 transition shadow"
+            >
+                <span className="mr-2">Tambah</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+            </Link>
+            <button
+                onClick={() => handleDownload('fq140')}
+                disabled={isDownloading}
+                className="inline-flex items-center px-4 py-2 bg-teal-600 text-white font-bold rounded-lg hover:bg-teal-700 transition shadow disabled:bg-gray-400"
+            >
+                <Download className="mr-2 h-4 w-4" />
+                {isDownloading ? 'Proses...' : 'Unduh FQ 140'}
+            </button>
+             <button
+                onClick={() => handleDownload('fq183')}
+                disabled={isDownloading}
+                className="inline-flex items-center px-4 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition shadow disabled:bg-gray-400"
+            >
+                <Download className="mr-2 h-4 w-4" />
+                {isDownloading ? 'Proses...' : 'Unduh FQ 183'}
+            </button>
+        </div>
+        {/* ------------------------------------------- */}
       </div>
 
       {/* Table */}
       <div className="bg-white rounded-xl shadow overflow-x-auto">
+        {/* ... sisa kode tabel Anda tidak berubah ... */}
         <table className="min-w-full divide-y divide-blue-100">
           <thead className="bg-blue-900">
             <tr>

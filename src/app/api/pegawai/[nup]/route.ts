@@ -27,15 +27,20 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ nup:
     };
     return NextResponse.json(result);
 
-  } catch (error) {
-    console.error('API Error - Gagal mengambil data pegawai:', error);
-    
-    // ✅ PERBAIKAN: Kembalikan struktur yang konsisten bahkan saat error
-    if (error.code === 'P2025') {
-      return NextResponse.json({ error: 'Data pegawai tidak ditemukan' }, { status: 404 });
+  } catch (error: unknown) {
+    // Log error safely
+    if (error instanceof Error) {
+      console.error('API Error - Gagal mengambil data pegawai:', error.message, error.stack);
+      // Prisma error code check (optional chaining)
+      // @ts-ignore
+      if (typeof error === 'object' && error !== null && 'code' in error && (error as any).code === 'P2025') {
+        return NextResponse.json({ error: 'Data pegawai tidak ditemukan' }, { status: 404 });
+      }
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    } else {
+      console.error('API Error - Gagal mengambil data pegawai:', error);
+      return NextResponse.json({ error: 'Gagal mengambil data pegawai dari server.' }, { status: 500 });
     }
-    
-    return NextResponse.json({ error: 'Gagal mengambil data pegawai dari server.' }, { status: 500 });
   }
 }
 
