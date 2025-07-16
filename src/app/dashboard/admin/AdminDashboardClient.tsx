@@ -66,6 +66,9 @@ export default function AdminDashboardClient() {
     isOpen: false,
     pegawai: null as Pegawai | null
   });
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
 
   // Fetch pegawai data from API on mount
   useEffect(() => {
@@ -91,7 +94,15 @@ export default function AdminDashboardClient() {
       pegawai.nup?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredData(filtered);
+    setCurrentPage(1); // Reset ke halaman 1 saat search berubah
   }, [searchTerm, pegawaiData]);
+
+  // Pagination logic
+  const totalRows = filteredData.length;
+  const totalPages = Math.ceil(totalRows / rowsPerPage);
+  const startIdx = (currentPage - 1) * rowsPerPage;
+  const endIdx = Math.min(startIdx + rowsPerPage, totalRows);
+  const paginatedData = filteredData.slice(startIdx, endIdx);
 
   const handleDelete = (pegawai: Pegawai) => {
     setDeleteModal({
@@ -148,99 +159,147 @@ export default function AdminDashboardClient() {
         </div>
       </div>
 
+      {/* Daftar Pegawai Header & Tambah Pegawai Button (fixed above table) */}
+      <div className="flex items-center justify-between mb-2">
+        <div>
+          <h3 className="text-lg font-bold text-blue-900">
+            Daftar Pegawai
+          </h3>
+          <span className="text-sm text-blue-700">
+            Menampilkan {totalRows === 0 ? 0 : startIdx + 1} - {endIdx} dari {totalRows} data
+          </span>
+        </div>
+        <Link
+          href="/dashboard/admin/tambah-pegawai"
+          className="inline-flex items-center px-4 py-2 bg-blue-900 text-white font-bold rounded-lg hover:bg-blue-800 transition shadow"
+        >
+          <span className="mr-2">Tambah Pegawai</span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+        </Link>
+      </div>
+
       {/* Table */}
       <div className="bg-white rounded-xl shadow overflow-x-auto">
-        <div className="px-6 py-4 border-b border-blue-100 rounded-t-xl flex items-center justify-between">
-          <h3 className="text-lg font-bold text-blue-900">
-            Daftar Pegawai ({filteredData.length})
-          </h3>
-          <Link
-            href="/dashboard/admin/tambah-pegawai"
-            className="inline-flex items-center px-4 py-2 bg-blue-900 text-white font-bold rounded-lg hover:bg-blue-800 transition shadow"
-          >
-            <span className="mr-2">Tambah Pegawai</span>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
-          </Link>
-        </div>
         <table className="min-w-full divide-y divide-blue-100">
           <thead className="bg-blue-900">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">No.</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">NUP</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Nama Pegawai</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Status Pegawai</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Jabatan</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Tempat Lahir</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Tanggal Lahir</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Alamat</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Warga Negara</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Agama</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">No. Telepon</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Email</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">NIK</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Jenjang Pendidikan</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Pendidikan</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Tahun Pendidikan</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Aksi</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider sticky left-0 z-20 bg-blue-900 border-r border-blue-700 w-[64px]">No.</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider sticky left-[55px] z-20 bg-blue-900 border-r border-blue-700 w-[120px]">NUP</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider sticky left-[200px] z-20 bg-blue-900 border-r border-blue-700 w-[220px]">Nama Pegawai</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[120px]">Status Pegawai</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[150px]">Jabatan</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[120px]">Tempat Lahir</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[120px]">Tanggal Lahir</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[250px]">Alamat</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[120px]">Warga Negara</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[80px]">Agama</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[130px]">No. Telepon</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[200px]">Email</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[150px]">NIK</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[150px]">Jenjang Pendidikan</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[200px]">Pendidikan</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[120px]">Tahun Pendidikan</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[120px]">Aksi</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-blue-50">
-            {filteredData.length === 0 ? (
+            {totalRows === 0 ? (
               <tr>
                 <td colSpan={17} className="px-6 py-8 text-center text-blue-400">
                   {searchTerm ? 'Tidak ada data yang sesuai dengan pencarian' : 'Belum ada data pegawai'}
                 </td>
               </tr>
             ) : (
-              filteredData.map((pegawai, index) => (
-                <tr key={pegawai.nup} className={index % 2 === 0 ? "bg-blue-50 hover:bg-blue-100" : "hover:bg-blue-50"}>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{index + 1}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm font-bold text-blue-900">{pegawai.nup}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.nama_pegawai}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.status_pegawai || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.jabatan || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.tempat_lahir || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.tanggal_lahir ? new Date(pegawai.tanggal_lahir).toLocaleDateString('id-ID') : '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.alamat || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.warga_negara || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.agama || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.no_telepon || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.email || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.nik || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.jenjang_pend || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.pendidikan || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.tahun_pend || '-'}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">
-                    <div className="flex items-center gap-2">
-                      <Link
-                        href={`/dashboard/admin/detail-pegawai/${pegawai.nup}`}
-                        className="p-2 text-blue-700 hover:bg-blue-100 rounded-lg transition"
-                        title="Lihat Detail"
-                      >
-                        <Eye className="w-4 h-4" />
-                      </Link>
-                      <Link
-                        href={`/dashboard/admin/edit-pegawai/${pegawai.nup}`}
-                        className="p-2 text-green-700 hover:bg-green-100 rounded-lg transition"
-                        title="Edit Data"
-                      >
-                        <Edit className="w-4 h-4" />
-                      </Link>
-                      <button
-                        onClick={() => handleDelete(pegawai)}
-                        className="p-2 text-red-700 hover:bg-red-100 rounded-lg transition"
-                        title="Hapus Data"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
+              paginatedData.map((pegawai, idx) => {
+                const index = startIdx + idx;
+                return (
+                  <tr key={pegawai.nup} className={index % 2 === 0 ? "bg-blue-50 hover:bg-blue-100" : "bg-white hover:bg-blue-50"}>
+                    <td className={`px-4 py-3 whitespace-nowrap text-sm text-blue-900 sticky left-0 z-10 border-r border-blue-100 w-[64px] ${index % 2 === 0 ? 'bg-blue-50' : 'bg-white'}`}>
+                      {index + 1}
+                    </td>
+                    <td className={`px-4 py-3 whitespace-nowrap text-sm font-bold text-blue-900 sticky left-[56px] z-10 border-r border-blue-100 w-[120px] ${index % 2 === 0 ? 'bg-blue-50' : 'bg-white'}`}>
+                      {pegawai.nup}
+                    </td>
+                    <td className={`px-4 py-3 whitespace-nowrap text-sm text-blue-900 sticky left-[205px] z-10 border-r border-blue-100 w-[230px] ${index % 2 === 0 ? 'bg-blue-50' : 'bg-white'}`}>
+                      {pegawai.nama_pegawai}
+                    </td>
+                    <td className="px-4 py-3 whitespace-nowrap text-sm">
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                        pegawai.status_pegawai === 'KOMERBA' ? 'bg-green-100 text-green-800' :
+                        pegawai.status_pegawai === 'PKWTT' ? 'bg-yellow-100 text-yellow-800' :
+                        pegawai.status_pegawai === 'PKWT' ? 'bg-yellow-100 text-orange-800' :
+                        'bg-blue-100 text-blue-800'
+                      }`}>
+                        {pegawai.status_pegawai || '-'}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.jabatan || '-'}</td>
+                    <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.tempat_lahir || '-'}</td>
+                    <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.tanggal_lahir ? new Date(pegawai.tanggal_lahir).toLocaleDateString('id-ID') : '-'}</td>
+                    <td className="px-4 py-3 text-sm text-blue-900 max-w-[250px] truncate" title={pegawai.alamat || '-'}>{pegawai.alamat || '-'}</td>
+                    <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.warga_negara || '-'}</td>
+                    <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.agama || '-'}</td>
+                    <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.no_telepon || '-'}</td>
+                    <td className="px-4 py-3 text-sm text-blue-900 max-w-[200px] truncate" title={pegawai.email || '-'}>{pegawai.email || '-'}</td>
+                    <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.nik || '-'}</td>
+                    <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.jenjang_pend || '-'}</td>
+                    <td className="px-4 py-3 text-sm text-blue-900 max-w-[200px] truncate" title={pegawai.pendidikan || '-'}>{pegawai.pendidikan || '-'}</td>
+                    <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">{pegawai.tahun_pend || '-'}</td>
+                    <td className="px-4 py-3 whitespace-nowrap text-sm text-blue-900">
+                      <div className="flex items-center gap-2">
+                        <Link
+                          href={`/dashboard/admin/detail-pegawai/${pegawai.nup}`}
+                          className="p-2 text-blue-700 hover:bg-blue-100 rounded-lg transition"
+                          title="Lihat Detail"
+                        >
+                          <Eye className="w-4 h-4" />
+                        </Link>
+                        <Link
+                          href={`/dashboard/admin/edit-pegawai/${pegawai.nup}`}
+                          className="p-2 text-green-700 hover:bg-green-100 rounded-lg transition"
+                          title="Edit Data"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(pegawai)}
+                          className="p-2 text-red-700 hover:bg-red-100 rounded-lg transition"
+                          title="Hapus Data"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
             )}
           </tbody>
         </table>
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between mt-4">
+          <button
+            className="px-4 py-2 rounded bg-blue-100 text-blue-900 font-semibold disabled:opacity-50"
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+          >
+            Sebelumnya
+          </button>
+          <span className="text-blue-900 font-semibold">
+            Halaman {currentPage} dari {totalPages}
+          </span>
+          <button
+            className="px-4 py-2 rounded bg-blue-100 text-blue-900 font-semibold disabled:opacity-50"
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+          >
+            Selanjutnya
+          </button>
+        </div>
+      )}
 
       {/* Delete Modal */}
       <DeleteModal

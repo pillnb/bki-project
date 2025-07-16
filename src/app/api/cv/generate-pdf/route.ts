@@ -53,7 +53,12 @@ export async function POST(request: NextRequest) {
     });
 
     // 4. Generate QR-Code untuk tanda tangan digital
-    const qrData = JSON.stringify({ nup, generatedAt: now.toISOString() });
+    const qrData = JSON.stringify({
+      nama_pegawai: pegawai.nama_pegawai,
+      nup,
+      perusahaan: 'PT. BKI Komersil Balikpapan',
+      generatedAt: now.toISOString(),
+    });
     const qrSignature = await QRCode.toDataURL(qrData);
 
     // 5. Generate DOCX file

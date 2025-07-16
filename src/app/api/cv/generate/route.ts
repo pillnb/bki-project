@@ -8,17 +8,32 @@ const ImageModule = require('docxtemplater-image-module-free');
 import fs from 'fs';
 
 export async function POST(request: NextRequest) {
-  try {
-    // 1. Autentikasi & ambil nup dari session/cookie
-    const cookieStore = await cookies();
-    const allCookies = await cookieStore;
-    const nik = allCookies.get ? allCookies.get('nik')?.value : undefined;
-    if (!nik) return NextResponse.json({ error: 'Unauthorized: NIK not found' }, { status: 401 });
 
-    // Ambil NUP dari pegawai
-    const pegawaiUser = await prisma.pegawai.findFirst({ where: { nik }, select: { nup: true } });
-    if (!pegawaiUser?.nup) return NextResponse.json({ error: 'Pegawai/NUP not found' }, { status: 404 });
-    const nup = pegawaiUser.nup;
+  try {
+    // 1. Ambil nup dari body (jika ada) atau dari cookie (default)
+    let nup: string | undefined = undefined;
+    let nik: string | undefined = undefined;
+    let body: any = undefined;
+    try {
+      body = await request.json();
+      if (body && body.nup) {
+        nup = body.nup;
+      }
+    } catch (e) {
+      // body kosong atau bukan JSON, abaikan
+    }
+    if (!nup) {
+      // fallback: ambil dari cookie
+      const cookieStore = await cookies();
+      const allCookies = await cookieStore;
+      nik = allCookies.get ? allCookies.get('nik')?.value : undefined;
+      if (!nik) return NextResponse.json({ error: 'Unauthorized: NIK not found' }, { status: 401 });
+      // Ambil NUP dari pegawai
+      const pegawaiUser = await prisma.pegawai.findFirst({ where: { nik }, select: { nup: true } });
+      if (!pegawaiUser?.nup) return NextResponse.json({ error: 'Pegawai/NUP not found' }, { status: 404 });
+      nup = pegawaiUser.nup;
+    }
+    if (!nup) return NextResponse.json({ error: 'NUP tidak ditemukan' }, { status: 400 });
 
     // 2. Query data pegawai beserta relasi
     const pegawai = await prisma.pegawai.findUnique({
@@ -38,7 +53,12 @@ export async function POST(request: NextRequest) {
     });
 
     // 4. Generate QR-Code untuk tanda tangan digital
-    const qrData = JSON.stringify({ nup, generatedAt: now.toISOString() });
+    const qrData = JSON.stringify({
+      nama_pegawai: pegawai.nama_pegawai,
+      nup,
+      perusahaan: 'PT. BKI Komersil Balikpapan',
+      generatedAt: now.toISOString(),
+    });
     const qrSignature = await QRCode.toDataURL(qrData);
 
     // 5. Isi template DOCX (pakai docxtemplater + pizzip)
