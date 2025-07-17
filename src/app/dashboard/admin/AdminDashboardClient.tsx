@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, Eye, Edit, Trash2, Filter, Download } from 'lucide-react'; // Import ikon Download
+import { Search, Eye, Edit, Trash2, Filter, Download } from 'lucide-react';
 
 interface Pegawai {
   nup: string;
@@ -66,7 +66,7 @@ export default function AdminDashboardClient() {
     isOpen: false,
     pegawai: null as Pegawai | null
   });
-  const [isDownloading, setIsDownloading] = useState(false); // State untuk download
+  const [isDownloading, setIsDownloading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
 
@@ -95,7 +95,6 @@ export default function AdminDashboardClient() {
     setCurrentPage(1);
   }, [searchTerm, pegawaiData]);
 
-  // --- LOGIKA UNTUK DOWNLOAD DATA ---
   const handleDownload = async (templateType: 'fq140' | 'fq183') => {
     setIsDownloading(true);
     try {
@@ -122,7 +121,6 @@ export default function AdminDashboardClient() {
       setIsDownloading(false);
     }
   };
-  // ------------------------------------
 
   const totalRows = filteredData.length;
   const totalPages = Math.ceil(totalRows / rowsPerPage);
@@ -168,12 +166,6 @@ export default function AdminDashboardClient() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <div className="flex items-center gap-2">
-            <button className="inline-flex items-center px-3 py-2 border border-blue-200 rounded-lg text-blue-700 bg-blue-50 hover:bg-blue-100">
-              <Filter className="w-4 h-4 mr-2" />
-              Filter
-            </button>
-          </div>
         </div>
       </div>
 
@@ -188,7 +180,6 @@ export default function AdminDashboardClient() {
           </span>
         </div>
         
-        {/* --- KELOMPOK TOMBOL AKSI TERMASUK DOWNLOAD --- */}
         <div className="flex items-center space-x-2">
             <Link
                 href="/dashboard/admin/tambah-pegawai"
@@ -214,18 +205,35 @@ export default function AdminDashboardClient() {
                 {isDownloading ? 'Proses...' : 'Unduh FQ 183'}
             </button>
         </div>
-        {/* ------------------------------------------- */}
       </div>
 
       {/* Table */}
       <div className="bg-white rounded-xl shadow overflow-x-auto">
-        {/* ... sisa kode tabel Anda tidak berubah ... */}
-        <table className="min-w-full divide-y divide-blue-100">
+        <table className="min-w-full divide-y divide-blue-100" style={{ tableLayout: 'fixed' }}>
           <thead className="bg-blue-900">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider sticky left-0 z-20 bg-blue-900 border-r border-blue-700 w-[64px]">No.</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider sticky left-[55px] z-20 bg-blue-900 border-r border-blue-700 w-[120px]">NUP</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider sticky left-[200px] z-20 bg-blue-900 border-r border-blue-700 w-[220px]">Nama Pegawai</th>
+              {/* Kolom No. - Fixed width 60px */}
+              <th 
+                className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider sticky left-0 z-20 bg-blue-900 border-r border-blue-700"
+                style={{ width: '60px', minWidth: '60px', maxWidth: '60px' }}
+              >
+                No.
+              </th>
+              {/* Kolom NUP - Fixed width 180px untuk mengakomodasi NUP panjang */}
+              <th 
+                className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider sticky left-[59px] z-20 bg-blue-900 border-r border-blue-700"
+                style={{ width: '180px', minWidth: '180px', maxWidth: '180px' }}
+              >
+                NUP
+              </th>
+              {/* Kolom Nama - Fixed width 200px */}
+              <th 
+                className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider sticky left-[238px] z-20 bg-blue-900 border-r border-blue-700"
+                style={{ width: '200px', minWidth: '200px', maxWidth: '200px' }}
+              >
+                Nama Pegawai
+              </th>
+              {/* Kolom-kolom lainnya tetap sama */}
               <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[120px]">Status Pegawai</th>
               <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[150px]">Jabatan</th>
               <th className="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider min-w-[120px]">Tempat Lahir</th>
@@ -252,17 +260,39 @@ export default function AdminDashboardClient() {
             ) : (
               paginatedData.map((pegawai, idx) => {
                 const index = startIdx + idx;
+                const rowBgClass = index % 2 === 0 ? 'bg-blue-50' : 'bg-white';
+                
                 return (
-                  <tr key={pegawai.nup} className={index % 2 === 0 ? "bg-blue-50 hover:bg-blue-100" : "bg-white hover:bg-blue-50"}>
-                    <td className={`px-4 py-3 whitespace-nowrap text-sm text-blue-900 sticky left-0 z-10 border-r border-blue-100 w-[64px] ${index % 2 === 0 ? 'bg-blue-50' : 'bg-white'}`}>
+                  <tr key={pegawai.nup} className={`${rowBgClass} hover:bg-blue-100`}>
+                    {/* Kolom No. - Sticky dengan lebar tetap */}
+                    <td 
+                      className={`px-4 py-3 whitespace-nowrap text-sm text-blue-900 sticky left-0 z-10 border-r border-blue-100 ${rowBgClass}`}
+                      style={{ width: '60px', minWidth: '60px', maxWidth: '60px' }}
+                    >
                       {index + 1}
                     </td>
-                    <td className={`px-4 py-3 whitespace-nowrap text-sm font-bold text-blue-900 sticky left-[56px] z-10 border-r border-blue-100 w-[120px] ${index % 2 === 0 ? 'bg-blue-50' : 'bg-white'}`}>
-                      {pegawai.nup}
+                    
+                    {/* Kolom NUP - Sticky dengan lebar tetap 180px, teks akan terpotong jika terlalu panjang */}
+                    <td 
+                      className={`px-4 py-3 text-sm font-bold text-blue-900 sticky left-[59px] z-10 border-r border-blue-100 ${rowBgClass}`}
+                      style={{ width: '180px', minWidth: '180px', maxWidth: '180px' }}
+                    >
+                      <div className="truncate" title={pegawai.nup}>
+                        {pegawai.nup}
+                      </div>
                     </td>
-                    <td className={`px-4 py-3 whitespace-nowrap text-sm text-blue-900 sticky left-[205px] z-10 border-r border-blue-100 w-[230px] ${index % 2 === 0 ? 'bg-blue-50' : 'bg-white'}`}>
-                      {pegawai.nama_pegawai}
+                    
+                    {/* Kolom Nama - Sticky dengan lebar tetap 200px */}
+                    <td 
+                      className={`px-4 py-3 text-sm text-blue-900 sticky left-[238px] z-10 border-r border-blue-100 ${rowBgClass}`}
+                      style={{ width: '200px', minWidth: '200px', maxWidth: '200px' }}
+                    >
+                      <div className="truncate" title={pegawai.nama_pegawai}>
+                        {pegawai.nama_pegawai}
+                      </div>
                     </td>
+                    
+                    {/* Kolom-kolom lainnya tetap sama */}
                     <td className="px-4 py-3 whitespace-nowrap text-sm">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
                         pegawai.status_pegawai === 'KOMERBA' ? 'bg-green-100 text-green-800' :

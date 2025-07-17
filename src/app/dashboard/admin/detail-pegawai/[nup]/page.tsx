@@ -18,6 +18,15 @@ interface Kualifikasi {
   lokasi: string;
 }
 
+// ✅ PERBAIKAN: Interface pengalaman_kerja yang sesuai dengan API response
+interface PengalamanKerja {
+  id: number;
+  pengalaman_kerja: string; // nama pengalaman/posisi
+  perusahaan: string;
+  tahun: number;
+  lokasi: string;
+}
+
 interface Pegawai {
   id: number;
   nup: string;
@@ -34,12 +43,7 @@ interface Pegawai {
   status_pegawai: string;
   tanggal_bergabung: string;
   kualifikasi: Kualifikasi[];
-  pengalaman_kerja: Array<{
-    posisi: string;
-    perusahaan: string;
-    durasi: string;
-    deskripsi: string;
-  }>;
+  pengalaman_kerja: PengalamanKerja[];
   username: string;
   status: string;
   created_at: string;
@@ -110,28 +114,26 @@ export default function DetailPegawai() {
   const [downloadFormat, setDownloadFormat] = useState<'pdf' | 'docx'>('pdf');
 
   const handleDownload = async (format: 'pdf' | 'docx') => {
-    if (!pegawai) return;
-    setIsDownloading(true);
-    setShowDropdown(false);
-    try {
-      let endpoint = '';
-      let filename = `CV-${pegawai.nup}`;
-      let contentType = '';
-      if (format === 'docx') {
-        endpoint = '/api/cv/generate';
-        filename += '.docx';
-        contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-      } else {
-        endpoint = '/api/cv/generate-pdf';
-        filename += '.pdf';
-        contentType = 'application/pdf';
-      }
+  if (!pegawai) return;
+  setIsDownloading(true);
+  setShowDropdown(false);
+  
+  try {
+    let endpoint = '';
+    let filename = `CV-${pegawai.nup}`;
+    
+    if (format === 'docx') {
+      endpoint = '/api/cv/generate';
+      filename += '.docx';
+      
       const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nup, format }),
       });
+      
       if (!res.ok) throw new Error('Gagal generate CV');
+      
       const blob = await res.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -141,12 +143,34 @@ export default function DetailPegawai() {
       a.click();
       a.remove();
       window.URL.revokeObjectURL(url);
-    } catch (err) {
-      alert('Gagal download CV!');
-    } finally {
-      setIsDownloading(false);
+    } else {
+      endpoint = `/api/cv/generate-pdf/${nup}`;
+      filename += '.pdf';
+      
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ format }),
+      });
+      
+      if (!res.ok) throw new Error('Gagal generate CV');
+      
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
     }
-  };
+  } catch (err) {
+    alert('Gagal download CV!');
+  } finally {
+    setIsDownloading(false);
+  }
+};
 
   useEffect(() => {
     if (!nup) return;
@@ -156,6 +180,11 @@ export default function DetailPegawai() {
       .then(async (res) => {
         if (!res.ok) throw new Error('Data pegawai tidak ditemukan');
         const data = await res.json();
+        
+        // ✅ PERBAIKAN: Debug log untuk melihat struktur data
+        console.log('Data dari API:', data);
+        console.log('Pengalaman kerja:', data.pengalaman_kerja);
+        
         // Ensure kualifikasi and pengalaman_kerja are always arrays
         setPegawai({
           ...data,
@@ -165,7 +194,8 @@ export default function DetailPegawai() {
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-    // Fetch activity log (surat tugas & training)
+    
+      // Fetch activity log (surat tugas & training)
     fetch(`/api/pegawai/${nup}/activity-log`)
       .then(async (res) => {
         if (!res.ok) return;
@@ -184,34 +214,6 @@ export default function DetailPegawai() {
       day: 'numeric'
     });
   };
-
-  const calculateAge = (birthDate: string) => {
-    if (!birthDate) return '-';
-    const today = new Date();
-    const birth = new Date(birthDate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      age--;
-    }
-    return age;
-  };
-
-  const calculateWorkDuration = (startDate: string) => {
-    if (!startDate) return '-';
-    const today = new Date();
-    const start = new Date(startDate);
-    const diffTime = Math.abs(today.getTime() - start.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    const years = Math.floor(diffDays / 365);
-    const months = Math.floor((diffDays % 365) / 30);
-    if (years > 0) {
-      return `${years} tahun ${months} bulan`;
-    } else {
-      return `${months} bulan`;
-    }
-  };
-
 
   const handleDelete = () => {
     setDeleteModal({
@@ -392,66 +394,49 @@ export default function DetailPegawai() {
                     <div key={kual.id_pelatihan} className="border-l-4 border-blue-200 pl-4">
                       <div className="flex items-center justify-between mb-2">
                         <h4 className="font-bold text-blue-900">{kual.nama_pelatihan}</h4>
-                        <span className="text-sm text-blue-400">{kual.tahun}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-blue-400">{kual.tahun}</span>
+                          <div className="whitespace-nowrap">
+                            {kual.status === "ON_GOING" && <span className="inline-block px-2 py-1 rounded bg-yellow-100 text-yellow-800 font-semibold text-xs whitespace-nowrap">On Going</span>}
+                            {kual.status === "VALID" && <span className="inline-block px-2 py-1 rounded bg-green-100 text-green-800 font-semibold text-xs whitespace-nowrap">Valid</span>}
+                            {kual.status === "EXPIRED" && <span className="inline-block px-2 py-1 rounded bg-red-100 text-red-800 font-semibold text-xs whitespace-nowrap">Expired</span>}
+                            {!["ON_GOING","VALID","EXPIRED"].includes(kual.status) && <span className="inline-block whitespace-nowrap">{kual.status}</span>}
+                          </div>
+                        </div>
                       </div>
                       <p className="text-blue-600 font-bold mb-2">{kual.penyelenggara}</p>
+                      <p className="text-blue-900 text-sm leading-relaxed">{kual.lokasi || '-'}</p>
                     </div>
                   ))
                 )}
               </div>
             </div>
-            {/* Pengalaman Kerja */}
+            {/* ✅ PERBAIKAN: Pengalaman Kerja section dengan field yang benar */}
             <div className="bg-white rounded-xl shadow p-8 border border-blue-100">
               <h3 className="text-lg font-bold text-blue-900 mb-6 flex items-center gap-2">
                 <Briefcase className="w-5 h-5 text-blue-400" />
                 Pengalaman Kerja
               </h3>
               <div className="space-y-6">
-                {(pegawai.pengalaman_kerja || []).map((exp, index) => (
-                  <div key={index} className="border-l-4 border-blue-200 pl-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-bold text-blue-900">{exp.posisi}</h4>
-                      <span className="text-sm text-blue-400">{exp.durasi}</span>
+                {(pegawai.pengalaman_kerja?.length ?? 0) === 0 ? (
+                  <span className="text-sm text-blue-400">(Belum ada data)</span>
+                ) : (
+                  (pegawai.pengalaman_kerja || []).map((exp, index) => (
+                    <div key={exp.id || index} className="border-l-4 border-blue-200 pl-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-bold text-blue-900">{exp.pengalaman_kerja}</h4>
+                        <span className="text-sm text-blue-400">{exp.tahun || '-'}</span>
+                      </div>
+                      <p className="text-blue-600 font-bold mb-2">{exp.perusahaan}</p>
+                      <p className="text-blue-900 text-sm leading-relaxed">{exp.lokasi || '-'}</p>
                     </div>
-                    <p className="text-blue-600 font-bold mb-2">{exp.perusahaan}</p>
-                    <p className="text-blue-900 text-sm leading-relaxed">{exp.deskripsi}</p>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
           </div>
           {/* Right Column */}
           <div className="space-y-8">
-            {/* Informasi Akun */}
-            <div className="bg-white rounded-xl shadow p-8 border border-blue-100">
-              <h3 className="text-lg font-bold text-blue-900 mb-6">Informasi Akun</h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-bold text-blue-400 mb-1">Username</label>
-                  <span className="text-blue-900">{pegawai.username}</span>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-blue-400 mb-1">NIK</label>
-                  <span className="text-blue-900">{pegawai.nik || '-'}</span>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-blue-400 mb-1">Status Akun</label>
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
-                    pegawai.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                  }`}>
-                    {pegawai.status === 'active' ? 'Aktif' : 'Nonaktif'}
-                  </span>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-blue-400 mb-1">Dibuat Pada</label>
-                  <span className="text-blue-900">{formatDate(pegawai.created_at)}</span>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-blue-400 mb-1">Terakhir Diupdate</label>
-                  <span className="text-blue-900">{formatDate(pegawai.updated_at)}</span>
-                </div>
-              </div>
-            </div>
             {/* Quick Actions */}
             <div className="bg-white rounded-xl shadow p-8 border border-blue-100">
               <h3 className="text-lg font-bold text-blue-900 mb-6">Aksi Cepat</h3>

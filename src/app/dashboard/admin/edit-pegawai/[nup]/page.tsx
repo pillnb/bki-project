@@ -1,4 +1,14 @@
 "use client";
+// Fungsi untuk menentukan status kualifikasi/pelatihan
+function getStatusKualifikasi(tanggal_akhir: string, masa_berlaku: string) {
+  const today = new Date();
+  const tglAkhir = tanggal_akhir ? new Date(tanggal_akhir) : null;
+  const masaBerlaku = masa_berlaku ? new Date(masa_berlaku) : null;
+  if (tglAkhir && today <= tglAkhir) return 'ON_GOING';
+  if (masaBerlaku && today > masaBerlaku) return 'EXPIRED';
+  if (tglAkhir && masaBerlaku && today > tglAkhir && today <= masaBerlaku) return 'VALID';
+  return 'VALID'; // fallback
+}
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
@@ -96,10 +106,10 @@ interface PegawaiFromAPI {
   }>;
   pengalaman_kerja: Array<{
     id: number;
-    posisi: string;
+    pengalaman_kerja: string;
     perusahaan: string;
-    durasi: string;
-    deskripsi: string;
+    tahun: string;
+    lokasi: string;
   }>;
 }
 
@@ -168,26 +178,30 @@ export default function EditPegawaiForm() {
           confirm_password: '',
           
           // ✅ PERBAIKAN 2: Gunakan 'data.kualifikasi' untuk memetakan data
-          pelatihan: data.kualifikasi?.map(p => ({
-            id_pelatihan: p.id_pelatihan,
-            nama_pelatihan: p.nama_pelatihan || '',
-            penyelenggara: p.penyelenggara || '',
-            lokasi: p.lokasi || '',
-            nomor_sertifikat: p.nomor_sertifikat || '',
-            tanggal_awal: formatDateForInput(p.tanggal_awal),
-            tanggal_akhir: formatDateForInput(p.tanggal_akhir),
-            masa_berlaku: formatDateForInput(p.masa_berlaku),
-            status: p.status || 'VALID',
-            keterangan_utilisasi: p.keterangan_utilisasi || '',
-            tahun: p.tahun?.toString() || '',
-          })) || [],
+          pelatihan: data.kualifikasi?.map(p => {
+            const tanggal_akhir = formatDateForInput(p.tanggal_akhir);
+            const masa_berlaku = formatDateForInput(p.masa_berlaku);
+            return {
+              id_pelatihan: p.id_pelatihan,
+              nama_pelatihan: p.nama_pelatihan || '',
+              penyelenggara: p.penyelenggara || '',
+              lokasi: p.lokasi || '',
+              nomor_sertifikat: p.nomor_sertifikat || '',
+              tanggal_awal: formatDateForInput(p.tanggal_awal),
+              tanggal_akhir,
+              masa_berlaku,
+              status: getStatusKualifikasi(tanggal_akhir, masa_berlaku),
+              keterangan_utilisasi: p.keterangan_utilisasi || '',
+              tahun: p.tahun?.toString() || '',
+            }
+          }) || [],
 
           pengalaman_kerja: data.pengalaman_kerja?.map(p => ({
             id: p.id,
-            pengalaman_kerja: p.posisi || '',
+            pengalaman_kerja: p.pengalaman_kerja || '',
             perusahaan: p.perusahaan || '',
-            tahun: p.durasi?.substring(0, 4) || '',
-            lokasi: ''
+            tahun: p.tahun?.toString() || '',
+            lokasi: p.lokasi || '',
           })) || [],
         });
 
@@ -265,15 +279,89 @@ export default function EditPegawaiForm() {
   const updatePelatihan = (index: number, field: string, value: string) => {
     setFormData(prev => ({
       ...prev,
-      pelatihan: prev.pelatihan.map((pel, i) =>
-        i === index ? { ...pel, [field]: value } : pel
-      )
+      pelatihan: prev.pelatihan.map((pel, i) => {
+        if (i !== index) return pel;
+        const updated = { ...pel, [field]: value };
+        // Jika field yang diubah adalah tanggal_akhir atau masa_berlaku, update status otomatis
+        if (field === 'tanggal_akhir' || field === 'masa_berlaku') {
+          updated.status = getStatusKualifikasi(
+            field === 'tanggal_akhir' ? value : updated.tanggal_akhir,
+            field === 'masa_berlaku' ? value : updated.masa_berlaku
+          );
+        }
+        return updated;
+      })
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Validasi kolom wajib
+    const requiredFields = [
+      { key: 'nama_pegawai', label: 'Nama Lengkap' },
+      { key: 'nik', label: 'NIK' },
+      { key: 'email', label: 'Email' },
+      { key: 'no_telepon', label: 'No. Telepon' },
+      { key: 'nup', label: 'NUP' },
+      { key: 'jabatan', label: 'Jabatan' },
+      { key: 'status_pegawai', label: 'Status Pegawai' },
+    ];
+    const missingFields = requiredFields.filter(f => !formData[f.key as keyof typeof formData] || (typeof formData[f.key as keyof typeof formData] === 'string' && (formData[f.key as keyof typeof formData] as string).trim() === ''));
+
+    // Validasi pelatihan (jika ada pelatihan, cek kolom penting)
+    let pelatihanErrors: string[] = [];
+    formData.pelatihan.forEach((pel, idx) => {
+      const pelFields = [
+        { key: 'nama_pelatihan', label: 'Nama Pelatihan' },
+        { key: 'penyelenggara', label: 'Penyelenggara' },
+        { key: 'nomor_sertifikat', label: 'Nomor Sertifikat' },
+        { key: 'tanggal_awal', label: 'Tanggal Mulai' },
+        { key: 'tanggal_akhir', label: 'Tanggal Selesai' },
+        { key: 'masa_berlaku', label: 'Masa Berlaku' },
+        { key: 'tahun', label: 'Tahun' },
+      ];
+      pelFields.forEach(f => {
+        const value = (pel as any)[f.key];
+        if (!value || (typeof value === 'string' && value.trim() === '')) {
+          pelatihanErrors.push(`Pelatihan ${idx + 1}: ${f.label}`);
+        }
+      });
+    });
+
+    // Validasi pengalaman kerja (jika ada pengalaman, cek kolom penting)
+    let pengalamanErrors: string[] = [];
+    formData.pengalaman_kerja.forEach((exp, idx) => {
+      const expFields = [
+        { key: 'tahun', label: 'Tahun' },
+        { key: 'pengalaman_kerja', label: 'Posisi' },
+        { key: 'perusahaan', label: 'Perusahaan' },
+      ];
+      expFields.forEach(f => {
+        const value = (exp as any)[f.key];
+        if (!value || (typeof value === 'string' && value.trim() === '')) {
+          pengalamanErrors.push(`Pengalaman ${idx + 1}: ${f.label}`);
+        }
+      });
+    });
+
+    let errorMessages: string[] = [];
+    if (missingFields.length > 0) {
+      errorMessages.push('Kolom wajib belum diisi: ' + missingFields.map(f => f.label).join(', '));
+    }
+    if (pelatihanErrors.length > 0) {
+      errorMessages.push('Data pelatihan belum lengkap di: ' + pelatihanErrors.join(', '));
+    }
+    if (pengalamanErrors.length > 0) {
+      errorMessages.push('Data pengalaman kerja belum lengkap di: ' + pengalamanErrors.join(', '));
+    }
+
+    if (errorMessages.length > 0) {
+      alert(errorMessages.join('\n'));
+      setIsSubmitting(false);
+      return;
+    }
 
     if (formData.password && formData.password !== formData.confirm_password) {
       alert('Password dan konfirmasi password tidak cocok!');
@@ -604,11 +692,13 @@ export default function EditPegawaiForm() {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                                <select value={pel.status} onChange={(e) => updatePelatihan(index, 'status', e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-black">
-                                    <option value="VALID">VALID</option>
-                                    <option value="EXPIRED">EXPIRED</option>
-                                    <option value="ON_GOING">ON GOING</option>
-                                </select>
+                                <input
+                                  type="text"
+                                  value={pel.status}
+                                  readOnly
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 text-black cursor-not-allowed"
+                                  tabIndex={-1}
+                                />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Tahun</label>

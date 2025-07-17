@@ -17,8 +17,8 @@ interface FormData {
 
   // Data Kepegawaian
   nup: string;
-  jabatan: string;
   status_pegawai: string;
+  jabatan: string;
 
   // Data Pendidikan
   jenjang_pend: string;
@@ -80,7 +80,25 @@ function PelatihanTag({ pelatihan, index, onRemove }: PelatihanTagProps) {
   );
 }
 
+interface FormErrors {
+  nik?: string;
+  email?: string;
+  no_telepon?: string;
+  tempat_lahir?: string;
+  tanggal_lahir?: string;
+  agama?: string;
+  warga_negara?: string;
+  nama_pegawai?: string;
+  nup?: string;
+  confirm_password?: string;
+  [key: string]: string | undefined;
+}
+
 export default function TambahPegawaiForm() {
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [nikKeyError, setNikKeyError] = useState("");
+  const [telpKeyError, setTelpKeyError] = useState("");
+
   const [formData, setFormData] = useState<FormData>({
     nama_pegawai: '',
     nik: '',
@@ -93,7 +111,7 @@ export default function TambahPegawaiForm() {
     warga_negara: 'Indonesia',
     nup: '',
     jabatan: '',
-    status_pegawai: '',
+    status_pegawai: 'KOMERBA',
     jenjang_pend: '',
     pendidikan: '',
     tahun_pend: '',
@@ -107,22 +125,156 @@ export default function TambahPegawaiForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+
+  const validateField = (name: string, value: string) => {
+    let error = '';
+    switch (name) {
+      case 'nik':
+        if (!value.trim()) {
+          error = 'NIK harus diisi';
+        } else if (!/^\d+$/.test(value)) {
+          error = 'NIK harus berupa angka';
+        }
+        break;
+      case 'email':
+        if (!value.trim()) {
+          error = 'Email harus diisi';
+        } else {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(value)) {
+            error = 'Format email tidak valid';
+          }
+        }
+        break;
+      case 'no_telepon':
+        if (!value.trim()) {
+          error = 'Nomor telepon harus diisi';
+        } else if (!/^\d+$/.test(value)) {
+          error = 'Nomor telepon harus berupa angka';
+        }
+        break;
+      case 'tempat_lahir':
+        if (!value.trim()) {
+          error = 'Tempat lahir harus diisi';
+        }
+        break;
+      case 'tanggal_lahir':
+        if (!value) {
+          error = 'Tanggal lahir harus diisi';
+        }
+        break;
+      case 'agama':
+        if (!value) {
+          error = 'Agama harus dipilih';
+        }
+        break;
+      case 'warga_negara':
+        if (!value.trim()) {
+          error = 'Kewarganegaraan harus diisi';
+        }
+        break;
+      case 'nama_pegawai':
+        if (!value.trim()) {
+          error = 'Nama pegawai harus diisi';
+        }
+        break;
+      case 'nup':
+        if (!value.trim()) {
+          error = 'NUP harus diisi';
+        }
+        break;
+    }
+    setErrors(prev => ({
+      ...prev,
+      [name]: error
+    }));
+    return error;
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+    validateField(name, value);
   };
 
-  // Set username berdasarkan NIK ketika NIK berubah
   const handleNikChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nikValue = e.target.value;
     setFormData(prev => ({
       ...prev,
       nik: nikValue,
-      username: nikValue // Username otomatis sama dengan NIK
+      username: nikValue
     }));
+    validateField('nik', nikValue);
+  };
+
+  const validateForm = () => {
+    const fieldsToValidate = [
+      'nama_pegawai',
+      'nik',
+      'email',
+      'no_telepon',
+      'tempat_lahir',
+      'tanggal_lahir',
+      'agama',
+      'warga_negara',
+      'nup'
+    ];
+    const newErrors: FormErrors = {};
+    let hasError = false;
+    fieldsToValidate.forEach(field => {
+      const error = validateField(field, formData[field as keyof Omit<FormData, 'pengalaman_kerja' | 'pelatihan'>] as string);
+      if (error) {
+        newErrors[field] = error;
+        hasError = true;
+      }
+    });
+    if (formData.password !== formData.confirm_password) {
+      newErrors.confirm_password = 'Password dan konfirmasi password tidak cocok';
+      hasError = true;
+    }
+    setErrors(newErrors);
+    return !hasError;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    if (!validateForm()) {
+      setIsSubmitting(false);
+      return;
+    }
+    try {
+      const submitData = {
+        ...formData,
+        tahun_pend: formData.tahun_pend ? parseInt(formData.tahun_pend) : null,
+        pengalaman_kerja: formData.pengalaman_kerja.map(exp => ({
+          ...exp,
+          tahun: exp.tahun ? parseInt(exp.tahun) : null
+        })),
+        pelatihan: formData.pelatihan?.map?.(pel => ({
+          ...pel,
+          tahun: pel.tahun ? parseInt(pel.tahun) : null
+        }))
+      };
+      const res = await fetch('/api/pegawai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(submitData),
+      });
+      if (!res.ok) {
+        throw new Error('Gagal menambah pegawai');
+      }
+      alert('Data pegawai berhasil ditambahkan!');
+      window.location.href = '/dashboard/admin';
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Terjadi kesalahan saat menyimpan data!');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const addExperience = () => {
@@ -187,65 +339,6 @@ export default function TambahPegawaiForm() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Validasi
-    if (formData.password !== formData.confirm_password) {
-      alert('Password dan konfirmasi password tidak cocok!');
-      setIsSubmitting(false);
-      return;
-    }
-
-    // Validasi NIK dan NUP
-    if (!formData.nik.trim()) {
-      alert('NIK harus diisi!');
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (!formData.nup.trim()) {
-      alert('NUP harus diisi!');
-      setIsSubmitting(false);
-      return;
-    }
-
-    try {
-      // Format data untuk dikirim ke API
-      const submitData = {
-        ...formData,
-        tahun_pend: formData.tahun_pend ? parseInt(formData.tahun_pend) : null,
-        pengalaman_kerja: formData.pengalaman_kerja.map(exp => ({
-          ...exp,
-          tahun: exp.tahun ? parseInt(exp.tahun) : null
-        })),
-        pelatihan: formData.pelatihan?.map?.(pel => ({
-          ...pel,
-          tahun: pel.tahun ? parseInt(pel.tahun) : null
-        }))
-      };
-
-      const res = await fetch('/api/pegawai', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(submitData),
-      });
-
-      if (!res.ok) {
-        throw new Error('Gagal menambah pegawai');
-      }
-
-      alert('Data pegawai berhasil ditambahkan!');
-      window.location.href = '/dashboard/admin';
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Terjadi kesalahan saat menyimpan data!');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-blue-50">
       {/* Header */}
@@ -282,9 +375,14 @@ export default function TambahPegawaiForm() {
                   name="nama_pegawai"
                   value={formData.nama_pegawai}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black ${
+                    errors.nama_pegawai ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   required
                 />
+                {errors.nama_pegawai && (
+                  <p className="text-xs text-red-500 mt-1">{errors.nama_pegawai}</p>
+                )}
               </div>
 
               <div>
@@ -296,11 +394,31 @@ export default function TambahPegawaiForm() {
                   name="nik"
                   value={formData.nik}
                   onChange={handleNikChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  onKeyDown={e => {
+                    if (!/^[0-9]$/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'Tab' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
+                      setNikKeyError('NIK harus berupa angka');
+                      e.preventDefault();
+                    } else {
+                      setNikKeyError("");
+                    }
+                  }}
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black ${
+                    errors.nik || nikKeyError ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   maxLength={32}
+                  pattern="[0-9]*"
+                  title="NIK harus berupa angka"
                   required
                 />
-                <p className="text-xs text-gray-500 mt-1">NIK akan digunakan sebagai username untuk login</p>
+                {nikKeyError && (
+                  <p className="text-xs text-red-500 mt-1">{nikKeyError}</p>
+                )}
+                {errors.nik && (
+                  <p className="text-xs text-red-500 mt-1">{errors.nik}</p>
+                )}
+                {!errors.nik && !nikKeyError && (
+                  <p className="text-xs text-gray-500 mt-1">NIK akan digunakan sebagai username untuk login</p>
+                )}
               </div>
 
               <div>
@@ -312,35 +430,52 @@ export default function TambahPegawaiForm() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black ${
+                    errors.email ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   required
                 />
+                {errors.email && (
+                  <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+                )}
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Tempat Lahir
+                  Tempat Lahir <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
                   name="tempat_lahir"
                   value={formData.tempat_lahir}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black ${
+                    errors.tempat_lahir ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  required
                 />
+                {errors.tempat_lahir && (
+                  <p className="text-xs text-red-500 mt-1">{errors.tempat_lahir}</p>
+                )}
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Tanggal Lahir
+                  Tanggal Lahir <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="date"
                   name="tanggal_lahir"
                   value={formData.tanggal_lahir}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black ${
+                    errors.tanggal_lahir ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  required
                 />
+                {errors.tanggal_lahir && (
+                  <p className="text-xs text-red-500 mt-1">{errors.tanggal_lahir}</p>
+                )}
               </div>
 
               <div>
@@ -352,20 +487,41 @@ export default function TambahPegawaiForm() {
                   name="no_telepon"
                   value={formData.no_telepon}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  onKeyDown={e => {
+                    if (!/^[0-9]$/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'Tab' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
+                      setTelpKeyError('Nomor telepon harus berupa angka');
+                      e.preventDefault();
+                    } else {
+                      setTelpKeyError("");
+                    }
+                  }}
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black ${
+                    errors.no_telepon || telpKeyError ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  pattern="[0-9]*"
+                  title="Nomor telepon harus berupa angka"
                   required
                 />
+                {telpKeyError && (
+                  <p className="text-xs text-red-500 mt-1">{telpKeyError}</p>
+                )}
+                {errors.no_telepon && (
+                  <p className="text-xs text-red-500 mt-1">{errors.no_telepon}</p>
+                )}
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Agama
+                  Agama <span className="text-red-600">*</span>
                 </label>
                 <select
                   name="agama"
                   value={formData.agama}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black ${
+                    errors.agama ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  required
                 >
                   <option value="">Pilih Agama</option>
                   <option value="Islam">Islam</option>
@@ -375,19 +531,28 @@ export default function TambahPegawaiForm() {
                   <option value="Buddha">Buddha</option>
                   <option value="Konghucu">Konghucu</option>
                 </select>
+                {errors.agama && (
+                  <p className="text-xs text-red-500 mt-1">{errors.agama}</p>
+                )}
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Kewarganegaraan
+                  Kewarganegaraan <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
                   name="warga_negara"
                   value={formData.warga_negara}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black ${
+                    errors.warga_negara ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  required
                 />
+                {errors.warga_negara && (
+                  <p className="text-xs text-red-500 mt-1">{errors.warga_negara}</p>
+                )}
               </div>
 
               <div className="md:col-span-2">

@@ -3,6 +3,7 @@ import InfoAdminCard from './InfoAdminCard';
 import AdminDashboardClient from './AdminDashboardClient';
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
+import LogoutButton from './LogoutButton';
 
 export default function AdminDashboard() {
   return (
@@ -15,6 +16,7 @@ export default function AdminDashboard() {
               <h1 className="text-2xl font-bold text-white">Dashboard Admin</h1>
               <p className="text-blue-100">Manajemen Data Pegawai</p>
             </div>
+            <LogoutButton />
           </div>
         </div>
       </div>
