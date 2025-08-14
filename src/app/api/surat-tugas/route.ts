@@ -1,89 +1,178 @@
+// API untuk update Surat Tugas (PUT)
+export async function PUT(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { id, ...updateData } = body;
+    if (!id) {
+      return NextResponse.json({ error: 'ID surat tugas wajib diisi.' }, { status: 400 });
+    }
+
+    // Cari surat tugas yang akan diupdate
+    const surat = await prisma.suratTugas.findUnique({
+      where: { id: id },
+      select: { status: true }
+    });
+    if (!surat) {
+      return NextResponse.json({ error: 'Surat tugas tidak ditemukan.' }, { status: 404 });
+    }
+    if (surat.status !== 'DRAFT') {
+      return NextResponse.json({ error: 'Surat tugas hanya bisa diupdate jika status masih DRAFT.' }, { status: 403 });
+    }
+
+    // Siapkan data yang boleh diupdate
+    const allowedFields = [
+      'nomor_surat', 'klien', 'pekerjaan', 'status_pekerjaan', 'no_service_order', 'spi', 'wbs',
+      'bidang_pekerjaan', 'peralatan_inspeksi', 'kebutuhan_material', 'lokasi_pekerjaan',
+      'tanggal_berangkat', 'tanggal_kembali', 'transportasi_operasional', 'transportasi_ditanggung_klien',
+      'transportasi_asal_tujuan', 'transportasi_dinas', 'tiket', 'penginapan', 'keterangan_lain',
+      'timInspektor', 'leadInspectorNup'
+    ];
+    const dataToUpdate: any = {};
+    for (const key of allowedFields) {
+      if (key in updateData) {
+        dataToUpdate[key] = updateData[key];
+      }
+    }
+
+    // Update relasi timInspektor jika ada
+    if (dataToUpdate.timInspektor) {
+      dataToUpdate.timInspektor = {
+        set: [],
+        connect: Array.isArray(updateData.timInspektor)
+          ? updateData.timInspektor.map((nup: string) => ({ nup }))
+          : []
+      };
+    }
+
+    // Update leadInspector jika ada
+    if (dataToUpdate.leadInspectorNup) {
+      const leadInspector = await prisma.pegawai.findUnique({ where: { nup: dataToUpdate.leadInspectorNup }, select: { id: true } });
+      if (leadInspector) {
+        dataToUpdate.leadInspectorId = leadInspector.id;
+      }
+      delete dataToUpdate.leadInspectorNup;
+    }
+
+    // Update proyek jika ada perubahan pekerjaan/klien/lokasi
+    if (dataToUpdate.pekerjaan || dataToUpdate.klien || dataToUpdate.lokasi_pekerjaan) {
+      // Cari proyek lama
+      const suratLama = await prisma.suratTugas.findUnique({ where: { id }, include: { proyek: true } });
+      let proyekId = suratLama?.proyek?.id;
+      let namaProyek = dataToUpdate.pekerjaan || suratLama?.proyek?.namaProyek;
+      let klienProyek = dataToUpdate.klien || suratLama?.proyek?.klien;
+      let lokasiProyek = Array.isArray(dataToUpdate.lokasi_pekerjaan)
+        ? dataToUpdate.lokasi_pekerjaan.join(', ')
+        : suratLama?.proyek?.lokasi;
+      // Cari proyek yang sesuai
+      let proyek = await prisma.proyek.findFirst({ where: { namaProyek } });
+      if (!proyek) {
+        proyek = await prisma.proyek.create({ data: { namaProyek, klien: klienProyek, lokasi: lokasiProyek } });
+      }
+      proyekId = proyek.id;
+      dataToUpdate.proyekId = proyekId;
+    }
+
+    // Update surat tugas
+    const updatedSurat = await prisma.suratTugas.update({
+      where: { id },
+      data: dataToUpdate
+    });
+    return NextResponse.json({ message: 'Surat tugas berhasil diupdate.', data: updatedSurat });
+  } catch (error: any) {
+    console.error('Error saat update surat tugas:', error);
+    return NextResponse.json({ error: 'Terjadi kesalahan pada server.' }, { status: 500 });
+  }
+}
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import prisma from '@/lib/prisma';
 
+// API untuk membuat Surat Tugas (POST)
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     
-    console.log('Received body:', body); // Debug log
-
-    // Frontend sends snake_case, so we read snake_case
-    const nomor_surat = body.nomor_surat;
-    const klien = body.klien;
-    const pekerjaan = body.pekerjaan;
-    const status_pekerjaan = body.status_pekerjaan;
-    const no_service_order = body.no_service_order;
-    const spi = body.spi;
-    const wbs = body.wbs;
-    const bidang_pekerjaan = body.bidang_pekerjaan;
-    const peralatan_inspeksi = body.peralatan_inspeksi;
-    const kebutuhan_material = body.kebutuhan_material;
-    const lokasi_pekerjaan = body.lokasi_pekerjaan;
-    const tanggal_berangkat = body.tanggal_berangkat;
-    const tanggal_kembali = body.tanggal_kembali;
-    const transportasi_operasional = body.transportasi_operasional;
-    const transportasi_ditanggung_klien = body.transportasi_ditanggung_klien;
-    const transportasi_asal_tujuan = body.transportasi_asal_tujuan;
-    const transportasi_dinas = body.transportasi_dinas;
-    const tiket = body.tiket;
-    const penginapan = body.penginapan;
-    const keterangan_lain = body.keterangan_lain;
-    const pegawaiNupList = body.pegawaiNupList;
-    const status = body.status;
-
-    // Validasi dan filter array agar tidak hanya berisi string kosong
-    const lokasi_pekerjaan_valid = Array.isArray(lokasi_pekerjaan) ? lokasi_pekerjaan.filter(l => l && l.trim() !== '') : [];
-    const pegawaiNupList_valid = Array.isArray(pegawaiNupList) ? pegawaiNupList.filter(nup => nup && nup.trim() !== '') : [];
-    
-    console.log('Validation data:', {
+    // Membaca semua data dari body
+    const {
+      nomor_surat,
       klien,
-      pekerjaan,
-      lokasi_pekerjaan_valid,
-      pegawaiNupList_valid,
+      pekerjaan, // Ini akan digunakan sebagai namaProyek
+      status_pekerjaan,
       no_service_order,
       spi,
-      wbs
-    }); // Debug log
+      wbs,
+      bidang_pekerjaan,
+      peralatan_inspeksi,
+      kebutuhan_material,
+      lokasi_pekerjaan, // Ini akan digunakan sebagai lokasi Proyek
+      tanggal_berangkat,
+      tanggal_kembali,
+      transportasi_operasional,
+      transportasi_ditanggung_klien,
+      transportasi_asal_tujuan,
+      transportasi_dinas,
+      tiket,
+      penginapan,
+      keterangan_lain,
+      pegawaiNupList = body.pegawaiNupList || body.timInspektor, // Daftar NUP untuk timInspektor
+      leadInspectorNup, // NUP Lead Inspector
+      status,
+      dibuatOlehId
+    } = body;
 
-    if (!klien || !pekerjaan || lokasi_pekerjaan_valid.length === 0 || pegawaiNupList_valid.length === 0) {
-      return NextResponse.json({ error: 'Data wajib tidak boleh kosong.' }, { status: 400 });
+    // Validasi dan filter array NUP agar tidak ada yang kosong
+    const pegawaiNupList_valid = Array.isArray(pegawaiNupList) ? pegawaiNupList.filter(nup => nup && nup.trim() !== '') : [];
+    
+    if (!klien || !pekerjaan || pegawaiNupList_valid.length === 0) {
+      return NextResponse.json({ error: 'Klien, Pekerjaan, dan Tim Inspektor tidak boleh kosong.' }, { status: 400 });
     }
 
-    // PERBAIKAN: Validasi "isi salah satu" - fix the validation logic
-    const hasServiceOrder = no_service_order && no_service_order !== null && no_service_order.trim() !== '';
-    const hasSpi = spi && spi !== null && spi.trim() !== '';
-    const hasWbs = wbs && wbs !== null && wbs.trim() !== '';
-    
-    console.log('Validation check:', { 
-      hasServiceOrder, 
-      hasSpi, 
-      hasWbs, 
-      no_service_order, 
-      spi, 
-      wbs,
-      no_service_order_type: typeof no_service_order,
-      spi_type: typeof spi,
-      wbs_type: typeof wbs
-    }); // Debug log
-    
-    if (!hasServiceOrder && !hasSpi && !hasWbs) {
+    // Validasi bahwa salah satu dari No Service Order, SPI, atau WBS harus diisi
+    if (!no_service_order && !spi && !wbs) {
       return NextResponse.json({ error: 'Salah satu dari No Service Order, SPI, atau WBS harus diisi.' }, { status: 400 });
     }
 
-    const result = await prisma.$transaction(async (tx) => {
-      // Build data object without undefined fields
-      const suratTugasData: any = {
-        klien,
-        pekerjaan,
+    // Cari ID Lead Inspector berdasarkan NUP jika ada
+    let leadInspectorId = null;
+    if (leadInspectorNup) {
+      const leadInspectorData = await prisma.pegawai.findUnique({
+        where: { nup: leadInspectorNup },
+        select: { id: true }
+      });
+      if (leadInspectorData) {
+        leadInspectorId = leadInspectorData.id;
+      }
+    }
+
+    // Logika untuk mencari atau membuat proyek
+    let proyek = await prisma.proyek.findFirst({
+      where: { namaProyek: pekerjaan },
+    });
+
+    if (!proyek) {
+      proyek = await prisma.proyek.create({
+        data: {
+          namaProyek: pekerjaan,
+          klien: klien,
+          // Menggabungkan array lokasi menjadi string tunggal
+          lokasi: Array.isArray(lokasi_pekerjaan) ? lokasi_pekerjaan.join(', ') : (lokasi_pekerjaan || "N/A"),
+        },
+      });
+    }
+
+    // Membuat Surat Tugas dan menghubungkan relasi dalam satu operasi create
+    const newSuratTugas = await prisma.suratTugas.create({
+      data: {
+        nomor_surat: nomor_surat || null,
         status_pekerjaan,
-        status: status || 'DIAJUKAN', // Gunakan status dari body jika ada, default DIAJUKAN
-        no_service_order: hasServiceOrder ? no_service_order : null,
-        spi: hasSpi ? spi : null,
-        wbs: hasWbs ? wbs : null,
+        no_service_order: no_service_order || null,
+        spi: spi || null,
+        wbs: wbs || null,
         bidang_pekerjaan,
         peralatan_inspeksi: Array.isArray(peralatan_inspeksi) ? peralatan_inspeksi : [],
         kebutuhan_material: Array.isArray(kebutuhan_material) ? kebutuhan_material.filter(m => m && m.trim() !== '') : [],
-        lokasi_pekerjaan: lokasi_pekerjaan_valid,
+        tanggal_berangkat: tanggal_berangkat ? new Date(tanggal_berangkat) : null,
+        tanggal_kembali: tanggal_kembali ? new Date(tanggal_kembali) : null,
         transportasi_operasional: !!transportasi_operasional,
         transportasi_ditanggung_klien: !!transportasi_ditanggung_klien,
         transportasi_asal_tujuan: !!transportasi_asal_tujuan,
@@ -91,52 +180,163 @@ export async function POST(req: NextRequest) {
         tiket: !!tiket,
         penginapan: !!penginapan,
         keterangan_lain,
-      };
-      
-      if (nomor_surat) suratTugasData.nomor_surat = nomor_surat;
-      if (tanggal_berangkat) suratTugasData.tanggal_berangkat = new Date(tanggal_berangkat);
-      if (tanggal_kembali) suratTugasData.tanggal_kembali = new Date(tanggal_kembali);
+        status: status || 'DRAFT', // Default ke DRAFT jika tidak ada status
+        
+        // Menghubungkan ke proyek yang sudah ada atau baru dibuat via ID
+        proyekId: proyek.id,
 
-      const newSuratTugas = await tx.suratTugas.create({
-        data: suratTugasData,
-      });
-
-      const pegawaiSuratTugasData = pegawaiNupList_valid.map((nup: string) => ({
-        suratTugasId: newSuratTugas.id,
-        pegawaiNup: nup,
-      }));
-
-      await tx.pegawaiSuratTugas.createMany({
-        data: pegawaiSuratTugasData,
-      });
-
-      return newSuratTugas;
+        // Menghubungkan lead inspector menggunakan ID
+        leadInspectorId: leadInspectorId,
+        
+        // Menghubungkan tim inspektor langsung menggunakan NUP
+        timInspektor: {
+          connect: pegawaiNupList_valid.map((nup: string) => ({ nup })),
+        },
+        
+        // Menghubungkan pembuat surat jika ID-nya diberikan
+        dibuatOlehId: dibuatOlehId ? parseInt(dibuatOlehId) : null,
+        
+      },
     });
 
-    return NextResponse.json({ message: 'Surat tugas berhasil dibuat!', data: result }, { status: 201 });
+    return NextResponse.json({ message: 'Surat tugas berhasil dibuat!', data: newSuratTugas }, { status: 201 });
 
   } catch (error: any) {
     console.error("Error saat membuat surat tugas:", error);
     if (error.code === 'P2002') {
       return NextResponse.json({ error: 'Nomor surat sudah ada.' }, { status: 409 });
     }
+    if (error.code === 'P2025') {
+        return NextResponse.json({ error: 'Satu atau lebih data (pegawai atau pembuat) tidak ditemukan untuk dihubungkan.' }, { status: 404 });
+    }
     return NextResponse.json({ error: 'Terjadi kesalahan pada server.' }, { status: 500 });
   }
 }
 
-// Opsional: API untuk mengambil semua surat tugas (GET)
-export async function GET() {
+// API untuk mengambil surat tugas dengan filter berdasarkan NUP (GET)
+export async function GET(req: NextRequest) {
     try {
-        const allSuratTugas = await prisma.suratTugas.findMany({
-            include: {
-                pegawai_surat_tugas: {
-                    select: {
-                        pegawai: {
-                            select: {
-                                nama_pegawai: true,
-                                nup: true
+        // Ambil NIK dari cookies
+        const cookieStore = await cookies();
+        const nik = cookieStore.get('nik')?.value;
+        
+        if (!nik) {
+            return NextResponse.json({ error: 'User tidak terautentikasi.' }, { status: 401 });
+        }
+
+        //
+        const pegawai = await prisma.pegawai.findFirst({ 
+            where: { nik }, 
+            select: { 
+                id: true,
+                nup: true,
+                nik: true, 
+                nama_pegawai: true 
+            } 
+        });
+
+        if (!pegawai) {
+            return NextResponse.json({ error: 'Data pegawai tidak ditemukan.' }, { status: 404 });
+        }
+
+        const userId = pegawai.id;
+        const userNup = pegawai.nup;
+        const userNik = pegawai.nik;
+
+        // Ambil parameter query untuk menentukan jenis filter
+        const { searchParams } = new URL(req.url);
+        const showAll = searchParams.get('showAll') === 'true'; // Parameter untuk admin/supervisor
+        
+        let whereCondition = {};
+        
+        // Jika bukan showAll, filter berdasarkan keterlibatan pegawai yang login
+        if (!showAll) {
+            whereCondition = {
+                OR: [
+                    // Pegawai adalah anggota tim inspektor
+                    {
+                        timInspektor: {
+                            some: {
+                                nup: userNup
                             }
                         }
+                    },
+                    // Pegawai adalah lead inspector
+                    {
+                        leadInspectorId: userId
+                    },
+                    // Pegawai adalah koordinator
+                    {
+                        koordinatorId: userId
+                    },
+                    // Pegawai adalah senior manager
+                    {
+                        seniorManagerId: userId
+                    },
+                    // Pegawai adalah kepala cabang
+                    {
+                        kepalaCabangId: userId
+                    },
+                    // Pegawai adalah pembuat surat
+                    {
+                        dibuatOlehId: userId
+                    }
+                ]
+            };
+        }
+
+        // Query surat tugas dengan kondisi filter
+        const allSuratTugas = await prisma.suratTugas.findMany({
+            where: whereCondition,
+            include: {
+                timInspektor: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
+                    }
+                },
+                proyek: {
+                    select: {
+                        id: true,
+                        namaProyek: true,
+                        klien: true,
+                        lokasi: true
+                    }
+                },
+                leadInspector: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
+                    }
+                },
+                koordinator: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
+                    }
+                },
+                seniorManager: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
+                    }
+                },
+                kepalaCabang: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
+                    }
+                },
+                dibuatOleh: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
                     }
                 }
             },
@@ -144,9 +344,106 @@ export async function GET() {
                 createdAt: 'desc'
             }
         });
-        return NextResponse.json(allSuratTugas);
+
+        // Tambahkan informasi peran user dalam setiap surat tugas
+        const enrichedSuratTugas = allSuratTugas.map(surat => ({
+            ...surat,
+            userRole: {
+                isTeamMember: surat.timInspektor.some(tim => tim.nup === userNup),
+                isLeadInspector: surat.leadInspectorId === userId,
+                isKoordinator: surat.koordinatorId === userId,
+                isSeniorManager: surat.seniorManagerId === userId,
+                isKepalaCabang: surat.kepalaCabangId === userId,
+                isPembuat: surat.dibuatOlehId === userId,
+                userNup: userNup,
+                userId: userId
+            }
+        }));
+
+        return NextResponse.json({
+            data: enrichedSuratTugas,
+            totalCount: enrichedSuratTugas.length,
+            userInfo: {
+                id: userId,
+                nup: userNup,
+                nama: pegawai.nama_pegawai
+            }
+        });
+
     } catch (error) {
         console.error("Error saat mengambil data surat tugas:", error);
+        return NextResponse.json({ error: 'Terjadi kesalahan pada server.' }, { status: 500 });
+    }
+}
+
+// API untuk mengambil semua surat tugas (untuk admin/supervisor)
+export async function getAllSuratTugas() {
+    try {
+        const allSuratTugas = await prisma.suratTugas.findMany({
+            include: {
+                timInspektor: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
+                    }
+                },
+                proyek: {
+                    select: {
+                        id: true,
+                        namaProyek: true,
+                        klien: true,
+                        lokasi: true
+                    }
+                },
+                leadInspector: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
+                    }
+                },
+                koordinator: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
+                    }
+                },
+                seniorManager: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
+                    }
+                },
+                kepalaCabang: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
+                    }
+                },
+                dibuatOleh: {
+                    select: {
+                        id: true,
+                        nama_pegawai: true,
+                        nup: true
+                    }
+                }
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        });
+
+        return NextResponse.json({
+            data: allSuratTugas,
+            totalCount: allSuratTugas.length
+        });
+
+    } catch (error) {
+        console.error("Error saat mengambil semua data surat tugas:", error);
         return NextResponse.json({ error: 'Terjadi kesalahan pada server.' }, { status: 500 });
     }
 }

@@ -1,0 +1,7166 @@
+[
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Coating Quality Control Course",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Sea Survival & HUET",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": "0126-SSH-3/KS- BP/111/2007",
+    "file_sertifikat": null,
+    "tanggal_awal": "29-Jun-05",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Ship Appraisal Course",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Marine Surveyor",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "021-MS/KS-BP/VI/2006",
+    "file_sertifikat": null,
+    "tanggal_awal": "12-Jun-06",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Welding Inspektur",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Auditor ISM Code",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Design Calculation",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Training NES (NON EKSLUSIVE SURVEY)",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "BELUM ADA SERTIFIKAT",
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Liquid Cargo Survey",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Safety Leadership For Supervisor",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0883/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "25-Apr-18",
+    "masa_berlaku": "25/04/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Accident Investigation",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0890/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-18",
+    "masa_berlaku": "27/04/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Implementation of SNI IOS/IEC 17025",
+    "penyelenggara": "TUV Rheinland Group",
+    "lokasi": null,
+    "nomor_sertifikat": "1303212504/01",
+    "file_sertifikat": null,
+    "tanggal_awal": "-",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Midle Management Laedership Program  ( MMLP )",
+    "penyelenggara": "BKI ACADEMY",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "per April 2020 belum terbit sert",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Inspektur Pipa Penyalur",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "346/EXT/IPP21-MIGAS/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "10/09/2023",
+    "masa_berlaku": "10/09/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "INSPEKTUR PLATFORM",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "94/IPM4-MIGAS/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "22-Mar-21",
+    "masa_berlaku": "01/04/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Inspektur Tangki Penimbun",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "541/ITP-R/MIGAS/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10 Agus 24",
+    "masa_berlaku": "09/02/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Inspektur Tangki Penimbun ( BNSP )",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "721033117700001242024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10 Agus 24",
+    "masa_berlaku": "08/08/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "Implementation of SNI IOS/IEC 17020;2012 (Lembaga Inspeksi)",
+    "penyelenggara": "DIKLAT BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "19/9/22",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "TIDAK DIKIRIMKAN SERTIFIKAT",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "\"TRAINING AUDITOR/ASESSOR GREEN PORT",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "IHT/0714/2022",
+    "nama_pelatihan": "tak terhingga",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "IHT/0714/2022"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "TKDN",
+    "penyelenggara": "BKI SBU ENI",
+    "lokasi": null,
+    "nomor_sertifikat": "B.0017/UM.012/ENI/KI-23",
+    "file_sertifikat": null,
+    "tanggal_awal": "4 Maret 2023",
+    "masa_berlaku": "tak terhingga",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83511",
+    "nama_pelatihan": "LEAN SIX SIGMA",
+    "penyelenggara": "HCTIO",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": "tak terhingga",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83511"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Ahli K3 Pesawat Angkat Angkut Depnaker",
+    "penyelenggara": "DIRGEN KETENAGAKERJAAN",
+    "lokasi": null,
+    "nomor_sertifikat": "329/M/DJPPK/XI/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Nov-14",
+    "masa_berlaku": "09-Nov-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Ahli K3 Pesawat Uap & Bejana Tekan",
+    "penyelenggara": "DIRGEN KETENAGAKERJAAN",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Design Calculation",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "121/INS-BPN/BSS/VI/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "22/6/23",
+    "masa_berlaku": "22/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Dasar Dasar K3",
+    "penyelenggara": "PT. DELTA JAYA internasional",
+    "lokasi": null,
+    "nomor_sertifikat": "12499/DDK3/DJI-BPN/IV/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-22",
+    "masa_berlaku": "27/04/2025",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Identifikasi Bahaya dan Penilaian Resiko",
+    "penyelenggara": "PT. DELTA JAYA internasional",
+    "lokasi": null,
+    "nomor_sertifikat": "12509/IBPR/DJI-BPN/IV/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-22",
+    "masa_berlaku": "27/04/2025",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Wire Rope Tester Intorn",
+    "penyelenggara": "PT.PRATITA PRAMA NUGRAHA",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Apr-11",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Welding Inspektur",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Basic MFR & Sea Survival",
+    "penyelenggara": "BADAN SAR",
+    "lokasi": null,
+    "nomor_sertifikat": "LAT.001/031/III/BPP-2009",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Feb-09",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Marine Surveyor",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "042-MS/KS-BP/II/2007",
+    "file_sertifikat": null,
+    "tanggal_awal": "26-Feb-07",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Training NES (NON EKSLUSIVE SURVEY)",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "BELUM ADA SERTIFIKAT",
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Safety Leadership For Supervisor",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0884/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "25-Apr-18",
+    "masa_berlaku": "25-Apr-21",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Accident Investigation",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0891/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-18",
+    "masa_berlaku": "27-Apr-21",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Confined Spaces",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "3405/CS/DJI-BPN/I/2017",
+    "file_sertifikat": null,
+    "tanggal_awal": "12-Jan-17",
+    "masa_berlaku": "12-Jan-20",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Inspektur Rig Migas",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "361/Insp.Rig/KPD-Migas/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "10/02/2023",
+    "masa_berlaku": "10/02/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Training Stabilitas Kapal Online",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "07-Sep-20",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "INSPEKTUR PLATFORM",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "112/IPM4-MIGAS/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "22-Mar-21",
+    "masa_berlaku": "01-Apr-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Inspektur Bejana Tekan - MIGAS",
+    "penyelenggara": "LPK KPDM ( Koperasi Prima Daya Migas )",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "2 S/D 17 JULI 2021",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "TIDAK LULUS thn 22",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Inspektur Kelistrikan MIGAS",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "230/IKM-R1/MIGAS/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "1 okto 2024",
+    "masa_berlaku": "1 okt 2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "Implementation of SNI IOS/IEC 17020;2012 (Lembaga Inspeksi)",
+    "penyelenggara": "BKI ACADEMY & BSN",
+    "lokasi": null,
+    "nomor_sertifikat": "IHT/0716/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "17 Juni 22",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "LIQUID CARGO SURVEY",
+    "penyelenggara": "AISI",
+    "lokasi": null,
+    "nomor_sertifikat": "NIJS-8409",
+    "file_sertifikat": null,
+    "tanggal_awal": "5 s/d 10 DESEMBER 2022",
+    "masa_berlaku": "12/05/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "83411",
+    "nama_pelatihan": "HSE SAFETY LEADERSHIP",
+    "penyelenggara": "INSURIN ADHIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "502/INS-BPN/SLT/XII/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "12/11/2024",
+    "masa_berlaku": "12/10/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "83411"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Bahaya Gas Beracun",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Port State Control",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Internal Auditor ISM Code",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Marine Surveyor",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "025-MS/KS-BP/XII/2006",
+    "file_sertifikat": null,
+    "tanggal_awal": "15-Dec-06",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "HUET & Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "002/INS-BPN/HUET&BSS/I/2016",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Feb-19",
+    "masa_berlaku": "10/02/2022",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "HSE Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "002/INS-BPN/BSS/II/2025",
+    "file_sertifikat": null,
+    "tanggal_awal": "02/04/2025",
+    "masa_berlaku": "02/03/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Basic MFR & Sea Survival",
+    "penyelenggara": "BADAN SAR",
+    "lokasi": null,
+    "nomor_sertifikat": "LAT.001/010/II/BPP-2009",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Feb-09",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Dasar Dasar K3",
+    "penyelenggara": "PT. DELTA JAYA internasional",
+    "lokasi": null,
+    "nomor_sertifikat": "12501/DDK3/DJI-BPN/IV/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-22",
+    "masa_berlaku": "27/04/2025",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Identifikasi Bahaya dan Penilaian Resiko",
+    "penyelenggara": "PT. DELTA JAYA internasional",
+    "lokasi": null,
+    "nomor_sertifikat": "12511/IBPR/DJI-BPN/IV/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-22",
+    "masa_berlaku": "27/04/2025",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Auditor ISM Code",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Ahli K3 Listrik Depnaker",
+    "penyelenggara": "PT. CENTRA GAMA  INDOVISI",
+    "lokasi": null,
+    "nomor_sertifikat": "00242/AK3-LIST/V/2016",
+    "file_sertifikat": null,
+    "tanggal_awal": "06-May-16",
+    "masa_berlaku": "05-May-19",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Inspektur OVID",
+    "penyelenggara": "Oil Companies International  Marine Forum",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "14-Jun-18",
+    "masa_berlaku": "14-Jun-22",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Welding Inspektur",
+    "penyelenggara": "BKI ACADEMY & BNSP",
+    "lokasi": null,
+    "nomor_sertifikat": "0069-S02/M054-T01/0007-ACY/P06/03-19 & 00289,0721,0006597,2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Apr-19",
+    "masa_berlaku": "30-Apr-22",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Pemeriksaan & Pengujian Pembangkit Tenaga Listrik PLTD",
+    "penyelenggara": "ELESKA HAKIT",
+    "lokasi": null,
+    "nomor_sertifikat": "1605.1.01.P035.10.2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "16 /10/2024",
+    "masa_berlaku": "15/10/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Training Stabilitas Kapal Online",
+    "penyelenggara": "14",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "07-Sep-20",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Inspektur Pipa Penyalur",
+    "penyelenggara": "LPK KPDM ( Koperasi Prima Daya Migas )",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "TIDAK LULUS thn 22",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Inspektur Bejana Tekan - MIGAS",
+    "penyelenggara": "LPK KPDM ( Koperasi Prima Daya Migas )",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "TIDAK LULUS thn 22",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "Inspektur Kelistrikan MIGAS",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "216/IKM-R1/MIGAS/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Dec-24",
+    "masa_berlaku": "10-Dec-27",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "TEKNIK PENGUKURAN KALIBRASI BESARAN TEKANAN",
+    "penyelenggara": "SPIN",
+    "lokasi": null,
+    "nomor_sertifikat": "8271/PT/KT/VII/22",
+    "file_sertifikat": null,
+    "tanggal_awal": "26-Jul-22",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "TAK TERHINGGA",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "\"TRAINING AUDITOR/ASESSOR GREEN PORT",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "",
+    "nama_pelatihan": "21/9/2022",
+    "penyelenggara": "TIDAK DIKIRIMKAN SERTIFIKAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": ""
+      }
+    }
+  },
+  {
+    "nup": "84212",
+    "nama_pelatihan": "LIQUID CARGO SURVEY",
+    "penyelenggara": "AISI",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "12/05/2022",
+    "masa_berlaku": "12/05/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "84212"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-38",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Nov-19",
+    "masa_berlaku": "29-Nov-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-39",
+    "file_sertifikat": null,
+    "tanggal_awal": "04-Nov-19",
+    "masa_berlaku": "29-Nov-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "HUET & SS",
+    "penyelenggara": "PT. BINA NUSANTARA",
+    "lokasi": null,
+    "nomor_sertifikat": "50713300090",
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Inspektur Bejana Tekan - MIGAS (BNSP)",
+    "penyelenggara": "LPK KPDM ( Koperasi Prima Daya Migas )",
+    "lokasi": null,
+    "nomor_sertifikat": "71203 3117 5 0000328 2018",
+    "file_sertifikat": null,
+    "tanggal_awal": "10/01/2022",
+    "masa_berlaku": "1 /10/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Inspektur Bejana Tekan - MIGAS",
+    "penyelenggara": "LPK KPDM ( Koperasi Prima Daya Migas )",
+    "lokasi": null,
+    "nomor_sertifikat": "069/IBT-R/MIGAS/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Feb-22",
+    "masa_berlaku": "10/02/2025",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Ahli K3 Pesawat Uap & Bejana tekan",
+    "penyelenggara": "DIRGEN KETENAGAKERJAAN RI",
+    "lokasi": null,
+    "nomor_sertifikat": "5/4111/AS.01.04/III/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "14/3/2023",
+    "masa_berlaku": "14/3/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Inspektur Instalasi Migas/ Plant Inspector",
+    "penyelenggara": "KPDM MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "01/ISI-R2/MIGAS/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Aug-21",
+    "masa_berlaku": "10-Aug-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Inspektur Pesawat Angkat - MIGAS",
+    "penyelenggara": "KPDM MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "475/L1-R2/IPA/MIGAS/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "09/01/2023",
+    "masa_berlaku": "09/01/2026",
+    "keterangan_utilisasi": "REFRES JULI 2023",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Inspektur Las / Welding Inspector",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "301/WI-JU/VIII/2003",
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Gesture & Postures",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "675/GP/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Sep-14",
+    "masa_berlaku": "19-Sep-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Working At Height",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "691/WAH/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Sep-14",
+    "masa_berlaku": "19-Sep-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Working At Confined Spaces",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "667/WACS/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Sep-14",
+    "masa_berlaku": "19-Sep-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "HSE Induction",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "715/HSEI/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "18-Sep-14",
+    "masa_berlaku": "18-Sep-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Basic Fire Fighting",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "105/INS-BPN/BFF/VI/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "21/6/23",
+    "masa_berlaku": "20/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Basic First Aid",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "092/INS-BPN/BFA/VI/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "21/6/23",
+    "masa_berlaku": "20/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "118/INS-BPN/BSS/VI/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "22/6/23",
+    "masa_berlaku": "22/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "SKKNI Wajib (LSP Migas)",
+    "penyelenggara": "LSP MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "IMG.074.000887.2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "25-Jun-14",
+    "masa_berlaku": "25-Jun-17",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Public Education Program",
+    "penyelenggara": "MARK PLUS INSTITUTE",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "11-May-16",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Laboratory Internal Audit",
+    "penyelenggara": "TUV Rheinland Group",
+    "lokasi": null,
+    "nomor_sertifikat": "1303212504/01",
+    "file_sertifikat": null,
+    "tanggal_awal": "-",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Safety Leadership For Supervisor",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0886/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "25-Apr-18",
+    "masa_berlaku": "25-Apr-21",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Accident Investigation",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0893/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-18",
+    "masa_berlaku": "27-Apr-21",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Implementation of SNI IOS/IEC 17025",
+    "penyelenggara": "TUV Rheinland Group",
+    "lokasi": null,
+    "nomor_sertifikat": "1303212504/02",
+    "file_sertifikat": null,
+    "tanggal_awal": "-",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Pulsed Eddy Curent Array",
+    "penyelenggara": "BKI ACADEMY",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "INSTRUMENT INSPECTOR LEVEL I",
+    "penyelenggara": "INSTRUMENTB - INSPECTOR",
+    "lokasi": null,
+    "nomor_sertifikat": "51177050120",
+    "file_sertifikat": null,
+    "tanggal_awal": ".05/01/2020",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "Inspektur Pipa Penyalur",
+    "penyelenggara": "KPDM MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "2 SD 9 NOV 20",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": "gak lulus",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "66008",
+    "nama_pelatihan": "HSE SAFETY LEADERSHIP",
+    "penyelenggara": "INSURIN ADHIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "500/INS-BPN/SLT/XII/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "12/11/2024",
+    "masa_berlaku": "12/10/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66008"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Port State Control",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Internal Auditor ISM Code / ISPS CODE",
+    "penyelenggara": "PT.BIRO KLASIFIKASI INDONESIA PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "014-PFS-1/KS-BP/V/2007",
+    "file_sertifikat": null,
+    "tanggal_awal": "07-Jun-07",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Marine Surveyor",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Basic MFR & Sea Survival",
+    "penyelenggara": "BADAN SAR NASIONAL",
+    "lokasi": null,
+    "nomor_sertifikat": "LAT.001/006/II/BPP-2009",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Feb-09",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Wire Rope Tester Intorn",
+    "penyelenggara": "PT.PRATITA PRAMA NUGRAHA",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Apr-11",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "HUET &  SS",
+    "penyelenggara": "PT.BIMA NUSANTARA",
+    "lokasi": null,
+    "nomor_sertifikat": "10416300560",
+    "file_sertifikat": null,
+    "tanggal_awal": "01-Apr-16",
+    "masa_berlaku": "01/04/2019",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Inspektur Pesawat Angkat (BNSP)",
+    "penyelenggara": "LPK KPDM-DIRGEN MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "609/L2-R5/IPA/MIGAS/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "12-Apr-22",
+    "masa_berlaku": "12/04/2025",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Coating QC Lev-I",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-40",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Nov-19",
+    "masa_berlaku": "29/11/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-PT-41",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Nov-19",
+    "masa_berlaku": "29/11/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Lifting Gear Inspection",
+    "penyelenggara": "PT. WIRE ROPE TRAINING",
+    "lokasi": null,
+    "nomor_sertifikat": "LGI 0709 - 2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "14-Apr-14",
+    "masa_berlaku": "10/04/2017",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Inspektur Tangki Penimbun",
+    "penyelenggara": "DIRGEN MIGAS (SUDAH REFRESHING SEP16)",
+    "lokasi": null,
+    "nomor_sertifikat": "357/ITP-R/MIGAS/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10 Agus 24",
+    "masa_berlaku": "09/02/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Inspektur Tangki Penimbun ( BNSP )",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "721033117700001272024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10 Agus 24",
+    "masa_berlaku": "08/08/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Gesture & Postures",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "005/INS-BPN/GP/IV/2018",
+    "file_sertifikat": null,
+    "tanggal_awal": "15-Apr-18",
+    "masa_berlaku": "14/04/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Working At Height",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "005/INS-BPN/WAH/IV/2018",
+    "file_sertifikat": null,
+    "tanggal_awal": "14-Apr-18",
+    "masa_berlaku": "13/04/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Working At Confined Spaces",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "005/INS-BPN/WACS/IV/2018",
+    "file_sertifikat": null,
+    "tanggal_awal": "14-Apr-18",
+    "masa_berlaku": "13/04/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "HSE Induction",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "005/INS-BPN/HSEI/IV/2018",
+    "file_sertifikat": null,
+    "tanggal_awal": "15-Apr-18",
+    "masa_berlaku": "14/04/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "056/INS-BPN-BFA/IV/2018",
+    "file_sertifikat": null,
+    "tanggal_awal": "13-Apr-18",
+    "masa_berlaku": "12/04/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Basic First Aid",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "747/SS/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "18-Sep-14",
+    "masa_berlaku": "18/09/2017",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "HSE Induction",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "065/INS-BPN/BFF/IV/2018",
+    "file_sertifikat": null,
+    "tanggal_awal": "13-Apr-18",
+    "masa_berlaku": "12/04/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Basic Fire Fighting",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "024/INS-BPN/BSS/XI/20",
+    "file_sertifikat": null,
+    "tanggal_awal": "06-Nov-20",
+    "masa_berlaku": "05/11/2023",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "BOSIET",
+    "penyelenggara": "DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "15285/T-BOSIET/DJI-BPN/VII/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "8 JULI 23",
+    "masa_berlaku": "8 JULI 26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Petugas Proteksi radiasi /PPR",
+    "penyelenggara": "BAPETEN",
+    "lokasi": null,
+    "nomor_sertifikat": "423070,113,10,140622",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Jun-22",
+    "masa_berlaku": "25/07/2025",
+    "keterangan_utilisasi": "sudah perpanjangan mei 25 blm keluar sertifikat",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "Inspektur Alat Bantu Angkat (IABA)",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "173/LI-RO/KPDM/IABA/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "16/10/2023",
+    "masa_berlaku": "16/10/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100715",
+    "nama_pelatihan": "HSE SAFETY LEADERSHIP",
+    "penyelenggara": "INSURIN ADHIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "497/INS-BPN/SLT/XII/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "12/11/2024",
+    "masa_berlaku": "12/10/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100715"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "Inspektur Bejana Tekan - MIGAS",
+    "penyelenggara": "DIRGEN MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "282/IBT-R/MIGAS/2020",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Nov-20",
+    "masa_berlaku": "10/11/2023",
+    "keterangan_utilisasi": "REFRES 24-28 Juli 24 blm terbit sert",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "NDT UT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-UT-80",
+    "file_sertifikat": null,
+    "tanggal_awal": "26/7/2023",
+    "masa_berlaku": "25/7/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-63",
+    "file_sertifikat": null,
+    "tanggal_awal": "26/7/2023",
+    "masa_berlaku": "25/7/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-PT-64",
+    "file_sertifikat": null,
+    "tanggal_awal": "26/7/2023",
+    "masa_berlaku": "25/7/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "120/INS-BPN/BSS/VI/23",
+    "file_sertifikat": null,
+    "tanggal_awal": "22/6/23",
+    "masa_berlaku": "21/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "Inspektur Instalasi Migas/ Plant Inspector",
+    "penyelenggara": "DIRGEN MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "02/ISI-R1/MIGAS/2017",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Aug-21",
+    "masa_berlaku": "10/08/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "Piping Inspektor",
+    "penyelenggara": "LAWDER INSTITUE & API 570",
+    "lokasi": null,
+    "nomor_sertifikat": "227/1014/I/lI & -",
+    "file_sertifikat": null,
+    "tanggal_awal": "28-Oct-14",
+    "masa_berlaku": "31 Juli 18 - 31 Juli 21",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "Safety Leadership For Supervisor",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0885/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "25-Apr-18",
+    "masa_berlaku": "25/04/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "Accident Investigation",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0892/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-18",
+    "masa_berlaku": "27/04/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "SKKNI Wajib (LSP Migas)",
+    "penyelenggara": "LSP MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "IMG.074.000886.2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "25-Jun-14",
+    "masa_berlaku": "25/06/2017",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "Welding Inspektur",
+    "penyelenggara": "BKI ACADEMY & BNSP",
+    "lokasi": null,
+    "nomor_sertifikat": "0069-S02/M054-T01/0007-ACY/P06/03-19 & 00289,0721,0006589,2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Apr-19",
+    "masa_berlaku": "30/04/2022",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "INSPEKTUR PLATFORM",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "104/IPM4-MIGAS/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "22-Mar-21",
+    "masa_berlaku": "01/04/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "IMPLEMENTASI & INTERNAL AUDIT ISO 27000-1;2013",
+    "penyelenggara": "BKI ACADEMY",
+    "lokasi": null,
+    "nomor_sertifikat": "tidak bersertifikat",
+    "file_sertifikat": null,
+    "tanggal_awal": "14-Jun-21",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "Inspektur Tangki Penimbun",
+    "penyelenggara": "KPDM DIRGEN MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "525/ITP-R/MIGAS/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10 Agus 24",
+    "masa_berlaku": "09/02/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "Inspektur Tangki Penimbun ( BNSP )",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "721033117700001402024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10 Agus 24",
+    "masa_berlaku": "08/08/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100615",
+    "nama_pelatihan": "TKDN",
+    "penyelenggara": "BKI SBU ENI",
+    "lokasi": null,
+    "nomor_sertifikat": "B.0064/UM.012/ENI/KI-23",
+    "file_sertifikat": null,
+    "tanggal_awal": "4 Maret 2023",
+    "masa_berlaku": "tak terhingga",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100615"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "Coating Inspektor",
+    "penyelenggara": "BADAN NASIONAL SERTIFIKASI PROFESI (BNSP)",
+    "lokasi": null,
+    "nomor_sertifikat": "COA/CIM-1./171/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Jun-14",
+    "masa_berlaku": "30/06/2017",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "1725/PT/N/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Jun-21",
+    "masa_berlaku": "03/06/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "1773/MT/N/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Jun-21",
+    "masa_berlaku": "03/06/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "Marine Surveyor",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "062-MS/KS-BP/V/2008",
+    "file_sertifikat": null,
+    "tanggal_awal": "31-May-08",
+    "masa_berlaku": "Tidak Ada1",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "Training NES (NON EKSLUSIVE SURVEY)",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "BELUM ADA SERTIFIKAT",
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "Inspektur Pesawat Angkat - MIGAS",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "359/L1-R1/IPA/MIGAS/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "12-Apr-22",
+    "masa_berlaku": "12/04/2025",
+    "keterangan_utilisasi": "dah refres maret",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "basic sea survival",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "021/INS-BPN/BSS/XII/2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "20/6/23",
+    "masa_berlaku": "19/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "Basic First Aid Kit",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "001/INS-BPN/BFA/XI/20",
+    "file_sertifikat": null,
+    "tanggal_awal": "20/6/23",
+    "masa_berlaku": "19/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "Basic Fire Fighting",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "001/INS-BPN/BFA/XI/20",
+    "file_sertifikat": null,
+    "tanggal_awal": "20/6/23",
+    "masa_berlaku": "19/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "BOSIET",
+    "penyelenggara": "DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "14851/T-BOSIET/DJI-BPN/VII/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "8 JULI 23",
+    "masa_berlaku": "8 JULI 26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "Awarness Behaviour Based on Safety",
+    "penyelenggara": "SYNERGY SOLUSI",
+    "lokasi": null,
+    "nomor_sertifikat": "3321BBS/TRN-SSI/XI-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Nov-18",
+    "masa_berlaku": "27/11/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "LIQUID CARGO",
+    "penyelenggara": "AISI",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "5 s/d 10 DESEMBER 2022",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "sert dari AISI Blm terbit",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "100815",
+    "nama_pelatihan": "INSPEKTUR PLATFORM",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "105/IPM4-MIGAS/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "22-Mar-21",
+    "masa_berlaku": "01/04/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100815"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Welding Inspektur",
+    "penyelenggara": "BNSP",
+    "lokasi": null,
+    "nomor_sertifikat": "0011100740008722014",
+    "file_sertifikat": null,
+    "tanggal_awal": "24-Jun-14",
+    "masa_berlaku": "24-Jun-17",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Auditor ISM Code",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "7507/ISA-MNS/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "11-Sep-14",
+    "masa_berlaku": "Tidak Ada1",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Marine Surveyor",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "061-MS/KS-BP/V/2008",
+    "file_sertifikat": null,
+    "tanggal_awal": "31-May-08",
+    "masa_berlaku": "31-May-11",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "1718/NT/N/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Jun-21",
+    "masa_berlaku": "03-Jun-26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "1726/NT/N/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Jun-21",
+    "masa_berlaku": "03-Jun-26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "NDT UT Lev-II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "1209/UT/N/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "05-Aug-21",
+    "masa_berlaku": "05-Aug-26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Training NES (NON EKSLUSIVE SURVEY)",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "BELUM ADA SERTIFIKAT",
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "119/INS-BPN/BSS/VI/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "22/6/23",
+    "masa_berlaku": "22/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Basic First Aid Kit",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "019/INS-BPN/BSS/XII/2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "20/6/23",
+    "masa_berlaku": "19/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Basic Fire Fighting",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "019/INS-BPN/BSS/XII/2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "20/6/23",
+    "masa_berlaku": "19/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Inspektur Pesawat Angkat - MIGAS",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "360/L1-R1/IPA/MIGAS/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "12-Apr-22",
+    "masa_berlaku": "12-Apr-25",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Ahli K3 Pesawat Uap & Bejana Tekan",
+    "penyelenggara": "KEMENAKER RI",
+    "lokasi": null,
+    "nomor_sertifikat": "5/4108/AS.01.04/III/23",
+    "file_sertifikat": null,
+    "tanggal_awal": "14/3/2023",
+    "masa_berlaku": "14/3/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Awarness Behaviour Based on Safety",
+    "penyelenggara": "SYNERGY SOLUSI",
+    "lokasi": null,
+    "nomor_sertifikat": "3330BBS/TRN-SSI/XI-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Nov-18",
+    "masa_berlaku": "27-Nov-21",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Inspektur Tangki Penimbun",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "540/ITP-R/MIGAS/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10 Agus 24",
+    "masa_berlaku": "09/02/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Inspektur Tangki Penimbun ( BNSP )",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "721033117700001642024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10 Agus 24",
+    "masa_berlaku": "08/08/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "LIQUID CARGO",
+    "penyelenggara": "AISI",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "12/05/2022",
+    "masa_berlaku": "12/05/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "100915",
+    "nama_pelatihan": "Inspektur Instalasi Migas/ Plant Inspector",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "188/ISI-MIGAS/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Aug-21",
+    "masa_berlaku": "10-Aug-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100915"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Marine Surveyor",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "060-MS/KS-BP/V/2008",
+    "file_sertifikat": null,
+    "tanggal_awal": "31-May-08",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Internal Safety Auditor",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "0121/BKI/MI/ISA",
+    "file_sertifikat": null,
+    "tanggal_awal": "09-Jun-14",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "HUET & Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "001/INS-BPN/HUET&BSS/I/2016",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Feb-19",
+    "masa_berlaku": "10/02/2022",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Dasar Dasar K3",
+    "penyelenggara": "PT. DELTA JAYA internasional",
+    "lokasi": null,
+    "nomor_sertifikat": "12498/DDK3/DJI-BPN/IV/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-22",
+    "masa_berlaku": "27/04/2025",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Identifikasi Bahaya dan Penilaian Resiko",
+    "penyelenggara": "PT. DELTA JAYA internasional",
+    "lokasi": null,
+    "nomor_sertifikat": "12508/IBPR/DJI-BPN/IV/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-22",
+    "masa_berlaku": "27/04/2025",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Inspektur Kelistrikan Migas",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "129/IKM-R/MIGAS/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "26/10/2023",
+    "masa_berlaku": "26/10/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Liquid Cargo Survey",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Auditor ISM Code",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "7425/ISA-MNS/VI/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "09-Jun-14",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Inspektur Las",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "5028/WI-ATT-MNS/VIII/2017",
+    "file_sertifikat": null,
+    "tanggal_awal": "18-Jul-17",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Welding Inspektur",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "094-14-MNS/M057-K18/P5/08/17",
+    "file_sertifikat": null,
+    "tanggal_awal": "18-Sep-17",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Inspektur OVID",
+    "penyelenggara": "Oil Companies International  Marine Forum",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "13-May-18",
+    "masa_berlaku": "13/05/2022",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Pemeriksaan & Pengujian Pembangkit Tenaga Listrik PLTD",
+    "penyelenggara": "ELESKA HAKIT",
+    "lokasi": null,
+    "nomor_sertifikat": "1604.1.01.P035.10.2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "16 /10/2024",
+    "masa_berlaku": "15/10/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "INSTRUMENT INSPECTOR LEVEL I",
+    "penyelenggara": "INSTRUMENTB - INSPECTOR",
+    "lokasi": null,
+    "nomor_sertifikat": "60480050120",
+    "file_sertifikat": null,
+    "tanggal_awal": ".05/01/2020",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Ketidakpastian Kalibrasi dan Uji Banding Laboratorium Kalibrasi Berdasarkan Standar ISO17025:2017",
+    "penyelenggara": "TUV RHEINLAND",
+    "lokasi": null,
+    "nomor_sertifikat": "ZID9/246115906/05",
+    "file_sertifikat": null,
+    "tanggal_awal": "25/09/2020",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "tak terhingga",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Inspektur Instalasi Migas/ Plant Inspector",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "186/ISI-MIGAS/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Aug-21",
+    "masa_berlaku": "10/08/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "1804/NT/N/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Sep-21",
+    "masa_berlaku": "30/09/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "1813/NT/N/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Sep-21",
+    "masa_berlaku": "30/09/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "NDT UT Lev-II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "1742/MT/N/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Aug-21",
+    "masa_berlaku": "30/08/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "ISAUST / METERING / CUSTUDY TRANSFER",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "259/ISAUST/MIGAS/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "22 NOP S/D 2 DES 21",
+    "masa_berlaku": "13/1/2025",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "125/INS-BPN/BSS/VI/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "22/6/23",
+    "masa_berlaku": "22/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Basic First Aid Kit",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "019/INS-BPN/BSS/XII/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "20/6/23",
+    "masa_berlaku": "19/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Basic Fire Fighting",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "019/INS-BPN/BSS/XII/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "20/6/23",
+    "masa_berlaku": "19/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "107316",
+    "nama_pelatihan": "Ports Facility Security Officer (ISPS Code)",
+    "penyelenggara": "BKI Academy",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "10 s/d 12 Juni 2024.",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "sd Agustus blm terbit sertifikat",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "107316"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Ahli K3 Pesawat Uap & Bejana tekan",
+    "penyelenggara": "DIRGEN KETENAGAKERJAAN",
+    "lokasi": null,
+    "nomor_sertifikat": "5/2441/AS.02.00/III/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "14/3/2023",
+    "masa_berlaku": "14/3/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Inspektur Bejana Tekan - MIGAS",
+    "penyelenggara": "DIRGEN MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "418/IBT-R/MIGAS/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "10/09/2023",
+    "masa_berlaku": "10/09/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Inspektur Pesawat Angkat - MIGAS",
+    "penyelenggara": "KPDM MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "474/L1-R2/IPA/MIGAS/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "09/01/2023",
+    "masa_berlaku": "09/01/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Inspektur Pesawat Angkat (BNSP)",
+    "penyelenggara": "LSP MIGAS BNSP",
+    "lokasi": null,
+    "nomor_sertifikat": "71203 3117 5 0001087 2020",
+    "file_sertifikat": null,
+    "tanggal_awal": "04-Jul-20",
+    "masa_berlaku": "04/07/2023",
+    "keterangan_utilisasi": "REFRES JULI 223 ga lulus",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Pipe Line",
+    "penyelenggara": "DIRGEN MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "093/EXTI/IPP-MIGAS/2015",
+    "file_sertifikat": null,
+    "tanggal_awal": "15-Jan-15",
+    "masa_berlaku": "31/01/2019",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "HUET & SS",
+    "penyelenggara": "PT. BIMA NUSANTARA",
+    "lokasi": null,
+    "nomor_sertifikat": "No. 260514300244",
+    "file_sertifikat": null,
+    "tanggal_awal": "26-May-14",
+    "masa_berlaku": "26/05/2017",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "SKKNI Wajib (LSP Migas)",
+    "penyelenggara": "LSP MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "IMG.074.000083.2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "25-Jun-14",
+    "masa_berlaku": "25/06/2017",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Welding Inspektur",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "018/INS-BPN/BSS/XI/20",
+    "file_sertifikat": null,
+    "tanggal_awal": "06-Nov-20",
+    "masa_berlaku": "05/11/2023",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Gesture & Postures",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "859/GP/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Oct-14",
+    "masa_berlaku": "03/10/2017",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Working At Height",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "897/WAH/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Oct-14",
+    "masa_berlaku": "03/10/2017",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Working At Confined Spaces",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "840/WACS/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Oct-14",
+    "masa_berlaku": "03/10/2017",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "HSE Induction",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "821/HSEI/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Oct-14",
+    "masa_berlaku": "02/10/2017",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Basic First Aid",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "001/INS-BPN/BFA/XI/20",
+    "file_sertifikat": null,
+    "tanggal_awal": "06-Nov-20",
+    "masa_berlaku": "05/11/2023",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Fire Fighting",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "878/FF/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Oct-14",
+    "masa_berlaku": "03/10/2017",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Assesment OR & AR",
+    "penyelenggara": "Gowar",
+    "lokasi": null,
+    "nomor_sertifikat": "06/KC-PSMN/100318",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Mar-18",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Inspektur Pipa Penyalur",
+    "penyelenggara": "DIRGEN MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "290/EXT/IPP20-MIGAS/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "09-Oct-22",
+    "masa_berlaku": "11/01/2025",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Inspektur Tangki Penimbun",
+    "penyelenggara": "DIRGEN MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "563/ITP-R/MIGAS/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "27/10/2022",
+    "masa_berlaku": "27/10/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Inspektur Tangki Penimbun ( BNSP )",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "721033117700001402024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10 Agus 24",
+    "masa_berlaku": "08/08/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "TKDN",
+    "penyelenggara": "BKI SBU ENI",
+    "lokasi": null,
+    "nomor_sertifikat": "B.0016/UM.012/ENI/KI-23",
+    "file_sertifikat": null,
+    "tanggal_awal": "4 Maret 2023",
+    "masa_berlaku": "tak terhingga",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "Inspektur Kelistrikan MIGAS",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "322/IKM-R0/MIGAS/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Dec-24",
+    "masa_berlaku": "10-Dec-27",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "101215",
+    "nama_pelatihan": "HSE SAFETY LEADERSHIP",
+    "penyelenggara": "INSURIN ADHIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "504/INS-BPN/SLT/XII/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "12/11/2024",
+    "masa_berlaku": "12/10/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101215"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "ADIPADMO",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-81",
+    "file_sertifikat": null,
+    "tanggal_awal": "22-9-2023",
+    "masa_berlaku": "21-9-2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "ADIPADMO",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-PT-82",
+    "file_sertifikat": null,
+    "tanggal_awal": "22-9-2023",
+    "masa_berlaku": "21-9-2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "NDT UT Lev-II",
+    "penyelenggara": "ADIPADMO",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-UT-83",
+    "file_sertifikat": null,
+    "tanggal_awal": "22-9-2023",
+    "masa_berlaku": "21-9-2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Radiographic Film Interpretation & Evaluation",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Laboratory Calibration Technician",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Industrial Radiographic Testing (RT) Lev-I",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Inspektur Katup Pengaman Migas / PSV",
+    "penyelenggara": "DIRGEN MIGAS (SUDAH REFRESHING DES 22)",
+    "lokasi": null,
+    "nomor_sertifikat": "753/IKP.R/MIGAS/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "21/12/22",
+    "masa_berlaku": "21/12/25",
+    "keterangan_utilisasi": "kondisi kesehatan  ?",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Gesture & Postures",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "851/GP/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Oct-14",
+    "masa_berlaku": "3-Oct-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Working At Height",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "889/WAH/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Oct-14",
+    "masa_berlaku": "3-Oct-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Working At Confined Spaces",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "832/WACS/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Oct-14",
+    "masa_berlaku": "3-Oct-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "HSE Induction",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "813/HSEI/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Oct-14",
+    "masa_berlaku": "2-Oct-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Basic First Aid",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "794/FAK/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Oct-14",
+    "masa_berlaku": "2-Oct-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Fire Fighting",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "870/FF/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Oct-14",
+    "masa_berlaku": "3-Oct-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN",
+    "lokasi": null,
+    "nomor_sertifikat": "020/INS-BPN/BSS/XII/2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "14-Dec-19",
+    "masa_berlaku": "14-Dec-22",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Inspektur Pesawat Angkat - MIGAS",
+    "penyelenggara": "DIRGEN MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "322/L1-R3/IPA/MIGAS/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "12-Apr-22",
+    "masa_berlaku": "12-Apr-25",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Laboratory Internal Audit",
+    "penyelenggara": "TUV Rheinland Group",
+    "lokasi": null,
+    "nomor_sertifikat": "1303212504/04",
+    "file_sertifikat": null,
+    "tanggal_awal": "-",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Implementation of SNI IOS/IEC 17025",
+    "penyelenggara": "TUV Rheinland Group",
+    "lokasi": null,
+    "nomor_sertifikat": "1303212504/09",
+    "file_sertifikat": null,
+    "tanggal_awal": "-",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Basic MFR & Sea Survival",
+    "penyelenggara": "BADAN SAR",
+    "lokasi": null,
+    "nomor_sertifikat": "LAT.001/023/II/BPP-2009",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Feb-09",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "HUET&SS",
+    "penyelenggara": "PT.BIMA NUSANTARA",
+    "lokasi": null,
+    "nomor_sertifikat": "50713300092",
+    "file_sertifikat": null,
+    "tanggal_awal": "05-Jul-13",
+    "masa_berlaku": "05-Jul-16",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Safety Leadership For Supervisor",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0882/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "25-Apr-18",
+    "masa_berlaku": "25-Apr-21",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Accident Investigation",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0889/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-18",
+    "masa_berlaku": "27-Apr-21",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Calibration Method",
+    "penyelenggara": "TUV Rheinland Group",
+    "lokasi": null,
+    "nomor_sertifikat": "1303212504/08",
+    "file_sertifikat": null,
+    "tanggal_awal": "-",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "65408",
+    "nama_pelatihan": "Eddy Current Testing Level II",
+    "penyelenggara": "PT. Global Solution",
+    "lokasi": null,
+    "nomor_sertifikat": "GST-SNS-002/ET/IN-22003",
+    "file_sertifikat": null,
+    "tanggal_awal": "18-Jan-22",
+    "masa_berlaku": "18-Jan-27",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "65408"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-71",
+    "file_sertifikat": null,
+    "tanggal_awal": "25/7/2023",
+    "masa_berlaku": "25/7/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-PT-72",
+    "file_sertifikat": null,
+    "tanggal_awal": "25/7/2023",
+    "masa_berlaku": "25/7/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "Inspektur Pesawat Angkat - MIGAS",
+    "penyelenggara": "KPDM MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "475/L1-R2/IPA/MIGAS/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "22/2/23",
+    "masa_berlaku": "22/2/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "Ahli K3 Pesawat Angkat Angkut Depnaker",
+    "penyelenggara": "DIRGEN KETENAGAKERJAAN",
+    "lokasi": null,
+    "nomor_sertifikat": "5/2279/AS.02.00/II/ 20",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Apr-11",
+    "masa_berlaku": "22/2/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "Wire Rope Tester Intorn",
+    "penyelenggara": "PT.PRATITA PRAMA NUGRAHA",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "23-Jun-20",
+    "masa_berlaku": "15-Jul-23",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "Awarness Behaviour Based on Safety",
+    "penyelenggara": "SYNERGY SOLUSI",
+    "lokasi": null,
+    "nomor_sertifikat": "3352BBS/TRN-SSI/XI-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "28-Nov-18",
+    "masa_berlaku": "28-Nov-21",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "Awarness Basic Sea Survival",
+    "penyelenggara": "SYNERGY SOLUSI",
+    "lokasi": null,
+    "nomor_sertifikat": "2991/TRN-SSI/XI-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "26-Nov-18",
+    "masa_berlaku": "26-Nov-21",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "Basic Fire Fighting",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "086/INS-BPN/BFF/VI/2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "29-Jun-19",
+    "masa_berlaku": "28-Jun-22",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "Working At Height",
+    "penyelenggara": "DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "14858/WAH/DJI-BPN/VII/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "8 JULI 23",
+    "masa_berlaku": "8 JULI 26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "Inspektur Kelistrikan MIGAS",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "236/IKM-R0/MIGAS/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "06-Dec-21",
+    "masa_berlaku": "06-Dec-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "Inspektur Eddy Current testing level II",
+    "penyelenggara": "PT. Global Solution",
+    "lokasi": null,
+    "nomor_sertifikat": "GST-SNS/ET/IN-22005",
+    "file_sertifikat": null,
+    "tanggal_awal": "18-Jan-22",
+    "masa_berlaku": "18-Jan-27",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "66208",
+    "nama_pelatihan": "SURVEYOR CONTAINER (scs)",
+    "penyelenggara": "DIKLAT BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "0454/SO2/M066-T01/0023-ACY/P07/06-23",
+    "file_sertifikat": null,
+    "tanggal_awal": "5 - 11 JUNI 23",
+    "masa_berlaku": "TAK TERHINGGA",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66208"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-52",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Nov-19",
+    "masa_berlaku": "29-Nov-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-53",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Nov-19",
+    "masa_berlaku": "29-Nov-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Inspektur Kelistrikan MIGAS",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "128/IKM-R2/MIGAS/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "26/10/2023",
+    "masa_berlaku": "26/10/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Inspektur Pesawat Angkat - MIGAS",
+    "penyelenggara": "KPDM MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "475/L1-R2/IPA/MIGAS/2020",
+    "file_sertifikat": null,
+    "tanggal_awal": "12-Dec-23",
+    "masa_berlaku": "12-Dec-26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Inspektur Pesawat Angkat (BNSP)",
+    "penyelenggara": "LSP MIGAS BNSP",
+    "lokasi": null,
+    "nomor_sertifikat": "71203 3117 5 0001084 2020",
+    "file_sertifikat": null,
+    "tanggal_awal": "04-Jul-20",
+    "masa_berlaku": "04-Jul-23",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Ahli K3 Pesawat Angkat Angkut Depnaker",
+    "penyelenggara": "DIRGEN KETENAGAKERJAAN",
+    "lokasi": null,
+    "nomor_sertifikat": "5/1603/AS.01.04/I/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "26/1/23",
+    "masa_berlaku": "26/1/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Ahli K3 Listrik Depnaker",
+    "penyelenggara": "DIRGEN KETENAGAKERJAAN",
+    "lokasi": null,
+    "nomor_sertifikat": "5/17788/AS.01.04/XI/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "18/11/22",
+    "masa_berlaku": "18/11/25",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Insp. Rotating Equipment",
+    "penyelenggara": "DIRGEN MIGAS ( sudah Refres per maret 22 )",
+    "lokasi": null,
+    "nomor_sertifikat": "129/IRE/MIGAS/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "26/4/22",
+    "masa_berlaku": "26/4/25",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Wire Rope Tester Intorn",
+    "penyelenggara": "PT.PRATITA PRAMA NUGRAHA",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Apr-11",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Basic MFR & Sea Survival",
+    "penyelenggara": "BADAN SAR",
+    "lokasi": null,
+    "nomor_sertifikat": "LAT.001/030/II/BPP-2009",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Feb-09",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "HUET & SS",
+    "penyelenggara": "PT.BIMA NUSANTARA",
+    "lokasi": null,
+    "nomor_sertifikat": "50713300091",
+    "file_sertifikat": null,
+    "tanggal_awal": "05-Jul-13",
+    "masa_berlaku": "05-Jul-16",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "026/INS-BPN/BSS/XI/20",
+    "file_sertifikat": null,
+    "tanggal_awal": "05-Nov-20",
+    "masa_berlaku": "05-Nov-23",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Gesture & Postures",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "676/GP/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Sep-14",
+    "masa_berlaku": "19-Sep-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Working At Height",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "692/WAH/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Sep-14",
+    "masa_berlaku": "19-Sep-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Working At Confined Spaces",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "668/WACS/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Sep-14",
+    "masa_berlaku": "19-Sep-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "HSE Induction",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "716/HSEI/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "18-Sep-14",
+    "masa_berlaku": "18-Sep-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Basic First Aid",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "708/FAK/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "18-Sep-14",
+    "masa_berlaku": "18-Sep-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Ahli K3 Penaggulangan KebakaraN",
+    "penyelenggara": "PT.UPAYA RIKSA PATRA",
+    "lokasi": null,
+    "nomor_sertifikat": "5/17802/AS.01.04/XI/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "17/11/22",
+    "masa_berlaku": "17/11/25",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Fire Fighting",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "684/FF/DJI-BPN/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Sep-14",
+    "masa_berlaku": "19-Sep-17",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Ahli K3 ESKALATOR DAN ELEVATOR DEPNAKER 2018",
+    "penyelenggara": "KEMENAKER RI",
+    "lokasi": null,
+    "nomor_sertifikat": "5/17824/AS.01.04/XI/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "17/11/22",
+    "masa_berlaku": "17/11/25",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "Pemeriksaan & Pengujian Pembangkit Tenaga Listrik PLTD",
+    "penyelenggara": "ELESKA HAKIT",
+    "lokasi": null,
+    "nomor_sertifikat": "1607.1.01.P035.10.2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "16 /10/2024",
+    "masa_berlaku": "15/10/2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "100515",
+    "nama_pelatihan": "AK3 PTP",
+    "penyelenggara": "PHITAGORAS",
+    "lokasi": null,
+    "nomor_sertifikat": "5/14109/AS.01.04/IX/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "09/08/2023",
+    "masa_berlaku": "09/08/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "100515"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Ahli K3 UMUM DISNAKER",
+    "penyelenggara": "KEMENAKER RI & Tranindo",
+    "lokasi": null,
+    "nomor_sertifikat": "5/2723/AS.01.03/II/24",
+    "file_sertifikat": null,
+    "tanggal_awal": "2 februari 2024",
+    "masa_berlaku": "1 februari 2027",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Basic First Aid",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "085/INS-BPN/BFA/VII/2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Jul-19",
+    "masa_berlaku": "18-Jul-22",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Basic Fire Fighting",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "088/INS-BPN/BFF/VII/2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Jul-19",
+    "masa_berlaku": "18-Jul-22",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "014/INS-BPN/BSS/VI/2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "29-Jun-19",
+    "masa_berlaku": "28-Jun-22",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Difensive Driving",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Accident Investigation & Reporting",
+    "penyelenggara": "GENTRA SAFETY",
+    "lokasi": null,
+    "nomor_sertifikat": "05/STK/CGIV/V/2012",
+    "file_sertifikat": null,
+    "tanggal_awal": "16-May-12",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Auditor SMK 3",
+    "penyelenggara": "KEMENTRIAN TENAGA KERJA",
+    "lokasi": null,
+    "nomor_sertifikat": "1711/A-SMK3/X/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "11-Oct-14",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Auditor SMK 3 (SKP )",
+    "penyelenggara": "KEMENTRIAN TENAGA KERJA",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "11-Nov-24",
+    "masa_berlaku": "3 THN",
+    "keterangan_utilisasi": "BELUM TERBIT",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "P2K3",
+    "penyelenggara": "DINAS TENAGA KERJA DAN SOSIAL BALIKPAPAN",
+    "lokasi": null,
+    "nomor_sertifikat": "560/243/Disnakersos/2015",
+    "file_sertifikat": null,
+    "tanggal_awal": "20-May-15",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "SMK3, OHSAS 18001 & ISO 14001",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "16-Feb-15",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Sistem Managemen Pengamanan",
+    "penyelenggara": "KEPOLISIAN NEGARA RI",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Laboratory Internal Audit",
+    "penyelenggara": "TUV Rheinland Group",
+    "lokasi": null,
+    "nomor_sertifikat": "1303212504/02",
+    "file_sertifikat": null,
+    "tanggal_awal": "-",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Implementation of SNI IOS/IEC 17025",
+    "penyelenggara": "TUV Rheinland Group",
+    "lokasi": null,
+    "nomor_sertifikat": "1303212504/05",
+    "file_sertifikat": null,
+    "tanggal_awal": "-",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Calibration Method",
+    "penyelenggara": "TUV Rheinland Group",
+    "lokasi": null,
+    "nomor_sertifikat": "1303212504/02",
+    "file_sertifikat": null,
+    "tanggal_awal": "-",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Seminar K3",
+    "penyelenggara": "POLNES",
+    "lokasi": null,
+    "nomor_sertifikat": "152/PL7/TU/2015",
+    "file_sertifikat": null,
+    "tanggal_awal": "28-Jan-15",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Keselamatan dan Kesehatan Kerja Pemantauan Lingkungan Kerja",
+    "penyelenggara": "PT. PATRARI JAYA UTAMA",
+    "lokasi": null,
+    "nomor_sertifikat": "048/PK-3P.LINGKER/VI/2017",
+    "file_sertifikat": null,
+    "tanggal_awal": "15-Jun-17",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Lead Auditor Sistem Manajemen Pengaman",
+    "penyelenggara": "KORBINMAS",
+    "lokasi": null,
+    "nomor_sertifikat": "00703",
+    "file_sertifikat": null,
+    "tanggal_awal": "01-Aug-17",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Safety Leadership For Supervisor",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0887/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "25-Apr-18",
+    "masa_berlaku": "25-Apr-21",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Accident Investigation",
+    "penyelenggara": "Synergy Solusi",
+    "lokasi": null,
+    "nomor_sertifikat": "0894/TRN-SSI/IV-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Apr-18",
+    "masa_berlaku": "27-Apr-21",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Pelatihan Standart Baru ISO/IEC 17025:2017 Lab. Pengujian & Kalibrasi",
+    "penyelenggara": "PUSAT PENGEMBANGAN PROFESI (P3I)",
+    "lokasi": null,
+    "nomor_sertifikat": "03/PPPI/IV/2018",
+    "file_sertifikat": null,
+    "tanggal_awal": "13-Apr-18",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Training Tehnik Kalibrasi Pressure Gauge, Test Gauge, & Thickness Gauge.",
+    "penyelenggara": "PT. Anametri Metrologi Indonesia",
+    "lokasi": null,
+    "nomor_sertifikat": "ANMI-SP-19.0084",
+    "file_sertifikat": null,
+    "tanggal_awal": "13-Aug-19",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Ketidakpastian Kalibrasi dan Uji Banding Laboratorium Kalibrasi Berdasarkan Standar ISO17025:2017",
+    "penyelenggara": "TUV RHEINLAND",
+    "lokasi": null,
+    "nomor_sertifikat": "ZID9/246115906/03",
+    "file_sertifikat": null,
+    "tanggal_awal": "23 sd 25 September 2020",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "AUDIT ENERGY INDUSTRI",
+    "penyelenggara": "Enerco Training Center",
+    "lokasi": null,
+    "nomor_sertifikat": "70209 2612 0007787 2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "15-Mar-21",
+    "masa_berlaku": "15-Mar-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Implementation of SNI IOS/IEC 17020;2012 (Lembaga Inspeksi)",
+    "penyelenggara": "BKI ACADEMY & BSN",
+    "lokasi": null,
+    "nomor_sertifikat": "IHT/0715/2022",
+    "file_sertifikat": null,
+    "tanggal_awal": "17 Juni 22",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "TEKNIK PENGUKURAN KALIBRASI BESARAN TEKANAN",
+    "penyelenggara": "SPIN",
+    "lokasi": null,
+    "nomor_sertifikat": "8268/PT/KT/VII/22",
+    "file_sertifikat": null,
+    "tanggal_awal": "26-Jul-22",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "\"TRAINING AUDITOR/ASESSOR GREEN PORT",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "",
+    "nama_pelatihan": "21/9/2022",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": ""
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "Ports Facility Security Officer (ISPS Code)",
+    "penyelenggara": "BKI Academy",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "10 s/d 12 Juni 2024.",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "sd Agustus blm terbit sertifikat",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "101315",
+    "nama_pelatihan": "TKDN",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "4 SD 11 NOVEMBER 24",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "BELUM TERBIT",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101315"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "Basic MFR & Sea Survival",
+    "penyelenggara": "BADAN SAR",
+    "lokasi": null,
+    "nomor_sertifikat": "LAT.001/026/II/BPP-2009",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Feb-09",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "Wire Rope Tester Intorn",
+    "penyelenggara": "PT.PRATITA PRAMA NUSANTARA",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Apr-11",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "HUET &  SS",
+    "penyelenggara": "PT.BIMA NUSANTARA",
+    "lokasi": null,
+    "nomor_sertifikat": "10416300565",
+    "file_sertifikat": null,
+    "tanggal_awal": "01-Apr-16",
+    "masa_berlaku": "01/04/2019",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "010/INS-BPN/BSS/XI/19",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-May-19",
+    "masa_berlaku": "03/05/2022",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "Working At Height",
+    "penyelenggara": "DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "14854/WAH/DJI-BPN/VII/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "8 JULI 23",
+    "masa_berlaku": "8 JULI 26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "Awarness Behaviour Based on Safety",
+    "penyelenggara": "SYNERGY SOLUSI",
+    "lokasi": null,
+    "nomor_sertifikat": "3327BBS/TRN-SSI/XI-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Nov-18",
+    "masa_berlaku": "27/11/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "NDT UT Lev II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-UT-68",
+    "file_sertifikat": null,
+    "tanggal_awal": "26/7/2023",
+    "masa_berlaku": "25/7/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-69",
+    "file_sertifikat": null,
+    "tanggal_awal": "26/7/2023",
+    "masa_berlaku": "25/7/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-PT-70",
+    "file_sertifikat": null,
+    "tanggal_awal": "26/7/2023",
+    "masa_berlaku": "25/7/2028",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "Inspektur Pesawat Angkat (BNSP)",
+    "penyelenggara": "LSP ENERGI",
+    "lokasi": null,
+    "nomor_sertifikat": "IMG,074 00484 2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "12 - 15 /11/ 24",
+    "masa_berlaku": "02-Apr-24",
+    "keterangan_utilisasi": "blm TERBIT SERTIFIKAT",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "Inspektur Pesawat Angkat - MIGAS",
+    "penyelenggara": "DIRGEN MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "336/L1-R2/IPA/MIGAS/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "12 - 15 /11/ 24",
+    "masa_berlaku": "15-Apr-24",
+    "keterangan_utilisasi": "blm TERBIT SERTIFIKAT",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "LIQUID CARGO",
+    "penyelenggara": "AISI",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "5 s/d 10 DESEMBER 2022",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "sert dari AISI Blm terbit",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "ISAUST / METERING / CUSTUDY TRANSFER",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "255/ISAUST/MIGAS/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "22 NOP S/D 2 DES 21",
+    "masa_berlaku": "13/1/2025",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "Insp. Rotating Equipment",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "284/IRE/MIGAS/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "07/11/2023",
+    "masa_berlaku": "07/11/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109616",
+    "nama_pelatihan": "Petugas Keamanan Zat Radioaktif (PKZR)",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": "457324.70.0028102024",
+    "file_sertifikat": null,
+    "tanggal_awal": "28/10/2024",
+    "masa_berlaku": "27/10/2029",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109616"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-49",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Nov-19",
+    "masa_berlaku": "29/11/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-50",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Nov-19",
+    "masa_berlaku": "29/11/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "NDT UT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-51",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Nov-19",
+    "masa_berlaku": "29/11/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "Welding Inspektor",
+    "penyelenggara": "BNSP",
+    "lokasi": null,
+    "nomor_sertifikat": "71203 3117 5 0000468 2018",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Mar-19",
+    "masa_berlaku": "30/03/2021",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "Basic MFR & Sea Survival",
+    "penyelenggara": "BADAN SAR",
+    "lokasi": null,
+    "nomor_sertifikat": "LAT.001/025/II/BPP-2009",
+    "file_sertifikat": null,
+    "tanggal_awal": "02-Feb-09",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "BOSIET",
+    "penyelenggara": "DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "14846/T-BOSIET/DJI-BPN/VII/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "8 JULI 23",
+    "masa_berlaku": "8 JULI 26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "Working At Height",
+    "penyelenggara": "DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "14856/WAH/DJI-BPN/VII/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "8 JULI 23",
+    "masa_berlaku": "8 JULI 26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "Inspektur Pesawat Angkat - MIGAS",
+    "penyelenggara": "DIRGEN MIGAS",
+    "lokasi": null,
+    "nomor_sertifikat": "323/L1-R2/IPA/MIGAS/2020",
+    "file_sertifikat": null,
+    "tanggal_awal": "12-Dec-23",
+    "masa_berlaku": "12-Dec-26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "Intorn Wire Rope Tester MH 6-24",
+    "penyelenggara": "PT. PRATITA PRAMA NUGRAHA",
+    "lokasi": null,
+    "nomor_sertifikat": "-",
+    "file_sertifikat": null,
+    "tanggal_awal": "06-Jun-17",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "022/INS-BPN/BSS/XI/20",
+    "file_sertifikat": null,
+    "tanggal_awal": "06-Nov-20",
+    "masa_berlaku": "05/11/2023",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "Awarness Behaviour Based on Safety",
+    "penyelenggara": "SYNERGY SOLUSI",
+    "lokasi": null,
+    "nomor_sertifikat": "3326BBS/TRN-SSI/XI-18",
+    "file_sertifikat": null,
+    "tanggal_awal": "27-Nov-18",
+    "masa_berlaku": "27/11/2021",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "Inspektur Katup Pengaman Migas / PSV",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "983/IKP-R/MIGAS/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "11/07/2023",
+    "masa_berlaku": "11/07/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "Ketidakpastian Kalibrasi dan Uji Banding Laboratorium Kalibrasi Berdasarkan Standar ISO17025:2017",
+    "penyelenggara": "TUV RHEINLAND",
+    "lokasi": null,
+    "nomor_sertifikat": "ZID9/246115906/10",
+    "file_sertifikat": null,
+    "tanggal_awal": "25/09/2020",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "tak terhingga",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "Ahli K3 UMUM DISNAKER",
+    "penyelenggara": "INDO TRAIN & DISNAKER",
+    "lokasi": null,
+    "nomor_sertifikat": "5/6342/AS.02.04/V/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "31 Mei 21",
+    "masa_berlaku": "31/05/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "109516",
+    "nama_pelatihan": "TEKNIK PENGUKURAN KALIBRASI BESARAN TEKANAN",
+    "penyelenggara": "SPIN",
+    "lokasi": null,
+    "nomor_sertifikat": "8270/PT/KT/VII/22",
+    "file_sertifikat": null,
+    "tanggal_awal": "26-Jul-22",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "tak terhingga",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "109516"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "NDT MT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-42",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Nov-19",
+    "masa_berlaku": "29-Nov-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "NDT PT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-43",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Nov-19",
+    "masa_berlaku": "29-Nov-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "NDT UT Lev-II",
+    "penyelenggara": "PT. BKI",
+    "lokasi": null,
+    "nomor_sertifikat": "BKI-BLPP-MT-54",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Nov-19",
+    "masa_berlaku": "29-Nov-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "HUET &  SS",
+    "penyelenggara": "PT.BIMA NUSANTARA",
+    "lokasi": null,
+    "nomor_sertifikat": "10416300561",
+    "file_sertifikat": null,
+    "tanggal_awal": "01-Apr-16",
+    "masa_berlaku": "01-Apr-19",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "006/INS-BPN/BSS/II/2025",
+    "file_sertifikat": null,
+    "tanggal_awal": "04-Feb-25",
+    "masa_berlaku": "03-Feb-28",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "Marine Surveyor",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "03-May-19",
+    "masa_berlaku": "03-May-22",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "Liquid Cargo Survey",
+    "penyelenggara": "AISI",
+    "lokasi": null,
+    "nomor_sertifikat": "3909",
+    "file_sertifikat": null,
+    "tanggal_awal": "20-Sep-14",
+    "masa_berlaku": "30-Apr-26",
+    "keterangan_utilisasi": "dah refres",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "Training Tehnik Kalibrasi Pressure Gauge, Test Gauge, & Thickness Gauge.",
+    "penyelenggara": "PT. Anametri Metrologi Indonesia",
+    "lokasi": null,
+    "nomor_sertifikat": "ANMI-SP-19.0084",
+    "file_sertifikat": null,
+    "tanggal_awal": "13-Aug-19",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "Ketidakpastian Kalibrasi dan Uji Banding Laboratorium Kalibrasi Berdasarkan Standar ISO17025:2017",
+    "penyelenggara": "TUV RHEINLAND",
+    "lokasi": null,
+    "nomor_sertifikat": "ZID9/246115906/01",
+    "file_sertifikat": null,
+    "tanggal_awal": "23 sd 25 September 2020",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "tak terhingga",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "Inspektur Katup Pengaman Migas / PSV",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "1021/IKP/MIGAS/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "27/9/21",
+    "masa_berlaku": "27/9/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "PEMAHAMAN ISO 1725:2017 MANAJEMEN LAB",
+    "penyelenggara": "BKI Academy & BSN",
+    "lokasi": null,
+    "nomor_sertifikat": "IHT/1274/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "08/09/2021",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": "tak terhingga",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "TEKNIK PENGUKURAN KALIBRASI BESARAN TEKANAN",
+    "penyelenggara": "SPIN",
+    "lokasi": null,
+    "nomor_sertifikat": "8269/PT/KT/VII/22",
+    "file_sertifikat": null,
+    "tanggal_awal": "26-Jul-22",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "tak terhingga",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111618",
+    "nama_pelatihan": "P3K",
+    "penyelenggara": "BKI ACADEMY / DIVISI ISPB",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "14 MEI 2025",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "tak terhingga",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111618"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "Auditor ISM Code",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "7519/ISA-MNS/IX/2014",
+    "file_sertifikat": null,
+    "tanggal_awal": "11-Sep-14",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "Marine Surveyor",
+    "penyelenggara": "BKI PUSAT",
+    "lokasi": null,
+    "nomor_sertifikat": "058-MS/KS-BP/V/2008",
+    "file_sertifikat": null,
+    "tanggal_awal": "31-May-08",
+    "masa_berlaku": "31/05/2011",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "NDT MT Lev II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "1739/MT/N/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "05-Jul-21",
+    "masa_berlaku": "05/07/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "NDT PT Lev II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "1719/PT/N/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "04-Jun-21",
+    "masa_berlaku": "03/06/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "NDT UT Lev-II",
+    "penyelenggara": "PT. SARANA QUALITY TEKNIK",
+    "lokasi": null,
+    "nomor_sertifikat": "1219/UT/N/21",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Sep-21",
+    "masa_berlaku": "30/09/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "Ahli K3 Pesawat Angkat Angkut ( Calon )",
+    "penyelenggara": "KEMENTERIAN KETENAGAKERJAAN RI (PT. CENTRA GAMA)",
+    "lokasi": null,
+    "nomor_sertifikat": "58/AK3/PAA/IX/2018",
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Sep-18",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "calon Proses ke Ahli  September PT.TRANINDO (BU DESTI) tidak melengkapi laporan",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "123/INS-BPN/BSS/VI/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "22/6/23",
+    "masa_berlaku": "22/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "Basic First Aid",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "015/INS-BPN/BFA/VI/2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "20/6/23",
+    "masa_berlaku": "19/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "Basic Fire Fighting",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "015/INS-BPN/BFF/IX/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "20/6/23",
+    "masa_berlaku": "19/6/26",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "Inspektur Rig Migas",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "364/Insp.Rig/KPD-Migas/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "10/02/2023",
+    "masa_berlaku": "10/02/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "Inspektur Instalasi Migas/ Plant Inspector",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "187/ISI-MIGAS/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Aug-21",
+    "masa_berlaku": "10/08/2024",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "Long Range UT Level I   ( LR UT )",
+    "penyelenggara": "BKI AKADEMI & DARI LUAR",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "03-Nov-21",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "ON PROGRES",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "ISAUST / METERING / CUSTUDY TRANSFER",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "07/10/2023",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "BATAL IKUT",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "111918",
+    "nama_pelatihan": "Insp. Rotating Equipment",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "288/IRE/MIGAS/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "07/11/2023",
+    "masa_berlaku": "07/11/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "111918"
+      }
+    }
+  },
+  {
+    "nup": "112518",
+    "nama_pelatihan": "Installation & Operation Clamp-on Ultrasonic Liquid",
+    "penyelenggara": "PT.SUPLINTAMA MAJUSEMESTA",
+    "lokasi": null,
+    "nomor_sertifikat": "028/CER/SMS-TM/10/09",
+    "file_sertifikat": null,
+    "tanggal_awal": "22-Oct-09",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "112518"
+      }
+    }
+  },
+  {
+    "nup": "112518",
+    "nama_pelatihan": "Teknik Kalibrasi Flowmeter (Minyak)",
+    "penyelenggara": "PT. EXPERTINDO",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "04-Dec-13",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "112518"
+      }
+    }
+  },
+  {
+    "nup": "112518",
+    "nama_pelatihan": "Teknisi K3 Listrik Depnaker",
+    "penyelenggara": "LINTAS PENGEMBANGAN MANAJEMEN INDONESIA",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "01-Mar-14",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "112518"
+      }
+    }
+  },
+  {
+    "nup": "112518",
+    "nama_pelatihan": "Ahli K3 Penaggulangan KebakaraN",
+    "penyelenggara": "PT. UPAYA RIKSA PATRA",
+    "lokasi": null,
+    "nomor_sertifikat": "1666/AK3-KEB/XII/2014-P0",
+    "file_sertifikat": null,
+    "tanggal_awal": "21-Jul-21",
+    "masa_berlaku": "21-Jul-24",
+    "keterangan_utilisasi": "proses perpanjangan 10- 8 24",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "112518"
+      }
+    }
+  },
+  {
+    "nup": "112518",
+    "nama_pelatihan": "Insp. Rotating Equipment",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "130/IRE-R/MIGAS/2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "07/11/2023",
+    "masa_berlaku": "07/11/2026",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "112518"
+      }
+    }
+  },
+  {
+    "nup": "112518",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "022/INS-BPN/BSS/XI/20",
+    "file_sertifikat": null,
+    "tanggal_awal": "06-Nov-20",
+    "masa_berlaku": "05-Nov-23",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "112518"
+      }
+    }
+  },
+  {
+    "nup": "112518",
+    "nama_pelatihan": "ISAUST / METERING / CUSTUDY TRANSFER",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": "069/ISAUST-R1/MIGAS/20",
+    "file_sertifikat": null,
+    "tanggal_awal": "16/10/2023",
+    "masa_berlaku": "16/10/2026",
+    "keterangan_utilisasi": "masih hasil yudisium",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "112518"
+      }
+    }
+  },
+  {
+    "nup": "112518",
+    "nama_pelatihan": "Training TOT (Train Of Rainer) AK3 PENANGGULANGAN KEBAKARAN",
+    "penyelenggara": "BKI ACADEMY & ALPK3I & DEPNAKER",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "112518"
+      }
+    }
+  },
+  {
+    "nup": "112518",
+    "nama_pelatihan": "INSTRUMENT INSPECTOR LEVEL I",
+    "penyelenggara": "INSTRUMENTB - INSPECTOR",
+    "lokasi": null,
+    "nomor_sertifikat": "240273050120.",
+    "file_sertifikat": null,
+    "tanggal_awal": ".05/01/2020",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "112518"
+      }
+    }
+  },
+  {
+    "nup": "112518",
+    "nama_pelatihan": "Inspektur Kelistrikan MIGAS",
+    "penyelenggara": "KPDM Migas",
+    "lokasi": null,
+    "nomor_sertifikat": "229/IKM-R1/MIGAS/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "10-Dec-24",
+    "masa_berlaku": "10-Dec-27",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "112518"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "Konsultan perpajakan ( Brevert A-B )",
+    "penyelenggara": "Bina Arta Konsultan Pajak",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "08-Oct-13",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "Key Performance Indicator",
+    "penyelenggara": "ASSOSIASI MEDIATOR HUBUNGAN INDUSTRIAL INDONESIA (AMHII)",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "20-Nov-14",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "Office Ergonomic",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "1312/ERG/DJI-BPN/IV/2015",
+    "file_sertifikat": null,
+    "tanggal_awal": "11-Apr-15",
+    "masa_berlaku": "11-Apr-18",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "Sistem Akuntansi Perpajakan Dalam Penyusunan Laporan Keuangan",
+    "penyelenggara": "YAYASAN BINA ARTA",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "08-Oct-13",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "Penyuluhan Teknis Pemutusan Hubungan Kerja",
+    "penyelenggara": "DINAS TENAGA KERJA DAN SOSIAL BALIKPAPAN",
+    "lokasi": null,
+    "nomor_sertifikat": "893.5/23/Disnakersos",
+    "file_sertifikat": null,
+    "tanggal_awal": "28-Aug-15",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "Teknis Norma Waktu Kerja dan Waktu Istirahat",
+    "penyelenggara": "DINAS TENAGA KERJA DAN SOSIAL BALIKPAPAN",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Jun-14",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "Penyuluhan Penyelesaian Perselisihan Hubungan Industrial  1",
+    "penyelenggara": "DINAS TENAGA KERJA DAN SOSIAL BALIKPAPAN",
+    "lokasi": null,
+    "nomor_sertifikat": "893.5/28/Disnakersos",
+    "file_sertifikat": null,
+    "tanggal_awal": "29-May-15",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "Penyuluhan Penyelesaian Perselisihan Hubungan Industrial",
+    "penyelenggara": "DINAS TENAGA KERJA DAN SOSIAL BALIKPAPAN",
+    "lokasi": null,
+    "nomor_sertifikat": "893.5/22/Disnakersos",
+    "file_sertifikat": null,
+    "tanggal_awal": "30-Oct-15",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "P2K3",
+    "penyelenggara": "DINAS TENAGA KERJA DAN SOSIAL BALIKPAPAN",
+    "lokasi": null,
+    "nomor_sertifikat": "560/243/Disnakersos/2015",
+    "file_sertifikat": null,
+    "tanggal_awal": "20-May-15",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "HR foundamental ( SDM )",
+    "penyelenggara": "OneHR Indonesia",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "March 2018",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "Ahli K3 UMUM DISNAKER",
+    "penyelenggara": "INDO TRAIN & DISNAKER",
+    "lokasi": null,
+    "nomor_sertifikat": "5/6343/AS.02.04/V/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "31-May-21",
+    "masa_berlaku": "31-May-24",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "PEMAHAMAN ISO 1725:2017 MANAJEMEN LAB",
+    "penyelenggara": "BKI Academy & BSN",
+    "lokasi": null,
+    "nomor_sertifikat": "IHT/1277/2021",
+    "file_sertifikat": null,
+    "tanggal_awal": "08/09/2021",
+    "masa_berlaku": "tak terhingga",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "JMLP",
+    "penyelenggara": "MHC",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "02/03/2023",
+    "masa_berlaku": "tak terhingga",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "Contract Drafting for Non Legal",
+    "penyelenggara": "SUCOFINDO ADVISORY",
+    "lokasi": null,
+    "nomor_sertifikat": "EC-007078-VIII-2023",
+    "file_sertifikat": null,
+    "tanggal_awal": "8-9/8/2023",
+    "masa_berlaku": "tak terhingga",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66508",
+    "nama_pelatihan": "TKDN",
+    "penyelenggara": "BKI SBU ENI",
+    "lokasi": null,
+    "nomor_sertifikat": "B.0037/UM.012/ENI/KI-23",
+    "file_sertifikat": null,
+    "tanggal_awal": "4 Maret 2023",
+    "masa_berlaku": "tak terhingga",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66508"
+      }
+    }
+  },
+  {
+    "nup": "66608",
+    "nama_pelatihan": "Training Pemasaran",
+    "penyelenggara": null,
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": null,
+    "masa_berlaku": null,
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66608"
+      }
+    }
+  },
+  {
+    "nup": "66608",
+    "nama_pelatihan": "Office Ergonomic",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "1358/ERG/DJI-BPN/IV/2015",
+    "file_sertifikat": null,
+    "tanggal_awal": "18-Apr-15",
+    "masa_berlaku": "18-Apr-18",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66608"
+      }
+    }
+  },
+  {
+    "nup": "66608",
+    "nama_pelatihan": "Public Education Program",
+    "penyelenggara": "MARK PLUS INSTITUTE",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "11-May-16",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66608"
+      }
+    }
+  },
+  {
+    "nup": "66608",
+    "nama_pelatihan": "Laboratory Internal Audit",
+    "penyelenggara": "TUV Rheinland Group",
+    "lokasi": null,
+    "nomor_sertifikat": "1303212504/05",
+    "file_sertifikat": null,
+    "tanggal_awal": "-",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66608"
+      }
+    }
+  },
+  {
+    "nup": "66608",
+    "nama_pelatihan": "Implementation of SNI IOS/IEC 17025",
+    "penyelenggara": "TUV Rheinland Group",
+    "lokasi": null,
+    "nomor_sertifikat": "1303212504/13",
+    "file_sertifikat": null,
+    "tanggal_awal": "-",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66608"
+      }
+    }
+  },
+  {
+    "nup": "66608",
+    "nama_pelatihan": "Pelatihan Standart Baru ISO/IEC 17025:2017 Lab. Pengujian & Kalibrasi",
+    "penyelenggara": "PUSAT PENGEMBANGAN PROFESI (P3I)",
+    "lokasi": null,
+    "nomor_sertifikat": "04/PPPI/IV/2018",
+    "file_sertifikat": null,
+    "tanggal_awal": "13-Apr-18",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66608"
+      }
+    }
+  },
+  {
+    "nup": "66608",
+    "nama_pelatihan": "TKDN",
+    "penyelenggara": "FISCO ENERGY",
+    "lokasi": null,
+    "nomor_sertifikat": "265/KVTKDN-P/DMB/2024",
+    "file_sertifikat": null,
+    "tanggal_awal": "11-Oct-24",
+    "masa_berlaku": "11-Oct-27",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66608"
+      }
+    }
+  },
+  {
+    "nup": "66308",
+    "nama_pelatihan": "Key Performance Indicator",
+    "penyelenggara": "ASSOSIASI MEDIATOR HUBUNGAN INDUSTRIAL INDONESIA (AMHII)",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "20-Nov-14",
+    "masa_berlaku": "Tidak Ada",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66308"
+      }
+    }
+  },
+  {
+    "nup": "66308",
+    "nama_pelatihan": "Office Ergonomic",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "1361/ERG/DJI-BPN/IV/2015",
+    "file_sertifikat": null,
+    "tanggal_awal": "11-Apr-15",
+    "masa_berlaku": "11-Apr-18",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66308"
+      }
+    }
+  },
+  {
+    "nup": "66308",
+    "nama_pelatihan": "Seminar K3 Nasional",
+    "penyelenggara": "APJK3 INDONESIA",
+    "lokasi": null,
+    "nomor_sertifikat": "SNK3/PEBK3/BPN/110216/104",
+    "file_sertifikat": null,
+    "tanggal_awal": "11-Feb-16",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66308"
+      }
+    }
+  },
+  {
+    "nup": "66308",
+    "nama_pelatihan": "Pelatihan Hukum Acara Penyelesaian Hubungan Industrial",
+    "penyelenggara": "KEMENTERIAN KETENAGAKERJAAN RI",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "13-Feb-18",
+    "masa_berlaku": "-",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66308"
+      }
+    }
+  },
+  {
+    "nup": "66308",
+    "nama_pelatihan": "Basic Sea Survival",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "3398/BSS/DJI-BPN/I/2017",
+    "file_sertifikat": null,
+    "tanggal_awal": "13-Jan-17",
+    "masa_berlaku": "13-Jan-20",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66308"
+      }
+    }
+  },
+  {
+    "nup": "66308",
+    "nama_pelatihan": "Ahli K3 UMUM DISNAKER",
+    "penyelenggara": "MHC",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "16/12/22",
+    "masa_berlaku": "16/12/25",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66308"
+      }
+    }
+  },
+  {
+    "nup": "66308",
+    "nama_pelatihan": "TKDN",
+    "penyelenggara": "BKI SBU ENI",
+    "lokasi": null,
+    "nomor_sertifikat": "B.0005/UM.012/ENI/KI-23",
+    "file_sertifikat": null,
+    "tanggal_awal": "4 Maret 2023",
+    "masa_berlaku": "tak terhingga",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66308"
+      }
+    }
+  },
+  {
+    "nup": "66308",
+    "nama_pelatihan": "TKDN",
+    "penyelenggara": "KPDM",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "4 SD 11 NOVEMBER 24",
+    "masa_berlaku": "gak lulus",
+    "keterangan_utilisasi": "BELUM TERBIT",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66308"
+      }
+    }
+  },
+  {
+    "nup": "66308",
+    "nama_pelatihan": "AUDITOR SMK3",
+    "penyelenggara": "KEMENAKER RI",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "5 sd 9  Mei 2025",
+    "masa_berlaku": null,
+    "keterangan_utilisasi": "BELUM TERBIT",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "66308"
+      }
+    }
+  },
+  {
+    "nup": "85712",
+    "nama_pelatihan": "Office Ergonomic",
+    "penyelenggara": "MHC",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "11-Apr-15",
+    "masa_berlaku": "11-Apr-18",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "85712"
+      }
+    }
+  },
+  {
+    "nup": "85712",
+    "nama_pelatihan": "Basic First Aid",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "1314/ERG/DJI-BPN/IV/2015",
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Jul-19",
+    "masa_berlaku": "18-Jul-22",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "85712"
+      }
+    }
+  },
+  {
+    "nup": "90513",
+    "nama_pelatihan": "Office Ergonomic",
+    "penyelenggara": "PT. INSURIN ADIRAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "084/INS-BPN/BFA/VI/2019",
+    "file_sertifikat": null,
+    "tanggal_awal": "11-Apr-15",
+    "masa_berlaku": "11-Apr-18",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "90513"
+      }
+    }
+  },
+  {
+    "nup": "90513",
+    "nama_pelatihan": "Basic First Aid",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "1322/ERG/DJI-BPN/IV/2015",
+    "file_sertifikat": null,
+    "tanggal_awal": "19-Jul-19",
+    "masa_berlaku": "18-Jul-22",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "90513"
+      }
+    }
+  },
+  {
+    "nup": "90513",
+    "nama_pelatihan": "TKDN",
+    "penyelenggara": "FISCO ENERGY",
+    "lokasi": null,
+    "nomor_sertifikat": null,
+    "file_sertifikat": null,
+    "tanggal_awal": "1-5/2/21",
+    "masa_berlaku": "keterangan  kehadiran",
+    "keterangan_utilisasi": null,
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "90513"
+      }
+    }
+  },
+  {
+    "nup": "101115",
+    "nama_pelatihan": "Office Ergonomic",
+    "penyelenggara": "PT. DELTA JAYA",
+    "lokasi": null,
+    "nomor_sertifikat": "1360/ERG/DJI-BPN/IV/2015",
+    "file_sertifikat": null,
+    "tanggal_awal": "18-Apr-15",
+    "masa_berlaku": "18-Apr-18",
+    "keterangan_utilisasi": "TIDAK DIGUNAKAN",
+    "tahun": null,
+    "tanggal_akhir": null,
+    "pegawai": {
+      "connect": {
+        "nup": "101115"
+      }
+    }
+  }
+]

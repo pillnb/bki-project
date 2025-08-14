@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import bcrypt from 'bcryptjs'; // 1. Import library bcryptjs
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,40 +11,50 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'NIK dan password harus diisi.' }, { status: 400 });
     }
 
-    // PERBAIKAN: Menggunakan model `pegawai` dan mencari berdasarkan kolom `nik`
-    // Menggunakan findFirst karena 'nik' tidak ditandai sebagai @unique di skema Anda
+    // Cari pegawai berdasarkan NIK
     const user = await prisma.pegawai.findFirst({
       where: {
         nik: nik,
       },
     });
 
-    // Cek jika user tidak ditemukan atau password tidak cocok
-    if (!user || user.password !== password) {
+    // Jika user tidak ditemukan, langsung kembalikan error
+    if (!user) {
       return NextResponse.json({ message: 'NIK atau Password salah.' }, { status: 401 });
     }
+    
+    // Pastikan user memiliki password sebelum membandingkan
+    if (!user.password) {
+        return NextResponse.json({ message: 'Akun ini tidak memiliki password.' }, { status: 401 });
+    }
+
+    // 2. Bandingkan password yang diinput dengan hash di database
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    // Jika password tidak valid, kembalikan error
+    if (!isPasswordValid) {
+      return NextResponse.json({ message: 'NIK atau Password salah.' }, { status: 401 });
+    }
+
+    // PENTING: Jangan kirim password hash ke client
+    const { password: _, ...userWithoutPassword } = user;
 
     // Login berhasil, siapkan respons JSON
     const response = NextResponse.json({
       message: 'Login berhasil!',
-      user: {
-        id: user.id,
-        nama_pegawai: user.nama_pegawai,
-        role: user.role,
-        nik: user.nik, 
-      },
+      user: userWithoutPassword, // 3. Kirim data user tanpa password
     });
 
-    // PERBAIKAN: Mengatur cookie 'nik' yang akan digunakan oleh halaman dashboard
-    // 'nup' adalah ID unik, tapi karena dashboard Anda mencari berdasarkan NIK di cookie, kita set cookie 'nik' dengan nilai NIK.
+    // Mengatur cookie 'nik' yang akan digunakan oleh halaman dashboard
     if(user.nik) {
         response.cookies.set('nik', user.nik, {
             path: '/',
-            httpOnly: true,
-            maxAge: 86400, // Cookie berlaku selama 1 hari
+            httpOnly: true, // Cookie tidak bisa diakses dari JavaScript sisi client
+            secure: process.env.NODE_ENV === 'production', // Hanya kirim via HTTPS di production
+            sameSite: 'strict',
+            maxAge: 86400, // Cookie berlaku selama 1 hari (dalam detik)
         });
     }
-
 
     return response;
 

@@ -163,7 +163,7 @@ export async function POST(request: NextRequest, { params }: { params: { nup: st
       select: { role: true }
     });
     
-    if (!adminUser || adminUser.role !== 'admin') {
+    if (!adminUser || !(Array.isArray(adminUser.role) ? adminUser.role.includes('admin') : adminUser.role === 'admin')) {
       return NextResponse.json({ error: 'Unauthorized: Admin access required' }, { status: 403 });
     }
 

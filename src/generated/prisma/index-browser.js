@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.11.1
- * Query Engine version: f40f79ec31188888a2e33acda0ecc8fd10a853a9
+ * Prisma Client JS version: 6.12.0
+ * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
  */
 Prisma.prismaVersion = {
-  client: "6.11.1",
-  engine: "f40f79ec31188888a2e33acda0ecc8fd10a853a9"
+  client: "6.12.0",
+  engine: "8047c96bbd92db98a2abc7c9323ce77c02c89dbc"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -121,6 +121,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 });
 
 exports.Prisma.PegawaiScalarFieldEnum = {
+  id: 'id',
   nup: 'nup',
   nama_pegawai: 'nama_pegawai',
   status_pegawai: 'status_pegawai',
@@ -135,12 +136,19 @@ exports.Prisma.PegawaiScalarFieldEnum = {
   password: 'password',
   role: 'role',
   username: 'username',
-  id: 'id',
   nik: 'nik',
   jenjang_pend: 'jenjang_pend',
   pendidikan: 'pendidikan',
   tahun_pend: 'tahun_pend',
+  tandaTanganUrl: 'tandaTanganUrl',
   cv_generated_at: 'cv_generated_at'
+};
+
+exports.Prisma.ProyekScalarFieldEnum = {
+  id: 'id',
+  namaProyek: 'namaProyek',
+  klien: 'klien',
+  lokasi: 'lokasi'
 };
 
 exports.Prisma.PelatihanScalarFieldEnum = {
@@ -156,7 +164,8 @@ exports.Prisma.PelatihanScalarFieldEnum = {
   status: 'status',
   keterangan_utilisasi: 'keterangan_utilisasi',
   tahun: 'tahun',
-  tanggal_akhir: 'tanggal_akhir'
+  tanggal_akhir: 'tanggal_akhir',
+  pegawaiId: 'pegawaiId'
 };
 
 exports.Prisma.Pengalaman_kerjaScalarFieldEnum = {
@@ -165,20 +174,19 @@ exports.Prisma.Pengalaman_kerjaScalarFieldEnum = {
   tahun: 'tahun',
   pengalaman_kerja: 'pengalaman_kerja',
   perusahaan: 'perusahaan',
-  lokasi: 'lokasi'
+  lokasi: 'lokasi',
+  pegawaiId: 'pegawaiId'
 };
 
 exports.Prisma.SuratTugasScalarFieldEnum = {
   id: 'id',
   nomor_surat: 'nomor_surat',
-  klien: 'klien',
-  pekerjaan: 'pekerjaan',
+  proyekId: 'proyekId',
   status_pekerjaan: 'status_pekerjaan',
   no_service_order: 'no_service_order',
   bidang_pekerjaan: 'bidang_pekerjaan',
   peralatan_inspeksi: 'peralatan_inspeksi',
   kebutuhan_material: 'kebutuhan_material',
-  lokasi_pekerjaan: 'lokasi_pekerjaan',
   tanggal_berangkat: 'tanggal_berangkat',
   tanggal_kembali: 'tanggal_kembali',
   transportasi_operasional: 'transportasi_operasional',
@@ -188,21 +196,21 @@ exports.Prisma.SuratTugasScalarFieldEnum = {
   tiket: 'tiket',
   penginapan: 'penginapan',
   keterangan_lain: 'keterangan_lain',
+  leadInspectorId: 'leadInspectorId',
+  disetujuiLeadAt: 'disetujuiLeadAt',
+  koordinatorId: 'koordinatorId',
+  disetujuiKoorAt: 'disetujuiKoorAt',
+  seniorManagerId: 'seniorManagerId',
+  disetujuiSmAt: 'disetujuiSmAt',
+  kepalaCabangId: 'kepalaCabangId',
+  disetujuiKacabAt: 'disetujuiKacabAt',
+  catatanPenolakan: 'catatanPenolakan',
+  dibuatOlehId: 'dibuatOlehId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   spi: 'spi',
   wbs: 'wbs',
   status: 'status'
-};
-
-exports.Prisma.PegawaiSuratTugasScalarFieldEnum = {
-  id: 'id',
-  suratTugasId: 'suratTugasId',
-  pegawaiNup: 'pegawaiNup',
-  jabatan: 'jabatan',
-  approved: 'approved',
-  approvedBy: 'approvedBy',
-  approvedAt: 'approvedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -226,18 +234,23 @@ exports.StatusPelatihan = exports.$Enums.StatusPelatihan = {
 };
 
 exports.StatusSuratTugas = exports.$Enums.StatusSuratTugas = {
-  DIAJUKAN: 'DIAJUKAN',
-  MENUNGGU_APPROVAL: 'MENUNGGU_APPROVAL',
+  DRAFT: 'DRAFT',
+  MENUNGGU_LEAD: 'MENUNGGU_LEAD',
+  MENUNGGU_KOORDINATOR: 'MENUNGGU_KOORDINATOR',
+  MENUNGGU_SM: 'MENUNGGU_SM',
+  MENUNGGU_KACAB: 'MENUNGGU_KACAB',
+  DISETUJUI: 'DISETUJUI',
+  BERJALAN: 'BERJALAN',
   SELESAI: 'SELESAI',
   DITOLAK: 'DITOLAK'
 };
 
 exports.Prisma.ModelName = {
   pegawai: 'pegawai',
+  Proyek: 'Proyek',
   pelatihan: 'pelatihan',
   pengalaman_kerja: 'pengalaman_kerja',
-  SuratTugas: 'SuratTugas',
-  PegawaiSuratTugas: 'PegawaiSuratTugas'
+  SuratTugas: 'SuratTugas'
 };
 
 /**

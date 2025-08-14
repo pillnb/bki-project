@@ -1,20 +1,37 @@
 import prisma from '@/lib/prisma';
 
 export async function getHistorySuratTugasByNup(nup: string) {
+  // Jika NUP tidak diberikan, kembalikan array kosong untuk menghindari error.
   if (!nup) return [];
-  // Cari surat tugas yang memiliki pegawai_surat_tugas dengan pegawaiNup = nup
-  const suratTugas = await prisma.suratTugas.findMany({
-    where: {
-      pegawai_surat_tugas: {
-        some: {
-          pegawaiNup: nup,
+
+  try {
+    const suratTugas = await prisma.suratTugas.findMany({
+      where: {
+        timInspektor: {
+          some: {
+            nup: nup,
+          },
         },
       },
-    },
-    orderBy: { createdAt: 'desc' },
-    include: {
-      pegawai_surat_tugas: true,
-    },
-  });
-  return suratTugas;
+      // Urutkan berdasarkan tanggal pembuatan, dari yang terbaru
+      orderBy: { createdAt: 'desc' },
+      // Sertakan data relasi yang relevan
+      include: {
+        // Sertakan data anggota tim lainnya
+        timInspektor: {
+          select: {
+            nup: true,
+            nama_pegawai: true,
+          }
+        },
+        // Sertakan juga data proyek terkait
+        proyek: true,
+      },
+    });
+
+    return suratTugas;
+  } catch (error) {
+    console.error(`Error saat mengambil riwayat surat tugas untuk NUP ${nup}:`, error);
+    return [];
+  }
 }

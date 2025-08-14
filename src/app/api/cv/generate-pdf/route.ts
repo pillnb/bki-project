@@ -186,7 +186,11 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
     pendidikan: pegawai.pendidikan,
     tahun_pend: pegawai.tahun_pend,
     pelatihan: (() => {
-      const arr = ((pegawai.pelatihan || []) as Array<{ tahun?: number; nama_pelatihan?: string; penyelenggara?: string; lokasi?: string; status?: string }>)
+      const arr = ((pegawai.pelatihan || []) as Array<{ tahun?: number; 
+      nama_pelatihan?: string; 
+      penyelenggara?: string; 
+      lokasi?: string; 
+      status?: string }>)
         .filter(pel => pel.status === 'VALID')
         .slice()
         .sort((a, b) => (a.tahun ?? 0) - (b.tahun ?? 0));
@@ -208,7 +212,11 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
       });
     })(),
     pengalaman_kerja: (() => {
-      const arr = ((pegawai.pengalaman_kerja || []) as Array<{ tahun?: number; pengalaman_kerja?: string; perusahaan?: string; lokasi?: string }>)
+      const arr = ((pegawai.pengalaman_kerja || []) as Array<{ 
+        tahun?: number; 
+        pengalaman_kerja?: string; 
+        perusahaan?: string; 
+        lokasi?: string }>)
         .slice()
         .sort((a, b) => (a.tahun ?? 0) - (b.tahun ?? 0));
       let lastYear: number | undefined = undefined;
@@ -231,8 +239,8 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
     cvGeneratedAt: today,
     cvGeneratedAtFormatted: cvGeneratedAtFormatted,
     tanggal_generate: cvGeneratedAtFormatted,
-    qr_signature: qrSignature,
-    qr_image: qrSignature
+    // qr_signature: qrSignature, // Barcode tanda tangan dinonaktifkan
+    // qr_image: qrSignature      // Barcode tanda tangan dinonaktifkan
   };
 
   doc.render(docData);

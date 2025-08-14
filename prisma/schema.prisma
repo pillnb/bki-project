@@ -9,7 +9,8 @@ datasource db {
 }
 
 model pegawai {
-  nup                 String              @id @unique(map: "unique_nup")
+  id                  Int                 @id @unique(map: "unique_id") @default(autoincrement())
+  nup                 String              @unique(map: "unique_nup")
   nama_pegawai        String
   status_pegawai      String?
   jabatan             String?
@@ -21,17 +22,31 @@ model pegawai {
   no_telepon          String?
   email               String?
   password            String
-  role                String?             @default("pegawai")
+  role                String[]           @default(["pegawai"])
   username            String?             @unique(map: "idx_pegawai_username")
-  id                  Int                 @unique(map: "unique_id") @default(autoincrement())
   nik                 String?             @db.VarChar(32)
   jenjang_pend        String?
   pendidikan          String?
   tahun_pend          Int?
-  pegawai_surat_tugas PegawaiSuratTugas[]
+  tandaTanganUrl      String?
+  cv_generated_at     DateTime? @db.Timestamp(6)
   pelatihan           pelatihan[]
   pengalaman_kerja    pengalaman_kerja[]
-  cv_generated_at     DateTime? @db.Timestamp(6)
+  suratTugasDibuat    SuratTugas[] @relation("DibuatOleh")
+  anggotaTimDi        SuratTugas[] @relation("TimInspektor")
+  leadApproverDi      SuratTugas[] @relation("LeadApprover")
+  koorApproverDi      SuratTugas[] @relation("KoorApprover")
+  smApproverDi        SuratTugas[] @relation("SmApprover")
+  kacabApproverDi     SuratTugas[] @relation("KacabApprover")
+  
+}
+
+model Proyek {
+  id          Int          @id @default(autoincrement())
+  namaProyek  String
+  klien       String
+  lokasi      String
+  suratTugas  SuratTugas[]
 }
 
 enum StatusPelatihan {
@@ -54,7 +69,8 @@ model pelatihan {
   keterangan_utilisasi String?
   tahun                Int?
   tanggal_akhir        DateTime? @db.Date
-  pegawai              pegawai?  @relation(fields: [nup], references: [nup], onDelete: Cascade, onUpdate: NoAction)
+  pegawaiId            Int?
+  pegawai              pegawai? @relation(fields: [pegawaiId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model pengalaman_kerja {
@@ -64,29 +80,34 @@ model pengalaman_kerja {
   pengalaman_kerja String?
   perusahaan       String?
   lokasi           String?
-  pegawai          pegawai? @relation(fields: [nup], references: [nup], onDelete: Cascade, onUpdate: NoAction)
+  pegawaiId        Int?
+  pegawai          pegawai? @relation(fields: [pegawaiId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 enum StatusSuratTugas {
-  DIAJUKAN
-  MENUNGGU_APPROVAL
-  SELESAI
-  DITOLAK
+  DRAFT                 // Saat surat masih dalam pengeditan oleh pembuat
+  MENUNGGU_LEAD         // Menunggu persetujuan Lead Inspector
+  MENUNGGU_KOORDINATOR  // Menunggu persetujuan Koordinator Bidang
+  MENUNGGU_SM           // Menunggu persetujuan Senior Manager
+  MENUNGGU_KACAB        // Menunggu persetujuan Kepala Cabang
+  DISETUJUI             // Semua level sudah menyetujui, siap generate dokumen
+  BERJALAN              // Tim sedang bertugas di lapangan
+  SELESAI               // Tugas telah selesai dan tim sudah kembali
+  DITOLAK               // Pengajuan ditolak oleh salah satu approver
 }
 
 model SuratTugas {
-  id                            Int                 @id @default(autoincrement())
-  nomor_surat                   String?              @unique
-  klien                         String
-  pekerjaan                     String
+  id                            Int      @id @default(autoincrement())
+  nomor_surat                   String?  @unique
+  proyekId                      Int?
+  proyek                        Proyek?   @relation(fields: [proyekId], references: [id])
   status_pekerjaan              String?
   no_service_order              String?
   bidang_pekerjaan              String?
-  peralatan_inspeksi            String[]            // Change from String? to String[]
-  kebutuhan_material            String[]            // Change from String? to String[]
-  lokasi_pekerjaan              String[]            // Change from String to String[]
-  tanggal_berangkat             DateTime?           // Make optional to handle empty dates
-  tanggal_kembali               DateTime?           // Make optional to handle empty dates
+  peralatan_inspeksi            String[]
+  kebutuhan_material            String[]
+  tanggal_berangkat             DateTime?
+  tanggal_kembali               DateTime?
   transportasi_operasional      Boolean             @default(false)
   transportasi_ditanggung_klien Boolean             @default(false)
   transportasi_asal_tujuan      Boolean             @default(false)
@@ -94,24 +115,25 @@ model SuratTugas {
   tiket                         Boolean             @default(false)
   penginapan                    Boolean             @default(false)
   keterangan_lain               String?
+  leadInspectorId               Int?
+  leadInspector                 pegawai? @relation("LeadApprover", fields: [leadInspectorId], references: [id])
+  disetujuiLeadAt               DateTime?
+  koordinatorId                 Int?
+  koordinator                   pegawai? @relation("KoorApprover", fields: [koordinatorId], references: [id])
+  disetujuiKoorAt               DateTime?
+  seniorManagerId               Int?
+  seniorManager                 pegawai? @relation("SmApprover", fields: [seniorManagerId], references: [id])
+  disetujuiSmAt                 DateTime?
+  kepalaCabangId                Int?
+  kepalaCabang                  pegawai? @relation("KacabApprover", fields: [kepalaCabangId], references: [id])
+  disetujuiKacabAt              DateTime?
+  catatanPenolakan              String?
+  timInspektor                  pegawai[] @relation("TimInspektor")
+  dibuatOlehId                  Int?
+  dibuatOleh                    pegawai?  @relation("DibuatOleh", fields: [dibuatOlehId], references: [id])
   createdAt                     DateTime            @default(now())
   updatedAt                     DateTime            @updatedAt
   spi                           String?
   wbs                           String?
-  status                        StatusSuratTugas    @default(DIAJUKAN)
-  pegawai_surat_tugas           PegawaiSuratTugas[]
+  status                        StatusSuratTugas    @default(DRAFT)
 }
-
-model PegawaiSuratTugas {
-  id           Int        @id @default(autoincrement())
-  suratTugasId Int
-  pegawaiNup   String
-  jabatan      String?
-  approved     Boolean    @default(false)
-  approvedBy   String?
-  approvedAt   DateTime?
-  pegawai      pegawai    @relation(fields: [pegawaiNup], references: [nup])
-  suratTugas   SuratTugas @relation(fields: [suratTugasId], references: [id])
-}
-
-

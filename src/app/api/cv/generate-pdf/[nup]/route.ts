@@ -35,16 +35,19 @@ export async function POST(request: NextRequest, { params }: { params: { nup: st
 
     // Validasi apakah user adalah admin (sesuaikan dengan logic role checking kamu)
     const adminUser = await prisma.pegawai.findFirst({ 
-      where: { nik: adminNik },
-      select: { role: true } // asumsikan ada field role
+      where: {
+        nik: adminNik,
+        role: { has: 'admin' } // role array, cari yang mengandung 'admin'
+      },
+      select: { role: true }
     });
     
-    if (!adminUser || adminUser.role !== 'admin') {
+    if (!adminUser) {
       return NextResponse.json({ error: 'Unauthorized: Admin access required' }, { status: 403 });
     }
 
     // 2. Ambil NUP dari parameter URL (langsung dari params, bukan dari cookie)
-    const { nup } = params;
+    const { nup } = await params;
     if (!nup) {
       return NextResponse.json({ error: 'NUP parameter is required' }, { status: 400 });
     }
@@ -249,8 +252,8 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
     cvGeneratedAt: today,
     cvGeneratedAtFormatted: cvGeneratedAtFormatted,
     tanggal_generate: cvGeneratedAtFormatted,
-    qr_signature: qrSignature,
-    qr_image: qrSignature
+    // qr_signature: qrSignature,
+    // qr_image: qrSignature
   };
 
   doc.render(docData);

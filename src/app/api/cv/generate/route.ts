@@ -179,8 +179,8 @@ export async function POST(request: NextRequest) {
       cvGeneratedAtFormatted: cvGeneratedAtFormatted,
       tanggal_generate: cvGeneratedAtFormatted, // alternatif placeholder
       // QR signature dengan format yang benar untuk image module
-      qr_signature: qrSignature, // gunakan data URL lengkap
-      qr_image: qrSignature      // alternatif placeholder
+      // qr_signature: qrSignature, // gunakan data URL lengkap (barcode dinonaktifkan)
+      // qr_image: qrSignature      // alternatif placeholder (barcode dinonaktifkan)
     };
 
     console.log('CV Generated At:', cvGeneratedAtFormatted); // untuk debugging

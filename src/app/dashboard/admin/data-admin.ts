@@ -2,7 +2,10 @@ import prisma from '@/lib/prisma';
 
 export async function getAdminByNik(nik: string) {
   return await prisma.pegawai.findFirst({
-    where: { nik, role: 'admin' },
+    where: {
+      nik,
+      role: { has: 'admin' } // role array, cari yang mengandung 'admin'
+    },
     select: {
       nup: true,
       nama_pegawai: true,

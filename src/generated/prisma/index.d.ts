@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type pegawai = $Result.DefaultSelection<Prisma.$pegawaiPayload>
 /**
+ * Model Proyek
+ * 
+ */
+export type Proyek = $Result.DefaultSelection<Prisma.$ProyekPayload>
+/**
  * Model pelatihan
  * 
  */
@@ -33,11 +38,6 @@ export type pengalaman_kerja = $Result.DefaultSelection<Prisma.$pengalaman_kerja
  * 
  */
 export type SuratTugas = $Result.DefaultSelection<Prisma.$SuratTugasPayload>
-/**
- * Model PegawaiSuratTugas
- * 
- */
-export type PegawaiSuratTugas = $Result.DefaultSelection<Prisma.$PegawaiSuratTugasPayload>
 
 /**
  * Enums
@@ -53,8 +53,13 @@ export type StatusPelatihan = (typeof StatusPelatihan)[keyof typeof StatusPelati
 
 
 export const StatusSuratTugas: {
-  DIAJUKAN: 'DIAJUKAN',
-  MENUNGGU_APPROVAL: 'MENUNGGU_APPROVAL',
+  DRAFT: 'DRAFT',
+  MENUNGGU_LEAD: 'MENUNGGU_LEAD',
+  MENUNGGU_KOORDINATOR: 'MENUNGGU_KOORDINATOR',
+  MENUNGGU_SM: 'MENUNGGU_SM',
+  MENUNGGU_KACAB: 'MENUNGGU_KACAB',
+  DISETUJUI: 'DISETUJUI',
+  BERJALAN: 'BERJALAN',
   SELESAI: 'SELESAI',
   DITOLAK: 'DITOLAK'
 };
@@ -207,6 +212,16 @@ export class PrismaClient<
   get pegawai(): Prisma.pegawaiDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.proyek`: Exposes CRUD operations for the **Proyek** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Proyeks
+    * const proyeks = await prisma.proyek.findMany()
+    * ```
+    */
+  get proyek(): Prisma.ProyekDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.pelatihan`: Exposes CRUD operations for the **pelatihan** model.
     * Example usage:
     * ```ts
@@ -235,16 +250,6 @@ export class PrismaClient<
     * ```
     */
   get suratTugas(): Prisma.SuratTugasDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.pegawaiSuratTugas`: Exposes CRUD operations for the **PegawaiSuratTugas** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more PegawaiSuratTugases
-    * const pegawaiSuratTugases = await prisma.pegawaiSuratTugas.findMany()
-    * ```
-    */
-  get pegawaiSuratTugas(): Prisma.PegawaiSuratTugasDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -303,8 +308,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.11.1
-   * Query Engine version: f40f79ec31188888a2e33acda0ecc8fd10a853a9
+   * Prisma Client JS version: 6.12.0
+   * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
    */
   export type PrismaVersion = {
     client: string
@@ -686,10 +691,10 @@ export namespace Prisma {
 
   export const ModelName: {
     pegawai: 'pegawai',
+    Proyek: 'Proyek',
     pelatihan: 'pelatihan',
     pengalaman_kerja: 'pengalaman_kerja',
-    SuratTugas: 'SuratTugas',
-    PegawaiSuratTugas: 'PegawaiSuratTugas'
+    SuratTugas: 'SuratTugas'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -708,7 +713,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "pegawai" | "pelatihan" | "pengalaman_kerja" | "suratTugas" | "pegawaiSuratTugas"
+      modelProps: "pegawai" | "proyek" | "pelatihan" | "pengalaman_kerja" | "suratTugas"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -783,6 +788,80 @@ export namespace Prisma {
           count: {
             args: Prisma.pegawaiCountArgs<ExtArgs>
             result: $Utils.Optional<PegawaiCountAggregateOutputType> | number
+          }
+        }
+      }
+      Proyek: {
+        payload: Prisma.$ProyekPayload<ExtArgs>
+        fields: Prisma.ProyekFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProyekFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProyekPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProyekFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProyekPayload>
+          }
+          findFirst: {
+            args: Prisma.ProyekFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProyekPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProyekFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProyekPayload>
+          }
+          findMany: {
+            args: Prisma.ProyekFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProyekPayload>[]
+          }
+          create: {
+            args: Prisma.ProyekCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProyekPayload>
+          }
+          createMany: {
+            args: Prisma.ProyekCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProyekCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProyekPayload>[]
+          }
+          delete: {
+            args: Prisma.ProyekDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProyekPayload>
+          }
+          update: {
+            args: Prisma.ProyekUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProyekPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProyekDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProyekUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProyekUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProyekPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProyekUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProyekPayload>
+          }
+          aggregate: {
+            args: Prisma.ProyekAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProyek>
+          }
+          groupBy: {
+            args: Prisma.ProyekGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProyekGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProyekCountArgs<ExtArgs>
+            result: $Utils.Optional<ProyekCountAggregateOutputType> | number
           }
         }
       }
@@ -1008,80 +1087,6 @@ export namespace Prisma {
           }
         }
       }
-      PegawaiSuratTugas: {
-        payload: Prisma.$PegawaiSuratTugasPayload<ExtArgs>
-        fields: Prisma.PegawaiSuratTugasFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.PegawaiSuratTugasFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PegawaiSuratTugasPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.PegawaiSuratTugasFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PegawaiSuratTugasPayload>
-          }
-          findFirst: {
-            args: Prisma.PegawaiSuratTugasFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PegawaiSuratTugasPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.PegawaiSuratTugasFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PegawaiSuratTugasPayload>
-          }
-          findMany: {
-            args: Prisma.PegawaiSuratTugasFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PegawaiSuratTugasPayload>[]
-          }
-          create: {
-            args: Prisma.PegawaiSuratTugasCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PegawaiSuratTugasPayload>
-          }
-          createMany: {
-            args: Prisma.PegawaiSuratTugasCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.PegawaiSuratTugasCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PegawaiSuratTugasPayload>[]
-          }
-          delete: {
-            args: Prisma.PegawaiSuratTugasDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PegawaiSuratTugasPayload>
-          }
-          update: {
-            args: Prisma.PegawaiSuratTugasUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PegawaiSuratTugasPayload>
-          }
-          deleteMany: {
-            args: Prisma.PegawaiSuratTugasDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.PegawaiSuratTugasUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.PegawaiSuratTugasUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PegawaiSuratTugasPayload>[]
-          }
-          upsert: {
-            args: Prisma.PegawaiSuratTugasUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PegawaiSuratTugasPayload>
-          }
-          aggregate: {
-            args: Prisma.PegawaiSuratTugasAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePegawaiSuratTugas>
-          }
-          groupBy: {
-            args: Prisma.PegawaiSuratTugasGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PegawaiSuratTugasGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.PegawaiSuratTugasCountArgs<ExtArgs>
-            result: $Utils.Optional<PegawaiSuratTugasCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -1167,10 +1172,10 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     pegawai?: pegawaiOmit
+    proyek?: ProyekOmit
     pelatihan?: pelatihanOmit
     pengalaman_kerja?: pengalaman_kerjaOmit
     suratTugas?: SuratTugasOmit
-    pegawaiSuratTugas?: PegawaiSuratTugasOmit
   }
 
   /* Types for Logging */
@@ -1265,15 +1270,25 @@ export namespace Prisma {
    */
 
   export type PegawaiCountOutputType = {
-    pegawai_surat_tugas: number
     pelatihan: number
     pengalaman_kerja: number
+    suratTugasDibuat: number
+    anggotaTimDi: number
+    leadApproverDi: number
+    koorApproverDi: number
+    smApproverDi: number
+    kacabApproverDi: number
   }
 
   export type PegawaiCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pegawai_surat_tugas?: boolean | PegawaiCountOutputTypeCountPegawai_surat_tugasArgs
     pelatihan?: boolean | PegawaiCountOutputTypeCountPelatihanArgs
     pengalaman_kerja?: boolean | PegawaiCountOutputTypeCountPengalaman_kerjaArgs
+    suratTugasDibuat?: boolean | PegawaiCountOutputTypeCountSuratTugasDibuatArgs
+    anggotaTimDi?: boolean | PegawaiCountOutputTypeCountAnggotaTimDiArgs
+    leadApproverDi?: boolean | PegawaiCountOutputTypeCountLeadApproverDiArgs
+    koorApproverDi?: boolean | PegawaiCountOutputTypeCountKoorApproverDiArgs
+    smApproverDi?: boolean | PegawaiCountOutputTypeCountSmApproverDiArgs
+    kacabApproverDi?: boolean | PegawaiCountOutputTypeCountKacabApproverDiArgs
   }
 
   // Custom InputTypes
@@ -1290,13 +1305,6 @@ export namespace Prisma {
   /**
    * PegawaiCountOutputType without action
    */
-  export type PegawaiCountOutputTypeCountPegawai_surat_tugasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PegawaiSuratTugasWhereInput
-  }
-
-  /**
-   * PegawaiCountOutputType without action
-   */
   export type PegawaiCountOutputTypeCountPelatihanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: pelatihanWhereInput
   }
@@ -1308,17 +1316,90 @@ export namespace Prisma {
     where?: pengalaman_kerjaWhereInput
   }
 
+  /**
+   * PegawaiCountOutputType without action
+   */
+  export type PegawaiCountOutputTypeCountSuratTugasDibuatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SuratTugasWhereInput
+  }
+
+  /**
+   * PegawaiCountOutputType without action
+   */
+  export type PegawaiCountOutputTypeCountAnggotaTimDiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SuratTugasWhereInput
+  }
+
+  /**
+   * PegawaiCountOutputType without action
+   */
+  export type PegawaiCountOutputTypeCountLeadApproverDiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SuratTugasWhereInput
+  }
+
+  /**
+   * PegawaiCountOutputType without action
+   */
+  export type PegawaiCountOutputTypeCountKoorApproverDiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SuratTugasWhereInput
+  }
+
+  /**
+   * PegawaiCountOutputType without action
+   */
+  export type PegawaiCountOutputTypeCountSmApproverDiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SuratTugasWhereInput
+  }
+
+  /**
+   * PegawaiCountOutputType without action
+   */
+  export type PegawaiCountOutputTypeCountKacabApproverDiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SuratTugasWhereInput
+  }
+
+
+  /**
+   * Count Type ProyekCountOutputType
+   */
+
+  export type ProyekCountOutputType = {
+    suratTugas: number
+  }
+
+  export type ProyekCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    suratTugas?: boolean | ProyekCountOutputTypeCountSuratTugasArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProyekCountOutputType without action
+   */
+  export type ProyekCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProyekCountOutputType
+     */
+    select?: ProyekCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProyekCountOutputType without action
+   */
+  export type ProyekCountOutputTypeCountSuratTugasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SuratTugasWhereInput
+  }
+
 
   /**
    * Count Type SuratTugasCountOutputType
    */
 
   export type SuratTugasCountOutputType = {
-    pegawai_surat_tugas: number
+    timInspektor: number
   }
 
   export type SuratTugasCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pegawai_surat_tugas?: boolean | SuratTugasCountOutputTypeCountPegawai_surat_tugasArgs
+    timInspektor?: boolean | SuratTugasCountOutputTypeCountTimInspektorArgs
   }
 
   // Custom InputTypes
@@ -1335,8 +1416,8 @@ export namespace Prisma {
   /**
    * SuratTugasCountOutputType without action
    */
-  export type SuratTugasCountOutputTypeCountPegawai_surat_tugasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PegawaiSuratTugasWhereInput
+  export type SuratTugasCountOutputTypeCountTimInspektorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: pegawaiWhereInput
   }
 
 
@@ -1367,6 +1448,7 @@ export namespace Prisma {
   }
 
   export type PegawaiMinAggregateOutputType = {
+    id: number | null
     nup: string | null
     nama_pegawai: string | null
     status_pegawai: string | null
@@ -1379,17 +1461,17 @@ export namespace Prisma {
     no_telepon: string | null
     email: string | null
     password: string | null
-    role: string | null
     username: string | null
-    id: number | null
     nik: string | null
     jenjang_pend: string | null
     pendidikan: string | null
     tahun_pend: number | null
+    tandaTanganUrl: string | null
     cv_generated_at: Date | null
   }
 
   export type PegawaiMaxAggregateOutputType = {
+    id: number | null
     nup: string | null
     nama_pegawai: string | null
     status_pegawai: string | null
@@ -1402,17 +1484,17 @@ export namespace Prisma {
     no_telepon: string | null
     email: string | null
     password: string | null
-    role: string | null
     username: string | null
-    id: number | null
     nik: string | null
     jenjang_pend: string | null
     pendidikan: string | null
     tahun_pend: number | null
+    tandaTanganUrl: string | null
     cv_generated_at: Date | null
   }
 
   export type PegawaiCountAggregateOutputType = {
+    id: number
     nup: number
     nama_pegawai: number
     status_pegawai: number
@@ -1427,11 +1509,11 @@ export namespace Prisma {
     password: number
     role: number
     username: number
-    id: number
     nik: number
     jenjang_pend: number
     pendidikan: number
     tahun_pend: number
+    tandaTanganUrl: number
     cv_generated_at: number
     _all: number
   }
@@ -1448,6 +1530,7 @@ export namespace Prisma {
   }
 
   export type PegawaiMinAggregateInputType = {
+    id?: true
     nup?: true
     nama_pegawai?: true
     status_pegawai?: true
@@ -1460,17 +1543,17 @@ export namespace Prisma {
     no_telepon?: true
     email?: true
     password?: true
-    role?: true
     username?: true
-    id?: true
     nik?: true
     jenjang_pend?: true
     pendidikan?: true
     tahun_pend?: true
+    tandaTanganUrl?: true
     cv_generated_at?: true
   }
 
   export type PegawaiMaxAggregateInputType = {
+    id?: true
     nup?: true
     nama_pegawai?: true
     status_pegawai?: true
@@ -1483,17 +1566,17 @@ export namespace Prisma {
     no_telepon?: true
     email?: true
     password?: true
-    role?: true
     username?: true
-    id?: true
     nik?: true
     jenjang_pend?: true
     pendidikan?: true
     tahun_pend?: true
+    tandaTanganUrl?: true
     cv_generated_at?: true
   }
 
   export type PegawaiCountAggregateInputType = {
+    id?: true
     nup?: true
     nama_pegawai?: true
     status_pegawai?: true
@@ -1508,11 +1591,11 @@ export namespace Prisma {
     password?: true
     role?: true
     username?: true
-    id?: true
     nik?: true
     jenjang_pend?: true
     pendidikan?: true
     tahun_pend?: true
+    tandaTanganUrl?: true
     cv_generated_at?: true
     _all?: true
   }
@@ -1604,6 +1687,7 @@ export namespace Prisma {
   }
 
   export type PegawaiGroupByOutputType = {
+    id: number
     nup: string
     nama_pegawai: string
     status_pegawai: string | null
@@ -1616,13 +1700,13 @@ export namespace Prisma {
     no_telepon: string | null
     email: string | null
     password: string
-    role: string | null
+    role: string[]
     username: string | null
-    id: number
     nik: string | null
     jenjang_pend: string | null
     pendidikan: string | null
     tahun_pend: number | null
+    tandaTanganUrl: string | null
     cv_generated_at: Date | null
     _count: PegawaiCountAggregateOutputType | null
     _avg: PegawaiAvgAggregateOutputType | null
@@ -1646,6 +1730,7 @@ export namespace Prisma {
 
 
   export type pegawaiSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     nup?: boolean
     nama_pegawai?: boolean
     status_pegawai?: boolean
@@ -1660,19 +1745,25 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     username?: boolean
-    id?: boolean
     nik?: boolean
     jenjang_pend?: boolean
     pendidikan?: boolean
     tahun_pend?: boolean
+    tandaTanganUrl?: boolean
     cv_generated_at?: boolean
-    pegawai_surat_tugas?: boolean | pegawai$pegawai_surat_tugasArgs<ExtArgs>
     pelatihan?: boolean | pegawai$pelatihanArgs<ExtArgs>
     pengalaman_kerja?: boolean | pegawai$pengalaman_kerjaArgs<ExtArgs>
+    suratTugasDibuat?: boolean | pegawai$suratTugasDibuatArgs<ExtArgs>
+    anggotaTimDi?: boolean | pegawai$anggotaTimDiArgs<ExtArgs>
+    leadApproverDi?: boolean | pegawai$leadApproverDiArgs<ExtArgs>
+    koorApproverDi?: boolean | pegawai$koorApproverDiArgs<ExtArgs>
+    smApproverDi?: boolean | pegawai$smApproverDiArgs<ExtArgs>
+    kacabApproverDi?: boolean | pegawai$kacabApproverDiArgs<ExtArgs>
     _count?: boolean | PegawaiCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pegawai"]>
 
   export type pegawaiSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     nup?: boolean
     nama_pegawai?: boolean
     status_pegawai?: boolean
@@ -1687,15 +1778,16 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     username?: boolean
-    id?: boolean
     nik?: boolean
     jenjang_pend?: boolean
     pendidikan?: boolean
     tahun_pend?: boolean
+    tandaTanganUrl?: boolean
     cv_generated_at?: boolean
   }, ExtArgs["result"]["pegawai"]>
 
   export type pegawaiSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     nup?: boolean
     nama_pegawai?: boolean
     status_pegawai?: boolean
@@ -1710,15 +1802,16 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     username?: boolean
-    id?: boolean
     nik?: boolean
     jenjang_pend?: boolean
     pendidikan?: boolean
     tahun_pend?: boolean
+    tandaTanganUrl?: boolean
     cv_generated_at?: boolean
   }, ExtArgs["result"]["pegawai"]>
 
   export type pegawaiSelectScalar = {
+    id?: boolean
     nup?: boolean
     nama_pegawai?: boolean
     status_pegawai?: boolean
@@ -1733,19 +1826,24 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     username?: boolean
-    id?: boolean
     nik?: boolean
     jenjang_pend?: boolean
     pendidikan?: boolean
     tahun_pend?: boolean
+    tandaTanganUrl?: boolean
     cv_generated_at?: boolean
   }
 
-  export type pegawaiOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"nup" | "nama_pegawai" | "status_pegawai" | "jabatan" | "tempat_lahir" | "tanggal_lahir" | "alamat" | "warga_negara" | "agama" | "no_telepon" | "email" | "password" | "role" | "username" | "id" | "nik" | "jenjang_pend" | "pendidikan" | "tahun_pend" | "cv_generated_at", ExtArgs["result"]["pegawai"]>
+  export type pegawaiOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nup" | "nama_pegawai" | "status_pegawai" | "jabatan" | "tempat_lahir" | "tanggal_lahir" | "alamat" | "warga_negara" | "agama" | "no_telepon" | "email" | "password" | "role" | "username" | "nik" | "jenjang_pend" | "pendidikan" | "tahun_pend" | "tandaTanganUrl" | "cv_generated_at", ExtArgs["result"]["pegawai"]>
   export type pegawaiInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pegawai_surat_tugas?: boolean | pegawai$pegawai_surat_tugasArgs<ExtArgs>
     pelatihan?: boolean | pegawai$pelatihanArgs<ExtArgs>
     pengalaman_kerja?: boolean | pegawai$pengalaman_kerjaArgs<ExtArgs>
+    suratTugasDibuat?: boolean | pegawai$suratTugasDibuatArgs<ExtArgs>
+    anggotaTimDi?: boolean | pegawai$anggotaTimDiArgs<ExtArgs>
+    leadApproverDi?: boolean | pegawai$leadApproverDiArgs<ExtArgs>
+    koorApproverDi?: boolean | pegawai$koorApproverDiArgs<ExtArgs>
+    smApproverDi?: boolean | pegawai$smApproverDiArgs<ExtArgs>
+    kacabApproverDi?: boolean | pegawai$kacabApproverDiArgs<ExtArgs>
     _count?: boolean | PegawaiCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type pegawaiIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1754,11 +1852,17 @@ export namespace Prisma {
   export type $pegawaiPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "pegawai"
     objects: {
-      pegawai_surat_tugas: Prisma.$PegawaiSuratTugasPayload<ExtArgs>[]
       pelatihan: Prisma.$pelatihanPayload<ExtArgs>[]
       pengalaman_kerja: Prisma.$pengalaman_kerjaPayload<ExtArgs>[]
+      suratTugasDibuat: Prisma.$SuratTugasPayload<ExtArgs>[]
+      anggotaTimDi: Prisma.$SuratTugasPayload<ExtArgs>[]
+      leadApproverDi: Prisma.$SuratTugasPayload<ExtArgs>[]
+      koorApproverDi: Prisma.$SuratTugasPayload<ExtArgs>[]
+      smApproverDi: Prisma.$SuratTugasPayload<ExtArgs>[]
+      kacabApproverDi: Prisma.$SuratTugasPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
+      id: number
       nup: string
       nama_pegawai: string
       status_pegawai: string | null
@@ -1771,13 +1875,13 @@ export namespace Prisma {
       no_telepon: string | null
       email: string | null
       password: string
-      role: string | null
+      role: string[]
       username: string | null
-      id: number
       nik: string | null
       jenjang_pend: string | null
       pendidikan: string | null
       tahun_pend: number | null
+      tandaTanganUrl: string | null
       cv_generated_at: Date | null
     }, ExtArgs["result"]["pegawai"]>
     composites: {}
@@ -1862,8 +1966,8 @@ export namespace Prisma {
      * // Get first 10 Pegawais
      * const pegawais = await prisma.pegawai.findMany({ take: 10 })
      * 
-     * // Only select the `nup`
-     * const pegawaiWithNupOnly = await prisma.pegawai.findMany({ select: { nup: true } })
+     * // Only select the `id`
+     * const pegawaiWithIdOnly = await prisma.pegawai.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends pegawaiFindManyArgs>(args?: SelectSubset<T, pegawaiFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$pegawaiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1907,9 +2011,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Pegawais and only return the `nup`
-     * const pegawaiWithNupOnly = await prisma.pegawai.createManyAndReturn({
-     *   select: { nup: true },
+     * // Create many Pegawais and only return the `id`
+     * const pegawaiWithIdOnly = await prisma.pegawai.createManyAndReturn({
+     *   select: { id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -1998,9 +2102,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Pegawais and only return the `nup`
-     * const pegawaiWithNupOnly = await prisma.pegawai.updateManyAndReturn({
-     *   select: { nup: true },
+     * // Update zero or more Pegawais and only return the `id`
+     * const pegawaiWithIdOnly = await prisma.pegawai.updateManyAndReturn({
+     *   select: { id: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2173,9 +2277,14 @@ export namespace Prisma {
    */
   export interface Prisma__pegawaiClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    pegawai_surat_tugas<T extends pegawai$pegawai_surat_tugasArgs<ExtArgs> = {}>(args?: Subset<T, pegawai$pegawai_surat_tugasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pelatihan<T extends pegawai$pelatihanArgs<ExtArgs> = {}>(args?: Subset<T, pegawai$pelatihanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$pelatihanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pengalaman_kerja<T extends pegawai$pengalaman_kerjaArgs<ExtArgs> = {}>(args?: Subset<T, pegawai$pengalaman_kerjaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$pengalaman_kerjaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    suratTugasDibuat<T extends pegawai$suratTugasDibuatArgs<ExtArgs> = {}>(args?: Subset<T, pegawai$suratTugasDibuatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuratTugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    anggotaTimDi<T extends pegawai$anggotaTimDiArgs<ExtArgs> = {}>(args?: Subset<T, pegawai$anggotaTimDiArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuratTugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    leadApproverDi<T extends pegawai$leadApproverDiArgs<ExtArgs> = {}>(args?: Subset<T, pegawai$leadApproverDiArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuratTugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    koorApproverDi<T extends pegawai$koorApproverDiArgs<ExtArgs> = {}>(args?: Subset<T, pegawai$koorApproverDiArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuratTugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    smApproverDi<T extends pegawai$smApproverDiArgs<ExtArgs> = {}>(args?: Subset<T, pegawai$smApproverDiArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuratTugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    kacabApproverDi<T extends pegawai$kacabApproverDiArgs<ExtArgs> = {}>(args?: Subset<T, pegawai$kacabApproverDiArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuratTugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2205,6 +2314,7 @@ export namespace Prisma {
    * Fields of the pegawai model
    */
   interface pegawaiFieldRefs {
+    readonly id: FieldRef<"pegawai", 'Int'>
     readonly nup: FieldRef<"pegawai", 'String'>
     readonly nama_pegawai: FieldRef<"pegawai", 'String'>
     readonly status_pegawai: FieldRef<"pegawai", 'String'>
@@ -2217,13 +2327,13 @@ export namespace Prisma {
     readonly no_telepon: FieldRef<"pegawai", 'String'>
     readonly email: FieldRef<"pegawai", 'String'>
     readonly password: FieldRef<"pegawai", 'String'>
-    readonly role: FieldRef<"pegawai", 'String'>
+    readonly role: FieldRef<"pegawai", 'String[]'>
     readonly username: FieldRef<"pegawai", 'String'>
-    readonly id: FieldRef<"pegawai", 'Int'>
     readonly nik: FieldRef<"pegawai", 'String'>
     readonly jenjang_pend: FieldRef<"pegawai", 'String'>
     readonly pendidikan: FieldRef<"pegawai", 'String'>
     readonly tahun_pend: FieldRef<"pegawai", 'Int'>
+    readonly tandaTanganUrl: FieldRef<"pegawai", 'String'>
     readonly cv_generated_at: FieldRef<"pegawai", 'DateTime'>
   }
     
@@ -2613,30 +2723,6 @@ export namespace Prisma {
   }
 
   /**
-   * pegawai.pegawai_surat_tugas
-   */
-  export type pegawai$pegawai_surat_tugasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-    where?: PegawaiSuratTugasWhereInput
-    orderBy?: PegawaiSuratTugasOrderByWithRelationInput | PegawaiSuratTugasOrderByWithRelationInput[]
-    cursor?: PegawaiSuratTugasWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PegawaiSuratTugasScalarFieldEnum | PegawaiSuratTugasScalarFieldEnum[]
-  }
-
-  /**
    * pegawai.pelatihan
    */
   export type pegawai$pelatihanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2685,6 +2771,150 @@ export namespace Prisma {
   }
 
   /**
+   * pegawai.suratTugasDibuat
+   */
+  export type pegawai$suratTugasDibuatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuratTugas
+     */
+    select?: SuratTugasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuratTugas
+     */
+    omit?: SuratTugasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuratTugasInclude<ExtArgs> | null
+    where?: SuratTugasWhereInput
+    orderBy?: SuratTugasOrderByWithRelationInput | SuratTugasOrderByWithRelationInput[]
+    cursor?: SuratTugasWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SuratTugasScalarFieldEnum | SuratTugasScalarFieldEnum[]
+  }
+
+  /**
+   * pegawai.anggotaTimDi
+   */
+  export type pegawai$anggotaTimDiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuratTugas
+     */
+    select?: SuratTugasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuratTugas
+     */
+    omit?: SuratTugasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuratTugasInclude<ExtArgs> | null
+    where?: SuratTugasWhereInput
+    orderBy?: SuratTugasOrderByWithRelationInput | SuratTugasOrderByWithRelationInput[]
+    cursor?: SuratTugasWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SuratTugasScalarFieldEnum | SuratTugasScalarFieldEnum[]
+  }
+
+  /**
+   * pegawai.leadApproverDi
+   */
+  export type pegawai$leadApproverDiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuratTugas
+     */
+    select?: SuratTugasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuratTugas
+     */
+    omit?: SuratTugasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuratTugasInclude<ExtArgs> | null
+    where?: SuratTugasWhereInput
+    orderBy?: SuratTugasOrderByWithRelationInput | SuratTugasOrderByWithRelationInput[]
+    cursor?: SuratTugasWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SuratTugasScalarFieldEnum | SuratTugasScalarFieldEnum[]
+  }
+
+  /**
+   * pegawai.koorApproverDi
+   */
+  export type pegawai$koorApproverDiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuratTugas
+     */
+    select?: SuratTugasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuratTugas
+     */
+    omit?: SuratTugasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuratTugasInclude<ExtArgs> | null
+    where?: SuratTugasWhereInput
+    orderBy?: SuratTugasOrderByWithRelationInput | SuratTugasOrderByWithRelationInput[]
+    cursor?: SuratTugasWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SuratTugasScalarFieldEnum | SuratTugasScalarFieldEnum[]
+  }
+
+  /**
+   * pegawai.smApproverDi
+   */
+  export type pegawai$smApproverDiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuratTugas
+     */
+    select?: SuratTugasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuratTugas
+     */
+    omit?: SuratTugasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuratTugasInclude<ExtArgs> | null
+    where?: SuratTugasWhereInput
+    orderBy?: SuratTugasOrderByWithRelationInput | SuratTugasOrderByWithRelationInput[]
+    cursor?: SuratTugasWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SuratTugasScalarFieldEnum | SuratTugasScalarFieldEnum[]
+  }
+
+  /**
+   * pegawai.kacabApproverDi
+   */
+  export type pegawai$kacabApproverDiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuratTugas
+     */
+    select?: SuratTugasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuratTugas
+     */
+    omit?: SuratTugasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuratTugasInclude<ExtArgs> | null
+    where?: SuratTugasWhereInput
+    orderBy?: SuratTugasOrderByWithRelationInput | SuratTugasOrderByWithRelationInput[]
+    cursor?: SuratTugasWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SuratTugasScalarFieldEnum | SuratTugasScalarFieldEnum[]
+  }
+
+  /**
    * pegawai without action
    */
   export type pegawaiDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2704,6 +2934,1097 @@ export namespace Prisma {
 
 
   /**
+   * Model Proyek
+   */
+
+  export type AggregateProyek = {
+    _count: ProyekCountAggregateOutputType | null
+    _avg: ProyekAvgAggregateOutputType | null
+    _sum: ProyekSumAggregateOutputType | null
+    _min: ProyekMinAggregateOutputType | null
+    _max: ProyekMaxAggregateOutputType | null
+  }
+
+  export type ProyekAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ProyekSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ProyekMinAggregateOutputType = {
+    id: number | null
+    namaProyek: string | null
+    klien: string | null
+    lokasi: string | null
+  }
+
+  export type ProyekMaxAggregateOutputType = {
+    id: number | null
+    namaProyek: string | null
+    klien: string | null
+    lokasi: string | null
+  }
+
+  export type ProyekCountAggregateOutputType = {
+    id: number
+    namaProyek: number
+    klien: number
+    lokasi: number
+    _all: number
+  }
+
+
+  export type ProyekAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ProyekSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ProyekMinAggregateInputType = {
+    id?: true
+    namaProyek?: true
+    klien?: true
+    lokasi?: true
+  }
+
+  export type ProyekMaxAggregateInputType = {
+    id?: true
+    namaProyek?: true
+    klien?: true
+    lokasi?: true
+  }
+
+  export type ProyekCountAggregateInputType = {
+    id?: true
+    namaProyek?: true
+    klien?: true
+    lokasi?: true
+    _all?: true
+  }
+
+  export type ProyekAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Proyek to aggregate.
+     */
+    where?: ProyekWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Proyeks to fetch.
+     */
+    orderBy?: ProyekOrderByWithRelationInput | ProyekOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProyekWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Proyeks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Proyeks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Proyeks
+    **/
+    _count?: true | ProyekCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProyekAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProyekSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProyekMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProyekMaxAggregateInputType
+  }
+
+  export type GetProyekAggregateType<T extends ProyekAggregateArgs> = {
+        [P in keyof T & keyof AggregateProyek]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProyek[P]>
+      : GetScalarType<T[P], AggregateProyek[P]>
+  }
+
+
+
+
+  export type ProyekGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProyekWhereInput
+    orderBy?: ProyekOrderByWithAggregationInput | ProyekOrderByWithAggregationInput[]
+    by: ProyekScalarFieldEnum[] | ProyekScalarFieldEnum
+    having?: ProyekScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProyekCountAggregateInputType | true
+    _avg?: ProyekAvgAggregateInputType
+    _sum?: ProyekSumAggregateInputType
+    _min?: ProyekMinAggregateInputType
+    _max?: ProyekMaxAggregateInputType
+  }
+
+  export type ProyekGroupByOutputType = {
+    id: number
+    namaProyek: string
+    klien: string
+    lokasi: string
+    _count: ProyekCountAggregateOutputType | null
+    _avg: ProyekAvgAggregateOutputType | null
+    _sum: ProyekSumAggregateOutputType | null
+    _min: ProyekMinAggregateOutputType | null
+    _max: ProyekMaxAggregateOutputType | null
+  }
+
+  type GetProyekGroupByPayload<T extends ProyekGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProyekGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProyekGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProyekGroupByOutputType[P]>
+            : GetScalarType<T[P], ProyekGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProyekSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    namaProyek?: boolean
+    klien?: boolean
+    lokasi?: boolean
+    suratTugas?: boolean | Proyek$suratTugasArgs<ExtArgs>
+    _count?: boolean | ProyekCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["proyek"]>
+
+  export type ProyekSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    namaProyek?: boolean
+    klien?: boolean
+    lokasi?: boolean
+  }, ExtArgs["result"]["proyek"]>
+
+  export type ProyekSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    namaProyek?: boolean
+    klien?: boolean
+    lokasi?: boolean
+  }, ExtArgs["result"]["proyek"]>
+
+  export type ProyekSelectScalar = {
+    id?: boolean
+    namaProyek?: boolean
+    klien?: boolean
+    lokasi?: boolean
+  }
+
+  export type ProyekOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "namaProyek" | "klien" | "lokasi", ExtArgs["result"]["proyek"]>
+  export type ProyekInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    suratTugas?: boolean | Proyek$suratTugasArgs<ExtArgs>
+    _count?: boolean | ProyekCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ProyekIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ProyekIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ProyekPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Proyek"
+    objects: {
+      suratTugas: Prisma.$SuratTugasPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      namaProyek: string
+      klien: string
+      lokasi: string
+    }, ExtArgs["result"]["proyek"]>
+    composites: {}
+  }
+
+  type ProyekGetPayload<S extends boolean | null | undefined | ProyekDefaultArgs> = $Result.GetResult<Prisma.$ProyekPayload, S>
+
+  type ProyekCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProyekFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProyekCountAggregateInputType | true
+    }
+
+  export interface ProyekDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Proyek'], meta: { name: 'Proyek' } }
+    /**
+     * Find zero or one Proyek that matches the filter.
+     * @param {ProyekFindUniqueArgs} args - Arguments to find a Proyek
+     * @example
+     * // Get one Proyek
+     * const proyek = await prisma.proyek.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProyekFindUniqueArgs>(args: SelectSubset<T, ProyekFindUniqueArgs<ExtArgs>>): Prisma__ProyekClient<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Proyek that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProyekFindUniqueOrThrowArgs} args - Arguments to find a Proyek
+     * @example
+     * // Get one Proyek
+     * const proyek = await prisma.proyek.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProyekFindUniqueOrThrowArgs>(args: SelectSubset<T, ProyekFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProyekClient<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Proyek that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProyekFindFirstArgs} args - Arguments to find a Proyek
+     * @example
+     * // Get one Proyek
+     * const proyek = await prisma.proyek.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProyekFindFirstArgs>(args?: SelectSubset<T, ProyekFindFirstArgs<ExtArgs>>): Prisma__ProyekClient<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Proyek that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProyekFindFirstOrThrowArgs} args - Arguments to find a Proyek
+     * @example
+     * // Get one Proyek
+     * const proyek = await prisma.proyek.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProyekFindFirstOrThrowArgs>(args?: SelectSubset<T, ProyekFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProyekClient<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Proyeks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProyekFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Proyeks
+     * const proyeks = await prisma.proyek.findMany()
+     * 
+     * // Get first 10 Proyeks
+     * const proyeks = await prisma.proyek.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const proyekWithIdOnly = await prisma.proyek.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProyekFindManyArgs>(args?: SelectSubset<T, ProyekFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Proyek.
+     * @param {ProyekCreateArgs} args - Arguments to create a Proyek.
+     * @example
+     * // Create one Proyek
+     * const Proyek = await prisma.proyek.create({
+     *   data: {
+     *     // ... data to create a Proyek
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProyekCreateArgs>(args: SelectSubset<T, ProyekCreateArgs<ExtArgs>>): Prisma__ProyekClient<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Proyeks.
+     * @param {ProyekCreateManyArgs} args - Arguments to create many Proyeks.
+     * @example
+     * // Create many Proyeks
+     * const proyek = await prisma.proyek.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProyekCreateManyArgs>(args?: SelectSubset<T, ProyekCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Proyeks and returns the data saved in the database.
+     * @param {ProyekCreateManyAndReturnArgs} args - Arguments to create many Proyeks.
+     * @example
+     * // Create many Proyeks
+     * const proyek = await prisma.proyek.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Proyeks and only return the `id`
+     * const proyekWithIdOnly = await prisma.proyek.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProyekCreateManyAndReturnArgs>(args?: SelectSubset<T, ProyekCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Proyek.
+     * @param {ProyekDeleteArgs} args - Arguments to delete one Proyek.
+     * @example
+     * // Delete one Proyek
+     * const Proyek = await prisma.proyek.delete({
+     *   where: {
+     *     // ... filter to delete one Proyek
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProyekDeleteArgs>(args: SelectSubset<T, ProyekDeleteArgs<ExtArgs>>): Prisma__ProyekClient<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Proyek.
+     * @param {ProyekUpdateArgs} args - Arguments to update one Proyek.
+     * @example
+     * // Update one Proyek
+     * const proyek = await prisma.proyek.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProyekUpdateArgs>(args: SelectSubset<T, ProyekUpdateArgs<ExtArgs>>): Prisma__ProyekClient<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Proyeks.
+     * @param {ProyekDeleteManyArgs} args - Arguments to filter Proyeks to delete.
+     * @example
+     * // Delete a few Proyeks
+     * const { count } = await prisma.proyek.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProyekDeleteManyArgs>(args?: SelectSubset<T, ProyekDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Proyeks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProyekUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Proyeks
+     * const proyek = await prisma.proyek.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProyekUpdateManyArgs>(args: SelectSubset<T, ProyekUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Proyeks and returns the data updated in the database.
+     * @param {ProyekUpdateManyAndReturnArgs} args - Arguments to update many Proyeks.
+     * @example
+     * // Update many Proyeks
+     * const proyek = await prisma.proyek.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Proyeks and only return the `id`
+     * const proyekWithIdOnly = await prisma.proyek.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProyekUpdateManyAndReturnArgs>(args: SelectSubset<T, ProyekUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Proyek.
+     * @param {ProyekUpsertArgs} args - Arguments to update or create a Proyek.
+     * @example
+     * // Update or create a Proyek
+     * const proyek = await prisma.proyek.upsert({
+     *   create: {
+     *     // ... data to create a Proyek
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Proyek we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProyekUpsertArgs>(args: SelectSubset<T, ProyekUpsertArgs<ExtArgs>>): Prisma__ProyekClient<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Proyeks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProyekCountArgs} args - Arguments to filter Proyeks to count.
+     * @example
+     * // Count the number of Proyeks
+     * const count = await prisma.proyek.count({
+     *   where: {
+     *     // ... the filter for the Proyeks we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProyekCountArgs>(
+      args?: Subset<T, ProyekCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProyekCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Proyek.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProyekAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProyekAggregateArgs>(args: Subset<T, ProyekAggregateArgs>): Prisma.PrismaPromise<GetProyekAggregateType<T>>
+
+    /**
+     * Group by Proyek.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProyekGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProyekGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProyekGroupByArgs['orderBy'] }
+        : { orderBy?: ProyekGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProyekGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProyekGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Proyek model
+   */
+  readonly fields: ProyekFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Proyek.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProyekClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    suratTugas<T extends Proyek$suratTugasArgs<ExtArgs> = {}>(args?: Subset<T, Proyek$suratTugasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuratTugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Proyek model
+   */
+  interface ProyekFieldRefs {
+    readonly id: FieldRef<"Proyek", 'Int'>
+    readonly namaProyek: FieldRef<"Proyek", 'String'>
+    readonly klien: FieldRef<"Proyek", 'String'>
+    readonly lokasi: FieldRef<"Proyek", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Proyek findUnique
+   */
+  export type ProyekFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProyekInclude<ExtArgs> | null
+    /**
+     * Filter, which Proyek to fetch.
+     */
+    where: ProyekWhereUniqueInput
+  }
+
+  /**
+   * Proyek findUniqueOrThrow
+   */
+  export type ProyekFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProyekInclude<ExtArgs> | null
+    /**
+     * Filter, which Proyek to fetch.
+     */
+    where: ProyekWhereUniqueInput
+  }
+
+  /**
+   * Proyek findFirst
+   */
+  export type ProyekFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProyekInclude<ExtArgs> | null
+    /**
+     * Filter, which Proyek to fetch.
+     */
+    where?: ProyekWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Proyeks to fetch.
+     */
+    orderBy?: ProyekOrderByWithRelationInput | ProyekOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Proyeks.
+     */
+    cursor?: ProyekWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Proyeks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Proyeks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Proyeks.
+     */
+    distinct?: ProyekScalarFieldEnum | ProyekScalarFieldEnum[]
+  }
+
+  /**
+   * Proyek findFirstOrThrow
+   */
+  export type ProyekFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProyekInclude<ExtArgs> | null
+    /**
+     * Filter, which Proyek to fetch.
+     */
+    where?: ProyekWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Proyeks to fetch.
+     */
+    orderBy?: ProyekOrderByWithRelationInput | ProyekOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Proyeks.
+     */
+    cursor?: ProyekWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Proyeks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Proyeks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Proyeks.
+     */
+    distinct?: ProyekScalarFieldEnum | ProyekScalarFieldEnum[]
+  }
+
+  /**
+   * Proyek findMany
+   */
+  export type ProyekFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProyekInclude<ExtArgs> | null
+    /**
+     * Filter, which Proyeks to fetch.
+     */
+    where?: ProyekWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Proyeks to fetch.
+     */
+    orderBy?: ProyekOrderByWithRelationInput | ProyekOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Proyeks.
+     */
+    cursor?: ProyekWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Proyeks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Proyeks.
+     */
+    skip?: number
+    distinct?: ProyekScalarFieldEnum | ProyekScalarFieldEnum[]
+  }
+
+  /**
+   * Proyek create
+   */
+  export type ProyekCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProyekInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Proyek.
+     */
+    data: XOR<ProyekCreateInput, ProyekUncheckedCreateInput>
+  }
+
+  /**
+   * Proyek createMany
+   */
+  export type ProyekCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Proyeks.
+     */
+    data: ProyekCreateManyInput | ProyekCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Proyek createManyAndReturn
+   */
+  export type ProyekCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * The data used to create many Proyeks.
+     */
+    data: ProyekCreateManyInput | ProyekCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Proyek update
+   */
+  export type ProyekUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProyekInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Proyek.
+     */
+    data: XOR<ProyekUpdateInput, ProyekUncheckedUpdateInput>
+    /**
+     * Choose, which Proyek to update.
+     */
+    where: ProyekWhereUniqueInput
+  }
+
+  /**
+   * Proyek updateMany
+   */
+  export type ProyekUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Proyeks.
+     */
+    data: XOR<ProyekUpdateManyMutationInput, ProyekUncheckedUpdateManyInput>
+    /**
+     * Filter which Proyeks to update
+     */
+    where?: ProyekWhereInput
+    /**
+     * Limit how many Proyeks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Proyek updateManyAndReturn
+   */
+  export type ProyekUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * The data used to update Proyeks.
+     */
+    data: XOR<ProyekUpdateManyMutationInput, ProyekUncheckedUpdateManyInput>
+    /**
+     * Filter which Proyeks to update
+     */
+    where?: ProyekWhereInput
+    /**
+     * Limit how many Proyeks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Proyek upsert
+   */
+  export type ProyekUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProyekInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Proyek to update in case it exists.
+     */
+    where: ProyekWhereUniqueInput
+    /**
+     * In case the Proyek found by the `where` argument doesn't exist, create a new Proyek with this data.
+     */
+    create: XOR<ProyekCreateInput, ProyekUncheckedCreateInput>
+    /**
+     * In case the Proyek was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProyekUpdateInput, ProyekUncheckedUpdateInput>
+  }
+
+  /**
+   * Proyek delete
+   */
+  export type ProyekDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProyekInclude<ExtArgs> | null
+    /**
+     * Filter which Proyek to delete.
+     */
+    where: ProyekWhereUniqueInput
+  }
+
+  /**
+   * Proyek deleteMany
+   */
+  export type ProyekDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Proyeks to delete
+     */
+    where?: ProyekWhereInput
+    /**
+     * Limit how many Proyeks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Proyek.suratTugas
+   */
+  export type Proyek$suratTugasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuratTugas
+     */
+    select?: SuratTugasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuratTugas
+     */
+    omit?: SuratTugasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuratTugasInclude<ExtArgs> | null
+    where?: SuratTugasWhereInput
+    orderBy?: SuratTugasOrderByWithRelationInput | SuratTugasOrderByWithRelationInput[]
+    cursor?: SuratTugasWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SuratTugasScalarFieldEnum | SuratTugasScalarFieldEnum[]
+  }
+
+  /**
+   * Proyek without action
+   */
+  export type ProyekDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Proyek
+     */
+    select?: ProyekSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Proyek
+     */
+    omit?: ProyekOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProyekInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model pelatihan
    */
 
@@ -2718,11 +4039,13 @@ export namespace Prisma {
   export type PelatihanAvgAggregateOutputType = {
     id_pelatihan: number | null
     tahun: number | null
+    pegawaiId: number | null
   }
 
   export type PelatihanSumAggregateOutputType = {
     id_pelatihan: number | null
     tahun: number | null
+    pegawaiId: number | null
   }
 
   export type PelatihanMinAggregateOutputType = {
@@ -2739,6 +4062,7 @@ export namespace Prisma {
     keterangan_utilisasi: string | null
     tahun: number | null
     tanggal_akhir: Date | null
+    pegawaiId: number | null
   }
 
   export type PelatihanMaxAggregateOutputType = {
@@ -2755,6 +4079,7 @@ export namespace Prisma {
     keterangan_utilisasi: string | null
     tahun: number | null
     tanggal_akhir: Date | null
+    pegawaiId: number | null
   }
 
   export type PelatihanCountAggregateOutputType = {
@@ -2771,6 +4096,7 @@ export namespace Prisma {
     keterangan_utilisasi: number
     tahun: number
     tanggal_akhir: number
+    pegawaiId: number
     _all: number
   }
 
@@ -2778,11 +4104,13 @@ export namespace Prisma {
   export type PelatihanAvgAggregateInputType = {
     id_pelatihan?: true
     tahun?: true
+    pegawaiId?: true
   }
 
   export type PelatihanSumAggregateInputType = {
     id_pelatihan?: true
     tahun?: true
+    pegawaiId?: true
   }
 
   export type PelatihanMinAggregateInputType = {
@@ -2799,6 +4127,7 @@ export namespace Prisma {
     keterangan_utilisasi?: true
     tahun?: true
     tanggal_akhir?: true
+    pegawaiId?: true
   }
 
   export type PelatihanMaxAggregateInputType = {
@@ -2815,6 +4144,7 @@ export namespace Prisma {
     keterangan_utilisasi?: true
     tahun?: true
     tanggal_akhir?: true
+    pegawaiId?: true
   }
 
   export type PelatihanCountAggregateInputType = {
@@ -2831,6 +4161,7 @@ export namespace Prisma {
     keterangan_utilisasi?: true
     tahun?: true
     tanggal_akhir?: true
+    pegawaiId?: true
     _all?: true
   }
 
@@ -2934,6 +4265,7 @@ export namespace Prisma {
     keterangan_utilisasi: string | null
     tahun: number | null
     tanggal_akhir: Date | null
+    pegawaiId: number | null
     _count: PelatihanCountAggregateOutputType | null
     _avg: PelatihanAvgAggregateOutputType | null
     _sum: PelatihanSumAggregateOutputType | null
@@ -2969,6 +4301,7 @@ export namespace Prisma {
     keterangan_utilisasi?: boolean
     tahun?: boolean
     tanggal_akhir?: boolean
+    pegawaiId?: boolean
     pegawai?: boolean | pelatihan$pegawaiArgs<ExtArgs>
   }, ExtArgs["result"]["pelatihan"]>
 
@@ -2986,6 +4319,7 @@ export namespace Prisma {
     keterangan_utilisasi?: boolean
     tahun?: boolean
     tanggal_akhir?: boolean
+    pegawaiId?: boolean
     pegawai?: boolean | pelatihan$pegawaiArgs<ExtArgs>
   }, ExtArgs["result"]["pelatihan"]>
 
@@ -3003,6 +4337,7 @@ export namespace Prisma {
     keterangan_utilisasi?: boolean
     tahun?: boolean
     tanggal_akhir?: boolean
+    pegawaiId?: boolean
     pegawai?: boolean | pelatihan$pegawaiArgs<ExtArgs>
   }, ExtArgs["result"]["pelatihan"]>
 
@@ -3020,9 +4355,10 @@ export namespace Prisma {
     keterangan_utilisasi?: boolean
     tahun?: boolean
     tanggal_akhir?: boolean
+    pegawaiId?: boolean
   }
 
-  export type pelatihanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pelatihan" | "nup" | "nama_pelatihan" | "penyelenggara" | "lokasi" | "nomor_sertifikat" | "file_sertifikat" | "tanggal_awal" | "masa_berlaku" | "status" | "keterangan_utilisasi" | "tahun" | "tanggal_akhir", ExtArgs["result"]["pelatihan"]>
+  export type pelatihanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pelatihan" | "nup" | "nama_pelatihan" | "penyelenggara" | "lokasi" | "nomor_sertifikat" | "file_sertifikat" | "tanggal_awal" | "masa_berlaku" | "status" | "keterangan_utilisasi" | "tahun" | "tanggal_akhir" | "pegawaiId", ExtArgs["result"]["pelatihan"]>
   export type pelatihanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pegawai?: boolean | pelatihan$pegawaiArgs<ExtArgs>
   }
@@ -3052,6 +4388,7 @@ export namespace Prisma {
       keterangan_utilisasi: string | null
       tahun: number | null
       tanggal_akhir: Date | null
+      pegawaiId: number | null
     }, ExtArgs["result"]["pelatihan"]>
     composites: {}
   }
@@ -3489,6 +4826,7 @@ export namespace Prisma {
     readonly keterangan_utilisasi: FieldRef<"pelatihan", 'String'>
     readonly tahun: FieldRef<"pelatihan", 'Int'>
     readonly tanggal_akhir: FieldRef<"pelatihan", 'DateTime'>
+    readonly pegawaiId: FieldRef<"pelatihan", 'Int'>
   }
     
 
@@ -3937,11 +5275,13 @@ export namespace Prisma {
   export type Pengalaman_kerjaAvgAggregateOutputType = {
     id_pengalaman: number | null
     tahun: number | null
+    pegawaiId: number | null
   }
 
   export type Pengalaman_kerjaSumAggregateOutputType = {
     id_pengalaman: number | null
     tahun: number | null
+    pegawaiId: number | null
   }
 
   export type Pengalaman_kerjaMinAggregateOutputType = {
@@ -3951,6 +5291,7 @@ export namespace Prisma {
     pengalaman_kerja: string | null
     perusahaan: string | null
     lokasi: string | null
+    pegawaiId: number | null
   }
 
   export type Pengalaman_kerjaMaxAggregateOutputType = {
@@ -3960,6 +5301,7 @@ export namespace Prisma {
     pengalaman_kerja: string | null
     perusahaan: string | null
     lokasi: string | null
+    pegawaiId: number | null
   }
 
   export type Pengalaman_kerjaCountAggregateOutputType = {
@@ -3969,6 +5311,7 @@ export namespace Prisma {
     pengalaman_kerja: number
     perusahaan: number
     lokasi: number
+    pegawaiId: number
     _all: number
   }
 
@@ -3976,11 +5319,13 @@ export namespace Prisma {
   export type Pengalaman_kerjaAvgAggregateInputType = {
     id_pengalaman?: true
     tahun?: true
+    pegawaiId?: true
   }
 
   export type Pengalaman_kerjaSumAggregateInputType = {
     id_pengalaman?: true
     tahun?: true
+    pegawaiId?: true
   }
 
   export type Pengalaman_kerjaMinAggregateInputType = {
@@ -3990,6 +5335,7 @@ export namespace Prisma {
     pengalaman_kerja?: true
     perusahaan?: true
     lokasi?: true
+    pegawaiId?: true
   }
 
   export type Pengalaman_kerjaMaxAggregateInputType = {
@@ -3999,6 +5345,7 @@ export namespace Prisma {
     pengalaman_kerja?: true
     perusahaan?: true
     lokasi?: true
+    pegawaiId?: true
   }
 
   export type Pengalaman_kerjaCountAggregateInputType = {
@@ -4008,6 +5355,7 @@ export namespace Prisma {
     pengalaman_kerja?: true
     perusahaan?: true
     lokasi?: true
+    pegawaiId?: true
     _all?: true
   }
 
@@ -4104,6 +5452,7 @@ export namespace Prisma {
     pengalaman_kerja: string | null
     perusahaan: string | null
     lokasi: string | null
+    pegawaiId: number | null
     _count: Pengalaman_kerjaCountAggregateOutputType | null
     _avg: Pengalaman_kerjaAvgAggregateOutputType | null
     _sum: Pengalaman_kerjaSumAggregateOutputType | null
@@ -4132,6 +5481,7 @@ export namespace Prisma {
     pengalaman_kerja?: boolean
     perusahaan?: boolean
     lokasi?: boolean
+    pegawaiId?: boolean
     pegawai?: boolean | pengalaman_kerja$pegawaiArgs<ExtArgs>
   }, ExtArgs["result"]["pengalaman_kerja"]>
 
@@ -4142,6 +5492,7 @@ export namespace Prisma {
     pengalaman_kerja?: boolean
     perusahaan?: boolean
     lokasi?: boolean
+    pegawaiId?: boolean
     pegawai?: boolean | pengalaman_kerja$pegawaiArgs<ExtArgs>
   }, ExtArgs["result"]["pengalaman_kerja"]>
 
@@ -4152,6 +5503,7 @@ export namespace Prisma {
     pengalaman_kerja?: boolean
     perusahaan?: boolean
     lokasi?: boolean
+    pegawaiId?: boolean
     pegawai?: boolean | pengalaman_kerja$pegawaiArgs<ExtArgs>
   }, ExtArgs["result"]["pengalaman_kerja"]>
 
@@ -4162,9 +5514,10 @@ export namespace Prisma {
     pengalaman_kerja?: boolean
     perusahaan?: boolean
     lokasi?: boolean
+    pegawaiId?: boolean
   }
 
-  export type pengalaman_kerjaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pengalaman" | "nup" | "tahun" | "pengalaman_kerja" | "perusahaan" | "lokasi", ExtArgs["result"]["pengalaman_kerja"]>
+  export type pengalaman_kerjaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pengalaman" | "nup" | "tahun" | "pengalaman_kerja" | "perusahaan" | "lokasi" | "pegawaiId", ExtArgs["result"]["pengalaman_kerja"]>
   export type pengalaman_kerjaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pegawai?: boolean | pengalaman_kerja$pegawaiArgs<ExtArgs>
   }
@@ -4187,6 +5540,7 @@ export namespace Prisma {
       pengalaman_kerja: string | null
       perusahaan: string | null
       lokasi: string | null
+      pegawaiId: number | null
     }, ExtArgs["result"]["pengalaman_kerja"]>
     composites: {}
   }
@@ -4617,6 +5971,7 @@ export namespace Prisma {
     readonly pengalaman_kerja: FieldRef<"pengalaman_kerja", 'String'>
     readonly perusahaan: FieldRef<"pengalaman_kerja", 'String'>
     readonly lokasi: FieldRef<"pengalaman_kerja", 'String'>
+    readonly pegawaiId: FieldRef<"pengalaman_kerja", 'Int'>
   }
     
 
@@ -5064,17 +6419,28 @@ export namespace Prisma {
 
   export type SuratTugasAvgAggregateOutputType = {
     id: number | null
+    proyekId: number | null
+    leadInspectorId: number | null
+    koordinatorId: number | null
+    seniorManagerId: number | null
+    kepalaCabangId: number | null
+    dibuatOlehId: number | null
   }
 
   export type SuratTugasSumAggregateOutputType = {
     id: number | null
+    proyekId: number | null
+    leadInspectorId: number | null
+    koordinatorId: number | null
+    seniorManagerId: number | null
+    kepalaCabangId: number | null
+    dibuatOlehId: number | null
   }
 
   export type SuratTugasMinAggregateOutputType = {
     id: number | null
     nomor_surat: string | null
-    klien: string | null
-    pekerjaan: string | null
+    proyekId: number | null
     status_pekerjaan: string | null
     no_service_order: string | null
     bidang_pekerjaan: string | null
@@ -5087,6 +6453,16 @@ export namespace Prisma {
     tiket: boolean | null
     penginapan: boolean | null
     keterangan_lain: string | null
+    leadInspectorId: number | null
+    disetujuiLeadAt: Date | null
+    koordinatorId: number | null
+    disetujuiKoorAt: Date | null
+    seniorManagerId: number | null
+    disetujuiSmAt: Date | null
+    kepalaCabangId: number | null
+    disetujuiKacabAt: Date | null
+    catatanPenolakan: string | null
+    dibuatOlehId: number | null
     createdAt: Date | null
     updatedAt: Date | null
     spi: string | null
@@ -5097,8 +6473,7 @@ export namespace Prisma {
   export type SuratTugasMaxAggregateOutputType = {
     id: number | null
     nomor_surat: string | null
-    klien: string | null
-    pekerjaan: string | null
+    proyekId: number | null
     status_pekerjaan: string | null
     no_service_order: string | null
     bidang_pekerjaan: string | null
@@ -5111,6 +6486,16 @@ export namespace Prisma {
     tiket: boolean | null
     penginapan: boolean | null
     keterangan_lain: string | null
+    leadInspectorId: number | null
+    disetujuiLeadAt: Date | null
+    koordinatorId: number | null
+    disetujuiKoorAt: Date | null
+    seniorManagerId: number | null
+    disetujuiSmAt: Date | null
+    kepalaCabangId: number | null
+    disetujuiKacabAt: Date | null
+    catatanPenolakan: string | null
+    dibuatOlehId: number | null
     createdAt: Date | null
     updatedAt: Date | null
     spi: string | null
@@ -5121,14 +6506,12 @@ export namespace Prisma {
   export type SuratTugasCountAggregateOutputType = {
     id: number
     nomor_surat: number
-    klien: number
-    pekerjaan: number
+    proyekId: number
     status_pekerjaan: number
     no_service_order: number
     bidang_pekerjaan: number
     peralatan_inspeksi: number
     kebutuhan_material: number
-    lokasi_pekerjaan: number
     tanggal_berangkat: number
     tanggal_kembali: number
     transportasi_operasional: number
@@ -5138,6 +6521,16 @@ export namespace Prisma {
     tiket: number
     penginapan: number
     keterangan_lain: number
+    leadInspectorId: number
+    disetujuiLeadAt: number
+    koordinatorId: number
+    disetujuiKoorAt: number
+    seniorManagerId: number
+    disetujuiSmAt: number
+    kepalaCabangId: number
+    disetujuiKacabAt: number
+    catatanPenolakan: number
+    dibuatOlehId: number
     createdAt: number
     updatedAt: number
     spi: number
@@ -5149,17 +6542,28 @@ export namespace Prisma {
 
   export type SuratTugasAvgAggregateInputType = {
     id?: true
+    proyekId?: true
+    leadInspectorId?: true
+    koordinatorId?: true
+    seniorManagerId?: true
+    kepalaCabangId?: true
+    dibuatOlehId?: true
   }
 
   export type SuratTugasSumAggregateInputType = {
     id?: true
+    proyekId?: true
+    leadInspectorId?: true
+    koordinatorId?: true
+    seniorManagerId?: true
+    kepalaCabangId?: true
+    dibuatOlehId?: true
   }
 
   export type SuratTugasMinAggregateInputType = {
     id?: true
     nomor_surat?: true
-    klien?: true
-    pekerjaan?: true
+    proyekId?: true
     status_pekerjaan?: true
     no_service_order?: true
     bidang_pekerjaan?: true
@@ -5172,6 +6576,16 @@ export namespace Prisma {
     tiket?: true
     penginapan?: true
     keterangan_lain?: true
+    leadInspectorId?: true
+    disetujuiLeadAt?: true
+    koordinatorId?: true
+    disetujuiKoorAt?: true
+    seniorManagerId?: true
+    disetujuiSmAt?: true
+    kepalaCabangId?: true
+    disetujuiKacabAt?: true
+    catatanPenolakan?: true
+    dibuatOlehId?: true
     createdAt?: true
     updatedAt?: true
     spi?: true
@@ -5182,8 +6596,7 @@ export namespace Prisma {
   export type SuratTugasMaxAggregateInputType = {
     id?: true
     nomor_surat?: true
-    klien?: true
-    pekerjaan?: true
+    proyekId?: true
     status_pekerjaan?: true
     no_service_order?: true
     bidang_pekerjaan?: true
@@ -5196,6 +6609,16 @@ export namespace Prisma {
     tiket?: true
     penginapan?: true
     keterangan_lain?: true
+    leadInspectorId?: true
+    disetujuiLeadAt?: true
+    koordinatorId?: true
+    disetujuiKoorAt?: true
+    seniorManagerId?: true
+    disetujuiSmAt?: true
+    kepalaCabangId?: true
+    disetujuiKacabAt?: true
+    catatanPenolakan?: true
+    dibuatOlehId?: true
     createdAt?: true
     updatedAt?: true
     spi?: true
@@ -5206,14 +6629,12 @@ export namespace Prisma {
   export type SuratTugasCountAggregateInputType = {
     id?: true
     nomor_surat?: true
-    klien?: true
-    pekerjaan?: true
+    proyekId?: true
     status_pekerjaan?: true
     no_service_order?: true
     bidang_pekerjaan?: true
     peralatan_inspeksi?: true
     kebutuhan_material?: true
-    lokasi_pekerjaan?: true
     tanggal_berangkat?: true
     tanggal_kembali?: true
     transportasi_operasional?: true
@@ -5223,6 +6644,16 @@ export namespace Prisma {
     tiket?: true
     penginapan?: true
     keterangan_lain?: true
+    leadInspectorId?: true
+    disetujuiLeadAt?: true
+    koordinatorId?: true
+    disetujuiKoorAt?: true
+    seniorManagerId?: true
+    disetujuiSmAt?: true
+    kepalaCabangId?: true
+    disetujuiKacabAt?: true
+    catatanPenolakan?: true
+    dibuatOlehId?: true
     createdAt?: true
     updatedAt?: true
     spi?: true
@@ -5320,14 +6751,12 @@ export namespace Prisma {
   export type SuratTugasGroupByOutputType = {
     id: number
     nomor_surat: string | null
-    klien: string
-    pekerjaan: string
+    proyekId: number | null
     status_pekerjaan: string | null
     no_service_order: string | null
     bidang_pekerjaan: string | null
     peralatan_inspeksi: string[]
     kebutuhan_material: string[]
-    lokasi_pekerjaan: string[]
     tanggal_berangkat: Date | null
     tanggal_kembali: Date | null
     transportasi_operasional: boolean
@@ -5337,6 +6766,16 @@ export namespace Prisma {
     tiket: boolean
     penginapan: boolean
     keterangan_lain: string | null
+    leadInspectorId: number | null
+    disetujuiLeadAt: Date | null
+    koordinatorId: number | null
+    disetujuiKoorAt: Date | null
+    seniorManagerId: number | null
+    disetujuiSmAt: Date | null
+    kepalaCabangId: number | null
+    disetujuiKacabAt: Date | null
+    catatanPenolakan: string | null
+    dibuatOlehId: number | null
     createdAt: Date
     updatedAt: Date
     spi: string | null
@@ -5366,14 +6805,12 @@ export namespace Prisma {
   export type SuratTugasSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nomor_surat?: boolean
-    klien?: boolean
-    pekerjaan?: boolean
+    proyekId?: boolean
     status_pekerjaan?: boolean
     no_service_order?: boolean
     bidang_pekerjaan?: boolean
     peralatan_inspeksi?: boolean
     kebutuhan_material?: boolean
-    lokasi_pekerjaan?: boolean
     tanggal_berangkat?: boolean
     tanggal_kembali?: boolean
     transportasi_operasional?: boolean
@@ -5383,26 +6820,40 @@ export namespace Prisma {
     tiket?: boolean
     penginapan?: boolean
     keterangan_lain?: boolean
+    leadInspectorId?: boolean
+    disetujuiLeadAt?: boolean
+    koordinatorId?: boolean
+    disetujuiKoorAt?: boolean
+    seniorManagerId?: boolean
+    disetujuiSmAt?: boolean
+    kepalaCabangId?: boolean
+    disetujuiKacabAt?: boolean
+    catatanPenolakan?: boolean
+    dibuatOlehId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     spi?: boolean
     wbs?: boolean
     status?: boolean
-    pegawai_surat_tugas?: boolean | SuratTugas$pegawai_surat_tugasArgs<ExtArgs>
+    proyek?: boolean | SuratTugas$proyekArgs<ExtArgs>
+    leadInspector?: boolean | SuratTugas$leadInspectorArgs<ExtArgs>
+    koordinator?: boolean | SuratTugas$koordinatorArgs<ExtArgs>
+    seniorManager?: boolean | SuratTugas$seniorManagerArgs<ExtArgs>
+    kepalaCabang?: boolean | SuratTugas$kepalaCabangArgs<ExtArgs>
+    timInspektor?: boolean | SuratTugas$timInspektorArgs<ExtArgs>
+    dibuatOleh?: boolean | SuratTugas$dibuatOlehArgs<ExtArgs>
     _count?: boolean | SuratTugasCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["suratTugas"]>
 
   export type SuratTugasSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nomor_surat?: boolean
-    klien?: boolean
-    pekerjaan?: boolean
+    proyekId?: boolean
     status_pekerjaan?: boolean
     no_service_order?: boolean
     bidang_pekerjaan?: boolean
     peralatan_inspeksi?: boolean
     kebutuhan_material?: boolean
-    lokasi_pekerjaan?: boolean
     tanggal_berangkat?: boolean
     tanggal_kembali?: boolean
     transportasi_operasional?: boolean
@@ -5412,24 +6863,38 @@ export namespace Prisma {
     tiket?: boolean
     penginapan?: boolean
     keterangan_lain?: boolean
+    leadInspectorId?: boolean
+    disetujuiLeadAt?: boolean
+    koordinatorId?: boolean
+    disetujuiKoorAt?: boolean
+    seniorManagerId?: boolean
+    disetujuiSmAt?: boolean
+    kepalaCabangId?: boolean
+    disetujuiKacabAt?: boolean
+    catatanPenolakan?: boolean
+    dibuatOlehId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     spi?: boolean
     wbs?: boolean
     status?: boolean
+    proyek?: boolean | SuratTugas$proyekArgs<ExtArgs>
+    leadInspector?: boolean | SuratTugas$leadInspectorArgs<ExtArgs>
+    koordinator?: boolean | SuratTugas$koordinatorArgs<ExtArgs>
+    seniorManager?: boolean | SuratTugas$seniorManagerArgs<ExtArgs>
+    kepalaCabang?: boolean | SuratTugas$kepalaCabangArgs<ExtArgs>
+    dibuatOleh?: boolean | SuratTugas$dibuatOlehArgs<ExtArgs>
   }, ExtArgs["result"]["suratTugas"]>
 
   export type SuratTugasSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nomor_surat?: boolean
-    klien?: boolean
-    pekerjaan?: boolean
+    proyekId?: boolean
     status_pekerjaan?: boolean
     no_service_order?: boolean
     bidang_pekerjaan?: boolean
     peralatan_inspeksi?: boolean
     kebutuhan_material?: boolean
-    lokasi_pekerjaan?: boolean
     tanggal_berangkat?: boolean
     tanggal_kembali?: boolean
     transportasi_operasional?: boolean
@@ -5439,24 +6904,38 @@ export namespace Prisma {
     tiket?: boolean
     penginapan?: boolean
     keterangan_lain?: boolean
+    leadInspectorId?: boolean
+    disetujuiLeadAt?: boolean
+    koordinatorId?: boolean
+    disetujuiKoorAt?: boolean
+    seniorManagerId?: boolean
+    disetujuiSmAt?: boolean
+    kepalaCabangId?: boolean
+    disetujuiKacabAt?: boolean
+    catatanPenolakan?: boolean
+    dibuatOlehId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     spi?: boolean
     wbs?: boolean
     status?: boolean
+    proyek?: boolean | SuratTugas$proyekArgs<ExtArgs>
+    leadInspector?: boolean | SuratTugas$leadInspectorArgs<ExtArgs>
+    koordinator?: boolean | SuratTugas$koordinatorArgs<ExtArgs>
+    seniorManager?: boolean | SuratTugas$seniorManagerArgs<ExtArgs>
+    kepalaCabang?: boolean | SuratTugas$kepalaCabangArgs<ExtArgs>
+    dibuatOleh?: boolean | SuratTugas$dibuatOlehArgs<ExtArgs>
   }, ExtArgs["result"]["suratTugas"]>
 
   export type SuratTugasSelectScalar = {
     id?: boolean
     nomor_surat?: boolean
-    klien?: boolean
-    pekerjaan?: boolean
+    proyekId?: boolean
     status_pekerjaan?: boolean
     no_service_order?: boolean
     bidang_pekerjaan?: boolean
     peralatan_inspeksi?: boolean
     kebutuhan_material?: boolean
-    lokasi_pekerjaan?: boolean
     tanggal_berangkat?: boolean
     tanggal_kembali?: boolean
     transportasi_operasional?: boolean
@@ -5466,6 +6945,16 @@ export namespace Prisma {
     tiket?: boolean
     penginapan?: boolean
     keterangan_lain?: boolean
+    leadInspectorId?: boolean
+    disetujuiLeadAt?: boolean
+    koordinatorId?: boolean
+    disetujuiKoorAt?: boolean
+    seniorManagerId?: boolean
+    disetujuiSmAt?: boolean
+    kepalaCabangId?: boolean
+    disetujuiKacabAt?: boolean
+    catatanPenolakan?: boolean
+    dibuatOlehId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     spi?: boolean
@@ -5473,30 +6962,54 @@ export namespace Prisma {
     status?: boolean
   }
 
-  export type SuratTugasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nomor_surat" | "klien" | "pekerjaan" | "status_pekerjaan" | "no_service_order" | "bidang_pekerjaan" | "peralatan_inspeksi" | "kebutuhan_material" | "lokasi_pekerjaan" | "tanggal_berangkat" | "tanggal_kembali" | "transportasi_operasional" | "transportasi_ditanggung_klien" | "transportasi_asal_tujuan" | "transportasi_dinas" | "tiket" | "penginapan" | "keterangan_lain" | "createdAt" | "updatedAt" | "spi" | "wbs" | "status", ExtArgs["result"]["suratTugas"]>
+  export type SuratTugasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nomor_surat" | "proyekId" | "status_pekerjaan" | "no_service_order" | "bidang_pekerjaan" | "peralatan_inspeksi" | "kebutuhan_material" | "tanggal_berangkat" | "tanggal_kembali" | "transportasi_operasional" | "transportasi_ditanggung_klien" | "transportasi_asal_tujuan" | "transportasi_dinas" | "tiket" | "penginapan" | "keterangan_lain" | "leadInspectorId" | "disetujuiLeadAt" | "koordinatorId" | "disetujuiKoorAt" | "seniorManagerId" | "disetujuiSmAt" | "kepalaCabangId" | "disetujuiKacabAt" | "catatanPenolakan" | "dibuatOlehId" | "createdAt" | "updatedAt" | "spi" | "wbs" | "status", ExtArgs["result"]["suratTugas"]>
   export type SuratTugasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pegawai_surat_tugas?: boolean | SuratTugas$pegawai_surat_tugasArgs<ExtArgs>
+    proyek?: boolean | SuratTugas$proyekArgs<ExtArgs>
+    leadInspector?: boolean | SuratTugas$leadInspectorArgs<ExtArgs>
+    koordinator?: boolean | SuratTugas$koordinatorArgs<ExtArgs>
+    seniorManager?: boolean | SuratTugas$seniorManagerArgs<ExtArgs>
+    kepalaCabang?: boolean | SuratTugas$kepalaCabangArgs<ExtArgs>
+    timInspektor?: boolean | SuratTugas$timInspektorArgs<ExtArgs>
+    dibuatOleh?: boolean | SuratTugas$dibuatOlehArgs<ExtArgs>
     _count?: boolean | SuratTugasCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type SuratTugasIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type SuratTugasIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type SuratTugasIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    proyek?: boolean | SuratTugas$proyekArgs<ExtArgs>
+    leadInspector?: boolean | SuratTugas$leadInspectorArgs<ExtArgs>
+    koordinator?: boolean | SuratTugas$koordinatorArgs<ExtArgs>
+    seniorManager?: boolean | SuratTugas$seniorManagerArgs<ExtArgs>
+    kepalaCabang?: boolean | SuratTugas$kepalaCabangArgs<ExtArgs>
+    dibuatOleh?: boolean | SuratTugas$dibuatOlehArgs<ExtArgs>
+  }
+  export type SuratTugasIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    proyek?: boolean | SuratTugas$proyekArgs<ExtArgs>
+    leadInspector?: boolean | SuratTugas$leadInspectorArgs<ExtArgs>
+    koordinator?: boolean | SuratTugas$koordinatorArgs<ExtArgs>
+    seniorManager?: boolean | SuratTugas$seniorManagerArgs<ExtArgs>
+    kepalaCabang?: boolean | SuratTugas$kepalaCabangArgs<ExtArgs>
+    dibuatOleh?: boolean | SuratTugas$dibuatOlehArgs<ExtArgs>
+  }
 
   export type $SuratTugasPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SuratTugas"
     objects: {
-      pegawai_surat_tugas: Prisma.$PegawaiSuratTugasPayload<ExtArgs>[]
+      proyek: Prisma.$ProyekPayload<ExtArgs> | null
+      leadInspector: Prisma.$pegawaiPayload<ExtArgs> | null
+      koordinator: Prisma.$pegawaiPayload<ExtArgs> | null
+      seniorManager: Prisma.$pegawaiPayload<ExtArgs> | null
+      kepalaCabang: Prisma.$pegawaiPayload<ExtArgs> | null
+      timInspektor: Prisma.$pegawaiPayload<ExtArgs>[]
+      dibuatOleh: Prisma.$pegawaiPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nomor_surat: string | null
-      klien: string
-      pekerjaan: string
+      proyekId: number | null
       status_pekerjaan: string | null
       no_service_order: string | null
       bidang_pekerjaan: string | null
       peralatan_inspeksi: string[]
       kebutuhan_material: string[]
-      lokasi_pekerjaan: string[]
       tanggal_berangkat: Date | null
       tanggal_kembali: Date | null
       transportasi_operasional: boolean
@@ -5506,6 +7019,16 @@ export namespace Prisma {
       tiket: boolean
       penginapan: boolean
       keterangan_lain: string | null
+      leadInspectorId: number | null
+      disetujuiLeadAt: Date | null
+      koordinatorId: number | null
+      disetujuiKoorAt: Date | null
+      seniorManagerId: number | null
+      disetujuiSmAt: Date | null
+      kepalaCabangId: number | null
+      disetujuiKacabAt: Date | null
+      catatanPenolakan: string | null
+      dibuatOlehId: number | null
       createdAt: Date
       updatedAt: Date
       spi: string | null
@@ -5905,7 +7428,13 @@ export namespace Prisma {
    */
   export interface Prisma__SuratTugasClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    pegawai_surat_tugas<T extends SuratTugas$pegawai_surat_tugasArgs<ExtArgs> = {}>(args?: Subset<T, SuratTugas$pegawai_surat_tugasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    proyek<T extends SuratTugas$proyekArgs<ExtArgs> = {}>(args?: Subset<T, SuratTugas$proyekArgs<ExtArgs>>): Prisma__ProyekClient<$Result.GetResult<Prisma.$ProyekPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    leadInspector<T extends SuratTugas$leadInspectorArgs<ExtArgs> = {}>(args?: Subset<T, SuratTugas$leadInspectorArgs<ExtArgs>>): Prisma__pegawaiClient<$Result.GetResult<Prisma.$pegawaiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    koordinator<T extends SuratTugas$koordinatorArgs<ExtArgs> = {}>(args?: Subset<T, SuratTugas$koordinatorArgs<ExtArgs>>): Prisma__pegawaiClient<$Result.GetResult<Prisma.$pegawaiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    seniorManager<T extends SuratTugas$seniorManagerArgs<ExtArgs> = {}>(args?: Subset<T, SuratTugas$seniorManagerArgs<ExtArgs>>): Prisma__pegawaiClient<$Result.GetResult<Prisma.$pegawaiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    kepalaCabang<T extends SuratTugas$kepalaCabangArgs<ExtArgs> = {}>(args?: Subset<T, SuratTugas$kepalaCabangArgs<ExtArgs>>): Prisma__pegawaiClient<$Result.GetResult<Prisma.$pegawaiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    timInspektor<T extends SuratTugas$timInspektorArgs<ExtArgs> = {}>(args?: Subset<T, SuratTugas$timInspektorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$pegawaiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dibuatOleh<T extends SuratTugas$dibuatOlehArgs<ExtArgs> = {}>(args?: Subset<T, SuratTugas$dibuatOlehArgs<ExtArgs>>): Prisma__pegawaiClient<$Result.GetResult<Prisma.$pegawaiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5937,14 +7466,12 @@ export namespace Prisma {
   interface SuratTugasFieldRefs {
     readonly id: FieldRef<"SuratTugas", 'Int'>
     readonly nomor_surat: FieldRef<"SuratTugas", 'String'>
-    readonly klien: FieldRef<"SuratTugas", 'String'>
-    readonly pekerjaan: FieldRef<"SuratTugas", 'String'>
+    readonly proyekId: FieldRef<"SuratTugas", 'Int'>
     readonly status_pekerjaan: FieldRef<"SuratTugas", 'String'>
     readonly no_service_order: FieldRef<"SuratTugas", 'String'>
     readonly bidang_pekerjaan: FieldRef<"SuratTugas", 'String'>
     readonly peralatan_inspeksi: FieldRef<"SuratTugas", 'String[]'>
     readonly kebutuhan_material: FieldRef<"SuratTugas", 'String[]'>
-    readonly lokasi_pekerjaan: FieldRef<"SuratTugas", 'String[]'>
     readonly tanggal_berangkat: FieldRef<"SuratTugas", 'DateTime'>
     readonly tanggal_kembali: FieldRef<"SuratTugas", 'DateTime'>
     readonly transportasi_operasional: FieldRef<"SuratTugas", 'Boolean'>
@@ -5954,6 +7481,16 @@ export namespace Prisma {
     readonly tiket: FieldRef<"SuratTugas", 'Boolean'>
     readonly penginapan: FieldRef<"SuratTugas", 'Boolean'>
     readonly keterangan_lain: FieldRef<"SuratTugas", 'String'>
+    readonly leadInspectorId: FieldRef<"SuratTugas", 'Int'>
+    readonly disetujuiLeadAt: FieldRef<"SuratTugas", 'DateTime'>
+    readonly koordinatorId: FieldRef<"SuratTugas", 'Int'>
+    readonly disetujuiKoorAt: FieldRef<"SuratTugas", 'DateTime'>
+    readonly seniorManagerId: FieldRef<"SuratTugas", 'Int'>
+    readonly disetujuiSmAt: FieldRef<"SuratTugas", 'DateTime'>
+    readonly kepalaCabangId: FieldRef<"SuratTugas", 'Int'>
+    readonly disetujuiKacabAt: FieldRef<"SuratTugas", 'DateTime'>
+    readonly catatanPenolakan: FieldRef<"SuratTugas", 'String'>
+    readonly dibuatOlehId: FieldRef<"SuratTugas", 'Int'>
     readonly createdAt: FieldRef<"SuratTugas", 'DateTime'>
     readonly updatedAt: FieldRef<"SuratTugas", 'DateTime'>
     readonly spi: FieldRef<"SuratTugas", 'String'>
@@ -6208,6 +7745,10 @@ export namespace Prisma {
      */
     data: SuratTugasCreateManyInput | SuratTugasCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuratTugasIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6278,6 +7819,10 @@ export namespace Prisma {
      * Limit how many SuratTugases to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SuratTugasIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6347,27 +7892,141 @@ export namespace Prisma {
   }
 
   /**
-   * SuratTugas.pegawai_surat_tugas
+   * SuratTugas.proyek
    */
-  export type SuratTugas$pegawai_surat_tugasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SuratTugas$proyekArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
+     * Select specific fields to fetch from the Proyek
      */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
+    select?: ProyekSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PegawaiSuratTugas
+     * Omit specific fields from the Proyek
      */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
+    omit?: ProyekOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-    where?: PegawaiSuratTugasWhereInput
-    orderBy?: PegawaiSuratTugasOrderByWithRelationInput | PegawaiSuratTugasOrderByWithRelationInput[]
-    cursor?: PegawaiSuratTugasWhereUniqueInput
+    include?: ProyekInclude<ExtArgs> | null
+    where?: ProyekWhereInput
+  }
+
+  /**
+   * SuratTugas.leadInspector
+   */
+  export type SuratTugas$leadInspectorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the pegawai
+     */
+    select?: pegawaiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the pegawai
+     */
+    omit?: pegawaiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: pegawaiInclude<ExtArgs> | null
+    where?: pegawaiWhereInput
+  }
+
+  /**
+   * SuratTugas.koordinator
+   */
+  export type SuratTugas$koordinatorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the pegawai
+     */
+    select?: pegawaiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the pegawai
+     */
+    omit?: pegawaiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: pegawaiInclude<ExtArgs> | null
+    where?: pegawaiWhereInput
+  }
+
+  /**
+   * SuratTugas.seniorManager
+   */
+  export type SuratTugas$seniorManagerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the pegawai
+     */
+    select?: pegawaiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the pegawai
+     */
+    omit?: pegawaiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: pegawaiInclude<ExtArgs> | null
+    where?: pegawaiWhereInput
+  }
+
+  /**
+   * SuratTugas.kepalaCabang
+   */
+  export type SuratTugas$kepalaCabangArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the pegawai
+     */
+    select?: pegawaiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the pegawai
+     */
+    omit?: pegawaiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: pegawaiInclude<ExtArgs> | null
+    where?: pegawaiWhereInput
+  }
+
+  /**
+   * SuratTugas.timInspektor
+   */
+  export type SuratTugas$timInspektorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the pegawai
+     */
+    select?: pegawaiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the pegawai
+     */
+    omit?: pegawaiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: pegawaiInclude<ExtArgs> | null
+    where?: pegawaiWhereInput
+    orderBy?: pegawaiOrderByWithRelationInput | pegawaiOrderByWithRelationInput[]
+    cursor?: pegawaiWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: PegawaiSuratTugasScalarFieldEnum | PegawaiSuratTugasScalarFieldEnum[]
+    distinct?: PegawaiScalarFieldEnum | PegawaiScalarFieldEnum[]
+  }
+
+  /**
+   * SuratTugas.dibuatOleh
+   */
+  export type SuratTugas$dibuatOlehArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the pegawai
+     */
+    select?: pegawaiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the pegawai
+     */
+    omit?: pegawaiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: pegawaiInclude<ExtArgs> | null
+    where?: pegawaiWhereInput
   }
 
   /**
@@ -6390,1136 +8049,6 @@ export namespace Prisma {
 
 
   /**
-   * Model PegawaiSuratTugas
-   */
-
-  export type AggregatePegawaiSuratTugas = {
-    _count: PegawaiSuratTugasCountAggregateOutputType | null
-    _avg: PegawaiSuratTugasAvgAggregateOutputType | null
-    _sum: PegawaiSuratTugasSumAggregateOutputType | null
-    _min: PegawaiSuratTugasMinAggregateOutputType | null
-    _max: PegawaiSuratTugasMaxAggregateOutputType | null
-  }
-
-  export type PegawaiSuratTugasAvgAggregateOutputType = {
-    id: number | null
-    suratTugasId: number | null
-  }
-
-  export type PegawaiSuratTugasSumAggregateOutputType = {
-    id: number | null
-    suratTugasId: number | null
-  }
-
-  export type PegawaiSuratTugasMinAggregateOutputType = {
-    id: number | null
-    suratTugasId: number | null
-    pegawaiNup: string | null
-    jabatan: string | null
-    approved: boolean | null
-    approvedBy: string | null
-    approvedAt: Date | null
-  }
-
-  export type PegawaiSuratTugasMaxAggregateOutputType = {
-    id: number | null
-    suratTugasId: number | null
-    pegawaiNup: string | null
-    jabatan: string | null
-    approved: boolean | null
-    approvedBy: string | null
-    approvedAt: Date | null
-  }
-
-  export type PegawaiSuratTugasCountAggregateOutputType = {
-    id: number
-    suratTugasId: number
-    pegawaiNup: number
-    jabatan: number
-    approved: number
-    approvedBy: number
-    approvedAt: number
-    _all: number
-  }
-
-
-  export type PegawaiSuratTugasAvgAggregateInputType = {
-    id?: true
-    suratTugasId?: true
-  }
-
-  export type PegawaiSuratTugasSumAggregateInputType = {
-    id?: true
-    suratTugasId?: true
-  }
-
-  export type PegawaiSuratTugasMinAggregateInputType = {
-    id?: true
-    suratTugasId?: true
-    pegawaiNup?: true
-    jabatan?: true
-    approved?: true
-    approvedBy?: true
-    approvedAt?: true
-  }
-
-  export type PegawaiSuratTugasMaxAggregateInputType = {
-    id?: true
-    suratTugasId?: true
-    pegawaiNup?: true
-    jabatan?: true
-    approved?: true
-    approvedBy?: true
-    approvedAt?: true
-  }
-
-  export type PegawaiSuratTugasCountAggregateInputType = {
-    id?: true
-    suratTugasId?: true
-    pegawaiNup?: true
-    jabatan?: true
-    approved?: true
-    approvedBy?: true
-    approvedAt?: true
-    _all?: true
-  }
-
-  export type PegawaiSuratTugasAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PegawaiSuratTugas to aggregate.
-     */
-    where?: PegawaiSuratTugasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PegawaiSuratTugases to fetch.
-     */
-    orderBy?: PegawaiSuratTugasOrderByWithRelationInput | PegawaiSuratTugasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: PegawaiSuratTugasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PegawaiSuratTugases from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PegawaiSuratTugases.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned PegawaiSuratTugases
-    **/
-    _count?: true | PegawaiSuratTugasCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: PegawaiSuratTugasAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: PegawaiSuratTugasSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PegawaiSuratTugasMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PegawaiSuratTugasMaxAggregateInputType
-  }
-
-  export type GetPegawaiSuratTugasAggregateType<T extends PegawaiSuratTugasAggregateArgs> = {
-        [P in keyof T & keyof AggregatePegawaiSuratTugas]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePegawaiSuratTugas[P]>
-      : GetScalarType<T[P], AggregatePegawaiSuratTugas[P]>
-  }
-
-
-
-
-  export type PegawaiSuratTugasGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PegawaiSuratTugasWhereInput
-    orderBy?: PegawaiSuratTugasOrderByWithAggregationInput | PegawaiSuratTugasOrderByWithAggregationInput[]
-    by: PegawaiSuratTugasScalarFieldEnum[] | PegawaiSuratTugasScalarFieldEnum
-    having?: PegawaiSuratTugasScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PegawaiSuratTugasCountAggregateInputType | true
-    _avg?: PegawaiSuratTugasAvgAggregateInputType
-    _sum?: PegawaiSuratTugasSumAggregateInputType
-    _min?: PegawaiSuratTugasMinAggregateInputType
-    _max?: PegawaiSuratTugasMaxAggregateInputType
-  }
-
-  export type PegawaiSuratTugasGroupByOutputType = {
-    id: number
-    suratTugasId: number
-    pegawaiNup: string
-    jabatan: string | null
-    approved: boolean
-    approvedBy: string | null
-    approvedAt: Date | null
-    _count: PegawaiSuratTugasCountAggregateOutputType | null
-    _avg: PegawaiSuratTugasAvgAggregateOutputType | null
-    _sum: PegawaiSuratTugasSumAggregateOutputType | null
-    _min: PegawaiSuratTugasMinAggregateOutputType | null
-    _max: PegawaiSuratTugasMaxAggregateOutputType | null
-  }
-
-  type GetPegawaiSuratTugasGroupByPayload<T extends PegawaiSuratTugasGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PegawaiSuratTugasGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PegawaiSuratTugasGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PegawaiSuratTugasGroupByOutputType[P]>
-            : GetScalarType<T[P], PegawaiSuratTugasGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type PegawaiSuratTugasSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    suratTugasId?: boolean
-    pegawaiNup?: boolean
-    jabatan?: boolean
-    approved?: boolean
-    approvedBy?: boolean
-    approvedAt?: boolean
-    pegawai?: boolean | pegawaiDefaultArgs<ExtArgs>
-    suratTugas?: boolean | SuratTugasDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pegawaiSuratTugas"]>
-
-  export type PegawaiSuratTugasSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    suratTugasId?: boolean
-    pegawaiNup?: boolean
-    jabatan?: boolean
-    approved?: boolean
-    approvedBy?: boolean
-    approvedAt?: boolean
-    pegawai?: boolean | pegawaiDefaultArgs<ExtArgs>
-    suratTugas?: boolean | SuratTugasDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pegawaiSuratTugas"]>
-
-  export type PegawaiSuratTugasSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    suratTugasId?: boolean
-    pegawaiNup?: boolean
-    jabatan?: boolean
-    approved?: boolean
-    approvedBy?: boolean
-    approvedAt?: boolean
-    pegawai?: boolean | pegawaiDefaultArgs<ExtArgs>
-    suratTugas?: boolean | SuratTugasDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pegawaiSuratTugas"]>
-
-  export type PegawaiSuratTugasSelectScalar = {
-    id?: boolean
-    suratTugasId?: boolean
-    pegawaiNup?: boolean
-    jabatan?: boolean
-    approved?: boolean
-    approvedBy?: boolean
-    approvedAt?: boolean
-  }
-
-  export type PegawaiSuratTugasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "suratTugasId" | "pegawaiNup" | "jabatan" | "approved" | "approvedBy" | "approvedAt", ExtArgs["result"]["pegawaiSuratTugas"]>
-  export type PegawaiSuratTugasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pegawai?: boolean | pegawaiDefaultArgs<ExtArgs>
-    suratTugas?: boolean | SuratTugasDefaultArgs<ExtArgs>
-  }
-  export type PegawaiSuratTugasIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pegawai?: boolean | pegawaiDefaultArgs<ExtArgs>
-    suratTugas?: boolean | SuratTugasDefaultArgs<ExtArgs>
-  }
-  export type PegawaiSuratTugasIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pegawai?: boolean | pegawaiDefaultArgs<ExtArgs>
-    suratTugas?: boolean | SuratTugasDefaultArgs<ExtArgs>
-  }
-
-  export type $PegawaiSuratTugasPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "PegawaiSuratTugas"
-    objects: {
-      pegawai: Prisma.$pegawaiPayload<ExtArgs>
-      suratTugas: Prisma.$SuratTugasPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      suratTugasId: number
-      pegawaiNup: string
-      jabatan: string | null
-      approved: boolean
-      approvedBy: string | null
-      approvedAt: Date | null
-    }, ExtArgs["result"]["pegawaiSuratTugas"]>
-    composites: {}
-  }
-
-  type PegawaiSuratTugasGetPayload<S extends boolean | null | undefined | PegawaiSuratTugasDefaultArgs> = $Result.GetResult<Prisma.$PegawaiSuratTugasPayload, S>
-
-  type PegawaiSuratTugasCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PegawaiSuratTugasFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PegawaiSuratTugasCountAggregateInputType | true
-    }
-
-  export interface PegawaiSuratTugasDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PegawaiSuratTugas'], meta: { name: 'PegawaiSuratTugas' } }
-    /**
-     * Find zero or one PegawaiSuratTugas that matches the filter.
-     * @param {PegawaiSuratTugasFindUniqueArgs} args - Arguments to find a PegawaiSuratTugas
-     * @example
-     * // Get one PegawaiSuratTugas
-     * const pegawaiSuratTugas = await prisma.pegawaiSuratTugas.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends PegawaiSuratTugasFindUniqueArgs>(args: SelectSubset<T, PegawaiSuratTugasFindUniqueArgs<ExtArgs>>): Prisma__PegawaiSuratTugasClient<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one PegawaiSuratTugas that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {PegawaiSuratTugasFindUniqueOrThrowArgs} args - Arguments to find a PegawaiSuratTugas
-     * @example
-     * // Get one PegawaiSuratTugas
-     * const pegawaiSuratTugas = await prisma.pegawaiSuratTugas.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends PegawaiSuratTugasFindUniqueOrThrowArgs>(args: SelectSubset<T, PegawaiSuratTugasFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PegawaiSuratTugasClient<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PegawaiSuratTugas that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PegawaiSuratTugasFindFirstArgs} args - Arguments to find a PegawaiSuratTugas
-     * @example
-     * // Get one PegawaiSuratTugas
-     * const pegawaiSuratTugas = await prisma.pegawaiSuratTugas.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends PegawaiSuratTugasFindFirstArgs>(args?: SelectSubset<T, PegawaiSuratTugasFindFirstArgs<ExtArgs>>): Prisma__PegawaiSuratTugasClient<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PegawaiSuratTugas that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PegawaiSuratTugasFindFirstOrThrowArgs} args - Arguments to find a PegawaiSuratTugas
-     * @example
-     * // Get one PegawaiSuratTugas
-     * const pegawaiSuratTugas = await prisma.pegawaiSuratTugas.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends PegawaiSuratTugasFindFirstOrThrowArgs>(args?: SelectSubset<T, PegawaiSuratTugasFindFirstOrThrowArgs<ExtArgs>>): Prisma__PegawaiSuratTugasClient<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more PegawaiSuratTugases that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PegawaiSuratTugasFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all PegawaiSuratTugases
-     * const pegawaiSuratTugases = await prisma.pegawaiSuratTugas.findMany()
-     * 
-     * // Get first 10 PegawaiSuratTugases
-     * const pegawaiSuratTugases = await prisma.pegawaiSuratTugas.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const pegawaiSuratTugasWithIdOnly = await prisma.pegawaiSuratTugas.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends PegawaiSuratTugasFindManyArgs>(args?: SelectSubset<T, PegawaiSuratTugasFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a PegawaiSuratTugas.
-     * @param {PegawaiSuratTugasCreateArgs} args - Arguments to create a PegawaiSuratTugas.
-     * @example
-     * // Create one PegawaiSuratTugas
-     * const PegawaiSuratTugas = await prisma.pegawaiSuratTugas.create({
-     *   data: {
-     *     // ... data to create a PegawaiSuratTugas
-     *   }
-     * })
-     * 
-     */
-    create<T extends PegawaiSuratTugasCreateArgs>(args: SelectSubset<T, PegawaiSuratTugasCreateArgs<ExtArgs>>): Prisma__PegawaiSuratTugasClient<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many PegawaiSuratTugases.
-     * @param {PegawaiSuratTugasCreateManyArgs} args - Arguments to create many PegawaiSuratTugases.
-     * @example
-     * // Create many PegawaiSuratTugases
-     * const pegawaiSuratTugas = await prisma.pegawaiSuratTugas.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends PegawaiSuratTugasCreateManyArgs>(args?: SelectSubset<T, PegawaiSuratTugasCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many PegawaiSuratTugases and returns the data saved in the database.
-     * @param {PegawaiSuratTugasCreateManyAndReturnArgs} args - Arguments to create many PegawaiSuratTugases.
-     * @example
-     * // Create many PegawaiSuratTugases
-     * const pegawaiSuratTugas = await prisma.pegawaiSuratTugas.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many PegawaiSuratTugases and only return the `id`
-     * const pegawaiSuratTugasWithIdOnly = await prisma.pegawaiSuratTugas.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends PegawaiSuratTugasCreateManyAndReturnArgs>(args?: SelectSubset<T, PegawaiSuratTugasCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a PegawaiSuratTugas.
-     * @param {PegawaiSuratTugasDeleteArgs} args - Arguments to delete one PegawaiSuratTugas.
-     * @example
-     * // Delete one PegawaiSuratTugas
-     * const PegawaiSuratTugas = await prisma.pegawaiSuratTugas.delete({
-     *   where: {
-     *     // ... filter to delete one PegawaiSuratTugas
-     *   }
-     * })
-     * 
-     */
-    delete<T extends PegawaiSuratTugasDeleteArgs>(args: SelectSubset<T, PegawaiSuratTugasDeleteArgs<ExtArgs>>): Prisma__PegawaiSuratTugasClient<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one PegawaiSuratTugas.
-     * @param {PegawaiSuratTugasUpdateArgs} args - Arguments to update one PegawaiSuratTugas.
-     * @example
-     * // Update one PegawaiSuratTugas
-     * const pegawaiSuratTugas = await prisma.pegawaiSuratTugas.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends PegawaiSuratTugasUpdateArgs>(args: SelectSubset<T, PegawaiSuratTugasUpdateArgs<ExtArgs>>): Prisma__PegawaiSuratTugasClient<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more PegawaiSuratTugases.
-     * @param {PegawaiSuratTugasDeleteManyArgs} args - Arguments to filter PegawaiSuratTugases to delete.
-     * @example
-     * // Delete a few PegawaiSuratTugases
-     * const { count } = await prisma.pegawaiSuratTugas.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends PegawaiSuratTugasDeleteManyArgs>(args?: SelectSubset<T, PegawaiSuratTugasDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PegawaiSuratTugases.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PegawaiSuratTugasUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many PegawaiSuratTugases
-     * const pegawaiSuratTugas = await prisma.pegawaiSuratTugas.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends PegawaiSuratTugasUpdateManyArgs>(args: SelectSubset<T, PegawaiSuratTugasUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PegawaiSuratTugases and returns the data updated in the database.
-     * @param {PegawaiSuratTugasUpdateManyAndReturnArgs} args - Arguments to update many PegawaiSuratTugases.
-     * @example
-     * // Update many PegawaiSuratTugases
-     * const pegawaiSuratTugas = await prisma.pegawaiSuratTugas.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more PegawaiSuratTugases and only return the `id`
-     * const pegawaiSuratTugasWithIdOnly = await prisma.pegawaiSuratTugas.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends PegawaiSuratTugasUpdateManyAndReturnArgs>(args: SelectSubset<T, PegawaiSuratTugasUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one PegawaiSuratTugas.
-     * @param {PegawaiSuratTugasUpsertArgs} args - Arguments to update or create a PegawaiSuratTugas.
-     * @example
-     * // Update or create a PegawaiSuratTugas
-     * const pegawaiSuratTugas = await prisma.pegawaiSuratTugas.upsert({
-     *   create: {
-     *     // ... data to create a PegawaiSuratTugas
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the PegawaiSuratTugas we want to update
-     *   }
-     * })
-     */
-    upsert<T extends PegawaiSuratTugasUpsertArgs>(args: SelectSubset<T, PegawaiSuratTugasUpsertArgs<ExtArgs>>): Prisma__PegawaiSuratTugasClient<$Result.GetResult<Prisma.$PegawaiSuratTugasPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of PegawaiSuratTugases.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PegawaiSuratTugasCountArgs} args - Arguments to filter PegawaiSuratTugases to count.
-     * @example
-     * // Count the number of PegawaiSuratTugases
-     * const count = await prisma.pegawaiSuratTugas.count({
-     *   where: {
-     *     // ... the filter for the PegawaiSuratTugases we want to count
-     *   }
-     * })
-    **/
-    count<T extends PegawaiSuratTugasCountArgs>(
-      args?: Subset<T, PegawaiSuratTugasCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PegawaiSuratTugasCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a PegawaiSuratTugas.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PegawaiSuratTugasAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PegawaiSuratTugasAggregateArgs>(args: Subset<T, PegawaiSuratTugasAggregateArgs>): Prisma.PrismaPromise<GetPegawaiSuratTugasAggregateType<T>>
-
-    /**
-     * Group by PegawaiSuratTugas.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PegawaiSuratTugasGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends PegawaiSuratTugasGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PegawaiSuratTugasGroupByArgs['orderBy'] }
-        : { orderBy?: PegawaiSuratTugasGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PegawaiSuratTugasGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPegawaiSuratTugasGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the PegawaiSuratTugas model
-   */
-  readonly fields: PegawaiSuratTugasFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for PegawaiSuratTugas.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__PegawaiSuratTugasClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    pegawai<T extends pegawaiDefaultArgs<ExtArgs> = {}>(args?: Subset<T, pegawaiDefaultArgs<ExtArgs>>): Prisma__pegawaiClient<$Result.GetResult<Prisma.$pegawaiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    suratTugas<T extends SuratTugasDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SuratTugasDefaultArgs<ExtArgs>>): Prisma__SuratTugasClient<$Result.GetResult<Prisma.$SuratTugasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the PegawaiSuratTugas model
-   */
-  interface PegawaiSuratTugasFieldRefs {
-    readonly id: FieldRef<"PegawaiSuratTugas", 'Int'>
-    readonly suratTugasId: FieldRef<"PegawaiSuratTugas", 'Int'>
-    readonly pegawaiNup: FieldRef<"PegawaiSuratTugas", 'String'>
-    readonly jabatan: FieldRef<"PegawaiSuratTugas", 'String'>
-    readonly approved: FieldRef<"PegawaiSuratTugas", 'Boolean'>
-    readonly approvedBy: FieldRef<"PegawaiSuratTugas", 'String'>
-    readonly approvedAt: FieldRef<"PegawaiSuratTugas", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * PegawaiSuratTugas findUnique
-   */
-  export type PegawaiSuratTugasFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-    /**
-     * Filter, which PegawaiSuratTugas to fetch.
-     */
-    where: PegawaiSuratTugasWhereUniqueInput
-  }
-
-  /**
-   * PegawaiSuratTugas findUniqueOrThrow
-   */
-  export type PegawaiSuratTugasFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-    /**
-     * Filter, which PegawaiSuratTugas to fetch.
-     */
-    where: PegawaiSuratTugasWhereUniqueInput
-  }
-
-  /**
-   * PegawaiSuratTugas findFirst
-   */
-  export type PegawaiSuratTugasFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-    /**
-     * Filter, which PegawaiSuratTugas to fetch.
-     */
-    where?: PegawaiSuratTugasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PegawaiSuratTugases to fetch.
-     */
-    orderBy?: PegawaiSuratTugasOrderByWithRelationInput | PegawaiSuratTugasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PegawaiSuratTugases.
-     */
-    cursor?: PegawaiSuratTugasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PegawaiSuratTugases from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PegawaiSuratTugases.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PegawaiSuratTugases.
-     */
-    distinct?: PegawaiSuratTugasScalarFieldEnum | PegawaiSuratTugasScalarFieldEnum[]
-  }
-
-  /**
-   * PegawaiSuratTugas findFirstOrThrow
-   */
-  export type PegawaiSuratTugasFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-    /**
-     * Filter, which PegawaiSuratTugas to fetch.
-     */
-    where?: PegawaiSuratTugasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PegawaiSuratTugases to fetch.
-     */
-    orderBy?: PegawaiSuratTugasOrderByWithRelationInput | PegawaiSuratTugasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PegawaiSuratTugases.
-     */
-    cursor?: PegawaiSuratTugasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PegawaiSuratTugases from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PegawaiSuratTugases.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PegawaiSuratTugases.
-     */
-    distinct?: PegawaiSuratTugasScalarFieldEnum | PegawaiSuratTugasScalarFieldEnum[]
-  }
-
-  /**
-   * PegawaiSuratTugas findMany
-   */
-  export type PegawaiSuratTugasFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-    /**
-     * Filter, which PegawaiSuratTugases to fetch.
-     */
-    where?: PegawaiSuratTugasWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PegawaiSuratTugases to fetch.
-     */
-    orderBy?: PegawaiSuratTugasOrderByWithRelationInput | PegawaiSuratTugasOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing PegawaiSuratTugases.
-     */
-    cursor?: PegawaiSuratTugasWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PegawaiSuratTugases from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PegawaiSuratTugases.
-     */
-    skip?: number
-    distinct?: PegawaiSuratTugasScalarFieldEnum | PegawaiSuratTugasScalarFieldEnum[]
-  }
-
-  /**
-   * PegawaiSuratTugas create
-   */
-  export type PegawaiSuratTugasCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-    /**
-     * The data needed to create a PegawaiSuratTugas.
-     */
-    data: XOR<PegawaiSuratTugasCreateInput, PegawaiSuratTugasUncheckedCreateInput>
-  }
-
-  /**
-   * PegawaiSuratTugas createMany
-   */
-  export type PegawaiSuratTugasCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many PegawaiSuratTugases.
-     */
-    data: PegawaiSuratTugasCreateManyInput | PegawaiSuratTugasCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * PegawaiSuratTugas createManyAndReturn
-   */
-  export type PegawaiSuratTugasCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * The data used to create many PegawaiSuratTugases.
-     */
-    data: PegawaiSuratTugasCreateManyInput | PegawaiSuratTugasCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PegawaiSuratTugas update
-   */
-  export type PegawaiSuratTugasUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-    /**
-     * The data needed to update a PegawaiSuratTugas.
-     */
-    data: XOR<PegawaiSuratTugasUpdateInput, PegawaiSuratTugasUncheckedUpdateInput>
-    /**
-     * Choose, which PegawaiSuratTugas to update.
-     */
-    where: PegawaiSuratTugasWhereUniqueInput
-  }
-
-  /**
-   * PegawaiSuratTugas updateMany
-   */
-  export type PegawaiSuratTugasUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update PegawaiSuratTugases.
-     */
-    data: XOR<PegawaiSuratTugasUpdateManyMutationInput, PegawaiSuratTugasUncheckedUpdateManyInput>
-    /**
-     * Filter which PegawaiSuratTugases to update
-     */
-    where?: PegawaiSuratTugasWhereInput
-    /**
-     * Limit how many PegawaiSuratTugases to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * PegawaiSuratTugas updateManyAndReturn
-   */
-  export type PegawaiSuratTugasUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * The data used to update PegawaiSuratTugases.
-     */
-    data: XOR<PegawaiSuratTugasUpdateManyMutationInput, PegawaiSuratTugasUncheckedUpdateManyInput>
-    /**
-     * Filter which PegawaiSuratTugases to update
-     */
-    where?: PegawaiSuratTugasWhereInput
-    /**
-     * Limit how many PegawaiSuratTugases to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PegawaiSuratTugas upsert
-   */
-  export type PegawaiSuratTugasUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-    /**
-     * The filter to search for the PegawaiSuratTugas to update in case it exists.
-     */
-    where: PegawaiSuratTugasWhereUniqueInput
-    /**
-     * In case the PegawaiSuratTugas found by the `where` argument doesn't exist, create a new PegawaiSuratTugas with this data.
-     */
-    create: XOR<PegawaiSuratTugasCreateInput, PegawaiSuratTugasUncheckedCreateInput>
-    /**
-     * In case the PegawaiSuratTugas was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PegawaiSuratTugasUpdateInput, PegawaiSuratTugasUncheckedUpdateInput>
-  }
-
-  /**
-   * PegawaiSuratTugas delete
-   */
-  export type PegawaiSuratTugasDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-    /**
-     * Filter which PegawaiSuratTugas to delete.
-     */
-    where: PegawaiSuratTugasWhereUniqueInput
-  }
-
-  /**
-   * PegawaiSuratTugas deleteMany
-   */
-  export type PegawaiSuratTugasDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PegawaiSuratTugases to delete
-     */
-    where?: PegawaiSuratTugasWhereInput
-    /**
-     * Limit how many PegawaiSuratTugases to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * PegawaiSuratTugas without action
-   */
-  export type PegawaiSuratTugasDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PegawaiSuratTugas
-     */
-    select?: PegawaiSuratTugasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PegawaiSuratTugas
-     */
-    omit?: PegawaiSuratTugasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PegawaiSuratTugasInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -7534,6 +8063,7 @@ export namespace Prisma {
 
 
   export const PegawaiScalarFieldEnum: {
+    id: 'id',
     nup: 'nup',
     nama_pegawai: 'nama_pegawai',
     status_pegawai: 'status_pegawai',
@@ -7548,15 +8078,25 @@ export namespace Prisma {
     password: 'password',
     role: 'role',
     username: 'username',
-    id: 'id',
     nik: 'nik',
     jenjang_pend: 'jenjang_pend',
     pendidikan: 'pendidikan',
     tahun_pend: 'tahun_pend',
+    tandaTanganUrl: 'tandaTanganUrl',
     cv_generated_at: 'cv_generated_at'
   };
 
   export type PegawaiScalarFieldEnum = (typeof PegawaiScalarFieldEnum)[keyof typeof PegawaiScalarFieldEnum]
+
+
+  export const ProyekScalarFieldEnum: {
+    id: 'id',
+    namaProyek: 'namaProyek',
+    klien: 'klien',
+    lokasi: 'lokasi'
+  };
+
+  export type ProyekScalarFieldEnum = (typeof ProyekScalarFieldEnum)[keyof typeof ProyekScalarFieldEnum]
 
 
   export const PelatihanScalarFieldEnum: {
@@ -7572,7 +8112,8 @@ export namespace Prisma {
     status: 'status',
     keterangan_utilisasi: 'keterangan_utilisasi',
     tahun: 'tahun',
-    tanggal_akhir: 'tanggal_akhir'
+    tanggal_akhir: 'tanggal_akhir',
+    pegawaiId: 'pegawaiId'
   };
 
   export type PelatihanScalarFieldEnum = (typeof PelatihanScalarFieldEnum)[keyof typeof PelatihanScalarFieldEnum]
@@ -7584,7 +8125,8 @@ export namespace Prisma {
     tahun: 'tahun',
     pengalaman_kerja: 'pengalaman_kerja',
     perusahaan: 'perusahaan',
-    lokasi: 'lokasi'
+    lokasi: 'lokasi',
+    pegawaiId: 'pegawaiId'
   };
 
   export type Pengalaman_kerjaScalarFieldEnum = (typeof Pengalaman_kerjaScalarFieldEnum)[keyof typeof Pengalaman_kerjaScalarFieldEnum]
@@ -7593,14 +8135,12 @@ export namespace Prisma {
   export const SuratTugasScalarFieldEnum: {
     id: 'id',
     nomor_surat: 'nomor_surat',
-    klien: 'klien',
-    pekerjaan: 'pekerjaan',
+    proyekId: 'proyekId',
     status_pekerjaan: 'status_pekerjaan',
     no_service_order: 'no_service_order',
     bidang_pekerjaan: 'bidang_pekerjaan',
     peralatan_inspeksi: 'peralatan_inspeksi',
     kebutuhan_material: 'kebutuhan_material',
-    lokasi_pekerjaan: 'lokasi_pekerjaan',
     tanggal_berangkat: 'tanggal_berangkat',
     tanggal_kembali: 'tanggal_kembali',
     transportasi_operasional: 'transportasi_operasional',
@@ -7610,6 +8150,16 @@ export namespace Prisma {
     tiket: 'tiket',
     penginapan: 'penginapan',
     keterangan_lain: 'keterangan_lain',
+    leadInspectorId: 'leadInspectorId',
+    disetujuiLeadAt: 'disetujuiLeadAt',
+    koordinatorId: 'koordinatorId',
+    disetujuiKoorAt: 'disetujuiKoorAt',
+    seniorManagerId: 'seniorManagerId',
+    disetujuiSmAt: 'disetujuiSmAt',
+    kepalaCabangId: 'kepalaCabangId',
+    disetujuiKacabAt: 'disetujuiKacabAt',
+    catatanPenolakan: 'catatanPenolakan',
+    dibuatOlehId: 'dibuatOlehId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     spi: 'spi',
@@ -7618,19 +8168,6 @@ export namespace Prisma {
   };
 
   export type SuratTugasScalarFieldEnum = (typeof SuratTugasScalarFieldEnum)[keyof typeof SuratTugasScalarFieldEnum]
-
-
-  export const PegawaiSuratTugasScalarFieldEnum: {
-    id: 'id',
-    suratTugasId: 'suratTugasId',
-    pegawaiNup: 'pegawaiNup',
-    jabatan: 'jabatan',
-    approved: 'approved',
-    approvedBy: 'approvedBy',
-    approvedAt: 'approvedAt'
-  };
-
-  export type PegawaiSuratTugasScalarFieldEnum = (typeof PegawaiSuratTugasScalarFieldEnum)[keyof typeof PegawaiSuratTugasScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7663,6 +8200,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
@@ -7687,20 +8238,6 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -7760,6 +8297,7 @@ export namespace Prisma {
     AND?: pegawaiWhereInput | pegawaiWhereInput[]
     OR?: pegawaiWhereInput[]
     NOT?: pegawaiWhereInput | pegawaiWhereInput[]
+    id?: IntFilter<"pegawai"> | number
     nup?: StringFilter<"pegawai"> | string
     nama_pegawai?: StringFilter<"pegawai"> | string
     status_pegawai?: StringNullableFilter<"pegawai"> | string | null
@@ -7772,20 +8310,26 @@ export namespace Prisma {
     no_telepon?: StringNullableFilter<"pegawai"> | string | null
     email?: StringNullableFilter<"pegawai"> | string | null
     password?: StringFilter<"pegawai"> | string
-    role?: StringNullableFilter<"pegawai"> | string | null
+    role?: StringNullableListFilter<"pegawai">
     username?: StringNullableFilter<"pegawai"> | string | null
-    id?: IntFilter<"pegawai"> | number
     nik?: StringNullableFilter<"pegawai"> | string | null
     jenjang_pend?: StringNullableFilter<"pegawai"> | string | null
     pendidikan?: StringNullableFilter<"pegawai"> | string | null
     tahun_pend?: IntNullableFilter<"pegawai"> | number | null
+    tandaTanganUrl?: StringNullableFilter<"pegawai"> | string | null
     cv_generated_at?: DateTimeNullableFilter<"pegawai"> | Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasListRelationFilter
     pelatihan?: PelatihanListRelationFilter
     pengalaman_kerja?: Pengalaman_kerjaListRelationFilter
+    suratTugasDibuat?: SuratTugasListRelationFilter
+    anggotaTimDi?: SuratTugasListRelationFilter
+    leadApproverDi?: SuratTugasListRelationFilter
+    koorApproverDi?: SuratTugasListRelationFilter
+    smApproverDi?: SuratTugasListRelationFilter
+    kacabApproverDi?: SuratTugasListRelationFilter
   }
 
   export type pegawaiOrderByWithRelationInput = {
+    id?: SortOrder
     nup?: SortOrder
     nama_pegawai?: SortOrder
     status_pegawai?: SortOrderInput | SortOrder
@@ -7798,23 +8342,28 @@ export namespace Prisma {
     no_telepon?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     password?: SortOrder
-    role?: SortOrderInput | SortOrder
+    role?: SortOrder
     username?: SortOrderInput | SortOrder
-    id?: SortOrder
     nik?: SortOrderInput | SortOrder
     jenjang_pend?: SortOrderInput | SortOrder
     pendidikan?: SortOrderInput | SortOrder
     tahun_pend?: SortOrderInput | SortOrder
+    tandaTanganUrl?: SortOrderInput | SortOrder
     cv_generated_at?: SortOrderInput | SortOrder
-    pegawai_surat_tugas?: PegawaiSuratTugasOrderByRelationAggregateInput
     pelatihan?: pelatihanOrderByRelationAggregateInput
     pengalaman_kerja?: pengalaman_kerjaOrderByRelationAggregateInput
+    suratTugasDibuat?: SuratTugasOrderByRelationAggregateInput
+    anggotaTimDi?: SuratTugasOrderByRelationAggregateInput
+    leadApproverDi?: SuratTugasOrderByRelationAggregateInput
+    koorApproverDi?: SuratTugasOrderByRelationAggregateInput
+    smApproverDi?: SuratTugasOrderByRelationAggregateInput
+    kacabApproverDi?: SuratTugasOrderByRelationAggregateInput
   }
 
   export type pegawaiWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
     nup?: string
     username?: string
-    id?: number
     AND?: pegawaiWhereInput | pegawaiWhereInput[]
     OR?: pegawaiWhereInput[]
     NOT?: pegawaiWhereInput | pegawaiWhereInput[]
@@ -7829,18 +8378,25 @@ export namespace Prisma {
     no_telepon?: StringNullableFilter<"pegawai"> | string | null
     email?: StringNullableFilter<"pegawai"> | string | null
     password?: StringFilter<"pegawai"> | string
-    role?: StringNullableFilter<"pegawai"> | string | null
+    role?: StringNullableListFilter<"pegawai">
     nik?: StringNullableFilter<"pegawai"> | string | null
     jenjang_pend?: StringNullableFilter<"pegawai"> | string | null
     pendidikan?: StringNullableFilter<"pegawai"> | string | null
     tahun_pend?: IntNullableFilter<"pegawai"> | number | null
+    tandaTanganUrl?: StringNullableFilter<"pegawai"> | string | null
     cv_generated_at?: DateTimeNullableFilter<"pegawai"> | Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasListRelationFilter
     pelatihan?: PelatihanListRelationFilter
     pengalaman_kerja?: Pengalaman_kerjaListRelationFilter
-  }, "nup" | "nup" | "username" | "id">
+    suratTugasDibuat?: SuratTugasListRelationFilter
+    anggotaTimDi?: SuratTugasListRelationFilter
+    leadApproverDi?: SuratTugasListRelationFilter
+    koorApproverDi?: SuratTugasListRelationFilter
+    smApproverDi?: SuratTugasListRelationFilter
+    kacabApproverDi?: SuratTugasListRelationFilter
+  }, "id" | "id" | "nup" | "username">
 
   export type pegawaiOrderByWithAggregationInput = {
+    id?: SortOrder
     nup?: SortOrder
     nama_pegawai?: SortOrder
     status_pegawai?: SortOrderInput | SortOrder
@@ -7853,13 +8409,13 @@ export namespace Prisma {
     no_telepon?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     password?: SortOrder
-    role?: SortOrderInput | SortOrder
+    role?: SortOrder
     username?: SortOrderInput | SortOrder
-    id?: SortOrder
     nik?: SortOrderInput | SortOrder
     jenjang_pend?: SortOrderInput | SortOrder
     pendidikan?: SortOrderInput | SortOrder
     tahun_pend?: SortOrderInput | SortOrder
+    tandaTanganUrl?: SortOrderInput | SortOrder
     cv_generated_at?: SortOrderInput | SortOrder
     _count?: pegawaiCountOrderByAggregateInput
     _avg?: pegawaiAvgOrderByAggregateInput
@@ -7872,6 +8428,7 @@ export namespace Prisma {
     AND?: pegawaiScalarWhereWithAggregatesInput | pegawaiScalarWhereWithAggregatesInput[]
     OR?: pegawaiScalarWhereWithAggregatesInput[]
     NOT?: pegawaiScalarWhereWithAggregatesInput | pegawaiScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"pegawai"> | number
     nup?: StringWithAggregatesFilter<"pegawai"> | string
     nama_pegawai?: StringWithAggregatesFilter<"pegawai"> | string
     status_pegawai?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
@@ -7884,14 +8441,66 @@ export namespace Prisma {
     no_telepon?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
     email?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
     password?: StringWithAggregatesFilter<"pegawai"> | string
-    role?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
+    role?: StringNullableListFilter<"pegawai">
     username?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
-    id?: IntWithAggregatesFilter<"pegawai"> | number
     nik?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
     jenjang_pend?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
     pendidikan?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
     tahun_pend?: IntNullableWithAggregatesFilter<"pegawai"> | number | null
+    tandaTanganUrl?: StringNullableWithAggregatesFilter<"pegawai"> | string | null
     cv_generated_at?: DateTimeNullableWithAggregatesFilter<"pegawai"> | Date | string | null
+  }
+
+  export type ProyekWhereInput = {
+    AND?: ProyekWhereInput | ProyekWhereInput[]
+    OR?: ProyekWhereInput[]
+    NOT?: ProyekWhereInput | ProyekWhereInput[]
+    id?: IntFilter<"Proyek"> | number
+    namaProyek?: StringFilter<"Proyek"> | string
+    klien?: StringFilter<"Proyek"> | string
+    lokasi?: StringFilter<"Proyek"> | string
+    suratTugas?: SuratTugasListRelationFilter
+  }
+
+  export type ProyekOrderByWithRelationInput = {
+    id?: SortOrder
+    namaProyek?: SortOrder
+    klien?: SortOrder
+    lokasi?: SortOrder
+    suratTugas?: SuratTugasOrderByRelationAggregateInput
+  }
+
+  export type ProyekWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ProyekWhereInput | ProyekWhereInput[]
+    OR?: ProyekWhereInput[]
+    NOT?: ProyekWhereInput | ProyekWhereInput[]
+    namaProyek?: StringFilter<"Proyek"> | string
+    klien?: StringFilter<"Proyek"> | string
+    lokasi?: StringFilter<"Proyek"> | string
+    suratTugas?: SuratTugasListRelationFilter
+  }, "id">
+
+  export type ProyekOrderByWithAggregationInput = {
+    id?: SortOrder
+    namaProyek?: SortOrder
+    klien?: SortOrder
+    lokasi?: SortOrder
+    _count?: ProyekCountOrderByAggregateInput
+    _avg?: ProyekAvgOrderByAggregateInput
+    _max?: ProyekMaxOrderByAggregateInput
+    _min?: ProyekMinOrderByAggregateInput
+    _sum?: ProyekSumOrderByAggregateInput
+  }
+
+  export type ProyekScalarWhereWithAggregatesInput = {
+    AND?: ProyekScalarWhereWithAggregatesInput | ProyekScalarWhereWithAggregatesInput[]
+    OR?: ProyekScalarWhereWithAggregatesInput[]
+    NOT?: ProyekScalarWhereWithAggregatesInput | ProyekScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Proyek"> | number
+    namaProyek?: StringWithAggregatesFilter<"Proyek"> | string
+    klien?: StringWithAggregatesFilter<"Proyek"> | string
+    lokasi?: StringWithAggregatesFilter<"Proyek"> | string
   }
 
   export type pelatihanWhereInput = {
@@ -7911,6 +8520,7 @@ export namespace Prisma {
     keterangan_utilisasi?: StringNullableFilter<"pelatihan"> | string | null
     tahun?: IntNullableFilter<"pelatihan"> | number | null
     tanggal_akhir?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
+    pegawaiId?: IntNullableFilter<"pelatihan"> | number | null
     pegawai?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
   }
 
@@ -7928,6 +8538,7 @@ export namespace Prisma {
     keterangan_utilisasi?: SortOrderInput | SortOrder
     tahun?: SortOrderInput | SortOrder
     tanggal_akhir?: SortOrderInput | SortOrder
+    pegawaiId?: SortOrderInput | SortOrder
     pegawai?: pegawaiOrderByWithRelationInput
   }
 
@@ -7948,6 +8559,7 @@ export namespace Prisma {
     keterangan_utilisasi?: StringNullableFilter<"pelatihan"> | string | null
     tahun?: IntNullableFilter<"pelatihan"> | number | null
     tanggal_akhir?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
+    pegawaiId?: IntNullableFilter<"pelatihan"> | number | null
     pegawai?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
   }, "id_pelatihan">
 
@@ -7965,6 +8577,7 @@ export namespace Prisma {
     keterangan_utilisasi?: SortOrderInput | SortOrder
     tahun?: SortOrderInput | SortOrder
     tanggal_akhir?: SortOrderInput | SortOrder
+    pegawaiId?: SortOrderInput | SortOrder
     _count?: pelatihanCountOrderByAggregateInput
     _avg?: pelatihanAvgOrderByAggregateInput
     _max?: pelatihanMaxOrderByAggregateInput
@@ -7989,6 +8602,7 @@ export namespace Prisma {
     keterangan_utilisasi?: StringNullableWithAggregatesFilter<"pelatihan"> | string | null
     tahun?: IntNullableWithAggregatesFilter<"pelatihan"> | number | null
     tanggal_akhir?: DateTimeNullableWithAggregatesFilter<"pelatihan"> | Date | string | null
+    pegawaiId?: IntNullableWithAggregatesFilter<"pelatihan"> | number | null
   }
 
   export type pengalaman_kerjaWhereInput = {
@@ -8001,6 +8615,7 @@ export namespace Prisma {
     pengalaman_kerja?: StringNullableFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableFilter<"pengalaman_kerja"> | string | null
     lokasi?: StringNullableFilter<"pengalaman_kerja"> | string | null
+    pegawaiId?: IntNullableFilter<"pengalaman_kerja"> | number | null
     pegawai?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
   }
 
@@ -8011,6 +8626,7 @@ export namespace Prisma {
     pengalaman_kerja?: SortOrderInput | SortOrder
     perusahaan?: SortOrderInput | SortOrder
     lokasi?: SortOrderInput | SortOrder
+    pegawaiId?: SortOrderInput | SortOrder
     pegawai?: pegawaiOrderByWithRelationInput
   }
 
@@ -8024,6 +8640,7 @@ export namespace Prisma {
     pengalaman_kerja?: StringNullableFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableFilter<"pengalaman_kerja"> | string | null
     lokasi?: StringNullableFilter<"pengalaman_kerja"> | string | null
+    pegawaiId?: IntNullableFilter<"pengalaman_kerja"> | number | null
     pegawai?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
   }, "id_pengalaman">
 
@@ -8034,6 +8651,7 @@ export namespace Prisma {
     pengalaman_kerja?: SortOrderInput | SortOrder
     perusahaan?: SortOrderInput | SortOrder
     lokasi?: SortOrderInput | SortOrder
+    pegawaiId?: SortOrderInput | SortOrder
     _count?: pengalaman_kerjaCountOrderByAggregateInput
     _avg?: pengalaman_kerjaAvgOrderByAggregateInput
     _max?: pengalaman_kerjaMaxOrderByAggregateInput
@@ -8051,6 +8669,7 @@ export namespace Prisma {
     pengalaman_kerja?: StringNullableWithAggregatesFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableWithAggregatesFilter<"pengalaman_kerja"> | string | null
     lokasi?: StringNullableWithAggregatesFilter<"pengalaman_kerja"> | string | null
+    pegawaiId?: IntNullableWithAggregatesFilter<"pengalaman_kerja"> | number | null
   }
 
   export type SuratTugasWhereInput = {
@@ -8059,14 +8678,12 @@ export namespace Prisma {
     NOT?: SuratTugasWhereInput | SuratTugasWhereInput[]
     id?: IntFilter<"SuratTugas"> | number
     nomor_surat?: StringNullableFilter<"SuratTugas"> | string | null
-    klien?: StringFilter<"SuratTugas"> | string
-    pekerjaan?: StringFilter<"SuratTugas"> | string
+    proyekId?: IntNullableFilter<"SuratTugas"> | number | null
     status_pekerjaan?: StringNullableFilter<"SuratTugas"> | string | null
     no_service_order?: StringNullableFilter<"SuratTugas"> | string | null
     bidang_pekerjaan?: StringNullableFilter<"SuratTugas"> | string | null
     peralatan_inspeksi?: StringNullableListFilter<"SuratTugas">
     kebutuhan_material?: StringNullableListFilter<"SuratTugas">
-    lokasi_pekerjaan?: StringNullableListFilter<"SuratTugas">
     tanggal_berangkat?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
     tanggal_kembali?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
     transportasi_operasional?: BoolFilter<"SuratTugas"> | boolean
@@ -8076,25 +8693,39 @@ export namespace Prisma {
     tiket?: BoolFilter<"SuratTugas"> | boolean
     penginapan?: BoolFilter<"SuratTugas"> | boolean
     keterangan_lain?: StringNullableFilter<"SuratTugas"> | string | null
+    leadInspectorId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiLeadAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    koordinatorId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiKoorAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    seniorManagerId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiSmAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    kepalaCabangId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiKacabAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    catatanPenolakan?: StringNullableFilter<"SuratTugas"> | string | null
+    dibuatOlehId?: IntNullableFilter<"SuratTugas"> | number | null
     createdAt?: DateTimeFilter<"SuratTugas"> | Date | string
     updatedAt?: DateTimeFilter<"SuratTugas"> | Date | string
     spi?: StringNullableFilter<"SuratTugas"> | string | null
     wbs?: StringNullableFilter<"SuratTugas"> | string | null
     status?: EnumStatusSuratTugasFilter<"SuratTugas"> | $Enums.StatusSuratTugas
-    pegawai_surat_tugas?: PegawaiSuratTugasListRelationFilter
+    proyek?: XOR<ProyekNullableScalarRelationFilter, ProyekWhereInput> | null
+    leadInspector?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
+    koordinator?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
+    seniorManager?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
+    kepalaCabang?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
+    timInspektor?: PegawaiListRelationFilter
+    dibuatOleh?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
   }
 
   export type SuratTugasOrderByWithRelationInput = {
     id?: SortOrder
     nomor_surat?: SortOrderInput | SortOrder
-    klien?: SortOrder
-    pekerjaan?: SortOrder
+    proyekId?: SortOrderInput | SortOrder
     status_pekerjaan?: SortOrderInput | SortOrder
     no_service_order?: SortOrderInput | SortOrder
     bidang_pekerjaan?: SortOrderInput | SortOrder
     peralatan_inspeksi?: SortOrder
     kebutuhan_material?: SortOrder
-    lokasi_pekerjaan?: SortOrder
     tanggal_berangkat?: SortOrderInput | SortOrder
     tanggal_kembali?: SortOrderInput | SortOrder
     transportasi_operasional?: SortOrder
@@ -8104,12 +8735,28 @@ export namespace Prisma {
     tiket?: SortOrder
     penginapan?: SortOrder
     keterangan_lain?: SortOrderInput | SortOrder
+    leadInspectorId?: SortOrderInput | SortOrder
+    disetujuiLeadAt?: SortOrderInput | SortOrder
+    koordinatorId?: SortOrderInput | SortOrder
+    disetujuiKoorAt?: SortOrderInput | SortOrder
+    seniorManagerId?: SortOrderInput | SortOrder
+    disetujuiSmAt?: SortOrderInput | SortOrder
+    kepalaCabangId?: SortOrderInput | SortOrder
+    disetujuiKacabAt?: SortOrderInput | SortOrder
+    catatanPenolakan?: SortOrderInput | SortOrder
+    dibuatOlehId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     spi?: SortOrderInput | SortOrder
     wbs?: SortOrderInput | SortOrder
     status?: SortOrder
-    pegawai_surat_tugas?: PegawaiSuratTugasOrderByRelationAggregateInput
+    proyek?: ProyekOrderByWithRelationInput
+    leadInspector?: pegawaiOrderByWithRelationInput
+    koordinator?: pegawaiOrderByWithRelationInput
+    seniorManager?: pegawaiOrderByWithRelationInput
+    kepalaCabang?: pegawaiOrderByWithRelationInput
+    timInspektor?: pegawaiOrderByRelationAggregateInput
+    dibuatOleh?: pegawaiOrderByWithRelationInput
   }
 
   export type SuratTugasWhereUniqueInput = Prisma.AtLeast<{
@@ -8118,14 +8765,12 @@ export namespace Prisma {
     AND?: SuratTugasWhereInput | SuratTugasWhereInput[]
     OR?: SuratTugasWhereInput[]
     NOT?: SuratTugasWhereInput | SuratTugasWhereInput[]
-    klien?: StringFilter<"SuratTugas"> | string
-    pekerjaan?: StringFilter<"SuratTugas"> | string
+    proyekId?: IntNullableFilter<"SuratTugas"> | number | null
     status_pekerjaan?: StringNullableFilter<"SuratTugas"> | string | null
     no_service_order?: StringNullableFilter<"SuratTugas"> | string | null
     bidang_pekerjaan?: StringNullableFilter<"SuratTugas"> | string | null
     peralatan_inspeksi?: StringNullableListFilter<"SuratTugas">
     kebutuhan_material?: StringNullableListFilter<"SuratTugas">
-    lokasi_pekerjaan?: StringNullableListFilter<"SuratTugas">
     tanggal_berangkat?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
     tanggal_kembali?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
     transportasi_operasional?: BoolFilter<"SuratTugas"> | boolean
@@ -8135,25 +8780,39 @@ export namespace Prisma {
     tiket?: BoolFilter<"SuratTugas"> | boolean
     penginapan?: BoolFilter<"SuratTugas"> | boolean
     keterangan_lain?: StringNullableFilter<"SuratTugas"> | string | null
+    leadInspectorId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiLeadAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    koordinatorId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiKoorAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    seniorManagerId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiSmAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    kepalaCabangId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiKacabAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    catatanPenolakan?: StringNullableFilter<"SuratTugas"> | string | null
+    dibuatOlehId?: IntNullableFilter<"SuratTugas"> | number | null
     createdAt?: DateTimeFilter<"SuratTugas"> | Date | string
     updatedAt?: DateTimeFilter<"SuratTugas"> | Date | string
     spi?: StringNullableFilter<"SuratTugas"> | string | null
     wbs?: StringNullableFilter<"SuratTugas"> | string | null
     status?: EnumStatusSuratTugasFilter<"SuratTugas"> | $Enums.StatusSuratTugas
-    pegawai_surat_tugas?: PegawaiSuratTugasListRelationFilter
+    proyek?: XOR<ProyekNullableScalarRelationFilter, ProyekWhereInput> | null
+    leadInspector?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
+    koordinator?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
+    seniorManager?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
+    kepalaCabang?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
+    timInspektor?: PegawaiListRelationFilter
+    dibuatOleh?: XOR<PegawaiNullableScalarRelationFilter, pegawaiWhereInput> | null
   }, "id" | "nomor_surat">
 
   export type SuratTugasOrderByWithAggregationInput = {
     id?: SortOrder
     nomor_surat?: SortOrderInput | SortOrder
-    klien?: SortOrder
-    pekerjaan?: SortOrder
+    proyekId?: SortOrderInput | SortOrder
     status_pekerjaan?: SortOrderInput | SortOrder
     no_service_order?: SortOrderInput | SortOrder
     bidang_pekerjaan?: SortOrderInput | SortOrder
     peralatan_inspeksi?: SortOrder
     kebutuhan_material?: SortOrder
-    lokasi_pekerjaan?: SortOrder
     tanggal_berangkat?: SortOrderInput | SortOrder
     tanggal_kembali?: SortOrderInput | SortOrder
     transportasi_operasional?: SortOrder
@@ -8163,6 +8822,16 @@ export namespace Prisma {
     tiket?: SortOrder
     penginapan?: SortOrder
     keterangan_lain?: SortOrderInput | SortOrder
+    leadInspectorId?: SortOrderInput | SortOrder
+    disetujuiLeadAt?: SortOrderInput | SortOrder
+    koordinatorId?: SortOrderInput | SortOrder
+    disetujuiKoorAt?: SortOrderInput | SortOrder
+    seniorManagerId?: SortOrderInput | SortOrder
+    disetujuiSmAt?: SortOrderInput | SortOrder
+    kepalaCabangId?: SortOrderInput | SortOrder
+    disetujuiKacabAt?: SortOrderInput | SortOrder
+    catatanPenolakan?: SortOrderInput | SortOrder
+    dibuatOlehId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     spi?: SortOrderInput | SortOrder
@@ -8181,14 +8850,12 @@ export namespace Prisma {
     NOT?: SuratTugasScalarWhereWithAggregatesInput | SuratTugasScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"SuratTugas"> | number
     nomor_surat?: StringNullableWithAggregatesFilter<"SuratTugas"> | string | null
-    klien?: StringWithAggregatesFilter<"SuratTugas"> | string
-    pekerjaan?: StringWithAggregatesFilter<"SuratTugas"> | string
+    proyekId?: IntNullableWithAggregatesFilter<"SuratTugas"> | number | null
     status_pekerjaan?: StringNullableWithAggregatesFilter<"SuratTugas"> | string | null
     no_service_order?: StringNullableWithAggregatesFilter<"SuratTugas"> | string | null
     bidang_pekerjaan?: StringNullableWithAggregatesFilter<"SuratTugas"> | string | null
     peralatan_inspeksi?: StringNullableListFilter<"SuratTugas">
     kebutuhan_material?: StringNullableListFilter<"SuratTugas">
-    lokasi_pekerjaan?: StringNullableListFilter<"SuratTugas">
     tanggal_berangkat?: DateTimeNullableWithAggregatesFilter<"SuratTugas"> | Date | string | null
     tanggal_kembali?: DateTimeNullableWithAggregatesFilter<"SuratTugas"> | Date | string | null
     transportasi_operasional?: BoolWithAggregatesFilter<"SuratTugas"> | boolean
@@ -8198,81 +8865,21 @@ export namespace Prisma {
     tiket?: BoolWithAggregatesFilter<"SuratTugas"> | boolean
     penginapan?: BoolWithAggregatesFilter<"SuratTugas"> | boolean
     keterangan_lain?: StringNullableWithAggregatesFilter<"SuratTugas"> | string | null
+    leadInspectorId?: IntNullableWithAggregatesFilter<"SuratTugas"> | number | null
+    disetujuiLeadAt?: DateTimeNullableWithAggregatesFilter<"SuratTugas"> | Date | string | null
+    koordinatorId?: IntNullableWithAggregatesFilter<"SuratTugas"> | number | null
+    disetujuiKoorAt?: DateTimeNullableWithAggregatesFilter<"SuratTugas"> | Date | string | null
+    seniorManagerId?: IntNullableWithAggregatesFilter<"SuratTugas"> | number | null
+    disetujuiSmAt?: DateTimeNullableWithAggregatesFilter<"SuratTugas"> | Date | string | null
+    kepalaCabangId?: IntNullableWithAggregatesFilter<"SuratTugas"> | number | null
+    disetujuiKacabAt?: DateTimeNullableWithAggregatesFilter<"SuratTugas"> | Date | string | null
+    catatanPenolakan?: StringNullableWithAggregatesFilter<"SuratTugas"> | string | null
+    dibuatOlehId?: IntNullableWithAggregatesFilter<"SuratTugas"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"SuratTugas"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SuratTugas"> | Date | string
     spi?: StringNullableWithAggregatesFilter<"SuratTugas"> | string | null
     wbs?: StringNullableWithAggregatesFilter<"SuratTugas"> | string | null
     status?: EnumStatusSuratTugasWithAggregatesFilter<"SuratTugas"> | $Enums.StatusSuratTugas
-  }
-
-  export type PegawaiSuratTugasWhereInput = {
-    AND?: PegawaiSuratTugasWhereInput | PegawaiSuratTugasWhereInput[]
-    OR?: PegawaiSuratTugasWhereInput[]
-    NOT?: PegawaiSuratTugasWhereInput | PegawaiSuratTugasWhereInput[]
-    id?: IntFilter<"PegawaiSuratTugas"> | number
-    suratTugasId?: IntFilter<"PegawaiSuratTugas"> | number
-    pegawaiNup?: StringFilter<"PegawaiSuratTugas"> | string
-    jabatan?: StringNullableFilter<"PegawaiSuratTugas"> | string | null
-    approved?: BoolFilter<"PegawaiSuratTugas"> | boolean
-    approvedBy?: StringNullableFilter<"PegawaiSuratTugas"> | string | null
-    approvedAt?: DateTimeNullableFilter<"PegawaiSuratTugas"> | Date | string | null
-    pegawai?: XOR<PegawaiScalarRelationFilter, pegawaiWhereInput>
-    suratTugas?: XOR<SuratTugasScalarRelationFilter, SuratTugasWhereInput>
-  }
-
-  export type PegawaiSuratTugasOrderByWithRelationInput = {
-    id?: SortOrder
-    suratTugasId?: SortOrder
-    pegawaiNup?: SortOrder
-    jabatan?: SortOrderInput | SortOrder
-    approved?: SortOrder
-    approvedBy?: SortOrderInput | SortOrder
-    approvedAt?: SortOrderInput | SortOrder
-    pegawai?: pegawaiOrderByWithRelationInput
-    suratTugas?: SuratTugasOrderByWithRelationInput
-  }
-
-  export type PegawaiSuratTugasWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: PegawaiSuratTugasWhereInput | PegawaiSuratTugasWhereInput[]
-    OR?: PegawaiSuratTugasWhereInput[]
-    NOT?: PegawaiSuratTugasWhereInput | PegawaiSuratTugasWhereInput[]
-    suratTugasId?: IntFilter<"PegawaiSuratTugas"> | number
-    pegawaiNup?: StringFilter<"PegawaiSuratTugas"> | string
-    jabatan?: StringNullableFilter<"PegawaiSuratTugas"> | string | null
-    approved?: BoolFilter<"PegawaiSuratTugas"> | boolean
-    approvedBy?: StringNullableFilter<"PegawaiSuratTugas"> | string | null
-    approvedAt?: DateTimeNullableFilter<"PegawaiSuratTugas"> | Date | string | null
-    pegawai?: XOR<PegawaiScalarRelationFilter, pegawaiWhereInput>
-    suratTugas?: XOR<SuratTugasScalarRelationFilter, SuratTugasWhereInput>
-  }, "id">
-
-  export type PegawaiSuratTugasOrderByWithAggregationInput = {
-    id?: SortOrder
-    suratTugasId?: SortOrder
-    pegawaiNup?: SortOrder
-    jabatan?: SortOrderInput | SortOrder
-    approved?: SortOrder
-    approvedBy?: SortOrderInput | SortOrder
-    approvedAt?: SortOrderInput | SortOrder
-    _count?: PegawaiSuratTugasCountOrderByAggregateInput
-    _avg?: PegawaiSuratTugasAvgOrderByAggregateInput
-    _max?: PegawaiSuratTugasMaxOrderByAggregateInput
-    _min?: PegawaiSuratTugasMinOrderByAggregateInput
-    _sum?: PegawaiSuratTugasSumOrderByAggregateInput
-  }
-
-  export type PegawaiSuratTugasScalarWhereWithAggregatesInput = {
-    AND?: PegawaiSuratTugasScalarWhereWithAggregatesInput | PegawaiSuratTugasScalarWhereWithAggregatesInput[]
-    OR?: PegawaiSuratTugasScalarWhereWithAggregatesInput[]
-    NOT?: PegawaiSuratTugasScalarWhereWithAggregatesInput | PegawaiSuratTugasScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"PegawaiSuratTugas"> | number
-    suratTugasId?: IntWithAggregatesFilter<"PegawaiSuratTugas"> | number
-    pegawaiNup?: StringWithAggregatesFilter<"PegawaiSuratTugas"> | string
-    jabatan?: StringNullableWithAggregatesFilter<"PegawaiSuratTugas"> | string | null
-    approved?: BoolWithAggregatesFilter<"PegawaiSuratTugas"> | boolean
-    approvedBy?: StringNullableWithAggregatesFilter<"PegawaiSuratTugas"> | string | null
-    approvedAt?: DateTimeNullableWithAggregatesFilter<"PegawaiSuratTugas"> | Date | string | null
   }
 
   export type pegawaiCreateInput = {
@@ -8288,20 +8895,26 @@ export namespace Prisma {
     no_telepon?: string | null
     email?: string | null
     password: string
-    role?: string | null
+    role?: pegawaiCreateroleInput | string[]
     username?: string | null
-    id?: number
     nik?: string | null
     jenjang_pend?: string | null
     pendidikan?: string | null
     tahun_pend?: number | null
+    tandaTanganUrl?: string | null
     cv_generated_at?: Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasCreateNestedManyWithoutPegawaiInput
     pelatihan?: pelatihanCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasCreateNestedManyWithoutKepalaCabangInput
   }
 
   export type pegawaiUncheckedCreateInput = {
+    id?: number
     nup: string
     nama_pegawai: string
     status_pegawai?: string | null
@@ -8314,17 +8927,22 @@ export namespace Prisma {
     no_telepon?: string | null
     email?: string | null
     password: string
-    role?: string | null
+    role?: pegawaiCreateroleInput | string[]
     username?: string | null
-    id?: number
     nik?: string | null
     jenjang_pend?: string | null
     pendidikan?: string | null
     tahun_pend?: number | null
+    tandaTanganUrl?: string | null
     cv_generated_at?: Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasUncheckedCreateNestedManyWithoutPegawaiInput
     pelatihan?: pelatihanUncheckedCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasUncheckedCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasUncheckedCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKepalaCabangInput
   }
 
   export type pegawaiUpdateInput = {
@@ -8340,19 +8958,26 @@ export namespace Prisma {
     no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: pegawaiUpdateroleInput | string[]
     username?: NullableStringFieldUpdateOperationsInput | string | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
     pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
     tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
     cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasUpdateManyWithoutPegawaiNestedInput
     pelatihan?: pelatihanUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUpdateManyWithoutKepalaCabangNestedInput
   }
 
   export type pegawaiUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
     nup?: StringFieldUpdateOperationsInput | string
     nama_pegawai?: StringFieldUpdateOperationsInput | string
     status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8365,20 +8990,26 @@ export namespace Prisma {
     no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: pegawaiUpdateroleInput | string[]
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    id?: IntFieldUpdateOperationsInput | number
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
     pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
     tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
     cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasUncheckedUpdateManyWithoutPegawaiNestedInput
     pelatihan?: pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUncheckedUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUncheckedUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUncheckedUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUncheckedUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUncheckedUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUncheckedUpdateManyWithoutKepalaCabangNestedInput
   }
 
   export type pegawaiCreateManyInput = {
+    id?: number
     nup: string
     nama_pegawai: string
     status_pegawai?: string | null
@@ -8391,13 +9022,13 @@ export namespace Prisma {
     no_telepon?: string | null
     email?: string | null
     password: string
-    role?: string | null
+    role?: pegawaiCreateroleInput | string[]
     username?: string | null
-    id?: number
     nik?: string | null
     jenjang_pend?: string | null
     pendidikan?: string | null
     tahun_pend?: number | null
+    tandaTanganUrl?: string | null
     cv_generated_at?: Date | string | null
   }
 
@@ -8414,16 +9045,18 @@ export namespace Prisma {
     no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: pegawaiUpdateroleInput | string[]
     username?: NullableStringFieldUpdateOperationsInput | string | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
     pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
     tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
     cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type pegawaiUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
     nup?: StringFieldUpdateOperationsInput | string
     nama_pegawai?: StringFieldUpdateOperationsInput | string
     status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8436,17 +9069,68 @@ export namespace Prisma {
     no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: pegawaiUpdateroleInput | string[]
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    id?: IntFieldUpdateOperationsInput | number
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
     pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
     tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
     cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type ProyekCreateInput = {
+    namaProyek: string
+    klien: string
+    lokasi: string
+    suratTugas?: SuratTugasCreateNestedManyWithoutProyekInput
+  }
+
+  export type ProyekUncheckedCreateInput = {
+    id?: number
+    namaProyek: string
+    klien: string
+    lokasi: string
+    suratTugas?: SuratTugasUncheckedCreateNestedManyWithoutProyekInput
+  }
+
+  export type ProyekUpdateInput = {
+    namaProyek?: StringFieldUpdateOperationsInput | string
+    klien?: StringFieldUpdateOperationsInput | string
+    lokasi?: StringFieldUpdateOperationsInput | string
+    suratTugas?: SuratTugasUpdateManyWithoutProyekNestedInput
+  }
+
+  export type ProyekUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    namaProyek?: StringFieldUpdateOperationsInput | string
+    klien?: StringFieldUpdateOperationsInput | string
+    lokasi?: StringFieldUpdateOperationsInput | string
+    suratTugas?: SuratTugasUncheckedUpdateManyWithoutProyekNestedInput
+  }
+
+  export type ProyekCreateManyInput = {
+    id?: number
+    namaProyek: string
+    klien: string
+    lokasi: string
+  }
+
+  export type ProyekUpdateManyMutationInput = {
+    namaProyek?: StringFieldUpdateOperationsInput | string
+    klien?: StringFieldUpdateOperationsInput | string
+    lokasi?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ProyekUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    namaProyek?: StringFieldUpdateOperationsInput | string
+    klien?: StringFieldUpdateOperationsInput | string
+    lokasi?: StringFieldUpdateOperationsInput | string
+  }
+
   export type pelatihanCreateInput = {
+    nup?: string | null
     nama_pelatihan?: string | null
     penyelenggara?: string | null
     lokasi?: string | null
@@ -8475,9 +9159,11 @@ export namespace Prisma {
     keterangan_utilisasi?: string | null
     tahun?: number | null
     tanggal_akhir?: Date | string | null
+    pegawaiId?: number | null
   }
 
   export type pelatihanUpdateInput = {
+    nup?: NullableStringFieldUpdateOperationsInput | string | null
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8506,6 +9192,7 @@ export namespace Prisma {
     keterangan_utilisasi?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pegawaiId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type pelatihanCreateManyInput = {
@@ -8522,9 +9209,11 @@ export namespace Prisma {
     keterangan_utilisasi?: string | null
     tahun?: number | null
     tanggal_akhir?: Date | string | null
+    pegawaiId?: number | null
   }
 
   export type pelatihanUpdateManyMutationInput = {
+    nup?: NullableStringFieldUpdateOperationsInput | string | null
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8552,9 +9241,11 @@ export namespace Prisma {
     keterangan_utilisasi?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     tanggal_akhir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pegawaiId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type pengalaman_kerjaCreateInput = {
+    nup?: string | null
     tahun?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
@@ -8569,9 +9260,11 @@ export namespace Prisma {
     pengalaman_kerja?: string | null
     perusahaan?: string | null
     lokasi?: string | null
+    pegawaiId?: number | null
   }
 
   export type pengalaman_kerjaUpdateInput = {
+    nup?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8586,6 +9279,7 @@ export namespace Prisma {
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
+    pegawaiId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type pengalaman_kerjaCreateManyInput = {
@@ -8595,9 +9289,11 @@ export namespace Prisma {
     pengalaman_kerja?: string | null
     perusahaan?: string | null
     lokasi?: string | null
+    pegawaiId?: number | null
   }
 
   export type pengalaman_kerjaUpdateManyMutationInput = {
+    nup?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8611,18 +9307,16 @@ export namespace Prisma {
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
+    pegawaiId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SuratTugasCreateInput = {
     nomor_surat?: string | null
-    klien: string
-    pekerjaan: string
     status_pekerjaan?: string | null
     no_service_order?: string | null
     bidang_pekerjaan?: string | null
     peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
     kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
-    lokasi_pekerjaan?: SuratTugasCreatelokasi_pekerjaanInput | string[]
     tanggal_berangkat?: Date | string | null
     tanggal_kembali?: Date | string | null
     transportasi_operasional?: boolean
@@ -8632,25 +9326,34 @@ export namespace Prisma {
     tiket?: boolean
     penginapan?: boolean
     keterangan_lain?: string | null
+    disetujuiLeadAt?: Date | string | null
+    disetujuiKoorAt?: Date | string | null
+    disetujuiSmAt?: Date | string | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     spi?: string | null
     wbs?: string | null
     status?: $Enums.StatusSuratTugas
-    pegawai_surat_tugas?: PegawaiSuratTugasCreateNestedManyWithoutSuratTugasInput
+    proyek?: ProyekCreateNestedOneWithoutSuratTugasInput
+    leadInspector?: pegawaiCreateNestedOneWithoutLeadApproverDiInput
+    koordinator?: pegawaiCreateNestedOneWithoutKoorApproverDiInput
+    seniorManager?: pegawaiCreateNestedOneWithoutSmApproverDiInput
+    kepalaCabang?: pegawaiCreateNestedOneWithoutKacabApproverDiInput
+    timInspektor?: pegawaiCreateNestedManyWithoutAnggotaTimDiInput
+    dibuatOleh?: pegawaiCreateNestedOneWithoutSuratTugasDibuatInput
   }
 
   export type SuratTugasUncheckedCreateInput = {
     id?: number
     nomor_surat?: string | null
-    klien: string
-    pekerjaan: string
+    proyekId?: number | null
     status_pekerjaan?: string | null
     no_service_order?: string | null
     bidang_pekerjaan?: string | null
     peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
     kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
-    lokasi_pekerjaan?: SuratTugasCreatelokasi_pekerjaanInput | string[]
     tanggal_berangkat?: Date | string | null
     tanggal_kembali?: Date | string | null
     transportasi_operasional?: boolean
@@ -8660,24 +9363,31 @@ export namespace Prisma {
     tiket?: boolean
     penginapan?: boolean
     keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     spi?: string | null
     wbs?: string | null
     status?: $Enums.StatusSuratTugas
-    pegawai_surat_tugas?: PegawaiSuratTugasUncheckedCreateNestedManyWithoutSuratTugasInput
+    timInspektor?: pegawaiUncheckedCreateNestedManyWithoutAnggotaTimDiInput
   }
 
   export type SuratTugasUpdateInput = {
     nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    klien?: StringFieldUpdateOperationsInput | string
-    pekerjaan?: StringFieldUpdateOperationsInput | string
     status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
     no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
     bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
     peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
     kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
-    lokasi_pekerjaan?: SuratTugasUpdatelokasi_pekerjaanInput | string[]
     tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
@@ -8687,25 +9397,34 @@ export namespace Prisma {
     tiket?: BoolFieldUpdateOperationsInput | boolean
     penginapan?: BoolFieldUpdateOperationsInput | boolean
     keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     spi?: NullableStringFieldUpdateOperationsInput | string | null
     wbs?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
-    pegawai_surat_tugas?: PegawaiSuratTugasUpdateManyWithoutSuratTugasNestedInput
+    proyek?: ProyekUpdateOneWithoutSuratTugasNestedInput
+    leadInspector?: pegawaiUpdateOneWithoutLeadApproverDiNestedInput
+    koordinator?: pegawaiUpdateOneWithoutKoorApproverDiNestedInput
+    seniorManager?: pegawaiUpdateOneWithoutSmApproverDiNestedInput
+    kepalaCabang?: pegawaiUpdateOneWithoutKacabApproverDiNestedInput
+    timInspektor?: pegawaiUpdateManyWithoutAnggotaTimDiNestedInput
+    dibuatOleh?: pegawaiUpdateOneWithoutSuratTugasDibuatNestedInput
   }
 
   export type SuratTugasUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    klien?: StringFieldUpdateOperationsInput | string
-    pekerjaan?: StringFieldUpdateOperationsInput | string
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
     status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
     no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
     bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
     peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
     kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
-    lokasi_pekerjaan?: SuratTugasUpdatelokasi_pekerjaanInput | string[]
     tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
@@ -8715,25 +9434,33 @@ export namespace Prisma {
     tiket?: BoolFieldUpdateOperationsInput | boolean
     penginapan?: BoolFieldUpdateOperationsInput | boolean
     keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     spi?: NullableStringFieldUpdateOperationsInput | string | null
     wbs?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
-    pegawai_surat_tugas?: PegawaiSuratTugasUncheckedUpdateManyWithoutSuratTugasNestedInput
+    timInspektor?: pegawaiUncheckedUpdateManyWithoutAnggotaTimDiNestedInput
   }
 
   export type SuratTugasCreateManyInput = {
     id?: number
     nomor_surat?: string | null
-    klien: string
-    pekerjaan: string
+    proyekId?: number | null
     status_pekerjaan?: string | null
     no_service_order?: string | null
     bidang_pekerjaan?: string | null
     peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
     kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
-    lokasi_pekerjaan?: SuratTugasCreatelokasi_pekerjaanInput | string[]
     tanggal_berangkat?: Date | string | null
     tanggal_kembali?: Date | string | null
     transportasi_operasional?: boolean
@@ -8743,6 +9470,16 @@ export namespace Prisma {
     tiket?: boolean
     penginapan?: boolean
     keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     spi?: string | null
@@ -8752,14 +9489,11 @@ export namespace Prisma {
 
   export type SuratTugasUpdateManyMutationInput = {
     nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    klien?: StringFieldUpdateOperationsInput | string
-    pekerjaan?: StringFieldUpdateOperationsInput | string
     status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
     no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
     bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
     peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
     kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
-    lokasi_pekerjaan?: SuratTugasUpdatelokasi_pekerjaanInput | string[]
     tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
@@ -8769,6 +9503,11 @@ export namespace Prisma {
     tiket?: BoolFieldUpdateOperationsInput | boolean
     penginapan?: BoolFieldUpdateOperationsInput | boolean
     keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     spi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8779,14 +9518,12 @@ export namespace Prisma {
   export type SuratTugasUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    klien?: StringFieldUpdateOperationsInput | string
-    pekerjaan?: StringFieldUpdateOperationsInput | string
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
     status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
     no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
     bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
     peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
     kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
-    lokasi_pekerjaan?: SuratTugasUpdatelokasi_pekerjaanInput | string[]
     tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
@@ -8796,6 +9533,16 @@ export namespace Prisma {
     tiket?: BoolFieldUpdateOperationsInput | boolean
     penginapan?: BoolFieldUpdateOperationsInput | boolean
     keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     spi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8803,69 +9550,15 @@ export namespace Prisma {
     status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
   }
 
-  export type PegawaiSuratTugasCreateInput = {
-    jabatan?: string | null
-    approved?: boolean
-    approvedBy?: string | null
-    approvedAt?: Date | string | null
-    pegawai: pegawaiCreateNestedOneWithoutPegawai_surat_tugasInput
-    suratTugas: SuratTugasCreateNestedOneWithoutPegawai_surat_tugasInput
-  }
-
-  export type PegawaiSuratTugasUncheckedCreateInput = {
-    id?: number
-    suratTugasId: number
-    pegawaiNup: string
-    jabatan?: string | null
-    approved?: boolean
-    approvedBy?: string | null
-    approvedAt?: Date | string | null
-  }
-
-  export type PegawaiSuratTugasUpdateInput = {
-    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
-    approved?: BoolFieldUpdateOperationsInput | boolean
-    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    pegawai?: pegawaiUpdateOneRequiredWithoutPegawai_surat_tugasNestedInput
-    suratTugas?: SuratTugasUpdateOneRequiredWithoutPegawai_surat_tugasNestedInput
-  }
-
-  export type PegawaiSuratTugasUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    suratTugasId?: IntFieldUpdateOperationsInput | number
-    pegawaiNup?: StringFieldUpdateOperationsInput | string
-    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
-    approved?: BoolFieldUpdateOperationsInput | boolean
-    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type PegawaiSuratTugasCreateManyInput = {
-    id?: number
-    suratTugasId: number
-    pegawaiNup: string
-    jabatan?: string | null
-    approved?: boolean
-    approvedBy?: string | null
-    approvedAt?: Date | string | null
-  }
-
-  export type PegawaiSuratTugasUpdateManyMutationInput = {
-    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
-    approved?: BoolFieldUpdateOperationsInput | boolean
-    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type PegawaiSuratTugasUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    suratTugasId?: IntFieldUpdateOperationsInput | number
-    pegawaiNup?: StringFieldUpdateOperationsInput | string
-    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
-    approved?: BoolFieldUpdateOperationsInput | boolean
-    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -8909,15 +9602,12 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -8929,12 +9619,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type PegawaiSuratTugasListRelationFilter = {
-    every?: PegawaiSuratTugasWhereInput
-    some?: PegawaiSuratTugasWhereInput
-    none?: PegawaiSuratTugasWhereInput
   }
 
   export type PelatihanListRelationFilter = {
@@ -8949,13 +9633,15 @@ export namespace Prisma {
     none?: pengalaman_kerjaWhereInput
   }
 
+  export type SuratTugasListRelationFilter = {
+    every?: SuratTugasWhereInput
+    some?: SuratTugasWhereInput
+    none?: SuratTugasWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
-  }
-
-  export type PegawaiSuratTugasOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type pelatihanOrderByRelationAggregateInput = {
@@ -8966,7 +9652,12 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type SuratTugasOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type pegawaiCountOrderByAggregateInput = {
+    id?: SortOrder
     nup?: SortOrder
     nama_pegawai?: SortOrder
     status_pegawai?: SortOrder
@@ -8981,11 +9672,11 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     username?: SortOrder
-    id?: SortOrder
     nik?: SortOrder
     jenjang_pend?: SortOrder
     pendidikan?: SortOrder
     tahun_pend?: SortOrder
+    tandaTanganUrl?: SortOrder
     cv_generated_at?: SortOrder
   }
 
@@ -8995,6 +9686,7 @@ export namespace Prisma {
   }
 
   export type pegawaiMaxOrderByAggregateInput = {
+    id?: SortOrder
     nup?: SortOrder
     nama_pegawai?: SortOrder
     status_pegawai?: SortOrder
@@ -9007,17 +9699,17 @@ export namespace Prisma {
     no_telepon?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    role?: SortOrder
     username?: SortOrder
-    id?: SortOrder
     nik?: SortOrder
     jenjang_pend?: SortOrder
     pendidikan?: SortOrder
     tahun_pend?: SortOrder
+    tandaTanganUrl?: SortOrder
     cv_generated_at?: SortOrder
   }
 
   export type pegawaiMinOrderByAggregateInput = {
+    id?: SortOrder
     nup?: SortOrder
     nama_pegawai?: SortOrder
     status_pegawai?: SortOrder
@@ -9030,19 +9722,34 @@ export namespace Prisma {
     no_telepon?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    role?: SortOrder
     username?: SortOrder
-    id?: SortOrder
     nik?: SortOrder
     jenjang_pend?: SortOrder
     pendidikan?: SortOrder
     tahun_pend?: SortOrder
+    tandaTanganUrl?: SortOrder
     cv_generated_at?: SortOrder
   }
 
   export type pegawaiSumOrderByAggregateInput = {
     id?: SortOrder
     tahun_pend?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -9095,22 +9802,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -9125,6 +9816,35 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type ProyekCountOrderByAggregateInput = {
+    id?: SortOrder
+    namaProyek?: SortOrder
+    klien?: SortOrder
+    lokasi?: SortOrder
+  }
+
+  export type ProyekAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ProyekMaxOrderByAggregateInput = {
+    id?: SortOrder
+    namaProyek?: SortOrder
+    klien?: SortOrder
+    lokasi?: SortOrder
+  }
+
+  export type ProyekMinOrderByAggregateInput = {
+    id?: SortOrder
+    namaProyek?: SortOrder
+    klien?: SortOrder
+    lokasi?: SortOrder
+  }
+
+  export type ProyekSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type EnumStatusPelatihanFilter<$PrismaModel = never> = {
@@ -9153,11 +9873,13 @@ export namespace Prisma {
     keterangan_utilisasi?: SortOrder
     tahun?: SortOrder
     tanggal_akhir?: SortOrder
+    pegawaiId?: SortOrder
   }
 
   export type pelatihanAvgOrderByAggregateInput = {
     id_pelatihan?: SortOrder
     tahun?: SortOrder
+    pegawaiId?: SortOrder
   }
 
   export type pelatihanMaxOrderByAggregateInput = {
@@ -9174,6 +9896,7 @@ export namespace Prisma {
     keterangan_utilisasi?: SortOrder
     tahun?: SortOrder
     tanggal_akhir?: SortOrder
+    pegawaiId?: SortOrder
   }
 
   export type pelatihanMinOrderByAggregateInput = {
@@ -9190,11 +9913,13 @@ export namespace Prisma {
     keterangan_utilisasi?: SortOrder
     tahun?: SortOrder
     tanggal_akhir?: SortOrder
+    pegawaiId?: SortOrder
   }
 
   export type pelatihanSumOrderByAggregateInput = {
     id_pelatihan?: SortOrder
     tahun?: SortOrder
+    pegawaiId?: SortOrder
   }
 
   export type EnumStatusPelatihanWithAggregatesFilter<$PrismaModel = never> = {
@@ -9214,11 +9939,13 @@ export namespace Prisma {
     pengalaman_kerja?: SortOrder
     perusahaan?: SortOrder
     lokasi?: SortOrder
+    pegawaiId?: SortOrder
   }
 
   export type pengalaman_kerjaAvgOrderByAggregateInput = {
     id_pengalaman?: SortOrder
     tahun?: SortOrder
+    pegawaiId?: SortOrder
   }
 
   export type pengalaman_kerjaMaxOrderByAggregateInput = {
@@ -9228,6 +9955,7 @@ export namespace Prisma {
     pengalaman_kerja?: SortOrder
     perusahaan?: SortOrder
     lokasi?: SortOrder
+    pegawaiId?: SortOrder
   }
 
   export type pengalaman_kerjaMinOrderByAggregateInput = {
@@ -9237,19 +9965,13 @@ export namespace Prisma {
     pengalaman_kerja?: SortOrder
     perusahaan?: SortOrder
     lokasi?: SortOrder
+    pegawaiId?: SortOrder
   }
 
   export type pengalaman_kerjaSumOrderByAggregateInput = {
     id_pengalaman?: SortOrder
     tahun?: SortOrder
-  }
-
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
+    pegawaiId?: SortOrder
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -9275,17 +9997,30 @@ export namespace Prisma {
     not?: NestedEnumStatusSuratTugasFilter<$PrismaModel> | $Enums.StatusSuratTugas
   }
 
+  export type ProyekNullableScalarRelationFilter = {
+    is?: ProyekWhereInput | null
+    isNot?: ProyekWhereInput | null
+  }
+
+  export type PegawaiListRelationFilter = {
+    every?: pegawaiWhereInput
+    some?: pegawaiWhereInput
+    none?: pegawaiWhereInput
+  }
+
+  export type pegawaiOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type SuratTugasCountOrderByAggregateInput = {
     id?: SortOrder
     nomor_surat?: SortOrder
-    klien?: SortOrder
-    pekerjaan?: SortOrder
+    proyekId?: SortOrder
     status_pekerjaan?: SortOrder
     no_service_order?: SortOrder
     bidang_pekerjaan?: SortOrder
     peralatan_inspeksi?: SortOrder
     kebutuhan_material?: SortOrder
-    lokasi_pekerjaan?: SortOrder
     tanggal_berangkat?: SortOrder
     tanggal_kembali?: SortOrder
     transportasi_operasional?: SortOrder
@@ -9295,6 +10030,16 @@ export namespace Prisma {
     tiket?: SortOrder
     penginapan?: SortOrder
     keterangan_lain?: SortOrder
+    leadInspectorId?: SortOrder
+    disetujuiLeadAt?: SortOrder
+    koordinatorId?: SortOrder
+    disetujuiKoorAt?: SortOrder
+    seniorManagerId?: SortOrder
+    disetujuiSmAt?: SortOrder
+    kepalaCabangId?: SortOrder
+    disetujuiKacabAt?: SortOrder
+    catatanPenolakan?: SortOrder
+    dibuatOlehId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     spi?: SortOrder
@@ -9304,13 +10049,18 @@ export namespace Prisma {
 
   export type SuratTugasAvgOrderByAggregateInput = {
     id?: SortOrder
+    proyekId?: SortOrder
+    leadInspectorId?: SortOrder
+    koordinatorId?: SortOrder
+    seniorManagerId?: SortOrder
+    kepalaCabangId?: SortOrder
+    dibuatOlehId?: SortOrder
   }
 
   export type SuratTugasMaxOrderByAggregateInput = {
     id?: SortOrder
     nomor_surat?: SortOrder
-    klien?: SortOrder
-    pekerjaan?: SortOrder
+    proyekId?: SortOrder
     status_pekerjaan?: SortOrder
     no_service_order?: SortOrder
     bidang_pekerjaan?: SortOrder
@@ -9323,6 +10073,16 @@ export namespace Prisma {
     tiket?: SortOrder
     penginapan?: SortOrder
     keterangan_lain?: SortOrder
+    leadInspectorId?: SortOrder
+    disetujuiLeadAt?: SortOrder
+    koordinatorId?: SortOrder
+    disetujuiKoorAt?: SortOrder
+    seniorManagerId?: SortOrder
+    disetujuiSmAt?: SortOrder
+    kepalaCabangId?: SortOrder
+    disetujuiKacabAt?: SortOrder
+    catatanPenolakan?: SortOrder
+    dibuatOlehId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     spi?: SortOrder
@@ -9333,8 +10093,7 @@ export namespace Prisma {
   export type SuratTugasMinOrderByAggregateInput = {
     id?: SortOrder
     nomor_surat?: SortOrder
-    klien?: SortOrder
-    pekerjaan?: SortOrder
+    proyekId?: SortOrder
     status_pekerjaan?: SortOrder
     no_service_order?: SortOrder
     bidang_pekerjaan?: SortOrder
@@ -9347,6 +10106,16 @@ export namespace Prisma {
     tiket?: SortOrder
     penginapan?: SortOrder
     keterangan_lain?: SortOrder
+    leadInspectorId?: SortOrder
+    disetujuiLeadAt?: SortOrder
+    koordinatorId?: SortOrder
+    disetujuiKoorAt?: SortOrder
+    seniorManagerId?: SortOrder
+    disetujuiSmAt?: SortOrder
+    kepalaCabangId?: SortOrder
+    disetujuiKacabAt?: SortOrder
+    catatanPenolakan?: SortOrder
+    dibuatOlehId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     spi?: SortOrder
@@ -9356,6 +10125,12 @@ export namespace Prisma {
 
   export type SuratTugasSumOrderByAggregateInput = {
     id?: SortOrder
+    proyekId?: SortOrder
+    leadInspectorId?: SortOrder
+    koordinatorId?: SortOrder
+    seniorManagerId?: SortOrder
+    kepalaCabangId?: SortOrder
+    dibuatOlehId?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -9390,61 +10165,8 @@ export namespace Prisma {
     _max?: NestedEnumStatusSuratTugasFilter<$PrismaModel>
   }
 
-  export type PegawaiScalarRelationFilter = {
-    is?: pegawaiWhereInput
-    isNot?: pegawaiWhereInput
-  }
-
-  export type SuratTugasScalarRelationFilter = {
-    is?: SuratTugasWhereInput
-    isNot?: SuratTugasWhereInput
-  }
-
-  export type PegawaiSuratTugasCountOrderByAggregateInput = {
-    id?: SortOrder
-    suratTugasId?: SortOrder
-    pegawaiNup?: SortOrder
-    jabatan?: SortOrder
-    approved?: SortOrder
-    approvedBy?: SortOrder
-    approvedAt?: SortOrder
-  }
-
-  export type PegawaiSuratTugasAvgOrderByAggregateInput = {
-    id?: SortOrder
-    suratTugasId?: SortOrder
-  }
-
-  export type PegawaiSuratTugasMaxOrderByAggregateInput = {
-    id?: SortOrder
-    suratTugasId?: SortOrder
-    pegawaiNup?: SortOrder
-    jabatan?: SortOrder
-    approved?: SortOrder
-    approvedBy?: SortOrder
-    approvedAt?: SortOrder
-  }
-
-  export type PegawaiSuratTugasMinOrderByAggregateInput = {
-    id?: SortOrder
-    suratTugasId?: SortOrder
-    pegawaiNup?: SortOrder
-    jabatan?: SortOrder
-    approved?: SortOrder
-    approvedBy?: SortOrder
-    approvedAt?: SortOrder
-  }
-
-  export type PegawaiSuratTugasSumOrderByAggregateInput = {
-    id?: SortOrder
-    suratTugasId?: SortOrder
-  }
-
-  export type PegawaiSuratTugasCreateNestedManyWithoutPegawaiInput = {
-    create?: XOR<PegawaiSuratTugasCreateWithoutPegawaiInput, PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput> | PegawaiSuratTugasCreateWithoutPegawaiInput[] | PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput[]
-    connectOrCreate?: PegawaiSuratTugasCreateOrConnectWithoutPegawaiInput | PegawaiSuratTugasCreateOrConnectWithoutPegawaiInput[]
-    createMany?: PegawaiSuratTugasCreateManyPegawaiInputEnvelope
-    connect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
+  export type pegawaiCreateroleInput = {
+    set: string[]
   }
 
   export type pelatihanCreateNestedManyWithoutPegawaiInput = {
@@ -9461,11 +10183,45 @@ export namespace Prisma {
     connect?: pengalaman_kerjaWhereUniqueInput | pengalaman_kerjaWhereUniqueInput[]
   }
 
-  export type PegawaiSuratTugasUncheckedCreateNestedManyWithoutPegawaiInput = {
-    create?: XOR<PegawaiSuratTugasCreateWithoutPegawaiInput, PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput> | PegawaiSuratTugasCreateWithoutPegawaiInput[] | PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput[]
-    connectOrCreate?: PegawaiSuratTugasCreateOrConnectWithoutPegawaiInput | PegawaiSuratTugasCreateOrConnectWithoutPegawaiInput[]
-    createMany?: PegawaiSuratTugasCreateManyPegawaiInputEnvelope
-    connect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
+  export type SuratTugasCreateNestedManyWithoutDibuatOlehInput = {
+    create?: XOR<SuratTugasCreateWithoutDibuatOlehInput, SuratTugasUncheckedCreateWithoutDibuatOlehInput> | SuratTugasCreateWithoutDibuatOlehInput[] | SuratTugasUncheckedCreateWithoutDibuatOlehInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutDibuatOlehInput | SuratTugasCreateOrConnectWithoutDibuatOlehInput[]
+    createMany?: SuratTugasCreateManyDibuatOlehInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasCreateNestedManyWithoutTimInspektorInput = {
+    create?: XOR<SuratTugasCreateWithoutTimInspektorInput, SuratTugasUncheckedCreateWithoutTimInspektorInput> | SuratTugasCreateWithoutTimInspektorInput[] | SuratTugasUncheckedCreateWithoutTimInspektorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutTimInspektorInput | SuratTugasCreateOrConnectWithoutTimInspektorInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasCreateNestedManyWithoutLeadInspectorInput = {
+    create?: XOR<SuratTugasCreateWithoutLeadInspectorInput, SuratTugasUncheckedCreateWithoutLeadInspectorInput> | SuratTugasCreateWithoutLeadInspectorInput[] | SuratTugasUncheckedCreateWithoutLeadInspectorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutLeadInspectorInput | SuratTugasCreateOrConnectWithoutLeadInspectorInput[]
+    createMany?: SuratTugasCreateManyLeadInspectorInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasCreateNestedManyWithoutKoordinatorInput = {
+    create?: XOR<SuratTugasCreateWithoutKoordinatorInput, SuratTugasUncheckedCreateWithoutKoordinatorInput> | SuratTugasCreateWithoutKoordinatorInput[] | SuratTugasUncheckedCreateWithoutKoordinatorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutKoordinatorInput | SuratTugasCreateOrConnectWithoutKoordinatorInput[]
+    createMany?: SuratTugasCreateManyKoordinatorInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasCreateNestedManyWithoutSeniorManagerInput = {
+    create?: XOR<SuratTugasCreateWithoutSeniorManagerInput, SuratTugasUncheckedCreateWithoutSeniorManagerInput> | SuratTugasCreateWithoutSeniorManagerInput[] | SuratTugasUncheckedCreateWithoutSeniorManagerInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutSeniorManagerInput | SuratTugasCreateOrConnectWithoutSeniorManagerInput[]
+    createMany?: SuratTugasCreateManySeniorManagerInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasCreateNestedManyWithoutKepalaCabangInput = {
+    create?: XOR<SuratTugasCreateWithoutKepalaCabangInput, SuratTugasUncheckedCreateWithoutKepalaCabangInput> | SuratTugasCreateWithoutKepalaCabangInput[] | SuratTugasUncheckedCreateWithoutKepalaCabangInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutKepalaCabangInput | SuratTugasCreateOrConnectWithoutKepalaCabangInput[]
+    createMany?: SuratTugasCreateManyKepalaCabangInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
   }
 
   export type pelatihanUncheckedCreateNestedManyWithoutPegawaiInput = {
@@ -9482,6 +10238,47 @@ export namespace Prisma {
     connect?: pengalaman_kerjaWhereUniqueInput | pengalaman_kerjaWhereUniqueInput[]
   }
 
+  export type SuratTugasUncheckedCreateNestedManyWithoutDibuatOlehInput = {
+    create?: XOR<SuratTugasCreateWithoutDibuatOlehInput, SuratTugasUncheckedCreateWithoutDibuatOlehInput> | SuratTugasCreateWithoutDibuatOlehInput[] | SuratTugasUncheckedCreateWithoutDibuatOlehInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutDibuatOlehInput | SuratTugasCreateOrConnectWithoutDibuatOlehInput[]
+    createMany?: SuratTugasCreateManyDibuatOlehInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasUncheckedCreateNestedManyWithoutTimInspektorInput = {
+    create?: XOR<SuratTugasCreateWithoutTimInspektorInput, SuratTugasUncheckedCreateWithoutTimInspektorInput> | SuratTugasCreateWithoutTimInspektorInput[] | SuratTugasUncheckedCreateWithoutTimInspektorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutTimInspektorInput | SuratTugasCreateOrConnectWithoutTimInspektorInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasUncheckedCreateNestedManyWithoutLeadInspectorInput = {
+    create?: XOR<SuratTugasCreateWithoutLeadInspectorInput, SuratTugasUncheckedCreateWithoutLeadInspectorInput> | SuratTugasCreateWithoutLeadInspectorInput[] | SuratTugasUncheckedCreateWithoutLeadInspectorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutLeadInspectorInput | SuratTugasCreateOrConnectWithoutLeadInspectorInput[]
+    createMany?: SuratTugasCreateManyLeadInspectorInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasUncheckedCreateNestedManyWithoutKoordinatorInput = {
+    create?: XOR<SuratTugasCreateWithoutKoordinatorInput, SuratTugasUncheckedCreateWithoutKoordinatorInput> | SuratTugasCreateWithoutKoordinatorInput[] | SuratTugasUncheckedCreateWithoutKoordinatorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutKoordinatorInput | SuratTugasCreateOrConnectWithoutKoordinatorInput[]
+    createMany?: SuratTugasCreateManyKoordinatorInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasUncheckedCreateNestedManyWithoutSeniorManagerInput = {
+    create?: XOR<SuratTugasCreateWithoutSeniorManagerInput, SuratTugasUncheckedCreateWithoutSeniorManagerInput> | SuratTugasCreateWithoutSeniorManagerInput[] | SuratTugasUncheckedCreateWithoutSeniorManagerInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutSeniorManagerInput | SuratTugasCreateOrConnectWithoutSeniorManagerInput[]
+    createMany?: SuratTugasCreateManySeniorManagerInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasUncheckedCreateNestedManyWithoutKepalaCabangInput = {
+    create?: XOR<SuratTugasCreateWithoutKepalaCabangInput, SuratTugasUncheckedCreateWithoutKepalaCabangInput> | SuratTugasCreateWithoutKepalaCabangInput[] | SuratTugasUncheckedCreateWithoutKepalaCabangInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutKepalaCabangInput | SuratTugasCreateOrConnectWithoutKepalaCabangInput[]
+    createMany?: SuratTugasCreateManyKepalaCabangInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -9494,26 +10291,17 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
+  export type pegawaiUpdateroleInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type PegawaiSuratTugasUpdateManyWithoutPegawaiNestedInput = {
-    create?: XOR<PegawaiSuratTugasCreateWithoutPegawaiInput, PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput> | PegawaiSuratTugasCreateWithoutPegawaiInput[] | PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput[]
-    connectOrCreate?: PegawaiSuratTugasCreateOrConnectWithoutPegawaiInput | PegawaiSuratTugasCreateOrConnectWithoutPegawaiInput[]
-    upsert?: PegawaiSuratTugasUpsertWithWhereUniqueWithoutPegawaiInput | PegawaiSuratTugasUpsertWithWhereUniqueWithoutPegawaiInput[]
-    createMany?: PegawaiSuratTugasCreateManyPegawaiInputEnvelope
-    set?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    disconnect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    delete?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    connect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    update?: PegawaiSuratTugasUpdateWithWhereUniqueWithoutPegawaiInput | PegawaiSuratTugasUpdateWithWhereUniqueWithoutPegawaiInput[]
-    updateMany?: PegawaiSuratTugasUpdateManyWithWhereWithoutPegawaiInput | PegawaiSuratTugasUpdateManyWithWhereWithoutPegawaiInput[]
-    deleteMany?: PegawaiSuratTugasScalarWhereInput | PegawaiSuratTugasScalarWhereInput[]
   }
 
   export type pelatihanUpdateManyWithoutPegawaiNestedInput = {
@@ -9544,26 +10332,95 @@ export namespace Prisma {
     deleteMany?: pengalaman_kerjaScalarWhereInput | pengalaman_kerjaScalarWhereInput[]
   }
 
+  export type SuratTugasUpdateManyWithoutDibuatOlehNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutDibuatOlehInput, SuratTugasUncheckedCreateWithoutDibuatOlehInput> | SuratTugasCreateWithoutDibuatOlehInput[] | SuratTugasUncheckedCreateWithoutDibuatOlehInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutDibuatOlehInput | SuratTugasCreateOrConnectWithoutDibuatOlehInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutDibuatOlehInput | SuratTugasUpsertWithWhereUniqueWithoutDibuatOlehInput[]
+    createMany?: SuratTugasCreateManyDibuatOlehInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutDibuatOlehInput | SuratTugasUpdateWithWhereUniqueWithoutDibuatOlehInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutDibuatOlehInput | SuratTugasUpdateManyWithWhereWithoutDibuatOlehInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasUpdateManyWithoutTimInspektorNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutTimInspektorInput, SuratTugasUncheckedCreateWithoutTimInspektorInput> | SuratTugasCreateWithoutTimInspektorInput[] | SuratTugasUncheckedCreateWithoutTimInspektorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutTimInspektorInput | SuratTugasCreateOrConnectWithoutTimInspektorInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutTimInspektorInput | SuratTugasUpsertWithWhereUniqueWithoutTimInspektorInput[]
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutTimInspektorInput | SuratTugasUpdateWithWhereUniqueWithoutTimInspektorInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutTimInspektorInput | SuratTugasUpdateManyWithWhereWithoutTimInspektorInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasUpdateManyWithoutLeadInspectorNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutLeadInspectorInput, SuratTugasUncheckedCreateWithoutLeadInspectorInput> | SuratTugasCreateWithoutLeadInspectorInput[] | SuratTugasUncheckedCreateWithoutLeadInspectorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutLeadInspectorInput | SuratTugasCreateOrConnectWithoutLeadInspectorInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutLeadInspectorInput | SuratTugasUpsertWithWhereUniqueWithoutLeadInspectorInput[]
+    createMany?: SuratTugasCreateManyLeadInspectorInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutLeadInspectorInput | SuratTugasUpdateWithWhereUniqueWithoutLeadInspectorInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutLeadInspectorInput | SuratTugasUpdateManyWithWhereWithoutLeadInspectorInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasUpdateManyWithoutKoordinatorNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutKoordinatorInput, SuratTugasUncheckedCreateWithoutKoordinatorInput> | SuratTugasCreateWithoutKoordinatorInput[] | SuratTugasUncheckedCreateWithoutKoordinatorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutKoordinatorInput | SuratTugasCreateOrConnectWithoutKoordinatorInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutKoordinatorInput | SuratTugasUpsertWithWhereUniqueWithoutKoordinatorInput[]
+    createMany?: SuratTugasCreateManyKoordinatorInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutKoordinatorInput | SuratTugasUpdateWithWhereUniqueWithoutKoordinatorInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutKoordinatorInput | SuratTugasUpdateManyWithWhereWithoutKoordinatorInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasUpdateManyWithoutSeniorManagerNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutSeniorManagerInput, SuratTugasUncheckedCreateWithoutSeniorManagerInput> | SuratTugasCreateWithoutSeniorManagerInput[] | SuratTugasUncheckedCreateWithoutSeniorManagerInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutSeniorManagerInput | SuratTugasCreateOrConnectWithoutSeniorManagerInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutSeniorManagerInput | SuratTugasUpsertWithWhereUniqueWithoutSeniorManagerInput[]
+    createMany?: SuratTugasCreateManySeniorManagerInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutSeniorManagerInput | SuratTugasUpdateWithWhereUniqueWithoutSeniorManagerInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutSeniorManagerInput | SuratTugasUpdateManyWithWhereWithoutSeniorManagerInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasUpdateManyWithoutKepalaCabangNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutKepalaCabangInput, SuratTugasUncheckedCreateWithoutKepalaCabangInput> | SuratTugasCreateWithoutKepalaCabangInput[] | SuratTugasUncheckedCreateWithoutKepalaCabangInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutKepalaCabangInput | SuratTugasCreateOrConnectWithoutKepalaCabangInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutKepalaCabangInput | SuratTugasUpsertWithWhereUniqueWithoutKepalaCabangInput[]
+    createMany?: SuratTugasCreateManyKepalaCabangInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutKepalaCabangInput | SuratTugasUpdateWithWhereUniqueWithoutKepalaCabangInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutKepalaCabangInput | SuratTugasUpdateManyWithWhereWithoutKepalaCabangInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type PegawaiSuratTugasUncheckedUpdateManyWithoutPegawaiNestedInput = {
-    create?: XOR<PegawaiSuratTugasCreateWithoutPegawaiInput, PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput> | PegawaiSuratTugasCreateWithoutPegawaiInput[] | PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput[]
-    connectOrCreate?: PegawaiSuratTugasCreateOrConnectWithoutPegawaiInput | PegawaiSuratTugasCreateOrConnectWithoutPegawaiInput[]
-    upsert?: PegawaiSuratTugasUpsertWithWhereUniqueWithoutPegawaiInput | PegawaiSuratTugasUpsertWithWhereUniqueWithoutPegawaiInput[]
-    createMany?: PegawaiSuratTugasCreateManyPegawaiInputEnvelope
-    set?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    disconnect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    delete?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    connect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    update?: PegawaiSuratTugasUpdateWithWhereUniqueWithoutPegawaiInput | PegawaiSuratTugasUpdateWithWhereUniqueWithoutPegawaiInput[]
-    updateMany?: PegawaiSuratTugasUpdateManyWithWhereWithoutPegawaiInput | PegawaiSuratTugasUpdateManyWithWhereWithoutPegawaiInput[]
-    deleteMany?: PegawaiSuratTugasScalarWhereInput | PegawaiSuratTugasScalarWhereInput[]
   }
 
   export type pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput = {
@@ -9592,6 +10449,131 @@ export namespace Prisma {
     update?: pengalaman_kerjaUpdateWithWhereUniqueWithoutPegawaiInput | pengalaman_kerjaUpdateWithWhereUniqueWithoutPegawaiInput[]
     updateMany?: pengalaman_kerjaUpdateManyWithWhereWithoutPegawaiInput | pengalaman_kerjaUpdateManyWithWhereWithoutPegawaiInput[]
     deleteMany?: pengalaman_kerjaScalarWhereInput | pengalaman_kerjaScalarWhereInput[]
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutDibuatOlehNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutDibuatOlehInput, SuratTugasUncheckedCreateWithoutDibuatOlehInput> | SuratTugasCreateWithoutDibuatOlehInput[] | SuratTugasUncheckedCreateWithoutDibuatOlehInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutDibuatOlehInput | SuratTugasCreateOrConnectWithoutDibuatOlehInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutDibuatOlehInput | SuratTugasUpsertWithWhereUniqueWithoutDibuatOlehInput[]
+    createMany?: SuratTugasCreateManyDibuatOlehInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutDibuatOlehInput | SuratTugasUpdateWithWhereUniqueWithoutDibuatOlehInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutDibuatOlehInput | SuratTugasUpdateManyWithWhereWithoutDibuatOlehInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutTimInspektorNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutTimInspektorInput, SuratTugasUncheckedCreateWithoutTimInspektorInput> | SuratTugasCreateWithoutTimInspektorInput[] | SuratTugasUncheckedCreateWithoutTimInspektorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutTimInspektorInput | SuratTugasCreateOrConnectWithoutTimInspektorInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutTimInspektorInput | SuratTugasUpsertWithWhereUniqueWithoutTimInspektorInput[]
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutTimInspektorInput | SuratTugasUpdateWithWhereUniqueWithoutTimInspektorInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutTimInspektorInput | SuratTugasUpdateManyWithWhereWithoutTimInspektorInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutLeadInspectorNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutLeadInspectorInput, SuratTugasUncheckedCreateWithoutLeadInspectorInput> | SuratTugasCreateWithoutLeadInspectorInput[] | SuratTugasUncheckedCreateWithoutLeadInspectorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutLeadInspectorInput | SuratTugasCreateOrConnectWithoutLeadInspectorInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutLeadInspectorInput | SuratTugasUpsertWithWhereUniqueWithoutLeadInspectorInput[]
+    createMany?: SuratTugasCreateManyLeadInspectorInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutLeadInspectorInput | SuratTugasUpdateWithWhereUniqueWithoutLeadInspectorInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutLeadInspectorInput | SuratTugasUpdateManyWithWhereWithoutLeadInspectorInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutKoordinatorNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutKoordinatorInput, SuratTugasUncheckedCreateWithoutKoordinatorInput> | SuratTugasCreateWithoutKoordinatorInput[] | SuratTugasUncheckedCreateWithoutKoordinatorInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutKoordinatorInput | SuratTugasCreateOrConnectWithoutKoordinatorInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutKoordinatorInput | SuratTugasUpsertWithWhereUniqueWithoutKoordinatorInput[]
+    createMany?: SuratTugasCreateManyKoordinatorInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutKoordinatorInput | SuratTugasUpdateWithWhereUniqueWithoutKoordinatorInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutKoordinatorInput | SuratTugasUpdateManyWithWhereWithoutKoordinatorInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutSeniorManagerNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutSeniorManagerInput, SuratTugasUncheckedCreateWithoutSeniorManagerInput> | SuratTugasCreateWithoutSeniorManagerInput[] | SuratTugasUncheckedCreateWithoutSeniorManagerInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutSeniorManagerInput | SuratTugasCreateOrConnectWithoutSeniorManagerInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutSeniorManagerInput | SuratTugasUpsertWithWhereUniqueWithoutSeniorManagerInput[]
+    createMany?: SuratTugasCreateManySeniorManagerInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutSeniorManagerInput | SuratTugasUpdateWithWhereUniqueWithoutSeniorManagerInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutSeniorManagerInput | SuratTugasUpdateManyWithWhereWithoutSeniorManagerInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutKepalaCabangNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutKepalaCabangInput, SuratTugasUncheckedCreateWithoutKepalaCabangInput> | SuratTugasCreateWithoutKepalaCabangInput[] | SuratTugasUncheckedCreateWithoutKepalaCabangInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutKepalaCabangInput | SuratTugasCreateOrConnectWithoutKepalaCabangInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutKepalaCabangInput | SuratTugasUpsertWithWhereUniqueWithoutKepalaCabangInput[]
+    createMany?: SuratTugasCreateManyKepalaCabangInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutKepalaCabangInput | SuratTugasUpdateWithWhereUniqueWithoutKepalaCabangInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutKepalaCabangInput | SuratTugasUpdateManyWithWhereWithoutKepalaCabangInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasCreateNestedManyWithoutProyekInput = {
+    create?: XOR<SuratTugasCreateWithoutProyekInput, SuratTugasUncheckedCreateWithoutProyekInput> | SuratTugasCreateWithoutProyekInput[] | SuratTugasUncheckedCreateWithoutProyekInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutProyekInput | SuratTugasCreateOrConnectWithoutProyekInput[]
+    createMany?: SuratTugasCreateManyProyekInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasUncheckedCreateNestedManyWithoutProyekInput = {
+    create?: XOR<SuratTugasCreateWithoutProyekInput, SuratTugasUncheckedCreateWithoutProyekInput> | SuratTugasCreateWithoutProyekInput[] | SuratTugasUncheckedCreateWithoutProyekInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutProyekInput | SuratTugasCreateOrConnectWithoutProyekInput[]
+    createMany?: SuratTugasCreateManyProyekInputEnvelope
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+  }
+
+  export type SuratTugasUpdateManyWithoutProyekNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutProyekInput, SuratTugasUncheckedCreateWithoutProyekInput> | SuratTugasCreateWithoutProyekInput[] | SuratTugasUncheckedCreateWithoutProyekInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutProyekInput | SuratTugasCreateOrConnectWithoutProyekInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutProyekInput | SuratTugasUpsertWithWhereUniqueWithoutProyekInput[]
+    createMany?: SuratTugasCreateManyProyekInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutProyekInput | SuratTugasUpdateWithWhereUniqueWithoutProyekInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutProyekInput | SuratTugasUpdateManyWithWhereWithoutProyekInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutProyekNestedInput = {
+    create?: XOR<SuratTugasCreateWithoutProyekInput, SuratTugasUncheckedCreateWithoutProyekInput> | SuratTugasCreateWithoutProyekInput[] | SuratTugasUncheckedCreateWithoutProyekInput[]
+    connectOrCreate?: SuratTugasCreateOrConnectWithoutProyekInput | SuratTugasCreateOrConnectWithoutProyekInput[]
+    upsert?: SuratTugasUpsertWithWhereUniqueWithoutProyekInput | SuratTugasUpsertWithWhereUniqueWithoutProyekInput[]
+    createMany?: SuratTugasCreateManyProyekInputEnvelope
+    set?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    disconnect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    delete?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    connect?: SuratTugasWhereUniqueInput | SuratTugasWhereUniqueInput[]
+    update?: SuratTugasUpdateWithWhereUniqueWithoutProyekInput | SuratTugasUpdateWithWhereUniqueWithoutProyekInput[]
+    updateMany?: SuratTugasUpdateManyWithWhereWithoutProyekInput | SuratTugasUpdateManyWithWhereWithoutProyekInput[]
+    deleteMany?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
   }
 
   export type pegawaiCreateNestedOneWithoutPelatihanInput = {
@@ -9638,22 +10620,52 @@ export namespace Prisma {
     set: string[]
   }
 
-  export type SuratTugasCreatelokasi_pekerjaanInput = {
-    set: string[]
+  export type ProyekCreateNestedOneWithoutSuratTugasInput = {
+    create?: XOR<ProyekCreateWithoutSuratTugasInput, ProyekUncheckedCreateWithoutSuratTugasInput>
+    connectOrCreate?: ProyekCreateOrConnectWithoutSuratTugasInput
+    connect?: ProyekWhereUniqueInput
   }
 
-  export type PegawaiSuratTugasCreateNestedManyWithoutSuratTugasInput = {
-    create?: XOR<PegawaiSuratTugasCreateWithoutSuratTugasInput, PegawaiSuratTugasUncheckedCreateWithoutSuratTugasInput> | PegawaiSuratTugasCreateWithoutSuratTugasInput[] | PegawaiSuratTugasUncheckedCreateWithoutSuratTugasInput[]
-    connectOrCreate?: PegawaiSuratTugasCreateOrConnectWithoutSuratTugasInput | PegawaiSuratTugasCreateOrConnectWithoutSuratTugasInput[]
-    createMany?: PegawaiSuratTugasCreateManySuratTugasInputEnvelope
-    connect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
+  export type pegawaiCreateNestedOneWithoutLeadApproverDiInput = {
+    create?: XOR<pegawaiCreateWithoutLeadApproverDiInput, pegawaiUncheckedCreateWithoutLeadApproverDiInput>
+    connectOrCreate?: pegawaiCreateOrConnectWithoutLeadApproverDiInput
+    connect?: pegawaiWhereUniqueInput
   }
 
-  export type PegawaiSuratTugasUncheckedCreateNestedManyWithoutSuratTugasInput = {
-    create?: XOR<PegawaiSuratTugasCreateWithoutSuratTugasInput, PegawaiSuratTugasUncheckedCreateWithoutSuratTugasInput> | PegawaiSuratTugasCreateWithoutSuratTugasInput[] | PegawaiSuratTugasUncheckedCreateWithoutSuratTugasInput[]
-    connectOrCreate?: PegawaiSuratTugasCreateOrConnectWithoutSuratTugasInput | PegawaiSuratTugasCreateOrConnectWithoutSuratTugasInput[]
-    createMany?: PegawaiSuratTugasCreateManySuratTugasInputEnvelope
-    connect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
+  export type pegawaiCreateNestedOneWithoutKoorApproverDiInput = {
+    create?: XOR<pegawaiCreateWithoutKoorApproverDiInput, pegawaiUncheckedCreateWithoutKoorApproverDiInput>
+    connectOrCreate?: pegawaiCreateOrConnectWithoutKoorApproverDiInput
+    connect?: pegawaiWhereUniqueInput
+  }
+
+  export type pegawaiCreateNestedOneWithoutSmApproverDiInput = {
+    create?: XOR<pegawaiCreateWithoutSmApproverDiInput, pegawaiUncheckedCreateWithoutSmApproverDiInput>
+    connectOrCreate?: pegawaiCreateOrConnectWithoutSmApproverDiInput
+    connect?: pegawaiWhereUniqueInput
+  }
+
+  export type pegawaiCreateNestedOneWithoutKacabApproverDiInput = {
+    create?: XOR<pegawaiCreateWithoutKacabApproverDiInput, pegawaiUncheckedCreateWithoutKacabApproverDiInput>
+    connectOrCreate?: pegawaiCreateOrConnectWithoutKacabApproverDiInput
+    connect?: pegawaiWhereUniqueInput
+  }
+
+  export type pegawaiCreateNestedManyWithoutAnggotaTimDiInput = {
+    create?: XOR<pegawaiCreateWithoutAnggotaTimDiInput, pegawaiUncheckedCreateWithoutAnggotaTimDiInput> | pegawaiCreateWithoutAnggotaTimDiInput[] | pegawaiUncheckedCreateWithoutAnggotaTimDiInput[]
+    connectOrCreate?: pegawaiCreateOrConnectWithoutAnggotaTimDiInput | pegawaiCreateOrConnectWithoutAnggotaTimDiInput[]
+    connect?: pegawaiWhereUniqueInput | pegawaiWhereUniqueInput[]
+  }
+
+  export type pegawaiCreateNestedOneWithoutSuratTugasDibuatInput = {
+    create?: XOR<pegawaiCreateWithoutSuratTugasDibuatInput, pegawaiUncheckedCreateWithoutSuratTugasDibuatInput>
+    connectOrCreate?: pegawaiCreateOrConnectWithoutSuratTugasDibuatInput
+    connect?: pegawaiWhereUniqueInput
+  }
+
+  export type pegawaiUncheckedCreateNestedManyWithoutAnggotaTimDiInput = {
+    create?: XOR<pegawaiCreateWithoutAnggotaTimDiInput, pegawaiUncheckedCreateWithoutAnggotaTimDiInput> | pegawaiCreateWithoutAnggotaTimDiInput[] | pegawaiUncheckedCreateWithoutAnggotaTimDiInput[]
+    connectOrCreate?: pegawaiCreateOrConnectWithoutAnggotaTimDiInput | pegawaiCreateOrConnectWithoutAnggotaTimDiInput[]
+    connect?: pegawaiWhereUniqueInput | pegawaiWhereUniqueInput[]
   }
 
   export type SuratTugasUpdateperalatan_inspeksiInput = {
@@ -9662,11 +10674,6 @@ export namespace Prisma {
   }
 
   export type SuratTugasUpdatekebutuhan_materialInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type SuratTugasUpdatelokasi_pekerjaanInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -9683,60 +10690,101 @@ export namespace Prisma {
     set?: $Enums.StatusSuratTugas
   }
 
-  export type PegawaiSuratTugasUpdateManyWithoutSuratTugasNestedInput = {
-    create?: XOR<PegawaiSuratTugasCreateWithoutSuratTugasInput, PegawaiSuratTugasUncheckedCreateWithoutSuratTugasInput> | PegawaiSuratTugasCreateWithoutSuratTugasInput[] | PegawaiSuratTugasUncheckedCreateWithoutSuratTugasInput[]
-    connectOrCreate?: PegawaiSuratTugasCreateOrConnectWithoutSuratTugasInput | PegawaiSuratTugasCreateOrConnectWithoutSuratTugasInput[]
-    upsert?: PegawaiSuratTugasUpsertWithWhereUniqueWithoutSuratTugasInput | PegawaiSuratTugasUpsertWithWhereUniqueWithoutSuratTugasInput[]
-    createMany?: PegawaiSuratTugasCreateManySuratTugasInputEnvelope
-    set?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    disconnect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    delete?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    connect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    update?: PegawaiSuratTugasUpdateWithWhereUniqueWithoutSuratTugasInput | PegawaiSuratTugasUpdateWithWhereUniqueWithoutSuratTugasInput[]
-    updateMany?: PegawaiSuratTugasUpdateManyWithWhereWithoutSuratTugasInput | PegawaiSuratTugasUpdateManyWithWhereWithoutSuratTugasInput[]
-    deleteMany?: PegawaiSuratTugasScalarWhereInput | PegawaiSuratTugasScalarWhereInput[]
+  export type ProyekUpdateOneWithoutSuratTugasNestedInput = {
+    create?: XOR<ProyekCreateWithoutSuratTugasInput, ProyekUncheckedCreateWithoutSuratTugasInput>
+    connectOrCreate?: ProyekCreateOrConnectWithoutSuratTugasInput
+    upsert?: ProyekUpsertWithoutSuratTugasInput
+    disconnect?: ProyekWhereInput | boolean
+    delete?: ProyekWhereInput | boolean
+    connect?: ProyekWhereUniqueInput
+    update?: XOR<XOR<ProyekUpdateToOneWithWhereWithoutSuratTugasInput, ProyekUpdateWithoutSuratTugasInput>, ProyekUncheckedUpdateWithoutSuratTugasInput>
   }
 
-  export type PegawaiSuratTugasUncheckedUpdateManyWithoutSuratTugasNestedInput = {
-    create?: XOR<PegawaiSuratTugasCreateWithoutSuratTugasInput, PegawaiSuratTugasUncheckedCreateWithoutSuratTugasInput> | PegawaiSuratTugasCreateWithoutSuratTugasInput[] | PegawaiSuratTugasUncheckedCreateWithoutSuratTugasInput[]
-    connectOrCreate?: PegawaiSuratTugasCreateOrConnectWithoutSuratTugasInput | PegawaiSuratTugasCreateOrConnectWithoutSuratTugasInput[]
-    upsert?: PegawaiSuratTugasUpsertWithWhereUniqueWithoutSuratTugasInput | PegawaiSuratTugasUpsertWithWhereUniqueWithoutSuratTugasInput[]
-    createMany?: PegawaiSuratTugasCreateManySuratTugasInputEnvelope
-    set?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    disconnect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    delete?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    connect?: PegawaiSuratTugasWhereUniqueInput | PegawaiSuratTugasWhereUniqueInput[]
-    update?: PegawaiSuratTugasUpdateWithWhereUniqueWithoutSuratTugasInput | PegawaiSuratTugasUpdateWithWhereUniqueWithoutSuratTugasInput[]
-    updateMany?: PegawaiSuratTugasUpdateManyWithWhereWithoutSuratTugasInput | PegawaiSuratTugasUpdateManyWithWhereWithoutSuratTugasInput[]
-    deleteMany?: PegawaiSuratTugasScalarWhereInput | PegawaiSuratTugasScalarWhereInput[]
-  }
-
-  export type pegawaiCreateNestedOneWithoutPegawai_surat_tugasInput = {
-    create?: XOR<pegawaiCreateWithoutPegawai_surat_tugasInput, pegawaiUncheckedCreateWithoutPegawai_surat_tugasInput>
-    connectOrCreate?: pegawaiCreateOrConnectWithoutPegawai_surat_tugasInput
+  export type pegawaiUpdateOneWithoutLeadApproverDiNestedInput = {
+    create?: XOR<pegawaiCreateWithoutLeadApproverDiInput, pegawaiUncheckedCreateWithoutLeadApproverDiInput>
+    connectOrCreate?: pegawaiCreateOrConnectWithoutLeadApproverDiInput
+    upsert?: pegawaiUpsertWithoutLeadApproverDiInput
+    disconnect?: pegawaiWhereInput | boolean
+    delete?: pegawaiWhereInput | boolean
     connect?: pegawaiWhereUniqueInput
+    update?: XOR<XOR<pegawaiUpdateToOneWithWhereWithoutLeadApproverDiInput, pegawaiUpdateWithoutLeadApproverDiInput>, pegawaiUncheckedUpdateWithoutLeadApproverDiInput>
   }
 
-  export type SuratTugasCreateNestedOneWithoutPegawai_surat_tugasInput = {
-    create?: XOR<SuratTugasCreateWithoutPegawai_surat_tugasInput, SuratTugasUncheckedCreateWithoutPegawai_surat_tugasInput>
-    connectOrCreate?: SuratTugasCreateOrConnectWithoutPegawai_surat_tugasInput
-    connect?: SuratTugasWhereUniqueInput
-  }
-
-  export type pegawaiUpdateOneRequiredWithoutPegawai_surat_tugasNestedInput = {
-    create?: XOR<pegawaiCreateWithoutPegawai_surat_tugasInput, pegawaiUncheckedCreateWithoutPegawai_surat_tugasInput>
-    connectOrCreate?: pegawaiCreateOrConnectWithoutPegawai_surat_tugasInput
-    upsert?: pegawaiUpsertWithoutPegawai_surat_tugasInput
+  export type pegawaiUpdateOneWithoutKoorApproverDiNestedInput = {
+    create?: XOR<pegawaiCreateWithoutKoorApproverDiInput, pegawaiUncheckedCreateWithoutKoorApproverDiInput>
+    connectOrCreate?: pegawaiCreateOrConnectWithoutKoorApproverDiInput
+    upsert?: pegawaiUpsertWithoutKoorApproverDiInput
+    disconnect?: pegawaiWhereInput | boolean
+    delete?: pegawaiWhereInput | boolean
     connect?: pegawaiWhereUniqueInput
-    update?: XOR<XOR<pegawaiUpdateToOneWithWhereWithoutPegawai_surat_tugasInput, pegawaiUpdateWithoutPegawai_surat_tugasInput>, pegawaiUncheckedUpdateWithoutPegawai_surat_tugasInput>
+    update?: XOR<XOR<pegawaiUpdateToOneWithWhereWithoutKoorApproverDiInput, pegawaiUpdateWithoutKoorApproverDiInput>, pegawaiUncheckedUpdateWithoutKoorApproverDiInput>
   }
 
-  export type SuratTugasUpdateOneRequiredWithoutPegawai_surat_tugasNestedInput = {
-    create?: XOR<SuratTugasCreateWithoutPegawai_surat_tugasInput, SuratTugasUncheckedCreateWithoutPegawai_surat_tugasInput>
-    connectOrCreate?: SuratTugasCreateOrConnectWithoutPegawai_surat_tugasInput
-    upsert?: SuratTugasUpsertWithoutPegawai_surat_tugasInput
-    connect?: SuratTugasWhereUniqueInput
-    update?: XOR<XOR<SuratTugasUpdateToOneWithWhereWithoutPegawai_surat_tugasInput, SuratTugasUpdateWithoutPegawai_surat_tugasInput>, SuratTugasUncheckedUpdateWithoutPegawai_surat_tugasInput>
+  export type pegawaiUpdateOneWithoutSmApproverDiNestedInput = {
+    create?: XOR<pegawaiCreateWithoutSmApproverDiInput, pegawaiUncheckedCreateWithoutSmApproverDiInput>
+    connectOrCreate?: pegawaiCreateOrConnectWithoutSmApproverDiInput
+    upsert?: pegawaiUpsertWithoutSmApproverDiInput
+    disconnect?: pegawaiWhereInput | boolean
+    delete?: pegawaiWhereInput | boolean
+    connect?: pegawaiWhereUniqueInput
+    update?: XOR<XOR<pegawaiUpdateToOneWithWhereWithoutSmApproverDiInput, pegawaiUpdateWithoutSmApproverDiInput>, pegawaiUncheckedUpdateWithoutSmApproverDiInput>
+  }
+
+  export type pegawaiUpdateOneWithoutKacabApproverDiNestedInput = {
+    create?: XOR<pegawaiCreateWithoutKacabApproverDiInput, pegawaiUncheckedCreateWithoutKacabApproverDiInput>
+    connectOrCreate?: pegawaiCreateOrConnectWithoutKacabApproverDiInput
+    upsert?: pegawaiUpsertWithoutKacabApproverDiInput
+    disconnect?: pegawaiWhereInput | boolean
+    delete?: pegawaiWhereInput | boolean
+    connect?: pegawaiWhereUniqueInput
+    update?: XOR<XOR<pegawaiUpdateToOneWithWhereWithoutKacabApproverDiInput, pegawaiUpdateWithoutKacabApproverDiInput>, pegawaiUncheckedUpdateWithoutKacabApproverDiInput>
+  }
+
+  export type pegawaiUpdateManyWithoutAnggotaTimDiNestedInput = {
+    create?: XOR<pegawaiCreateWithoutAnggotaTimDiInput, pegawaiUncheckedCreateWithoutAnggotaTimDiInput> | pegawaiCreateWithoutAnggotaTimDiInput[] | pegawaiUncheckedCreateWithoutAnggotaTimDiInput[]
+    connectOrCreate?: pegawaiCreateOrConnectWithoutAnggotaTimDiInput | pegawaiCreateOrConnectWithoutAnggotaTimDiInput[]
+    upsert?: pegawaiUpsertWithWhereUniqueWithoutAnggotaTimDiInput | pegawaiUpsertWithWhereUniqueWithoutAnggotaTimDiInput[]
+    set?: pegawaiWhereUniqueInput | pegawaiWhereUniqueInput[]
+    disconnect?: pegawaiWhereUniqueInput | pegawaiWhereUniqueInput[]
+    delete?: pegawaiWhereUniqueInput | pegawaiWhereUniqueInput[]
+    connect?: pegawaiWhereUniqueInput | pegawaiWhereUniqueInput[]
+    update?: pegawaiUpdateWithWhereUniqueWithoutAnggotaTimDiInput | pegawaiUpdateWithWhereUniqueWithoutAnggotaTimDiInput[]
+    updateMany?: pegawaiUpdateManyWithWhereWithoutAnggotaTimDiInput | pegawaiUpdateManyWithWhereWithoutAnggotaTimDiInput[]
+    deleteMany?: pegawaiScalarWhereInput | pegawaiScalarWhereInput[]
+  }
+
+  export type pegawaiUpdateOneWithoutSuratTugasDibuatNestedInput = {
+    create?: XOR<pegawaiCreateWithoutSuratTugasDibuatInput, pegawaiUncheckedCreateWithoutSuratTugasDibuatInput>
+    connectOrCreate?: pegawaiCreateOrConnectWithoutSuratTugasDibuatInput
+    upsert?: pegawaiUpsertWithoutSuratTugasDibuatInput
+    disconnect?: pegawaiWhereInput | boolean
+    delete?: pegawaiWhereInput | boolean
+    connect?: pegawaiWhereUniqueInput
+    update?: XOR<XOR<pegawaiUpdateToOneWithWhereWithoutSuratTugasDibuatInput, pegawaiUpdateWithoutSuratTugasDibuatInput>, pegawaiUncheckedUpdateWithoutSuratTugasDibuatInput>
+  }
+
+  export type pegawaiUncheckedUpdateManyWithoutAnggotaTimDiNestedInput = {
+    create?: XOR<pegawaiCreateWithoutAnggotaTimDiInput, pegawaiUncheckedCreateWithoutAnggotaTimDiInput> | pegawaiCreateWithoutAnggotaTimDiInput[] | pegawaiUncheckedCreateWithoutAnggotaTimDiInput[]
+    connectOrCreate?: pegawaiCreateOrConnectWithoutAnggotaTimDiInput | pegawaiCreateOrConnectWithoutAnggotaTimDiInput[]
+    upsert?: pegawaiUpsertWithWhereUniqueWithoutAnggotaTimDiInput | pegawaiUpsertWithWhereUniqueWithoutAnggotaTimDiInput[]
+    set?: pegawaiWhereUniqueInput | pegawaiWhereUniqueInput[]
+    disconnect?: pegawaiWhereUniqueInput | pegawaiWhereUniqueInput[]
+    delete?: pegawaiWhereUniqueInput | pegawaiWhereUniqueInput[]
+    connect?: pegawaiWhereUniqueInput | pegawaiWhereUniqueInput[]
+    update?: pegawaiUpdateWithWhereUniqueWithoutAnggotaTimDiInput | pegawaiUpdateWithWhereUniqueWithoutAnggotaTimDiInput[]
+    updateMany?: pegawaiUpdateManyWithWhereWithoutAnggotaTimDiInput | pegawaiUpdateManyWithWhereWithoutAnggotaTimDiInput[]
+    deleteMany?: pegawaiScalarWhereInput | pegawaiScalarWhereInput[]
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -9778,17 +10826,6 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type NestedIntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -9798,6 +10835,33 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -9846,33 +10910,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9974,34 +11011,8 @@ export namespace Prisma {
     _max?: NestedEnumStatusSuratTugasFilter<$PrismaModel>
   }
 
-  export type PegawaiSuratTugasCreateWithoutPegawaiInput = {
-    jabatan?: string | null
-    approved?: boolean
-    approvedBy?: string | null
-    approvedAt?: Date | string | null
-    suratTugas: SuratTugasCreateNestedOneWithoutPegawai_surat_tugasInput
-  }
-
-  export type PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput = {
-    id?: number
-    suratTugasId: number
-    jabatan?: string | null
-    approved?: boolean
-    approvedBy?: string | null
-    approvedAt?: Date | string | null
-  }
-
-  export type PegawaiSuratTugasCreateOrConnectWithoutPegawaiInput = {
-    where: PegawaiSuratTugasWhereUniqueInput
-    create: XOR<PegawaiSuratTugasCreateWithoutPegawaiInput, PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput>
-  }
-
-  export type PegawaiSuratTugasCreateManyPegawaiInputEnvelope = {
-    data: PegawaiSuratTugasCreateManyPegawaiInput | PegawaiSuratTugasCreateManyPegawaiInput[]
-    skipDuplicates?: boolean
-  }
-
   export type pelatihanCreateWithoutPegawaiInput = {
+    nup?: string | null
     nama_pelatihan?: string | null
     penyelenggara?: string | null
     lokasi?: string | null
@@ -10017,6 +11028,7 @@ export namespace Prisma {
 
   export type pelatihanUncheckedCreateWithoutPegawaiInput = {
     id_pelatihan?: number
+    nup?: string | null
     nama_pelatihan?: string | null
     penyelenggara?: string | null
     lokasi?: string | null
@@ -10041,6 +11053,7 @@ export namespace Prisma {
   }
 
   export type pengalaman_kerjaCreateWithoutPegawaiInput = {
+    nup?: string | null
     tahun?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
@@ -10049,6 +11062,7 @@ export namespace Prisma {
 
   export type pengalaman_kerjaUncheckedCreateWithoutPegawaiInput = {
     id_pengalaman?: number
+    nup?: string | null
     tahun?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
@@ -10065,33 +11079,473 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type PegawaiSuratTugasUpsertWithWhereUniqueWithoutPegawaiInput = {
-    where: PegawaiSuratTugasWhereUniqueInput
-    update: XOR<PegawaiSuratTugasUpdateWithoutPegawaiInput, PegawaiSuratTugasUncheckedUpdateWithoutPegawaiInput>
-    create: XOR<PegawaiSuratTugasCreateWithoutPegawaiInput, PegawaiSuratTugasUncheckedCreateWithoutPegawaiInput>
+  export type SuratTugasCreateWithoutDibuatOlehInput = {
+    nomor_surat?: string | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    disetujuiLeadAt?: Date | string | null
+    disetujuiKoorAt?: Date | string | null
+    disetujuiSmAt?: Date | string | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    proyek?: ProyekCreateNestedOneWithoutSuratTugasInput
+    leadInspector?: pegawaiCreateNestedOneWithoutLeadApproverDiInput
+    koordinator?: pegawaiCreateNestedOneWithoutKoorApproverDiInput
+    seniorManager?: pegawaiCreateNestedOneWithoutSmApproverDiInput
+    kepalaCabang?: pegawaiCreateNestedOneWithoutKacabApproverDiInput
+    timInspektor?: pegawaiCreateNestedManyWithoutAnggotaTimDiInput
   }
 
-  export type PegawaiSuratTugasUpdateWithWhereUniqueWithoutPegawaiInput = {
-    where: PegawaiSuratTugasWhereUniqueInput
-    data: XOR<PegawaiSuratTugasUpdateWithoutPegawaiInput, PegawaiSuratTugasUncheckedUpdateWithoutPegawaiInput>
+  export type SuratTugasUncheckedCreateWithoutDibuatOlehInput = {
+    id?: number
+    nomor_surat?: string | null
+    proyekId?: number | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedCreateNestedManyWithoutAnggotaTimDiInput
   }
 
-  export type PegawaiSuratTugasUpdateManyWithWhereWithoutPegawaiInput = {
-    where: PegawaiSuratTugasScalarWhereInput
-    data: XOR<PegawaiSuratTugasUpdateManyMutationInput, PegawaiSuratTugasUncheckedUpdateManyWithoutPegawaiInput>
+  export type SuratTugasCreateOrConnectWithoutDibuatOlehInput = {
+    where: SuratTugasWhereUniqueInput
+    create: XOR<SuratTugasCreateWithoutDibuatOlehInput, SuratTugasUncheckedCreateWithoutDibuatOlehInput>
   }
 
-  export type PegawaiSuratTugasScalarWhereInput = {
-    AND?: PegawaiSuratTugasScalarWhereInput | PegawaiSuratTugasScalarWhereInput[]
-    OR?: PegawaiSuratTugasScalarWhereInput[]
-    NOT?: PegawaiSuratTugasScalarWhereInput | PegawaiSuratTugasScalarWhereInput[]
-    id?: IntFilter<"PegawaiSuratTugas"> | number
-    suratTugasId?: IntFilter<"PegawaiSuratTugas"> | number
-    pegawaiNup?: StringFilter<"PegawaiSuratTugas"> | string
-    jabatan?: StringNullableFilter<"PegawaiSuratTugas"> | string | null
-    approved?: BoolFilter<"PegawaiSuratTugas"> | boolean
-    approvedBy?: StringNullableFilter<"PegawaiSuratTugas"> | string | null
-    approvedAt?: DateTimeNullableFilter<"PegawaiSuratTugas"> | Date | string | null
+  export type SuratTugasCreateManyDibuatOlehInputEnvelope = {
+    data: SuratTugasCreateManyDibuatOlehInput | SuratTugasCreateManyDibuatOlehInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SuratTugasCreateWithoutTimInspektorInput = {
+    nomor_surat?: string | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    disetujuiLeadAt?: Date | string | null
+    disetujuiKoorAt?: Date | string | null
+    disetujuiSmAt?: Date | string | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    proyek?: ProyekCreateNestedOneWithoutSuratTugasInput
+    leadInspector?: pegawaiCreateNestedOneWithoutLeadApproverDiInput
+    koordinator?: pegawaiCreateNestedOneWithoutKoorApproverDiInput
+    seniorManager?: pegawaiCreateNestedOneWithoutSmApproverDiInput
+    kepalaCabang?: pegawaiCreateNestedOneWithoutKacabApproverDiInput
+    dibuatOleh?: pegawaiCreateNestedOneWithoutSuratTugasDibuatInput
+  }
+
+  export type SuratTugasUncheckedCreateWithoutTimInspektorInput = {
+    id?: number
+    nomor_surat?: string | null
+    proyekId?: number | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+  }
+
+  export type SuratTugasCreateOrConnectWithoutTimInspektorInput = {
+    where: SuratTugasWhereUniqueInput
+    create: XOR<SuratTugasCreateWithoutTimInspektorInput, SuratTugasUncheckedCreateWithoutTimInspektorInput>
+  }
+
+  export type SuratTugasCreateWithoutLeadInspectorInput = {
+    nomor_surat?: string | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    disetujuiLeadAt?: Date | string | null
+    disetujuiKoorAt?: Date | string | null
+    disetujuiSmAt?: Date | string | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    proyek?: ProyekCreateNestedOneWithoutSuratTugasInput
+    koordinator?: pegawaiCreateNestedOneWithoutKoorApproverDiInput
+    seniorManager?: pegawaiCreateNestedOneWithoutSmApproverDiInput
+    kepalaCabang?: pegawaiCreateNestedOneWithoutKacabApproverDiInput
+    timInspektor?: pegawaiCreateNestedManyWithoutAnggotaTimDiInput
+    dibuatOleh?: pegawaiCreateNestedOneWithoutSuratTugasDibuatInput
+  }
+
+  export type SuratTugasUncheckedCreateWithoutLeadInspectorInput = {
+    id?: number
+    nomor_surat?: string | null
+    proyekId?: number | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedCreateNestedManyWithoutAnggotaTimDiInput
+  }
+
+  export type SuratTugasCreateOrConnectWithoutLeadInspectorInput = {
+    where: SuratTugasWhereUniqueInput
+    create: XOR<SuratTugasCreateWithoutLeadInspectorInput, SuratTugasUncheckedCreateWithoutLeadInspectorInput>
+  }
+
+  export type SuratTugasCreateManyLeadInspectorInputEnvelope = {
+    data: SuratTugasCreateManyLeadInspectorInput | SuratTugasCreateManyLeadInspectorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SuratTugasCreateWithoutKoordinatorInput = {
+    nomor_surat?: string | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    disetujuiLeadAt?: Date | string | null
+    disetujuiKoorAt?: Date | string | null
+    disetujuiSmAt?: Date | string | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    proyek?: ProyekCreateNestedOneWithoutSuratTugasInput
+    leadInspector?: pegawaiCreateNestedOneWithoutLeadApproverDiInput
+    seniorManager?: pegawaiCreateNestedOneWithoutSmApproverDiInput
+    kepalaCabang?: pegawaiCreateNestedOneWithoutKacabApproverDiInput
+    timInspektor?: pegawaiCreateNestedManyWithoutAnggotaTimDiInput
+    dibuatOleh?: pegawaiCreateNestedOneWithoutSuratTugasDibuatInput
+  }
+
+  export type SuratTugasUncheckedCreateWithoutKoordinatorInput = {
+    id?: number
+    nomor_surat?: string | null
+    proyekId?: number | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedCreateNestedManyWithoutAnggotaTimDiInput
+  }
+
+  export type SuratTugasCreateOrConnectWithoutKoordinatorInput = {
+    where: SuratTugasWhereUniqueInput
+    create: XOR<SuratTugasCreateWithoutKoordinatorInput, SuratTugasUncheckedCreateWithoutKoordinatorInput>
+  }
+
+  export type SuratTugasCreateManyKoordinatorInputEnvelope = {
+    data: SuratTugasCreateManyKoordinatorInput | SuratTugasCreateManyKoordinatorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SuratTugasCreateWithoutSeniorManagerInput = {
+    nomor_surat?: string | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    disetujuiLeadAt?: Date | string | null
+    disetujuiKoorAt?: Date | string | null
+    disetujuiSmAt?: Date | string | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    proyek?: ProyekCreateNestedOneWithoutSuratTugasInput
+    leadInspector?: pegawaiCreateNestedOneWithoutLeadApproverDiInput
+    koordinator?: pegawaiCreateNestedOneWithoutKoorApproverDiInput
+    kepalaCabang?: pegawaiCreateNestedOneWithoutKacabApproverDiInput
+    timInspektor?: pegawaiCreateNestedManyWithoutAnggotaTimDiInput
+    dibuatOleh?: pegawaiCreateNestedOneWithoutSuratTugasDibuatInput
+  }
+
+  export type SuratTugasUncheckedCreateWithoutSeniorManagerInput = {
+    id?: number
+    nomor_surat?: string | null
+    proyekId?: number | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedCreateNestedManyWithoutAnggotaTimDiInput
+  }
+
+  export type SuratTugasCreateOrConnectWithoutSeniorManagerInput = {
+    where: SuratTugasWhereUniqueInput
+    create: XOR<SuratTugasCreateWithoutSeniorManagerInput, SuratTugasUncheckedCreateWithoutSeniorManagerInput>
+  }
+
+  export type SuratTugasCreateManySeniorManagerInputEnvelope = {
+    data: SuratTugasCreateManySeniorManagerInput | SuratTugasCreateManySeniorManagerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SuratTugasCreateWithoutKepalaCabangInput = {
+    nomor_surat?: string | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    disetujuiLeadAt?: Date | string | null
+    disetujuiKoorAt?: Date | string | null
+    disetujuiSmAt?: Date | string | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    proyek?: ProyekCreateNestedOneWithoutSuratTugasInput
+    leadInspector?: pegawaiCreateNestedOneWithoutLeadApproverDiInput
+    koordinator?: pegawaiCreateNestedOneWithoutKoorApproverDiInput
+    seniorManager?: pegawaiCreateNestedOneWithoutSmApproverDiInput
+    timInspektor?: pegawaiCreateNestedManyWithoutAnggotaTimDiInput
+    dibuatOleh?: pegawaiCreateNestedOneWithoutSuratTugasDibuatInput
+  }
+
+  export type SuratTugasUncheckedCreateWithoutKepalaCabangInput = {
+    id?: number
+    nomor_surat?: string | null
+    proyekId?: number | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedCreateNestedManyWithoutAnggotaTimDiInput
+  }
+
+  export type SuratTugasCreateOrConnectWithoutKepalaCabangInput = {
+    where: SuratTugasWhereUniqueInput
+    create: XOR<SuratTugasCreateWithoutKepalaCabangInput, SuratTugasUncheckedCreateWithoutKepalaCabangInput>
+  }
+
+  export type SuratTugasCreateManyKepalaCabangInputEnvelope = {
+    data: SuratTugasCreateManyKepalaCabangInput | SuratTugasCreateManyKepalaCabangInput[]
+    skipDuplicates?: boolean
   }
 
   export type pelatihanUpsertWithWhereUniqueWithoutPegawaiInput = {
@@ -10127,6 +11581,7 @@ export namespace Prisma {
     keterangan_utilisasi?: StringNullableFilter<"pelatihan"> | string | null
     tahun?: IntNullableFilter<"pelatihan"> | number | null
     tanggal_akhir?: DateTimeNullableFilter<"pelatihan"> | Date | string | null
+    pegawaiId?: IntNullableFilter<"pelatihan"> | number | null
   }
 
   export type pengalaman_kerjaUpsertWithWhereUniqueWithoutPegawaiInput = {
@@ -10155,6 +11610,236 @@ export namespace Prisma {
     pengalaman_kerja?: StringNullableFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableFilter<"pengalaman_kerja"> | string | null
     lokasi?: StringNullableFilter<"pengalaman_kerja"> | string | null
+    pegawaiId?: IntNullableFilter<"pengalaman_kerja"> | number | null
+  }
+
+  export type SuratTugasUpsertWithWhereUniqueWithoutDibuatOlehInput = {
+    where: SuratTugasWhereUniqueInput
+    update: XOR<SuratTugasUpdateWithoutDibuatOlehInput, SuratTugasUncheckedUpdateWithoutDibuatOlehInput>
+    create: XOR<SuratTugasCreateWithoutDibuatOlehInput, SuratTugasUncheckedCreateWithoutDibuatOlehInput>
+  }
+
+  export type SuratTugasUpdateWithWhereUniqueWithoutDibuatOlehInput = {
+    where: SuratTugasWhereUniqueInput
+    data: XOR<SuratTugasUpdateWithoutDibuatOlehInput, SuratTugasUncheckedUpdateWithoutDibuatOlehInput>
+  }
+
+  export type SuratTugasUpdateManyWithWhereWithoutDibuatOlehInput = {
+    where: SuratTugasScalarWhereInput
+    data: XOR<SuratTugasUpdateManyMutationInput, SuratTugasUncheckedUpdateManyWithoutDibuatOlehInput>
+  }
+
+  export type SuratTugasScalarWhereInput = {
+    AND?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+    OR?: SuratTugasScalarWhereInput[]
+    NOT?: SuratTugasScalarWhereInput | SuratTugasScalarWhereInput[]
+    id?: IntFilter<"SuratTugas"> | number
+    nomor_surat?: StringNullableFilter<"SuratTugas"> | string | null
+    proyekId?: IntNullableFilter<"SuratTugas"> | number | null
+    status_pekerjaan?: StringNullableFilter<"SuratTugas"> | string | null
+    no_service_order?: StringNullableFilter<"SuratTugas"> | string | null
+    bidang_pekerjaan?: StringNullableFilter<"SuratTugas"> | string | null
+    peralatan_inspeksi?: StringNullableListFilter<"SuratTugas">
+    kebutuhan_material?: StringNullableListFilter<"SuratTugas">
+    tanggal_berangkat?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    tanggal_kembali?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    transportasi_operasional?: BoolFilter<"SuratTugas"> | boolean
+    transportasi_ditanggung_klien?: BoolFilter<"SuratTugas"> | boolean
+    transportasi_asal_tujuan?: BoolFilter<"SuratTugas"> | boolean
+    transportasi_dinas?: BoolFilter<"SuratTugas"> | boolean
+    tiket?: BoolFilter<"SuratTugas"> | boolean
+    penginapan?: BoolFilter<"SuratTugas"> | boolean
+    keterangan_lain?: StringNullableFilter<"SuratTugas"> | string | null
+    leadInspectorId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiLeadAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    koordinatorId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiKoorAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    seniorManagerId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiSmAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    kepalaCabangId?: IntNullableFilter<"SuratTugas"> | number | null
+    disetujuiKacabAt?: DateTimeNullableFilter<"SuratTugas"> | Date | string | null
+    catatanPenolakan?: StringNullableFilter<"SuratTugas"> | string | null
+    dibuatOlehId?: IntNullableFilter<"SuratTugas"> | number | null
+    createdAt?: DateTimeFilter<"SuratTugas"> | Date | string
+    updatedAt?: DateTimeFilter<"SuratTugas"> | Date | string
+    spi?: StringNullableFilter<"SuratTugas"> | string | null
+    wbs?: StringNullableFilter<"SuratTugas"> | string | null
+    status?: EnumStatusSuratTugasFilter<"SuratTugas"> | $Enums.StatusSuratTugas
+  }
+
+  export type SuratTugasUpsertWithWhereUniqueWithoutTimInspektorInput = {
+    where: SuratTugasWhereUniqueInput
+    update: XOR<SuratTugasUpdateWithoutTimInspektorInput, SuratTugasUncheckedUpdateWithoutTimInspektorInput>
+    create: XOR<SuratTugasCreateWithoutTimInspektorInput, SuratTugasUncheckedCreateWithoutTimInspektorInput>
+  }
+
+  export type SuratTugasUpdateWithWhereUniqueWithoutTimInspektorInput = {
+    where: SuratTugasWhereUniqueInput
+    data: XOR<SuratTugasUpdateWithoutTimInspektorInput, SuratTugasUncheckedUpdateWithoutTimInspektorInput>
+  }
+
+  export type SuratTugasUpdateManyWithWhereWithoutTimInspektorInput = {
+    where: SuratTugasScalarWhereInput
+    data: XOR<SuratTugasUpdateManyMutationInput, SuratTugasUncheckedUpdateManyWithoutTimInspektorInput>
+  }
+
+  export type SuratTugasUpsertWithWhereUniqueWithoutLeadInspectorInput = {
+    where: SuratTugasWhereUniqueInput
+    update: XOR<SuratTugasUpdateWithoutLeadInspectorInput, SuratTugasUncheckedUpdateWithoutLeadInspectorInput>
+    create: XOR<SuratTugasCreateWithoutLeadInspectorInput, SuratTugasUncheckedCreateWithoutLeadInspectorInput>
+  }
+
+  export type SuratTugasUpdateWithWhereUniqueWithoutLeadInspectorInput = {
+    where: SuratTugasWhereUniqueInput
+    data: XOR<SuratTugasUpdateWithoutLeadInspectorInput, SuratTugasUncheckedUpdateWithoutLeadInspectorInput>
+  }
+
+  export type SuratTugasUpdateManyWithWhereWithoutLeadInspectorInput = {
+    where: SuratTugasScalarWhereInput
+    data: XOR<SuratTugasUpdateManyMutationInput, SuratTugasUncheckedUpdateManyWithoutLeadInspectorInput>
+  }
+
+  export type SuratTugasUpsertWithWhereUniqueWithoutKoordinatorInput = {
+    where: SuratTugasWhereUniqueInput
+    update: XOR<SuratTugasUpdateWithoutKoordinatorInput, SuratTugasUncheckedUpdateWithoutKoordinatorInput>
+    create: XOR<SuratTugasCreateWithoutKoordinatorInput, SuratTugasUncheckedCreateWithoutKoordinatorInput>
+  }
+
+  export type SuratTugasUpdateWithWhereUniqueWithoutKoordinatorInput = {
+    where: SuratTugasWhereUniqueInput
+    data: XOR<SuratTugasUpdateWithoutKoordinatorInput, SuratTugasUncheckedUpdateWithoutKoordinatorInput>
+  }
+
+  export type SuratTugasUpdateManyWithWhereWithoutKoordinatorInput = {
+    where: SuratTugasScalarWhereInput
+    data: XOR<SuratTugasUpdateManyMutationInput, SuratTugasUncheckedUpdateManyWithoutKoordinatorInput>
+  }
+
+  export type SuratTugasUpsertWithWhereUniqueWithoutSeniorManagerInput = {
+    where: SuratTugasWhereUniqueInput
+    update: XOR<SuratTugasUpdateWithoutSeniorManagerInput, SuratTugasUncheckedUpdateWithoutSeniorManagerInput>
+    create: XOR<SuratTugasCreateWithoutSeniorManagerInput, SuratTugasUncheckedCreateWithoutSeniorManagerInput>
+  }
+
+  export type SuratTugasUpdateWithWhereUniqueWithoutSeniorManagerInput = {
+    where: SuratTugasWhereUniqueInput
+    data: XOR<SuratTugasUpdateWithoutSeniorManagerInput, SuratTugasUncheckedUpdateWithoutSeniorManagerInput>
+  }
+
+  export type SuratTugasUpdateManyWithWhereWithoutSeniorManagerInput = {
+    where: SuratTugasScalarWhereInput
+    data: XOR<SuratTugasUpdateManyMutationInput, SuratTugasUncheckedUpdateManyWithoutSeniorManagerInput>
+  }
+
+  export type SuratTugasUpsertWithWhereUniqueWithoutKepalaCabangInput = {
+    where: SuratTugasWhereUniqueInput
+    update: XOR<SuratTugasUpdateWithoutKepalaCabangInput, SuratTugasUncheckedUpdateWithoutKepalaCabangInput>
+    create: XOR<SuratTugasCreateWithoutKepalaCabangInput, SuratTugasUncheckedCreateWithoutKepalaCabangInput>
+  }
+
+  export type SuratTugasUpdateWithWhereUniqueWithoutKepalaCabangInput = {
+    where: SuratTugasWhereUniqueInput
+    data: XOR<SuratTugasUpdateWithoutKepalaCabangInput, SuratTugasUncheckedUpdateWithoutKepalaCabangInput>
+  }
+
+  export type SuratTugasUpdateManyWithWhereWithoutKepalaCabangInput = {
+    where: SuratTugasScalarWhereInput
+    data: XOR<SuratTugasUpdateManyMutationInput, SuratTugasUncheckedUpdateManyWithoutKepalaCabangInput>
+  }
+
+  export type SuratTugasCreateWithoutProyekInput = {
+    nomor_surat?: string | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    disetujuiLeadAt?: Date | string | null
+    disetujuiKoorAt?: Date | string | null
+    disetujuiSmAt?: Date | string | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    leadInspector?: pegawaiCreateNestedOneWithoutLeadApproverDiInput
+    koordinator?: pegawaiCreateNestedOneWithoutKoorApproverDiInput
+    seniorManager?: pegawaiCreateNestedOneWithoutSmApproverDiInput
+    kepalaCabang?: pegawaiCreateNestedOneWithoutKacabApproverDiInput
+    timInspektor?: pegawaiCreateNestedManyWithoutAnggotaTimDiInput
+    dibuatOleh?: pegawaiCreateNestedOneWithoutSuratTugasDibuatInput
+  }
+
+  export type SuratTugasUncheckedCreateWithoutProyekInput = {
+    id?: number
+    nomor_surat?: string | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedCreateNestedManyWithoutAnggotaTimDiInput
+  }
+
+  export type SuratTugasCreateOrConnectWithoutProyekInput = {
+    where: SuratTugasWhereUniqueInput
+    create: XOR<SuratTugasCreateWithoutProyekInput, SuratTugasUncheckedCreateWithoutProyekInput>
+  }
+
+  export type SuratTugasCreateManyProyekInputEnvelope = {
+    data: SuratTugasCreateManyProyekInput | SuratTugasCreateManyProyekInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SuratTugasUpsertWithWhereUniqueWithoutProyekInput = {
+    where: SuratTugasWhereUniqueInput
+    update: XOR<SuratTugasUpdateWithoutProyekInput, SuratTugasUncheckedUpdateWithoutProyekInput>
+    create: XOR<SuratTugasCreateWithoutProyekInput, SuratTugasUncheckedCreateWithoutProyekInput>
+  }
+
+  export type SuratTugasUpdateWithWhereUniqueWithoutProyekInput = {
+    where: SuratTugasWhereUniqueInput
+    data: XOR<SuratTugasUpdateWithoutProyekInput, SuratTugasUncheckedUpdateWithoutProyekInput>
+  }
+
+  export type SuratTugasUpdateManyWithWhereWithoutProyekInput = {
+    where: SuratTugasScalarWhereInput
+    data: XOR<SuratTugasUpdateManyMutationInput, SuratTugasUncheckedUpdateManyWithoutProyekInput>
   }
 
   export type pegawaiCreateWithoutPelatihanInput = {
@@ -10170,19 +11855,25 @@ export namespace Prisma {
     no_telepon?: string | null
     email?: string | null
     password: string
-    role?: string | null
+    role?: pegawaiCreateroleInput | string[]
     username?: string | null
-    id?: number
     nik?: string | null
     jenjang_pend?: string | null
     pendidikan?: string | null
     tahun_pend?: number | null
+    tandaTanganUrl?: string | null
     cv_generated_at?: Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasCreateNestedManyWithoutKepalaCabangInput
   }
 
   export type pegawaiUncheckedCreateWithoutPelatihanInput = {
+    id?: number
     nup: string
     nama_pegawai: string
     status_pegawai?: string | null
@@ -10195,16 +11886,21 @@ export namespace Prisma {
     no_telepon?: string | null
     email?: string | null
     password: string
-    role?: string | null
+    role?: pegawaiCreateroleInput | string[]
     username?: string | null
-    id?: number
     nik?: string | null
     jenjang_pend?: string | null
     pendidikan?: string | null
     tahun_pend?: number | null
+    tandaTanganUrl?: string | null
     cv_generated_at?: Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasUncheckedCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasUncheckedCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasUncheckedCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKepalaCabangInput
   }
 
   export type pegawaiCreateOrConnectWithoutPelatihanInput = {
@@ -10236,18 +11932,25 @@ export namespace Prisma {
     no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: pegawaiUpdateroleInput | string[]
     username?: NullableStringFieldUpdateOperationsInput | string | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
     pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
     tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
     cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUpdateManyWithoutKepalaCabangNestedInput
   }
 
   export type pegawaiUncheckedUpdateWithoutPelatihanInput = {
+    id?: IntFieldUpdateOperationsInput | number
     nup?: StringFieldUpdateOperationsInput | string
     nama_pegawai?: StringFieldUpdateOperationsInput | string
     status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10260,16 +11963,21 @@ export namespace Prisma {
     no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: pegawaiUpdateroleInput | string[]
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    id?: IntFieldUpdateOperationsInput | number
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
     pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
     tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
     cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasUncheckedUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUncheckedUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUncheckedUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUncheckedUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUncheckedUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUncheckedUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUncheckedUpdateManyWithoutKepalaCabangNestedInput
   }
 
   export type pegawaiCreateWithoutPengalaman_kerjaInput = {
@@ -10285,19 +11993,25 @@ export namespace Prisma {
     no_telepon?: string | null
     email?: string | null
     password: string
-    role?: string | null
+    role?: pegawaiCreateroleInput | string[]
     username?: string | null
-    id?: number
     nik?: string | null
     jenjang_pend?: string | null
     pendidikan?: string | null
     tahun_pend?: number | null
+    tandaTanganUrl?: string | null
     cv_generated_at?: Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasCreateNestedManyWithoutPegawaiInput
     pelatihan?: pelatihanCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasCreateNestedManyWithoutKepalaCabangInput
   }
 
   export type pegawaiUncheckedCreateWithoutPengalaman_kerjaInput = {
+    id?: number
     nup: string
     nama_pegawai: string
     status_pegawai?: string | null
@@ -10310,16 +12024,21 @@ export namespace Prisma {
     no_telepon?: string | null
     email?: string | null
     password: string
-    role?: string | null
+    role?: pegawaiCreateroleInput | string[]
     username?: string | null
-    id?: number
     nik?: string | null
     jenjang_pend?: string | null
     pendidikan?: string | null
     tahun_pend?: number | null
+    tandaTanganUrl?: string | null
     cv_generated_at?: Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasUncheckedCreateNestedManyWithoutPegawaiInput
     pelatihan?: pelatihanUncheckedCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasUncheckedCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasUncheckedCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKepalaCabangInput
   }
 
   export type pegawaiCreateOrConnectWithoutPengalaman_kerjaInput = {
@@ -10351,18 +12070,25 @@ export namespace Prisma {
     no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: pegawaiUpdateroleInput | string[]
     username?: NullableStringFieldUpdateOperationsInput | string | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
     pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
     tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
     cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasUpdateManyWithoutPegawaiNestedInput
     pelatihan?: pelatihanUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUpdateManyWithoutKepalaCabangNestedInput
   }
 
   export type pegawaiUncheckedUpdateWithoutPengalaman_kerjaInput = {
+    id?: IntFieldUpdateOperationsInput | number
     nup?: StringFieldUpdateOperationsInput | string
     nama_pegawai?: StringFieldUpdateOperationsInput | string
     status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10375,62 +12101,42 @@ export namespace Prisma {
     no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: pegawaiUpdateroleInput | string[]
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    id?: IntFieldUpdateOperationsInput | number
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
     pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
     tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
     cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    pegawai_surat_tugas?: PegawaiSuratTugasUncheckedUpdateManyWithoutPegawaiNestedInput
     pelatihan?: pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUncheckedUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUncheckedUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUncheckedUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUncheckedUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUncheckedUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUncheckedUpdateManyWithoutKepalaCabangNestedInput
   }
 
-  export type PegawaiSuratTugasCreateWithoutSuratTugasInput = {
-    jabatan?: string | null
-    approved?: boolean
-    approvedBy?: string | null
-    approvedAt?: Date | string | null
-    pegawai: pegawaiCreateNestedOneWithoutPegawai_surat_tugasInput
+  export type ProyekCreateWithoutSuratTugasInput = {
+    namaProyek: string
+    klien: string
+    lokasi: string
   }
 
-  export type PegawaiSuratTugasUncheckedCreateWithoutSuratTugasInput = {
+  export type ProyekUncheckedCreateWithoutSuratTugasInput = {
     id?: number
-    pegawaiNup: string
-    jabatan?: string | null
-    approved?: boolean
-    approvedBy?: string | null
-    approvedAt?: Date | string | null
+    namaProyek: string
+    klien: string
+    lokasi: string
   }
 
-  export type PegawaiSuratTugasCreateOrConnectWithoutSuratTugasInput = {
-    where: PegawaiSuratTugasWhereUniqueInput
-    create: XOR<PegawaiSuratTugasCreateWithoutSuratTugasInput, PegawaiSuratTugasUncheckedCreateWithoutSuratTugasInput>
+  export type ProyekCreateOrConnectWithoutSuratTugasInput = {
+    where: ProyekWhereUniqueInput
+    create: XOR<ProyekCreateWithoutSuratTugasInput, ProyekUncheckedCreateWithoutSuratTugasInput>
   }
 
-  export type PegawaiSuratTugasCreateManySuratTugasInputEnvelope = {
-    data: PegawaiSuratTugasCreateManySuratTugasInput | PegawaiSuratTugasCreateManySuratTugasInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PegawaiSuratTugasUpsertWithWhereUniqueWithoutSuratTugasInput = {
-    where: PegawaiSuratTugasWhereUniqueInput
-    update: XOR<PegawaiSuratTugasUpdateWithoutSuratTugasInput, PegawaiSuratTugasUncheckedUpdateWithoutSuratTugasInput>
-    create: XOR<PegawaiSuratTugasCreateWithoutSuratTugasInput, PegawaiSuratTugasUncheckedCreateWithoutSuratTugasInput>
-  }
-
-  export type PegawaiSuratTugasUpdateWithWhereUniqueWithoutSuratTugasInput = {
-    where: PegawaiSuratTugasWhereUniqueInput
-    data: XOR<PegawaiSuratTugasUpdateWithoutSuratTugasInput, PegawaiSuratTugasUncheckedUpdateWithoutSuratTugasInput>
-  }
-
-  export type PegawaiSuratTugasUpdateManyWithWhereWithoutSuratTugasInput = {
-    where: PegawaiSuratTugasScalarWhereInput
-    data: XOR<PegawaiSuratTugasUpdateManyMutationInput, PegawaiSuratTugasUncheckedUpdateManyWithoutSuratTugasInput>
-  }
-
-  export type pegawaiCreateWithoutPegawai_surat_tugasInput = {
+  export type pegawaiCreateWithoutLeadApproverDiInput = {
     nup: string
     nama_pegawai: string
     status_pegawai?: string | null
@@ -10443,19 +12149,25 @@ export namespace Prisma {
     no_telepon?: string | null
     email?: string | null
     password: string
-    role?: string | null
+    role?: pegawaiCreateroleInput | string[]
     username?: string | null
-    id?: number
     nik?: string | null
     jenjang_pend?: string | null
     pendidikan?: string | null
     tahun_pend?: number | null
+    tandaTanganUrl?: string | null
     cv_generated_at?: Date | string | null
     pelatihan?: pelatihanCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasCreateNestedManyWithoutTimInspektorInput
+    koorApproverDi?: SuratTugasCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasCreateNestedManyWithoutKepalaCabangInput
   }
 
-  export type pegawaiUncheckedCreateWithoutPegawai_surat_tugasInput = {
+  export type pegawaiUncheckedCreateWithoutLeadApproverDiInput = {
+    id?: number
     nup: string
     nama_pegawai: string
     status_pegawai?: string | null
@@ -10468,93 +12180,394 @@ export namespace Prisma {
     no_telepon?: string | null
     email?: string | null
     password: string
-    role?: string | null
+    role?: pegawaiCreateroleInput | string[]
     username?: string | null
-    id?: number
     nik?: string | null
     jenjang_pend?: string | null
     pendidikan?: string | null
     tahun_pend?: number | null
+    tandaTanganUrl?: string | null
     cv_generated_at?: Date | string | null
     pelatihan?: pelatihanUncheckedCreateNestedManyWithoutPegawaiInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasUncheckedCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasUncheckedCreateNestedManyWithoutTimInspektorInput
+    koorApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKepalaCabangInput
   }
 
-  export type pegawaiCreateOrConnectWithoutPegawai_surat_tugasInput = {
+  export type pegawaiCreateOrConnectWithoutLeadApproverDiInput = {
     where: pegawaiWhereUniqueInput
-    create: XOR<pegawaiCreateWithoutPegawai_surat_tugasInput, pegawaiUncheckedCreateWithoutPegawai_surat_tugasInput>
+    create: XOR<pegawaiCreateWithoutLeadApproverDiInput, pegawaiUncheckedCreateWithoutLeadApproverDiInput>
   }
 
-  export type SuratTugasCreateWithoutPegawai_surat_tugasInput = {
-    nomor_surat?: string | null
-    klien: string
-    pekerjaan: string
-    status_pekerjaan?: string | null
-    no_service_order?: string | null
-    bidang_pekerjaan?: string | null
-    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
-    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
-    lokasi_pekerjaan?: SuratTugasCreatelokasi_pekerjaanInput | string[]
-    tanggal_berangkat?: Date | string | null
-    tanggal_kembali?: Date | string | null
-    transportasi_operasional?: boolean
-    transportasi_ditanggung_klien?: boolean
-    transportasi_asal_tujuan?: boolean
-    transportasi_dinas?: boolean
-    tiket?: boolean
-    penginapan?: boolean
-    keterangan_lain?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    spi?: string | null
-    wbs?: string | null
-    status?: $Enums.StatusSuratTugas
+  export type pegawaiCreateWithoutKoorApproverDiInput = {
+    nup: string
+    nama_pegawai: string
+    status_pegawai?: string | null
+    jabatan?: string | null
+    tempat_lahir?: string | null
+    tanggal_lahir?: Date | string | null
+    alamat?: string | null
+    warga_negara?: string | null
+    agama?: string | null
+    no_telepon?: string | null
+    email?: string | null
+    password: string
+    role?: pegawaiCreateroleInput | string[]
+    username?: string | null
+    nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    tandaTanganUrl?: string | null
+    cv_generated_at?: Date | string | null
+    pelatihan?: pelatihanCreateNestedManyWithoutPegawaiInput
+    pengalaman_kerja?: pengalaman_kerjaCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasCreateNestedManyWithoutLeadInspectorInput
+    smApproverDi?: SuratTugasCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasCreateNestedManyWithoutKepalaCabangInput
   }
 
-  export type SuratTugasUncheckedCreateWithoutPegawai_surat_tugasInput = {
+  export type pegawaiUncheckedCreateWithoutKoorApproverDiInput = {
     id?: number
-    nomor_surat?: string | null
-    klien: string
-    pekerjaan: string
-    status_pekerjaan?: string | null
-    no_service_order?: string | null
-    bidang_pekerjaan?: string | null
-    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
-    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
-    lokasi_pekerjaan?: SuratTugasCreatelokasi_pekerjaanInput | string[]
-    tanggal_berangkat?: Date | string | null
-    tanggal_kembali?: Date | string | null
-    transportasi_operasional?: boolean
-    transportasi_ditanggung_klien?: boolean
-    transportasi_asal_tujuan?: boolean
-    transportasi_dinas?: boolean
-    tiket?: boolean
-    penginapan?: boolean
-    keterangan_lain?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    spi?: string | null
-    wbs?: string | null
-    status?: $Enums.StatusSuratTugas
+    nup: string
+    nama_pegawai: string
+    status_pegawai?: string | null
+    jabatan?: string | null
+    tempat_lahir?: string | null
+    tanggal_lahir?: Date | string | null
+    alamat?: string | null
+    warga_negara?: string | null
+    agama?: string | null
+    no_telepon?: string | null
+    email?: string | null
+    password: string
+    role?: pegawaiCreateroleInput | string[]
+    username?: string | null
+    nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    tandaTanganUrl?: string | null
+    cv_generated_at?: Date | string | null
+    pelatihan?: pelatihanUncheckedCreateNestedManyWithoutPegawaiInput
+    pengalaman_kerja?: pengalaman_kerjaUncheckedCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasUncheckedCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasUncheckedCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutLeadInspectorInput
+    smApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKepalaCabangInput
   }
 
-  export type SuratTugasCreateOrConnectWithoutPegawai_surat_tugasInput = {
-    where: SuratTugasWhereUniqueInput
-    create: XOR<SuratTugasCreateWithoutPegawai_surat_tugasInput, SuratTugasUncheckedCreateWithoutPegawai_surat_tugasInput>
+  export type pegawaiCreateOrConnectWithoutKoorApproverDiInput = {
+    where: pegawaiWhereUniqueInput
+    create: XOR<pegawaiCreateWithoutKoorApproverDiInput, pegawaiUncheckedCreateWithoutKoorApproverDiInput>
   }
 
-  export type pegawaiUpsertWithoutPegawai_surat_tugasInput = {
-    update: XOR<pegawaiUpdateWithoutPegawai_surat_tugasInput, pegawaiUncheckedUpdateWithoutPegawai_surat_tugasInput>
-    create: XOR<pegawaiCreateWithoutPegawai_surat_tugasInput, pegawaiUncheckedCreateWithoutPegawai_surat_tugasInput>
+  export type pegawaiCreateWithoutSmApproverDiInput = {
+    nup: string
+    nama_pegawai: string
+    status_pegawai?: string | null
+    jabatan?: string | null
+    tempat_lahir?: string | null
+    tanggal_lahir?: Date | string | null
+    alamat?: string | null
+    warga_negara?: string | null
+    agama?: string | null
+    no_telepon?: string | null
+    email?: string | null
+    password: string
+    role?: pegawaiCreateroleInput | string[]
+    username?: string | null
+    nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    tandaTanganUrl?: string | null
+    cv_generated_at?: Date | string | null
+    pelatihan?: pelatihanCreateNestedManyWithoutPegawaiInput
+    pengalaman_kerja?: pengalaman_kerjaCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasCreateNestedManyWithoutKoordinatorInput
+    kacabApproverDi?: SuratTugasCreateNestedManyWithoutKepalaCabangInput
+  }
+
+  export type pegawaiUncheckedCreateWithoutSmApproverDiInput = {
+    id?: number
+    nup: string
+    nama_pegawai: string
+    status_pegawai?: string | null
+    jabatan?: string | null
+    tempat_lahir?: string | null
+    tanggal_lahir?: Date | string | null
+    alamat?: string | null
+    warga_negara?: string | null
+    agama?: string | null
+    no_telepon?: string | null
+    email?: string | null
+    password: string
+    role?: pegawaiCreateroleInput | string[]
+    username?: string | null
+    nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    tandaTanganUrl?: string | null
+    cv_generated_at?: Date | string | null
+    pelatihan?: pelatihanUncheckedCreateNestedManyWithoutPegawaiInput
+    pengalaman_kerja?: pengalaman_kerjaUncheckedCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasUncheckedCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasUncheckedCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKoordinatorInput
+    kacabApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKepalaCabangInput
+  }
+
+  export type pegawaiCreateOrConnectWithoutSmApproverDiInput = {
+    where: pegawaiWhereUniqueInput
+    create: XOR<pegawaiCreateWithoutSmApproverDiInput, pegawaiUncheckedCreateWithoutSmApproverDiInput>
+  }
+
+  export type pegawaiCreateWithoutKacabApproverDiInput = {
+    nup: string
+    nama_pegawai: string
+    status_pegawai?: string | null
+    jabatan?: string | null
+    tempat_lahir?: string | null
+    tanggal_lahir?: Date | string | null
+    alamat?: string | null
+    warga_negara?: string | null
+    agama?: string | null
+    no_telepon?: string | null
+    email?: string | null
+    password: string
+    role?: pegawaiCreateroleInput | string[]
+    username?: string | null
+    nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    tandaTanganUrl?: string | null
+    cv_generated_at?: Date | string | null
+    pelatihan?: pelatihanCreateNestedManyWithoutPegawaiInput
+    pengalaman_kerja?: pengalaman_kerjaCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasCreateNestedManyWithoutSeniorManagerInput
+  }
+
+  export type pegawaiUncheckedCreateWithoutKacabApproverDiInput = {
+    id?: number
+    nup: string
+    nama_pegawai: string
+    status_pegawai?: string | null
+    jabatan?: string | null
+    tempat_lahir?: string | null
+    tanggal_lahir?: Date | string | null
+    alamat?: string | null
+    warga_negara?: string | null
+    agama?: string | null
+    no_telepon?: string | null
+    email?: string | null
+    password: string
+    role?: pegawaiCreateroleInput | string[]
+    username?: string | null
+    nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    tandaTanganUrl?: string | null
+    cv_generated_at?: Date | string | null
+    pelatihan?: pelatihanUncheckedCreateNestedManyWithoutPegawaiInput
+    pengalaman_kerja?: pengalaman_kerjaUncheckedCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasUncheckedCreateNestedManyWithoutDibuatOlehInput
+    anggotaTimDi?: SuratTugasUncheckedCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutSeniorManagerInput
+  }
+
+  export type pegawaiCreateOrConnectWithoutKacabApproverDiInput = {
+    where: pegawaiWhereUniqueInput
+    create: XOR<pegawaiCreateWithoutKacabApproverDiInput, pegawaiUncheckedCreateWithoutKacabApproverDiInput>
+  }
+
+  export type pegawaiCreateWithoutAnggotaTimDiInput = {
+    nup: string
+    nama_pegawai: string
+    status_pegawai?: string | null
+    jabatan?: string | null
+    tempat_lahir?: string | null
+    tanggal_lahir?: Date | string | null
+    alamat?: string | null
+    warga_negara?: string | null
+    agama?: string | null
+    no_telepon?: string | null
+    email?: string | null
+    password: string
+    role?: pegawaiCreateroleInput | string[]
+    username?: string | null
+    nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    tandaTanganUrl?: string | null
+    cv_generated_at?: Date | string | null
+    pelatihan?: pelatihanCreateNestedManyWithoutPegawaiInput
+    pengalaman_kerja?: pengalaman_kerjaCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasCreateNestedManyWithoutDibuatOlehInput
+    leadApproverDi?: SuratTugasCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasCreateNestedManyWithoutKepalaCabangInput
+  }
+
+  export type pegawaiUncheckedCreateWithoutAnggotaTimDiInput = {
+    id?: number
+    nup: string
+    nama_pegawai: string
+    status_pegawai?: string | null
+    jabatan?: string | null
+    tempat_lahir?: string | null
+    tanggal_lahir?: Date | string | null
+    alamat?: string | null
+    warga_negara?: string | null
+    agama?: string | null
+    no_telepon?: string | null
+    email?: string | null
+    password: string
+    role?: pegawaiCreateroleInput | string[]
+    username?: string | null
+    nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    tandaTanganUrl?: string | null
+    cv_generated_at?: Date | string | null
+    pelatihan?: pelatihanUncheckedCreateNestedManyWithoutPegawaiInput
+    pengalaman_kerja?: pengalaman_kerjaUncheckedCreateNestedManyWithoutPegawaiInput
+    suratTugasDibuat?: SuratTugasUncheckedCreateNestedManyWithoutDibuatOlehInput
+    leadApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKepalaCabangInput
+  }
+
+  export type pegawaiCreateOrConnectWithoutAnggotaTimDiInput = {
+    where: pegawaiWhereUniqueInput
+    create: XOR<pegawaiCreateWithoutAnggotaTimDiInput, pegawaiUncheckedCreateWithoutAnggotaTimDiInput>
+  }
+
+  export type pegawaiCreateWithoutSuratTugasDibuatInput = {
+    nup: string
+    nama_pegawai: string
+    status_pegawai?: string | null
+    jabatan?: string | null
+    tempat_lahir?: string | null
+    tanggal_lahir?: Date | string | null
+    alamat?: string | null
+    warga_negara?: string | null
+    agama?: string | null
+    no_telepon?: string | null
+    email?: string | null
+    password: string
+    role?: pegawaiCreateroleInput | string[]
+    username?: string | null
+    nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    tandaTanganUrl?: string | null
+    cv_generated_at?: Date | string | null
+    pelatihan?: pelatihanCreateNestedManyWithoutPegawaiInput
+    pengalaman_kerja?: pengalaman_kerjaCreateNestedManyWithoutPegawaiInput
+    anggotaTimDi?: SuratTugasCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasCreateNestedManyWithoutKepalaCabangInput
+  }
+
+  export type pegawaiUncheckedCreateWithoutSuratTugasDibuatInput = {
+    id?: number
+    nup: string
+    nama_pegawai: string
+    status_pegawai?: string | null
+    jabatan?: string | null
+    tempat_lahir?: string | null
+    tanggal_lahir?: Date | string | null
+    alamat?: string | null
+    warga_negara?: string | null
+    agama?: string | null
+    no_telepon?: string | null
+    email?: string | null
+    password: string
+    role?: pegawaiCreateroleInput | string[]
+    username?: string | null
+    nik?: string | null
+    jenjang_pend?: string | null
+    pendidikan?: string | null
+    tahun_pend?: number | null
+    tandaTanganUrl?: string | null
+    cv_generated_at?: Date | string | null
+    pelatihan?: pelatihanUncheckedCreateNestedManyWithoutPegawaiInput
+    pengalaman_kerja?: pengalaman_kerjaUncheckedCreateNestedManyWithoutPegawaiInput
+    anggotaTimDi?: SuratTugasUncheckedCreateNestedManyWithoutTimInspektorInput
+    leadApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutLeadInspectorInput
+    koorApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKoordinatorInput
+    smApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutSeniorManagerInput
+    kacabApproverDi?: SuratTugasUncheckedCreateNestedManyWithoutKepalaCabangInput
+  }
+
+  export type pegawaiCreateOrConnectWithoutSuratTugasDibuatInput = {
+    where: pegawaiWhereUniqueInput
+    create: XOR<pegawaiCreateWithoutSuratTugasDibuatInput, pegawaiUncheckedCreateWithoutSuratTugasDibuatInput>
+  }
+
+  export type ProyekUpsertWithoutSuratTugasInput = {
+    update: XOR<ProyekUpdateWithoutSuratTugasInput, ProyekUncheckedUpdateWithoutSuratTugasInput>
+    create: XOR<ProyekCreateWithoutSuratTugasInput, ProyekUncheckedCreateWithoutSuratTugasInput>
+    where?: ProyekWhereInput
+  }
+
+  export type ProyekUpdateToOneWithWhereWithoutSuratTugasInput = {
+    where?: ProyekWhereInput
+    data: XOR<ProyekUpdateWithoutSuratTugasInput, ProyekUncheckedUpdateWithoutSuratTugasInput>
+  }
+
+  export type ProyekUpdateWithoutSuratTugasInput = {
+    namaProyek?: StringFieldUpdateOperationsInput | string
+    klien?: StringFieldUpdateOperationsInput | string
+    lokasi?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ProyekUncheckedUpdateWithoutSuratTugasInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    namaProyek?: StringFieldUpdateOperationsInput | string
+    klien?: StringFieldUpdateOperationsInput | string
+    lokasi?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type pegawaiUpsertWithoutLeadApproverDiInput = {
+    update: XOR<pegawaiUpdateWithoutLeadApproverDiInput, pegawaiUncheckedUpdateWithoutLeadApproverDiInput>
+    create: XOR<pegawaiCreateWithoutLeadApproverDiInput, pegawaiUncheckedCreateWithoutLeadApproverDiInput>
     where?: pegawaiWhereInput
   }
 
-  export type pegawaiUpdateToOneWithWhereWithoutPegawai_surat_tugasInput = {
+  export type pegawaiUpdateToOneWithWhereWithoutLeadApproverDiInput = {
     where?: pegawaiWhereInput
-    data: XOR<pegawaiUpdateWithoutPegawai_surat_tugasInput, pegawaiUncheckedUpdateWithoutPegawai_surat_tugasInput>
+    data: XOR<pegawaiUpdateWithoutLeadApproverDiInput, pegawaiUncheckedUpdateWithoutLeadApproverDiInput>
   }
 
-  export type pegawaiUpdateWithoutPegawai_surat_tugasInput = {
+  export type pegawaiUpdateWithoutLeadApproverDiInput = {
     nup?: StringFieldUpdateOperationsInput | string
     nama_pegawai?: StringFieldUpdateOperationsInput | string
     status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10567,18 +12580,25 @@ export namespace Prisma {
     no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: pegawaiUpdateroleInput | string[]
     username?: NullableStringFieldUpdateOperationsInput | string | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
     pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
     tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
     cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pelatihan?: pelatihanUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUpdateManyWithoutTimInspektorNestedInput
+    koorApproverDi?: SuratTugasUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUpdateManyWithoutKepalaCabangNestedInput
   }
 
-  export type pegawaiUncheckedUpdateWithoutPegawai_surat_tugasInput = {
+  export type pegawaiUncheckedUpdateWithoutLeadApproverDiInput = {
+    id?: IntFieldUpdateOperationsInput | number
     nup?: StringFieldUpdateOperationsInput | string
     nama_pegawai?: StringFieldUpdateOperationsInput | string
     status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10591,93 +12611,357 @@ export namespace Prisma {
     no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: pegawaiUpdateroleInput | string[]
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    id?: IntFieldUpdateOperationsInput | number
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
     pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
     tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
     cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     pelatihan?: pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput
     pengalaman_kerja?: pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUncheckedUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUncheckedUpdateManyWithoutTimInspektorNestedInput
+    koorApproverDi?: SuratTugasUncheckedUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUncheckedUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUncheckedUpdateManyWithoutKepalaCabangNestedInput
   }
 
-  export type SuratTugasUpsertWithoutPegawai_surat_tugasInput = {
-    update: XOR<SuratTugasUpdateWithoutPegawai_surat_tugasInput, SuratTugasUncheckedUpdateWithoutPegawai_surat_tugasInput>
-    create: XOR<SuratTugasCreateWithoutPegawai_surat_tugasInput, SuratTugasUncheckedCreateWithoutPegawai_surat_tugasInput>
-    where?: SuratTugasWhereInput
+  export type pegawaiUpsertWithoutKoorApproverDiInput = {
+    update: XOR<pegawaiUpdateWithoutKoorApproverDiInput, pegawaiUncheckedUpdateWithoutKoorApproverDiInput>
+    create: XOR<pegawaiCreateWithoutKoorApproverDiInput, pegawaiUncheckedCreateWithoutKoorApproverDiInput>
+    where?: pegawaiWhereInput
   }
 
-  export type SuratTugasUpdateToOneWithWhereWithoutPegawai_surat_tugasInput = {
-    where?: SuratTugasWhereInput
-    data: XOR<SuratTugasUpdateWithoutPegawai_surat_tugasInput, SuratTugasUncheckedUpdateWithoutPegawai_surat_tugasInput>
+  export type pegawaiUpdateToOneWithWhereWithoutKoorApproverDiInput = {
+    where?: pegawaiWhereInput
+    data: XOR<pegawaiUpdateWithoutKoorApproverDiInput, pegawaiUncheckedUpdateWithoutKoorApproverDiInput>
   }
 
-  export type SuratTugasUpdateWithoutPegawai_surat_tugasInput = {
-    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    klien?: StringFieldUpdateOperationsInput | string
-    pekerjaan?: StringFieldUpdateOperationsInput | string
-    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
-    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
-    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
-    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
-    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
-    lokasi_pekerjaan?: SuratTugasUpdatelokasi_pekerjaanInput | string[]
-    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
-    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
-    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
-    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
-    tiket?: BoolFieldUpdateOperationsInput | boolean
-    penginapan?: BoolFieldUpdateOperationsInput | boolean
-    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    spi?: NullableStringFieldUpdateOperationsInput | string | null
-    wbs?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+  export type pegawaiUpdateWithoutKoorApproverDiInput = {
+    nup?: StringFieldUpdateOperationsInput | string
+    nama_pegawai?: StringFieldUpdateOperationsInput | string
+    status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
+    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
+    tempat_lahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_lahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    alamat?: NullableStringFieldUpdateOperationsInput | string | null
+    warga_negara?: NullableStringFieldUpdateOperationsInput | string | null
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: pegawaiUpdateroleInput | string[]
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pelatihan?: pelatihanUpdateManyWithoutPegawaiNestedInput
+    pengalaman_kerja?: pengalaman_kerjaUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUpdateManyWithoutLeadInspectorNestedInput
+    smApproverDi?: SuratTugasUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUpdateManyWithoutKepalaCabangNestedInput
   }
 
-  export type SuratTugasUncheckedUpdateWithoutPegawai_surat_tugasInput = {
+  export type pegawaiUncheckedUpdateWithoutKoorApproverDiInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    klien?: StringFieldUpdateOperationsInput | string
-    pekerjaan?: StringFieldUpdateOperationsInput | string
-    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
-    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
-    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
-    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
-    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
-    lokasi_pekerjaan?: SuratTugasUpdatelokasi_pekerjaanInput | string[]
-    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
-    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
-    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
-    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
-    tiket?: BoolFieldUpdateOperationsInput | boolean
-    penginapan?: BoolFieldUpdateOperationsInput | boolean
-    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    spi?: NullableStringFieldUpdateOperationsInput | string | null
-    wbs?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    nup?: StringFieldUpdateOperationsInput | string
+    nama_pegawai?: StringFieldUpdateOperationsInput | string
+    status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
+    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
+    tempat_lahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_lahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    alamat?: NullableStringFieldUpdateOperationsInput | string | null
+    warga_negara?: NullableStringFieldUpdateOperationsInput | string | null
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: pegawaiUpdateroleInput | string[]
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pelatihan?: pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput
+    pengalaman_kerja?: pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUncheckedUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUncheckedUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUncheckedUpdateManyWithoutLeadInspectorNestedInput
+    smApproverDi?: SuratTugasUncheckedUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUncheckedUpdateManyWithoutKepalaCabangNestedInput
   }
 
-  export type PegawaiSuratTugasCreateManyPegawaiInput = {
-    id?: number
-    suratTugasId: number
-    jabatan?: string | null
-    approved?: boolean
-    approvedBy?: string | null
-    approvedAt?: Date | string | null
+  export type pegawaiUpsertWithoutSmApproverDiInput = {
+    update: XOR<pegawaiUpdateWithoutSmApproverDiInput, pegawaiUncheckedUpdateWithoutSmApproverDiInput>
+    create: XOR<pegawaiCreateWithoutSmApproverDiInput, pegawaiUncheckedCreateWithoutSmApproverDiInput>
+    where?: pegawaiWhereInput
+  }
+
+  export type pegawaiUpdateToOneWithWhereWithoutSmApproverDiInput = {
+    where?: pegawaiWhereInput
+    data: XOR<pegawaiUpdateWithoutSmApproverDiInput, pegawaiUncheckedUpdateWithoutSmApproverDiInput>
+  }
+
+  export type pegawaiUpdateWithoutSmApproverDiInput = {
+    nup?: StringFieldUpdateOperationsInput | string
+    nama_pegawai?: StringFieldUpdateOperationsInput | string
+    status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
+    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
+    tempat_lahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_lahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    alamat?: NullableStringFieldUpdateOperationsInput | string | null
+    warga_negara?: NullableStringFieldUpdateOperationsInput | string | null
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: pegawaiUpdateroleInput | string[]
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pelatihan?: pelatihanUpdateManyWithoutPegawaiNestedInput
+    pengalaman_kerja?: pengalaman_kerjaUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUpdateManyWithoutKoordinatorNestedInput
+    kacabApproverDi?: SuratTugasUpdateManyWithoutKepalaCabangNestedInput
+  }
+
+  export type pegawaiUncheckedUpdateWithoutSmApproverDiInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nup?: StringFieldUpdateOperationsInput | string
+    nama_pegawai?: StringFieldUpdateOperationsInput | string
+    status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
+    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
+    tempat_lahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_lahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    alamat?: NullableStringFieldUpdateOperationsInput | string | null
+    warga_negara?: NullableStringFieldUpdateOperationsInput | string | null
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: pegawaiUpdateroleInput | string[]
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pelatihan?: pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput
+    pengalaman_kerja?: pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUncheckedUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUncheckedUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUncheckedUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUncheckedUpdateManyWithoutKoordinatorNestedInput
+    kacabApproverDi?: SuratTugasUncheckedUpdateManyWithoutKepalaCabangNestedInput
+  }
+
+  export type pegawaiUpsertWithoutKacabApproverDiInput = {
+    update: XOR<pegawaiUpdateWithoutKacabApproverDiInput, pegawaiUncheckedUpdateWithoutKacabApproverDiInput>
+    create: XOR<pegawaiCreateWithoutKacabApproverDiInput, pegawaiUncheckedCreateWithoutKacabApproverDiInput>
+    where?: pegawaiWhereInput
+  }
+
+  export type pegawaiUpdateToOneWithWhereWithoutKacabApproverDiInput = {
+    where?: pegawaiWhereInput
+    data: XOR<pegawaiUpdateWithoutKacabApproverDiInput, pegawaiUncheckedUpdateWithoutKacabApproverDiInput>
+  }
+
+  export type pegawaiUpdateWithoutKacabApproverDiInput = {
+    nup?: StringFieldUpdateOperationsInput | string
+    nama_pegawai?: StringFieldUpdateOperationsInput | string
+    status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
+    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
+    tempat_lahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_lahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    alamat?: NullableStringFieldUpdateOperationsInput | string | null
+    warga_negara?: NullableStringFieldUpdateOperationsInput | string | null
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: pegawaiUpdateroleInput | string[]
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pelatihan?: pelatihanUpdateManyWithoutPegawaiNestedInput
+    pengalaman_kerja?: pengalaman_kerjaUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUpdateManyWithoutSeniorManagerNestedInput
+  }
+
+  export type pegawaiUncheckedUpdateWithoutKacabApproverDiInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nup?: StringFieldUpdateOperationsInput | string
+    nama_pegawai?: StringFieldUpdateOperationsInput | string
+    status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
+    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
+    tempat_lahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_lahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    alamat?: NullableStringFieldUpdateOperationsInput | string | null
+    warga_negara?: NullableStringFieldUpdateOperationsInput | string | null
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: pegawaiUpdateroleInput | string[]
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pelatihan?: pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput
+    pengalaman_kerja?: pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUncheckedUpdateManyWithoutDibuatOlehNestedInput
+    anggotaTimDi?: SuratTugasUncheckedUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUncheckedUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUncheckedUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUncheckedUpdateManyWithoutSeniorManagerNestedInput
+  }
+
+  export type pegawaiUpsertWithWhereUniqueWithoutAnggotaTimDiInput = {
+    where: pegawaiWhereUniqueInput
+    update: XOR<pegawaiUpdateWithoutAnggotaTimDiInput, pegawaiUncheckedUpdateWithoutAnggotaTimDiInput>
+    create: XOR<pegawaiCreateWithoutAnggotaTimDiInput, pegawaiUncheckedCreateWithoutAnggotaTimDiInput>
+  }
+
+  export type pegawaiUpdateWithWhereUniqueWithoutAnggotaTimDiInput = {
+    where: pegawaiWhereUniqueInput
+    data: XOR<pegawaiUpdateWithoutAnggotaTimDiInput, pegawaiUncheckedUpdateWithoutAnggotaTimDiInput>
+  }
+
+  export type pegawaiUpdateManyWithWhereWithoutAnggotaTimDiInput = {
+    where: pegawaiScalarWhereInput
+    data: XOR<pegawaiUpdateManyMutationInput, pegawaiUncheckedUpdateManyWithoutAnggotaTimDiInput>
+  }
+
+  export type pegawaiScalarWhereInput = {
+    AND?: pegawaiScalarWhereInput | pegawaiScalarWhereInput[]
+    OR?: pegawaiScalarWhereInput[]
+    NOT?: pegawaiScalarWhereInput | pegawaiScalarWhereInput[]
+    id?: IntFilter<"pegawai"> | number
+    nup?: StringFilter<"pegawai"> | string
+    nama_pegawai?: StringFilter<"pegawai"> | string
+    status_pegawai?: StringNullableFilter<"pegawai"> | string | null
+    jabatan?: StringNullableFilter<"pegawai"> | string | null
+    tempat_lahir?: StringNullableFilter<"pegawai"> | string | null
+    tanggal_lahir?: DateTimeNullableFilter<"pegawai"> | Date | string | null
+    alamat?: StringNullableFilter<"pegawai"> | string | null
+    warga_negara?: StringNullableFilter<"pegawai"> | string | null
+    agama?: StringNullableFilter<"pegawai"> | string | null
+    no_telepon?: StringNullableFilter<"pegawai"> | string | null
+    email?: StringNullableFilter<"pegawai"> | string | null
+    password?: StringFilter<"pegawai"> | string
+    role?: StringNullableListFilter<"pegawai">
+    username?: StringNullableFilter<"pegawai"> | string | null
+    nik?: StringNullableFilter<"pegawai"> | string | null
+    jenjang_pend?: StringNullableFilter<"pegawai"> | string | null
+    pendidikan?: StringNullableFilter<"pegawai"> | string | null
+    tahun_pend?: IntNullableFilter<"pegawai"> | number | null
+    tandaTanganUrl?: StringNullableFilter<"pegawai"> | string | null
+    cv_generated_at?: DateTimeNullableFilter<"pegawai"> | Date | string | null
+  }
+
+  export type pegawaiUpsertWithoutSuratTugasDibuatInput = {
+    update: XOR<pegawaiUpdateWithoutSuratTugasDibuatInput, pegawaiUncheckedUpdateWithoutSuratTugasDibuatInput>
+    create: XOR<pegawaiCreateWithoutSuratTugasDibuatInput, pegawaiUncheckedCreateWithoutSuratTugasDibuatInput>
+    where?: pegawaiWhereInput
+  }
+
+  export type pegawaiUpdateToOneWithWhereWithoutSuratTugasDibuatInput = {
+    where?: pegawaiWhereInput
+    data: XOR<pegawaiUpdateWithoutSuratTugasDibuatInput, pegawaiUncheckedUpdateWithoutSuratTugasDibuatInput>
+  }
+
+  export type pegawaiUpdateWithoutSuratTugasDibuatInput = {
+    nup?: StringFieldUpdateOperationsInput | string
+    nama_pegawai?: StringFieldUpdateOperationsInput | string
+    status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
+    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
+    tempat_lahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_lahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    alamat?: NullableStringFieldUpdateOperationsInput | string | null
+    warga_negara?: NullableStringFieldUpdateOperationsInput | string | null
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: pegawaiUpdateroleInput | string[]
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pelatihan?: pelatihanUpdateManyWithoutPegawaiNestedInput
+    pengalaman_kerja?: pengalaman_kerjaUpdateManyWithoutPegawaiNestedInput
+    anggotaTimDi?: SuratTugasUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUpdateManyWithoutKepalaCabangNestedInput
+  }
+
+  export type pegawaiUncheckedUpdateWithoutSuratTugasDibuatInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nup?: StringFieldUpdateOperationsInput | string
+    nama_pegawai?: StringFieldUpdateOperationsInput | string
+    status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
+    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
+    tempat_lahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_lahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    alamat?: NullableStringFieldUpdateOperationsInput | string | null
+    warga_negara?: NullableStringFieldUpdateOperationsInput | string | null
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: pegawaiUpdateroleInput | string[]
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pelatihan?: pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput
+    pengalaman_kerja?: pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiNestedInput
+    anggotaTimDi?: SuratTugasUncheckedUpdateManyWithoutTimInspektorNestedInput
+    leadApproverDi?: SuratTugasUncheckedUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUncheckedUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUncheckedUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUncheckedUpdateManyWithoutKepalaCabangNestedInput
   }
 
   export type pelatihanCreateManyPegawaiInput = {
     id_pelatihan?: number
+    nup?: string | null
     nama_pelatihan?: string | null
     penyelenggara?: string | null
     lokasi?: string | null
@@ -10693,39 +12977,185 @@ export namespace Prisma {
 
   export type pengalaman_kerjaCreateManyPegawaiInput = {
     id_pengalaman?: number
+    nup?: string | null
     tahun?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
     lokasi?: string | null
   }
 
-  export type PegawaiSuratTugasUpdateWithoutPegawaiInput = {
-    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
-    approved?: BoolFieldUpdateOperationsInput | boolean
-    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    suratTugas?: SuratTugasUpdateOneRequiredWithoutPegawai_surat_tugasNestedInput
+  export type SuratTugasCreateManyDibuatOlehInput = {
+    id?: number
+    nomor_surat?: string | null
+    proyekId?: number | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
   }
 
-  export type PegawaiSuratTugasUncheckedUpdateWithoutPegawaiInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    suratTugasId?: IntFieldUpdateOperationsInput | number
-    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
-    approved?: BoolFieldUpdateOperationsInput | boolean
-    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  export type SuratTugasCreateManyLeadInspectorInput = {
+    id?: number
+    nomor_surat?: string | null
+    proyekId?: number | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
   }
 
-  export type PegawaiSuratTugasUncheckedUpdateManyWithoutPegawaiInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    suratTugasId?: IntFieldUpdateOperationsInput | number
-    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
-    approved?: BoolFieldUpdateOperationsInput | boolean
-    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  export type SuratTugasCreateManyKoordinatorInput = {
+    id?: number
+    nomor_surat?: string | null
+    proyekId?: number | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+  }
+
+  export type SuratTugasCreateManySeniorManagerInput = {
+    id?: number
+    nomor_surat?: string | null
+    proyekId?: number | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
+  }
+
+  export type SuratTugasCreateManyKepalaCabangInput = {
+    id?: number
+    nomor_surat?: string | null
+    proyekId?: number | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
   }
 
   export type pelatihanUpdateWithoutPegawaiInput = {
+    nup?: NullableStringFieldUpdateOperationsInput | string | null
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10741,6 +13171,7 @@ export namespace Prisma {
 
   export type pelatihanUncheckedUpdateWithoutPegawaiInput = {
     id_pelatihan?: IntFieldUpdateOperationsInput | number
+    nup?: NullableStringFieldUpdateOperationsInput | string | null
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10756,6 +13187,7 @@ export namespace Prisma {
 
   export type pelatihanUncheckedUpdateManyWithoutPegawaiInput = {
     id_pelatihan?: IntFieldUpdateOperationsInput | number
+    nup?: NullableStringFieldUpdateOperationsInput | string | null
     nama_pelatihan?: NullableStringFieldUpdateOperationsInput | string | null
     penyelenggara?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10770,6 +13202,7 @@ export namespace Prisma {
   }
 
   export type pengalaman_kerjaUpdateWithoutPegawaiInput = {
+    nup?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10778,6 +13211,7 @@ export namespace Prisma {
 
   export type pengalaman_kerjaUncheckedUpdateWithoutPegawaiInput = {
     id_pengalaman?: IntFieldUpdateOperationsInput | number
+    nup?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10786,45 +13220,852 @@ export namespace Prisma {
 
   export type pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiInput = {
     id_pengalaman?: IntFieldUpdateOperationsInput | number
+    nup?: NullableStringFieldUpdateOperationsInput | string | null
     tahun?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type PegawaiSuratTugasCreateManySuratTugasInput = {
+  export type SuratTugasUpdateWithoutDibuatOlehInput = {
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    proyek?: ProyekUpdateOneWithoutSuratTugasNestedInput
+    leadInspector?: pegawaiUpdateOneWithoutLeadApproverDiNestedInput
+    koordinator?: pegawaiUpdateOneWithoutKoorApproverDiNestedInput
+    seniorManager?: pegawaiUpdateOneWithoutSmApproverDiNestedInput
+    kepalaCabang?: pegawaiUpdateOneWithoutKacabApproverDiNestedInput
+    timInspektor?: pegawaiUpdateManyWithoutAnggotaTimDiNestedInput
+  }
+
+  export type SuratTugasUncheckedUpdateWithoutDibuatOlehInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedUpdateManyWithoutAnggotaTimDiNestedInput
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutDibuatOlehInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+  }
+
+  export type SuratTugasUpdateWithoutTimInspektorInput = {
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    proyek?: ProyekUpdateOneWithoutSuratTugasNestedInput
+    leadInspector?: pegawaiUpdateOneWithoutLeadApproverDiNestedInput
+    koordinator?: pegawaiUpdateOneWithoutKoorApproverDiNestedInput
+    seniorManager?: pegawaiUpdateOneWithoutSmApproverDiNestedInput
+    kepalaCabang?: pegawaiUpdateOneWithoutKacabApproverDiNestedInput
+    dibuatOleh?: pegawaiUpdateOneWithoutSuratTugasDibuatNestedInput
+  }
+
+  export type SuratTugasUncheckedUpdateWithoutTimInspektorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutTimInspektorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+  }
+
+  export type SuratTugasUpdateWithoutLeadInspectorInput = {
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    proyek?: ProyekUpdateOneWithoutSuratTugasNestedInput
+    koordinator?: pegawaiUpdateOneWithoutKoorApproverDiNestedInput
+    seniorManager?: pegawaiUpdateOneWithoutSmApproverDiNestedInput
+    kepalaCabang?: pegawaiUpdateOneWithoutKacabApproverDiNestedInput
+    timInspektor?: pegawaiUpdateManyWithoutAnggotaTimDiNestedInput
+    dibuatOleh?: pegawaiUpdateOneWithoutSuratTugasDibuatNestedInput
+  }
+
+  export type SuratTugasUncheckedUpdateWithoutLeadInspectorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedUpdateManyWithoutAnggotaTimDiNestedInput
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutLeadInspectorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+  }
+
+  export type SuratTugasUpdateWithoutKoordinatorInput = {
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    proyek?: ProyekUpdateOneWithoutSuratTugasNestedInput
+    leadInspector?: pegawaiUpdateOneWithoutLeadApproverDiNestedInput
+    seniorManager?: pegawaiUpdateOneWithoutSmApproverDiNestedInput
+    kepalaCabang?: pegawaiUpdateOneWithoutKacabApproverDiNestedInput
+    timInspektor?: pegawaiUpdateManyWithoutAnggotaTimDiNestedInput
+    dibuatOleh?: pegawaiUpdateOneWithoutSuratTugasDibuatNestedInput
+  }
+
+  export type SuratTugasUncheckedUpdateWithoutKoordinatorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedUpdateManyWithoutAnggotaTimDiNestedInput
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutKoordinatorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+  }
+
+  export type SuratTugasUpdateWithoutSeniorManagerInput = {
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    proyek?: ProyekUpdateOneWithoutSuratTugasNestedInput
+    leadInspector?: pegawaiUpdateOneWithoutLeadApproverDiNestedInput
+    koordinator?: pegawaiUpdateOneWithoutKoorApproverDiNestedInput
+    kepalaCabang?: pegawaiUpdateOneWithoutKacabApproverDiNestedInput
+    timInspektor?: pegawaiUpdateManyWithoutAnggotaTimDiNestedInput
+    dibuatOleh?: pegawaiUpdateOneWithoutSuratTugasDibuatNestedInput
+  }
+
+  export type SuratTugasUncheckedUpdateWithoutSeniorManagerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedUpdateManyWithoutAnggotaTimDiNestedInput
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutSeniorManagerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+  }
+
+  export type SuratTugasUpdateWithoutKepalaCabangInput = {
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    proyek?: ProyekUpdateOneWithoutSuratTugasNestedInput
+    leadInspector?: pegawaiUpdateOneWithoutLeadApproverDiNestedInput
+    koordinator?: pegawaiUpdateOneWithoutKoorApproverDiNestedInput
+    seniorManager?: pegawaiUpdateOneWithoutSmApproverDiNestedInput
+    timInspektor?: pegawaiUpdateManyWithoutAnggotaTimDiNestedInput
+    dibuatOleh?: pegawaiUpdateOneWithoutSuratTugasDibuatNestedInput
+  }
+
+  export type SuratTugasUncheckedUpdateWithoutKepalaCabangInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedUpdateManyWithoutAnggotaTimDiNestedInput
+  }
+
+  export type SuratTugasUncheckedUpdateManyWithoutKepalaCabangInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    proyekId?: NullableIntFieldUpdateOperationsInput | number | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+  }
+
+  export type SuratTugasCreateManyProyekInput = {
     id?: number
-    pegawaiNup: string
-    jabatan?: string | null
-    approved?: boolean
-    approvedBy?: string | null
-    approvedAt?: Date | string | null
+    nomor_surat?: string | null
+    status_pekerjaan?: string | null
+    no_service_order?: string | null
+    bidang_pekerjaan?: string | null
+    peralatan_inspeksi?: SuratTugasCreateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasCreatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: Date | string | null
+    tanggal_kembali?: Date | string | null
+    transportasi_operasional?: boolean
+    transportasi_ditanggung_klien?: boolean
+    transportasi_asal_tujuan?: boolean
+    transportasi_dinas?: boolean
+    tiket?: boolean
+    penginapan?: boolean
+    keterangan_lain?: string | null
+    leadInspectorId?: number | null
+    disetujuiLeadAt?: Date | string | null
+    koordinatorId?: number | null
+    disetujuiKoorAt?: Date | string | null
+    seniorManagerId?: number | null
+    disetujuiSmAt?: Date | string | null
+    kepalaCabangId?: number | null
+    disetujuiKacabAt?: Date | string | null
+    catatanPenolakan?: string | null
+    dibuatOlehId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spi?: string | null
+    wbs?: string | null
+    status?: $Enums.StatusSuratTugas
   }
 
-  export type PegawaiSuratTugasUpdateWithoutSuratTugasInput = {
-    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
-    approved?: BoolFieldUpdateOperationsInput | boolean
-    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    pegawai?: pegawaiUpdateOneRequiredWithoutPegawai_surat_tugasNestedInput
+  export type SuratTugasUpdateWithoutProyekInput = {
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    leadInspector?: pegawaiUpdateOneWithoutLeadApproverDiNestedInput
+    koordinator?: pegawaiUpdateOneWithoutKoorApproverDiNestedInput
+    seniorManager?: pegawaiUpdateOneWithoutSmApproverDiNestedInput
+    kepalaCabang?: pegawaiUpdateOneWithoutKacabApproverDiNestedInput
+    timInspektor?: pegawaiUpdateManyWithoutAnggotaTimDiNestedInput
+    dibuatOleh?: pegawaiUpdateOneWithoutSuratTugasDibuatNestedInput
   }
 
-  export type PegawaiSuratTugasUncheckedUpdateWithoutSuratTugasInput = {
+  export type SuratTugasUncheckedUpdateWithoutProyekInput = {
     id?: IntFieldUpdateOperationsInput | number
-    pegawaiNup?: StringFieldUpdateOperationsInput | string
-    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
-    approved?: BoolFieldUpdateOperationsInput | boolean
-    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+    timInspektor?: pegawaiUncheckedUpdateManyWithoutAnggotaTimDiNestedInput
   }
 
-  export type PegawaiSuratTugasUncheckedUpdateManyWithoutSuratTugasInput = {
+  export type SuratTugasUncheckedUpdateManyWithoutProyekInput = {
     id?: IntFieldUpdateOperationsInput | number
-    pegawaiNup?: StringFieldUpdateOperationsInput | string
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    status_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    no_service_order?: NullableStringFieldUpdateOperationsInput | string | null
+    bidang_pekerjaan?: NullableStringFieldUpdateOperationsInput | string | null
+    peralatan_inspeksi?: SuratTugasUpdateperalatan_inspeksiInput | string[]
+    kebutuhan_material?: SuratTugasUpdatekebutuhan_materialInput | string[]
+    tanggal_berangkat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tanggal_kembali?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    transportasi_operasional?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_ditanggung_klien?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_asal_tujuan?: BoolFieldUpdateOperationsInput | boolean
+    transportasi_dinas?: BoolFieldUpdateOperationsInput | boolean
+    tiket?: BoolFieldUpdateOperationsInput | boolean
+    penginapan?: BoolFieldUpdateOperationsInput | boolean
+    keterangan_lain?: NullableStringFieldUpdateOperationsInput | string | null
+    leadInspectorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiLeadAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    koordinatorId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKoorAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    seniorManagerId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiSmAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kepalaCabangId?: NullableIntFieldUpdateOperationsInput | number | null
+    disetujuiKacabAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    catatanPenolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    dibuatOlehId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spi?: NullableStringFieldUpdateOperationsInput | string | null
+    wbs?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
+  }
+
+  export type pegawaiUpdateWithoutAnggotaTimDiInput = {
+    nup?: StringFieldUpdateOperationsInput | string
+    nama_pegawai?: StringFieldUpdateOperationsInput | string
+    status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
     jabatan?: NullableStringFieldUpdateOperationsInput | string | null
-    approved?: BoolFieldUpdateOperationsInput | boolean
-    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tempat_lahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_lahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    alamat?: NullableStringFieldUpdateOperationsInput | string | null
+    warga_negara?: NullableStringFieldUpdateOperationsInput | string | null
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: pegawaiUpdateroleInput | string[]
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pelatihan?: pelatihanUpdateManyWithoutPegawaiNestedInput
+    pengalaman_kerja?: pengalaman_kerjaUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUpdateManyWithoutDibuatOlehNestedInput
+    leadApproverDi?: SuratTugasUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUpdateManyWithoutKepalaCabangNestedInput
+  }
+
+  export type pegawaiUncheckedUpdateWithoutAnggotaTimDiInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nup?: StringFieldUpdateOperationsInput | string
+    nama_pegawai?: StringFieldUpdateOperationsInput | string
+    status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
+    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
+    tempat_lahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_lahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    alamat?: NullableStringFieldUpdateOperationsInput | string | null
+    warga_negara?: NullableStringFieldUpdateOperationsInput | string | null
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: pegawaiUpdateroleInput | string[]
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pelatihan?: pelatihanUncheckedUpdateManyWithoutPegawaiNestedInput
+    pengalaman_kerja?: pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiNestedInput
+    suratTugasDibuat?: SuratTugasUncheckedUpdateManyWithoutDibuatOlehNestedInput
+    leadApproverDi?: SuratTugasUncheckedUpdateManyWithoutLeadInspectorNestedInput
+    koorApproverDi?: SuratTugasUncheckedUpdateManyWithoutKoordinatorNestedInput
+    smApproverDi?: SuratTugasUncheckedUpdateManyWithoutSeniorManagerNestedInput
+    kacabApproverDi?: SuratTugasUncheckedUpdateManyWithoutKepalaCabangNestedInput
+  }
+
+  export type pegawaiUncheckedUpdateManyWithoutAnggotaTimDiInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nup?: StringFieldUpdateOperationsInput | string
+    nama_pegawai?: StringFieldUpdateOperationsInput | string
+    status_pegawai?: NullableStringFieldUpdateOperationsInput | string | null
+    jabatan?: NullableStringFieldUpdateOperationsInput | string | null
+    tempat_lahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_lahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    alamat?: NullableStringFieldUpdateOperationsInput | string | null
+    warga_negara?: NullableStringFieldUpdateOperationsInput | string | null
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    no_telepon?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: pegawaiUpdateroleInput | string[]
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    jenjang_pend?: NullableStringFieldUpdateOperationsInput | string | null
+    pendidikan?: NullableStringFieldUpdateOperationsInput | string | null
+    tahun_pend?: NullableIntFieldUpdateOperationsInput | number | null
+    tandaTanganUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    cv_generated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
 

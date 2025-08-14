@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const pegawai = await prisma.pegawai.findMany({
       where: {
-        role: 'pegawai',
+        role: { has: 'pegawai' }, // role array, cari yang mengandung 'pegawai'
       },
       orderBy: {
         nama_pegawai: 'asc',
@@ -41,6 +41,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Data wajib tidak boleh kosong.' }, { status: 400 });
     }
 
+    // Pastikan role selalu array
+    let roleArr: string[] = [];
+    if (Array.isArray(role)) {
+      roleArr = role.length > 0 ? role : ['pegawai'];
+    } else if (typeof role === 'string') {
+      roleArr = [role];
+    } else {
+      roleArr = ['pegawai'];
+    }
+
     // Create pegawai
     const newPegawai = await prisma.pegawai.create({
       data: {
@@ -61,7 +71,7 @@ export async function POST(request: NextRequest) {
         tahun_pend: tahun_pend ? parseInt(tahun_pend) : null,
         username,
         password,
-        role: role || 'pegawai',
+        role: roleArr,
         // Relasi pengalaman_kerja dan pelatihan
         pengalaman_kerja: {
           create: (Array.isArray(pengalaman_kerja) ? pengalaman_kerja : []).map((exp) => ({
