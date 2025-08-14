@@ -148,10 +148,11 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
   return doc.getZip().generate({ type: 'nodebuffer' });
 }
 
-export async function POST(request: NextRequest, { params }: { params: { nup: string } }) {
+export async function POST(request: NextRequest, props: { params: Promise<{ nup: string }> }) {
+  const params = await props.params;
   try {
     // 1. Autentikasi admin
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const adminNik = (await cookieStore).get('nik')?.value;
     
     if (!adminNik) {

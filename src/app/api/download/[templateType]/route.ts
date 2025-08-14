@@ -5,10 +5,8 @@ import prisma from '@/lib/prisma';
 import ExcelJS from 'exceljs';
 import path from 'path';
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { templateType: string } }
-) {
+export async function GET(req: NextRequest, props: { params: Promise<{ templateType: string }> }) {
+  const params = await props.params;
   const { templateType } = params;
 
   if (templateType !== 'fq140' && templateType !== 'fq183') {

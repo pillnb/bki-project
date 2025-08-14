@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
-export async function GET(req: NextRequest, context: { params: { nup: string } }) {
+export async function GET(req: NextRequest, context: { params: Promise<{ nup: string }> }) {
   // Mengambil NUP dari parameter URL
-  const { nup } = context.params;
+  const { nup } = (await context.params);
 
   // Memastikan NUP ada sebelum melanjutkan
   if (!nup) {

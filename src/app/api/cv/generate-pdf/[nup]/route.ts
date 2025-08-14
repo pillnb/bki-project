@@ -47,7 +47,7 @@ export async function POST(request: NextRequest, { params }: { params: { nup: st
     }
 
     // 2. Ambil NUP dari parameter URL (langsung dari params, bukan dari cookie)
-    const { nup } = await params;
+    const { nup } = params;
     if (!nup) {
       return NextResponse.json({ error: 'NUP parameter is required' }, { status: 400 });
     }
