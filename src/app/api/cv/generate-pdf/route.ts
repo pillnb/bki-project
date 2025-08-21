@@ -10,10 +10,24 @@ import path from 'path';
 
 // Import untuk PDF conversion
 const libre = require('libreoffice-convert');
-const util = require('util');
-const libreConvert = util.promisify(libre.convert);
 
-export async function POST(request: NextRequest) {
+// Wrapper
+async function convertToPdf(inputBuffer: Buffer) {
+  return await new Promise<Buffer>((resolve, reject) => {
+    const maybe = libre.convert(inputBuffer, '.pdf', undefined, (err: any, done: Buffer) => {
+      if (err) return reject(err);
+      resolve(done);
+    });
+
+    //versi baru yang ngembaliin Promise
+    if (maybe && typeof maybe.then === 'function') {
+      maybe.then(resolve).catch(reject);
+    }
+  });
+}
+
+export async function POST(request: NextRequest, props: { params: Promise<{ nup: string }> }) {
+  const params = await props.params; {
   try {
     // Parse request body untuk mendapatkan format yang diinginkan
     const body = await request.json();
@@ -67,8 +81,8 @@ export async function POST(request: NextRequest) {
     // 6. Jika format PDF, konversi DOCX ke PDF
     if (format === 'pdf') {
       try {
-        const pdfBuffer = await libreConvert(docxBuffer, '.pdf', undefined);
-        return new NextResponse(pdfBuffer, {
+        const pdfBuffer = await convertToPdf(docxBuffer);
+        return new NextResponse( new Uint8Array(pdfBuffer), {
           headers: {
             'Content-Type': 'application/pdf',
             'Content-Disposition': `attachment; filename="cv_${pegawai.nama_pegawai}_${now.toISOString().split('T')[0]}.pdf"`
@@ -93,7 +107,7 @@ export async function POST(request: NextRequest) {
   } catch (err) {
     console.error('CV Generator API error:', err);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+    }
 }
 
 // Fungsi terpisah untuk generate DOCX buffer
@@ -212,37 +226,52 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
       });
     })(),
     pengalaman_kerja: (() => {
-      const arr = ((pegawai.pengalaman_kerja || []) as Array<{ 
-        tahun?: number; 
-        pengalaman_kerja?: string; 
-        perusahaan?: string; 
-        lokasi?: string }>)
-        .slice()
-        .sort((a, b) => (a.tahun ?? 0) - (b.tahun ?? 0));
-      let lastYear: number | undefined = undefined;
-      return arr.map((pen) => {
-        let tahunStr: string | number | undefined;
-        if (pen.tahun !== lastYear) {
-          tahunStr = pen.tahun;
-          lastYear = pen.tahun;
-        } else {
-          tahunStr = "       "; // 7 spaces for indentation
+      const pengalaman = (pegawai.pengalaman_kerja || []);
+      let tahunSet = new Set<number>();
+  pengalaman.forEach((pen: any) => {
+        const start = pen.tahun_awal ?? null;
+        const end = pen.tahun_akhir ?? pen.tahun_awal ?? null;
+        if (start && end) {
+          for (let t = start; t <= end; t++) {
+            tahunSet.add(t);
+          }
+        } else if (start) {
+          tahunSet.add(start);
         }
-        return {
-          tahun: tahunStr,
-          nama_pekerjaan: pen.pengalaman_kerja,
-          perusahaan: pen.perusahaan,
-          lokasi: pen.lokasi
-        };
       });
+      const tahunArr = Array.from(tahunSet).sort((a, b) => a - b);
+      let result: Array<{tahun: number, nama_pekerjaan: string, perusahaan: string, lokasi: string}> = [];
+      tahunArr.forEach(tahun => {
+  pengalaman.forEach((pen: any) => {
+          const start = pen.tahun_awal ?? null;
+          const end = pen.tahun_akhir ?? pen.tahun_awal ?? null;
+          if (start && end && tahun >= start && tahun <= end) {
+            result.push({
+              tahun,
+              nama_pekerjaan: pen.pengalaman_kerja ?? '',
+              perusahaan: pen.perusahaan ?? '',
+              lokasi: pen.lokasi ?? ''
+            });
+          } else if (start && !end && tahun === start) {
+            result.push({
+              tahun,
+              nama_pekerjaan: pen.pengalaman_kerja ?? '',
+              perusahaan: pen.perusahaan ?? '',
+              lokasi: pen.lokasi ?? ''
+            });
+          }
+        });
+      });
+      return result.sort((a, b) => a.tahun - b.tahun);
     })(),
     cvGeneratedAt: today,
     cvGeneratedAtFormatted: cvGeneratedAtFormatted,
     tanggal_generate: cvGeneratedAtFormatted,
-    // qr_signature: qrSignature, // Barcode tanda tangan dinonaktifkan
-    // qr_image: qrSignature      // Barcode tanda tangan dinonaktifkan
+    // qr_signature: qrSignature,
+    // qr_image: qrSignature     
   };
 
   doc.render(docData);
   return doc.getZip().generate({ type: 'nodebuffer' });
+}
 }

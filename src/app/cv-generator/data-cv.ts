@@ -28,9 +28,10 @@ export async function getPengalamanKerjaByNup(nup: string) {
       id_pengalaman: true,
       pengalaman_kerja: true,
       perusahaan: true,
-      tahun: true,
+      tahun_awal: true,
+      tahun_akhir: true,
       lokasi: true,
     },
-    orderBy: { tahun: "desc" },
+    orderBy: { tahun_awal: "desc" },
   });
 }

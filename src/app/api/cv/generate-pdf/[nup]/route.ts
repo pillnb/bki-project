@@ -10,10 +10,24 @@ import path from 'path';
 
 // Import untuk PDF conversion
 const libre = require('libreoffice-convert');
-const util = require('util');
-const libreConvert = util.promisify(libre.convert);
 
-export async function POST(request: NextRequest, { params }: { params: { nup: string } }) {
+// Wrapper
+async function convertToPdf(inputBuffer: Buffer) {
+  return await new Promise<Buffer>((resolve, reject) => {
+    const maybe = libre.convert(inputBuffer, '.pdf', undefined, (err: any, done: Buffer) => {
+      if (err) return reject(err);
+      resolve(done);
+    });
+
+    //versi baru yang ngembaliin Promise
+    if (maybe && typeof maybe.then === 'function') {
+      maybe.then(resolve).catch(reject);
+    }
+  });
+}
+
+export async function POST(request: NextRequest, props: { params: Promise<{ nup: string }> }) {
+  const params = await props.params;
   try {
     // Parse request body untuk mendapatkan format yang diinginkan
     const body = await request.json();
@@ -88,8 +102,8 @@ export async function POST(request: NextRequest, { params }: { params: { nup: st
     // 7. Jika format PDF, konversi DOCX ke PDF
     if (format === 'pdf') {
       try {
-        const pdfBuffer = await libreConvert(docxBuffer, '.pdf', undefined);
-        return new NextResponse(pdfBuffer, {
+        const pdfBuffer = await convertToPdf(docxBuffer);
+        return new NextResponse( new Uint8Array(pdfBuffer), {
           headers: {
             'Content-Type': 'application/pdf',
             'Content-Disposition': `attachment; filename="cv_${pegawai.nama_pegawai}_${now.toISOString().split('T')[0]}.pdf"`
@@ -123,43 +137,36 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
   const templateBuffer = fs.readFileSync(templatePath);
   const zip = new PizZip(templateBuffer);
 
-  // Base64 parser untuk image module
+  // parser base64 untuk gambar
   const base64Regex = /^(?:data:)?image\/(png|jpg|jpeg|svg|svg\+xml);base64,/;
   const validBase64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
-  
   function base64Parser(tagValue: any) {
-    if (typeof tagValue !== "string" || !base64Regex.test(tagValue)) {
-      return false;
-    }
+    if (typeof tagValue !== "string" || !base64Regex.test(tagValue)) return false;
     const stringBase64 = tagValue.replace(base64Regex, "");
     if (!validBase64.test(stringBase64)) {
       throw new Error("Error parsing base64 data, your data contains invalid characters");
     }
-    
     if (typeof Buffer !== "undefined" && Buffer.from) {
       return Buffer.from(stringBase64, "base64");
     }
-    
     const binaryString = window.atob(stringBase64);
     const len = binaryString.length;
     const bytes = new Uint8Array(len);
-    for (let i = 0; i < len; i++) {
-      const ascii = binaryString.charCodeAt(i);
-      bytes[i] = ascii;
-    }
+    for (let i = 0; i < len; i++) bytes[i] = binaryString.charCodeAt(i);
     return bytes.buffer;
   }
 
-  const imageOptions = {
+  const imageModule = new ImageModule({
     getImage(tagValue: any) {
       return base64Parser(tagValue);
     },
-    getSize(img: any, tagValue: any, tagName: any, context: any) {
+    getSize() {
       return [100, 100];
     },
-  };
+  });
 
-  const imageModule = new ImageModule(imageOptions);
+  const NBSP = '\u00A0';
+
   const doc = new Docxtemplater(zip, {
     paragraphLoop: true,
     linebreaks: true,
@@ -168,9 +175,10 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
       allowUnclosedTag: true,
     },
     modules: [imageModule],
+    // ini penting buat value kosong di DOCX
+    nullGetter: () => ''
   });
 
-  // Format tanggal Indonesia
   function formatTanggalIndo(date: any) {
     if (!date) return '-';
     const bulan = [
@@ -184,8 +192,7 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
 
   const today = new Date();
   const cvGeneratedAtFormatted = formatTanggalIndo(today);
-  
-  // Format tanggal lahir
+
   let birthDate = '-';
   if (pegawai.tanggal_lahir) {
     const dob = new Date(pegawai.tanggal_lahir);
@@ -206,51 +213,82 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
     jenjang: pegawai.jenjang_pend,
     pendidikan: pegawai.pendidikan,
     tahun_pend: pegawai.tahun_pend,
+
+    // sama seperti versi PDF, tapi yang kosong pakai NBSP biar tampil di DOCX
     pelatihan: (() => {
       const arr = ((pegawai.pelatihan || []) as Array<{ tahun?: number; nama_pelatihan?: string; penyelenggara?: string; lokasi?: string; status?: string }>)
-        .filter(pel => pel.status === 'VALID')
+        .filter(p => p.status === 'VALID')
         .slice()
         .sort((a, b) => (a.tahun ?? 0) - (b.tahun ?? 0));
+
       let lastYear: number | undefined = undefined;
-      return arr.map((pel) => {
-        let tahunStr: string | number | undefined;
-        if (pel.tahun !== lastYear) {
-          tahunStr = pel.tahun;
-          lastYear = pel.tahun;
+      return arr.map(p => {
+        let tahunStr: string = '';
+        if (p.tahun !== lastYear) {
+          tahunStr = String(p.tahun ?? '');
+          lastYear = p.tahun;
         } else {
-          tahunStr = "       "; // 7 spaces for indentation
+          tahunStr = NBSP; // kosong yang benar-benar “kosong” di Word
         }
         return {
           tahun: tahunStr,
-          nama_pelatihan: pel.nama_pelatihan,
-          penyelenggara: pel.penyelenggara,
-          lokasi: pel.lokasi
+          nama_pelatihan: p.nama_pelatihan,
+          penyelenggara: p.penyelenggara,
+          lokasi: p.lokasi
         };
       });
     })(),
+
+    // logic sesuai permintaan:
+    // 1) expand rentang tahun
+    // 2) sort by tahun ASC lalu idx ASC supaya pengalaman yang sama di tahun berurutan tidak kepotong
+    // 3) tahun diulang sekali saja, baris berikutnya kosong pakai NBSP
     pengalaman_kerja: (() => {
-      const arr = ((pegawai.pengalaman_kerja || []) as Array<{ tahun?: number; pengalaman_kerja?: string; perusahaan?: string; lokasi?: string }>)
-        .slice()
-        .sort((a, b) => (a.tahun ?? 0) - (b.tahun ?? 0));
-      let lastYear: number | undefined = undefined;
-      return arr.map((pen) => {
-        let tahunStr: string | number | undefined;
-        if (pen.tahun !== lastYear) {
-          tahunStr = pen.tahun;
-          lastYear = pen.tahun;
-        } else {
-          tahunStr = "       "; // 7 spaces for indentation
+      const pengalaman = (pegawai.pengalaman_kerja || []);
+      type Row = { tahun: number, nama_pekerjaan: string, perusahaan: string, lokasi: string, idx: number };
+
+      const expanded: Row[] = [];
+      pengalaman.forEach((pen: any, idx: number) => {
+        const start = pen.tahun_awal ?? null;
+        const end = pen.tahun_akhir ?? pen.tahun_awal ?? null;
+        if (start && end) {
+          for (let t = start; t <= end; t++) {
+            expanded.push({
+              tahun: t,
+              nama_pekerjaan: pen.pengalaman_kerja ?? '',
+              perusahaan: pen.perusahaan ?? '',
+              lokasi: pen.lokasi ?? '',
+              idx
+            });
+          }
+        } else if (start) {
+          expanded.push({
+            tahun: start,
+            nama_pekerjaan: pen.pengalaman_kerja ?? '',
+            perusahaan: pen.perusahaan ?? '',
+            lokasi: pen.lokasi ?? '',
+            idx
+          });
         }
+      });
+
+      expanded.sort((a, b) => a.tahun - b.tahun || a.idx - b.idx);
+
+      let lastTahun: number | null = null;
+      return expanded.map(row => {
+        const showYear = lastTahun === row.tahun ? NBSP : String(row.tahun);
+        lastTahun = row.tahun;
         return {
-          tahun: tahunStr,
-          nama_pekerjaan: pen.pengalaman_kerja,
-          perusahaan: pen.perusahaan,
-          lokasi: pen.lokasi
+          tahun: showYear,
+          nama_pekerjaan: row.nama_pekerjaan,
+          perusahaan: row.perusahaan,
+          lokasi: row.lokasi
         };
       });
     })(),
+
     cvGeneratedAt: today,
-    cvGeneratedAtFormatted: cvGeneratedAtFormatted,
+    cvGeneratedAtFormatted,
     tanggal_generate: cvGeneratedAtFormatted,
     // qr_signature: qrSignature,
     // qr_image: qrSignature

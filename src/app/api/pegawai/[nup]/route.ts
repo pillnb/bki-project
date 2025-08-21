@@ -29,7 +29,8 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ nup:
           id: exp.id_pengalaman,
           pengalaman_kerja: exp.pengalaman_kerja, // nama pengalaman/posisi
           perusahaan: exp.perusahaan,
-          tahun: exp.tahun,
+          tahun_awal: exp.tahun_awal,
+          tahun_akhir: exp.tahun_akhir,
           lokasi: exp.lokasi,
         }))
       : [];
@@ -220,7 +221,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
               data: {
                 pengalaman_kerja: exp.pengalaman_kerja,
                 perusahaan: exp.perusahaan,
-                tahun: exp.tahun ? parseInt(exp.tahun, 10) : null,
+                tahun_awal: exp.tahun_awal ? parseInt(exp.tahun_awal, 10) : null,
+                tahun_akhir: exp.tahun_akhir ? parseInt(exp.tahun_akhir, 10) : null,
                 lokasi: exp.lokasi,
               },
             })

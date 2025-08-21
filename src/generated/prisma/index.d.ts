@@ -5274,20 +5274,23 @@ export namespace Prisma {
 
   export type Pengalaman_kerjaAvgAggregateOutputType = {
     id_pengalaman: number | null
-    tahun: number | null
+    tahun_awal: number | null
+    tahun_akhir: number | null
     pegawaiId: number | null
   }
 
   export type Pengalaman_kerjaSumAggregateOutputType = {
     id_pengalaman: number | null
-    tahun: number | null
+    tahun_awal: number | null
+    tahun_akhir: number | null
     pegawaiId: number | null
   }
 
   export type Pengalaman_kerjaMinAggregateOutputType = {
     id_pengalaman: number | null
     nup: string | null
-    tahun: number | null
+    tahun_awal: number | null
+    tahun_akhir: number | null
     pengalaman_kerja: string | null
     perusahaan: string | null
     lokasi: string | null
@@ -5297,7 +5300,8 @@ export namespace Prisma {
   export type Pengalaman_kerjaMaxAggregateOutputType = {
     id_pengalaman: number | null
     nup: string | null
-    tahun: number | null
+    tahun_awal: number | null
+    tahun_akhir: number | null
     pengalaman_kerja: string | null
     perusahaan: string | null
     lokasi: string | null
@@ -5307,7 +5311,8 @@ export namespace Prisma {
   export type Pengalaman_kerjaCountAggregateOutputType = {
     id_pengalaman: number
     nup: number
-    tahun: number
+    tahun_awal: number
+    tahun_akhir: number
     pengalaman_kerja: number
     perusahaan: number
     lokasi: number
@@ -5318,20 +5323,23 @@ export namespace Prisma {
 
   export type Pengalaman_kerjaAvgAggregateInputType = {
     id_pengalaman?: true
-    tahun?: true
+    tahun_awal?: true
+    tahun_akhir?: true
     pegawaiId?: true
   }
 
   export type Pengalaman_kerjaSumAggregateInputType = {
     id_pengalaman?: true
-    tahun?: true
+    tahun_awal?: true
+    tahun_akhir?: true
     pegawaiId?: true
   }
 
   export type Pengalaman_kerjaMinAggregateInputType = {
     id_pengalaman?: true
     nup?: true
-    tahun?: true
+    tahun_awal?: true
+    tahun_akhir?: true
     pengalaman_kerja?: true
     perusahaan?: true
     lokasi?: true
@@ -5341,7 +5349,8 @@ export namespace Prisma {
   export type Pengalaman_kerjaMaxAggregateInputType = {
     id_pengalaman?: true
     nup?: true
-    tahun?: true
+    tahun_awal?: true
+    tahun_akhir?: true
     pengalaman_kerja?: true
     perusahaan?: true
     lokasi?: true
@@ -5351,7 +5360,8 @@ export namespace Prisma {
   export type Pengalaman_kerjaCountAggregateInputType = {
     id_pengalaman?: true
     nup?: true
-    tahun?: true
+    tahun_awal?: true
+    tahun_akhir?: true
     pengalaman_kerja?: true
     perusahaan?: true
     lokasi?: true
@@ -5448,7 +5458,8 @@ export namespace Prisma {
   export type Pengalaman_kerjaGroupByOutputType = {
     id_pengalaman: number
     nup: string | null
-    tahun: number | null
+    tahun_awal: number | null
+    tahun_akhir: number | null
     pengalaman_kerja: string | null
     perusahaan: string | null
     lokasi: string | null
@@ -5477,7 +5488,8 @@ export namespace Prisma {
   export type pengalaman_kerjaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_pengalaman?: boolean
     nup?: boolean
-    tahun?: boolean
+    tahun_awal?: boolean
+    tahun_akhir?: boolean
     pengalaman_kerja?: boolean
     perusahaan?: boolean
     lokasi?: boolean
@@ -5488,7 +5500,8 @@ export namespace Prisma {
   export type pengalaman_kerjaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_pengalaman?: boolean
     nup?: boolean
-    tahun?: boolean
+    tahun_awal?: boolean
+    tahun_akhir?: boolean
     pengalaman_kerja?: boolean
     perusahaan?: boolean
     lokasi?: boolean
@@ -5499,7 +5512,8 @@ export namespace Prisma {
   export type pengalaman_kerjaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_pengalaman?: boolean
     nup?: boolean
-    tahun?: boolean
+    tahun_awal?: boolean
+    tahun_akhir?: boolean
     pengalaman_kerja?: boolean
     perusahaan?: boolean
     lokasi?: boolean
@@ -5510,14 +5524,15 @@ export namespace Prisma {
   export type pengalaman_kerjaSelectScalar = {
     id_pengalaman?: boolean
     nup?: boolean
-    tahun?: boolean
+    tahun_awal?: boolean
+    tahun_akhir?: boolean
     pengalaman_kerja?: boolean
     perusahaan?: boolean
     lokasi?: boolean
     pegawaiId?: boolean
   }
 
-  export type pengalaman_kerjaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pengalaman" | "nup" | "tahun" | "pengalaman_kerja" | "perusahaan" | "lokasi" | "pegawaiId", ExtArgs["result"]["pengalaman_kerja"]>
+  export type pengalaman_kerjaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_pengalaman" | "nup" | "tahun_awal" | "tahun_akhir" | "pengalaman_kerja" | "perusahaan" | "lokasi" | "pegawaiId", ExtArgs["result"]["pengalaman_kerja"]>
   export type pengalaman_kerjaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pegawai?: boolean | pengalaman_kerja$pegawaiArgs<ExtArgs>
   }
@@ -5536,7 +5551,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id_pengalaman: number
       nup: string | null
-      tahun: number | null
+      tahun_awal: number | null
+      tahun_akhir: number | null
       pengalaman_kerja: string | null
       perusahaan: string | null
       lokasi: string | null
@@ -5967,7 +5983,8 @@ export namespace Prisma {
   interface pengalaman_kerjaFieldRefs {
     readonly id_pengalaman: FieldRef<"pengalaman_kerja", 'Int'>
     readonly nup: FieldRef<"pengalaman_kerja", 'String'>
-    readonly tahun: FieldRef<"pengalaman_kerja", 'Int'>
+    readonly tahun_awal: FieldRef<"pengalaman_kerja", 'Int'>
+    readonly tahun_akhir: FieldRef<"pengalaman_kerja", 'Int'>
     readonly pengalaman_kerja: FieldRef<"pengalaman_kerja", 'String'>
     readonly perusahaan: FieldRef<"pengalaman_kerja", 'String'>
     readonly lokasi: FieldRef<"pengalaman_kerja", 'String'>
@@ -8122,7 +8139,8 @@ export namespace Prisma {
   export const Pengalaman_kerjaScalarFieldEnum: {
     id_pengalaman: 'id_pengalaman',
     nup: 'nup',
-    tahun: 'tahun',
+    tahun_awal: 'tahun_awal',
+    tahun_akhir: 'tahun_akhir',
     pengalaman_kerja: 'pengalaman_kerja',
     perusahaan: 'perusahaan',
     lokasi: 'lokasi',
@@ -8611,7 +8629,8 @@ export namespace Prisma {
     NOT?: pengalaman_kerjaWhereInput | pengalaman_kerjaWhereInput[]
     id_pengalaman?: IntFilter<"pengalaman_kerja"> | number
     nup?: StringNullableFilter<"pengalaman_kerja"> | string | null
-    tahun?: IntNullableFilter<"pengalaman_kerja"> | number | null
+    tahun_awal?: IntNullableFilter<"pengalaman_kerja"> | number | null
+    tahun_akhir?: IntNullableFilter<"pengalaman_kerja"> | number | null
     pengalaman_kerja?: StringNullableFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableFilter<"pengalaman_kerja"> | string | null
     lokasi?: StringNullableFilter<"pengalaman_kerja"> | string | null
@@ -8622,7 +8641,8 @@ export namespace Prisma {
   export type pengalaman_kerjaOrderByWithRelationInput = {
     id_pengalaman?: SortOrder
     nup?: SortOrderInput | SortOrder
-    tahun?: SortOrderInput | SortOrder
+    tahun_awal?: SortOrderInput | SortOrder
+    tahun_akhir?: SortOrderInput | SortOrder
     pengalaman_kerja?: SortOrderInput | SortOrder
     perusahaan?: SortOrderInput | SortOrder
     lokasi?: SortOrderInput | SortOrder
@@ -8636,7 +8656,8 @@ export namespace Prisma {
     OR?: pengalaman_kerjaWhereInput[]
     NOT?: pengalaman_kerjaWhereInput | pengalaman_kerjaWhereInput[]
     nup?: StringNullableFilter<"pengalaman_kerja"> | string | null
-    tahun?: IntNullableFilter<"pengalaman_kerja"> | number | null
+    tahun_awal?: IntNullableFilter<"pengalaman_kerja"> | number | null
+    tahun_akhir?: IntNullableFilter<"pengalaman_kerja"> | number | null
     pengalaman_kerja?: StringNullableFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableFilter<"pengalaman_kerja"> | string | null
     lokasi?: StringNullableFilter<"pengalaman_kerja"> | string | null
@@ -8647,7 +8668,8 @@ export namespace Prisma {
   export type pengalaman_kerjaOrderByWithAggregationInput = {
     id_pengalaman?: SortOrder
     nup?: SortOrderInput | SortOrder
-    tahun?: SortOrderInput | SortOrder
+    tahun_awal?: SortOrderInput | SortOrder
+    tahun_akhir?: SortOrderInput | SortOrder
     pengalaman_kerja?: SortOrderInput | SortOrder
     perusahaan?: SortOrderInput | SortOrder
     lokasi?: SortOrderInput | SortOrder
@@ -8665,7 +8687,8 @@ export namespace Prisma {
     NOT?: pengalaman_kerjaScalarWhereWithAggregatesInput | pengalaman_kerjaScalarWhereWithAggregatesInput[]
     id_pengalaman?: IntWithAggregatesFilter<"pengalaman_kerja"> | number
     nup?: StringNullableWithAggregatesFilter<"pengalaman_kerja"> | string | null
-    tahun?: IntNullableWithAggregatesFilter<"pengalaman_kerja"> | number | null
+    tahun_awal?: IntNullableWithAggregatesFilter<"pengalaman_kerja"> | number | null
+    tahun_akhir?: IntNullableWithAggregatesFilter<"pengalaman_kerja"> | number | null
     pengalaman_kerja?: StringNullableWithAggregatesFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableWithAggregatesFilter<"pengalaman_kerja"> | string | null
     lokasi?: StringNullableWithAggregatesFilter<"pengalaman_kerja"> | string | null
@@ -9246,7 +9269,8 @@ export namespace Prisma {
 
   export type pengalaman_kerjaCreateInput = {
     nup?: string | null
-    tahun?: number | null
+    tahun_awal?: number | null
+    tahun_akhir?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
     lokasi?: string | null
@@ -9256,7 +9280,8 @@ export namespace Prisma {
   export type pengalaman_kerjaUncheckedCreateInput = {
     id_pengalaman?: number
     nup?: string | null
-    tahun?: number | null
+    tahun_awal?: number | null
+    tahun_akhir?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
     lokasi?: string | null
@@ -9265,7 +9290,8 @@ export namespace Prisma {
 
   export type pengalaman_kerjaUpdateInput = {
     nup?: NullableStringFieldUpdateOperationsInput | string | null
-    tahun?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_awal?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_akhir?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9275,7 +9301,8 @@ export namespace Prisma {
   export type pengalaman_kerjaUncheckedUpdateInput = {
     id_pengalaman?: IntFieldUpdateOperationsInput | number
     nup?: NullableStringFieldUpdateOperationsInput | string | null
-    tahun?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_awal?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_akhir?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9285,7 +9312,8 @@ export namespace Prisma {
   export type pengalaman_kerjaCreateManyInput = {
     id_pengalaman?: number
     nup?: string | null
-    tahun?: number | null
+    tahun_awal?: number | null
+    tahun_akhir?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
     lokasi?: string | null
@@ -9294,7 +9322,8 @@ export namespace Prisma {
 
   export type pengalaman_kerjaUpdateManyMutationInput = {
     nup?: NullableStringFieldUpdateOperationsInput | string | null
-    tahun?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_awal?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_akhir?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9303,7 +9332,8 @@ export namespace Prisma {
   export type pengalaman_kerjaUncheckedUpdateManyInput = {
     id_pengalaman?: IntFieldUpdateOperationsInput | number
     nup?: NullableStringFieldUpdateOperationsInput | string | null
-    tahun?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_awal?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_akhir?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9935,7 +9965,8 @@ export namespace Prisma {
   export type pengalaman_kerjaCountOrderByAggregateInput = {
     id_pengalaman?: SortOrder
     nup?: SortOrder
-    tahun?: SortOrder
+    tahun_awal?: SortOrder
+    tahun_akhir?: SortOrder
     pengalaman_kerja?: SortOrder
     perusahaan?: SortOrder
     lokasi?: SortOrder
@@ -9944,14 +9975,16 @@ export namespace Prisma {
 
   export type pengalaman_kerjaAvgOrderByAggregateInput = {
     id_pengalaman?: SortOrder
-    tahun?: SortOrder
+    tahun_awal?: SortOrder
+    tahun_akhir?: SortOrder
     pegawaiId?: SortOrder
   }
 
   export type pengalaman_kerjaMaxOrderByAggregateInput = {
     id_pengalaman?: SortOrder
     nup?: SortOrder
-    tahun?: SortOrder
+    tahun_awal?: SortOrder
+    tahun_akhir?: SortOrder
     pengalaman_kerja?: SortOrder
     perusahaan?: SortOrder
     lokasi?: SortOrder
@@ -9961,7 +9994,8 @@ export namespace Prisma {
   export type pengalaman_kerjaMinOrderByAggregateInput = {
     id_pengalaman?: SortOrder
     nup?: SortOrder
-    tahun?: SortOrder
+    tahun_awal?: SortOrder
+    tahun_akhir?: SortOrder
     pengalaman_kerja?: SortOrder
     perusahaan?: SortOrder
     lokasi?: SortOrder
@@ -9970,7 +10004,8 @@ export namespace Prisma {
 
   export type pengalaman_kerjaSumOrderByAggregateInput = {
     id_pengalaman?: SortOrder
-    tahun?: SortOrder
+    tahun_awal?: SortOrder
+    tahun_akhir?: SortOrder
     pegawaiId?: SortOrder
   }
 
@@ -11054,7 +11089,8 @@ export namespace Prisma {
 
   export type pengalaman_kerjaCreateWithoutPegawaiInput = {
     nup?: string | null
-    tahun?: number | null
+    tahun_awal?: number | null
+    tahun_akhir?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
     lokasi?: string | null
@@ -11063,7 +11099,8 @@ export namespace Prisma {
   export type pengalaman_kerjaUncheckedCreateWithoutPegawaiInput = {
     id_pengalaman?: number
     nup?: string | null
-    tahun?: number | null
+    tahun_awal?: number | null
+    tahun_akhir?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
     lokasi?: string | null
@@ -11606,7 +11643,8 @@ export namespace Prisma {
     NOT?: pengalaman_kerjaScalarWhereInput | pengalaman_kerjaScalarWhereInput[]
     id_pengalaman?: IntFilter<"pengalaman_kerja"> | number
     nup?: StringNullableFilter<"pengalaman_kerja"> | string | null
-    tahun?: IntNullableFilter<"pengalaman_kerja"> | number | null
+    tahun_awal?: IntNullableFilter<"pengalaman_kerja"> | number | null
+    tahun_akhir?: IntNullableFilter<"pengalaman_kerja"> | number | null
     pengalaman_kerja?: StringNullableFilter<"pengalaman_kerja"> | string | null
     perusahaan?: StringNullableFilter<"pengalaman_kerja"> | string | null
     lokasi?: StringNullableFilter<"pengalaman_kerja"> | string | null
@@ -12978,7 +13016,8 @@ export namespace Prisma {
   export type pengalaman_kerjaCreateManyPegawaiInput = {
     id_pengalaman?: number
     nup?: string | null
-    tahun?: number | null
+    tahun_awal?: number | null
+    tahun_akhir?: number | null
     pengalaman_kerja?: string | null
     perusahaan?: string | null
     lokasi?: string | null
@@ -13203,7 +13242,8 @@ export namespace Prisma {
 
   export type pengalaman_kerjaUpdateWithoutPegawaiInput = {
     nup?: NullableStringFieldUpdateOperationsInput | string | null
-    tahun?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_awal?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_akhir?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13212,7 +13252,8 @@ export namespace Prisma {
   export type pengalaman_kerjaUncheckedUpdateWithoutPegawaiInput = {
     id_pengalaman?: IntFieldUpdateOperationsInput | number
     nup?: NullableStringFieldUpdateOperationsInput | string | null
-    tahun?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_awal?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_akhir?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13221,7 +13262,8 @@ export namespace Prisma {
   export type pengalaman_kerjaUncheckedUpdateManyWithoutPegawaiInput = {
     id_pengalaman?: IntFieldUpdateOperationsInput | number
     nup?: NullableStringFieldUpdateOperationsInput | string | null
-    tahun?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_awal?: NullableIntFieldUpdateOperationsInput | number | null
+    tahun_akhir?: NullableIntFieldUpdateOperationsInput | number | null
     pengalaman_kerja?: NullableStringFieldUpdateOperationsInput | string | null
     perusahaan?: NullableStringFieldUpdateOperationsInput | string | null
     lokasi?: NullableStringFieldUpdateOperationsInput | string | null

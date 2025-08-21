@@ -40,7 +40,8 @@ interface FormData {
   // Pengalaman Kerja
   pengalaman_kerja: Array<{
     id?: number;
-    tahun: string;
+    tahun_awal: string;
+    tahun_akhir: string;
     pengalaman_kerja: string;
     perusahaan: string;
     lokasi: string;
@@ -108,7 +109,8 @@ interface PegawaiFromAPI {
     id: number;
     pengalaman_kerja: string;
     perusahaan: string;
-    tahun: string;
+    tahun_awal: string;
+    tahun_akhir: string;
     lokasi: string;
   }>;
 }
@@ -200,7 +202,8 @@ export default function EditPegawaiForm() {
             id: p.id,
             pengalaman_kerja: p.pengalaman_kerja || '',
             perusahaan: p.perusahaan || '',
-            tahun: p.tahun?.toString() || '',
+            tahun_awal: p.tahun_awal?.toString() || '',
+            tahun_akhir: p.tahun_akhir?.toString() || '',
             lokasi: p.lokasi || '',
           })) || [],
         });
@@ -237,7 +240,7 @@ export default function EditPegawaiForm() {
     setFormData(prev => ({
       ...prev,
       pengalaman_kerja: [...prev.pengalaman_kerja, {
-        tahun: '', pengalaman_kerja: '', perusahaan: '', lokasi: ''
+        tahun_awal: '', tahun_akhir: '', pengalaman_kerja: '', perusahaan: '', lokasi: ''
       }]
     }));
   };
@@ -375,7 +378,8 @@ export default function EditPegawaiForm() {
         tahun_pend: formData.tahun_pend ? parseInt(formData.tahun_pend) : null,
         pengalaman_kerja: formData.pengalaman_kerja.map(exp => ({
           ...exp,
-          tahun: exp.tahun ? parseInt(exp.tahun) : null
+          tahun_awal: exp.tahun_awal ? parseInt(exp.tahun_awal) : null,
+          tahun_akhir: exp.tahun_akhir ? parseInt(exp.tahun_akhir) : null
         })),
         pelatihan: formData.pelatihan.map(pel => ({
           ...pel,
@@ -600,40 +604,46 @@ export default function EditPegawaiForm() {
             </div>
             <div className="space-y-6">
                 {formData.pengalaman_kerja.map((exp, index) => (
-                    <div key={index} className="border border-blue-100 rounded-xl p-4 bg-blue-50">
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-sm font-bold text-blue-900">Pengalaman {index + 1}</h3>
-                            <button type="button" onClick={() => removeExperience(index)} className="text-red-600 hover:text-red-700 bg-red-50 rounded-full p-1">
-                                <X className="w-4 h-4" />
-                            </button>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Tahun</label>
-                                <input type="number" value={exp.tahun} onChange={(e) => updateExperience(index, 'tahun', e.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-                                    placeholder="2020" min="1900" max="2030" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Perusahaan</label>
-                                <input type="text" value={exp.perusahaan} onChange={(e) => updateExperience(index, 'perusahaan', e.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-                                    placeholder="Nama Perusahaan" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Lokasi</label>
-                                <input type="text" value={exp.lokasi} onChange={(e) => updateExperience(index, 'lokasi', e.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-                                    placeholder="Kota" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Pengalaman Kerja (Posisi)</label>
-                                <input type="text" value={exp.pengalaman_kerja} onChange={(e) => updateExperience(index, 'pengalaman_kerja', e.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-                                    placeholder="Posisi/Jabatan Kerja" />
-                            </div>
-                        </div>
-                    </div>
+          <div key={index} className="border border-blue-100 rounded-xl p-4 bg-blue-50">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-bold text-blue-900">Pengalaman {index + 1}</h3>
+              <button type="button" onClick={() => removeExperience(index)} className="text-red-600 hover:text-red-700 bg-red-50 rounded-full p-1">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Tahun Awal</label>
+                <input type="number" value={exp.tahun_awal} onChange={(e) => updateExperience(index, 'tahun_awal', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  placeholder="2020" min="1900" max="2030" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Tahun Akhir</label>
+                <input type="number" value={exp.tahun_akhir} onChange={(e) => updateExperience(index, 'tahun_akhir', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  placeholder="2023" min="1900" max="2030" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Perusahaan</label>
+                <input type="text" value={exp.perusahaan} onChange={(e) => updateExperience(index, 'perusahaan', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  placeholder="Nama Perusahaan" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Lokasi</label>
+                <input type="text" value={exp.lokasi} onChange={(e) => updateExperience(index, 'lokasi', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  placeholder="Kota" />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Pengalaman Kerja (Posisi)</label>
+                <input type="text" value={exp.pengalaman_kerja} onChange={(e) => updateExperience(index, 'pengalaman_kerja', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                  placeholder="Posisi/Jabatan Kerja" />
+              </div>
+            </div>
+          </div>
                 ))}
                 {formData.pengalaman_kerja.length === 0 && (
                     <div className="text-center py-8 text-blue-400">

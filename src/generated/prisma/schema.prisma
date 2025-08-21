@@ -75,7 +75,8 @@ model pelatihan {
 model pengalaman_kerja {
   id_pengalaman    Int      @id @default(autoincrement())
   nup              String?
-  tahun            Int?
+  tahun_awal       Int?     @map("tahun")
+  tahun_akhir      Int?
   pengalaman_kerja String?
   perusahaan       String?
   lokasi           String?

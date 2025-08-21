@@ -171,7 +171,8 @@ exports.Prisma.PelatihanScalarFieldEnum = {
 exports.Prisma.Pengalaman_kerjaScalarFieldEnum = {
   id_pengalaman: 'id_pengalaman',
   nup: 'nup',
-  tahun: 'tahun',
+  tahun_awal: 'tahun_awal',
+  tahun_akhir: 'tahun_akhir',
   pengalaman_kerja: 'pengalaman_kerja',
   perusahaan: 'perusahaan',
   lokasi: 'lokasi',

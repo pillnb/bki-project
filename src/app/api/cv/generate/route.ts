@@ -159,21 +159,66 @@ export async function POST(request: NextRequest) {
         .filter(pel => pel.status === 'VALID')
         .slice()
         .sort((a, b) => (a.tahun ?? 0) - (b.tahun ?? 0))
-        .map(pel => ({
-          tahun: pel.tahun,
-          nama_pelatihan: pel.nama_pelatihan,
-          penyelenggara: pel.penyelenggara,
-          lokasi: pel.lokasi
-        })),
-      pengalaman_kerja: (peg.pengalaman_kerja || [])
-        .slice()
-        .sort((a, b) => (a.tahun ?? 0) - (b.tahun ?? 0))
-        .map(pen => ({
-          tahun: pen.tahun,
-          nama_pekerjaan: pen.pengalaman_kerja,
-          perusahaan: pen.perusahaan,
-          lokasi: pen.lokasi
-        })),
+        .map((pel, idx, arr) => {
+          let tahunStr: string | number = "";
+          if (idx === 0 || pel.tahun !== arr[idx - 1].tahun) {
+            tahunStr = pel.tahun ?? "";
+          } else {
+            tahunStr = "       "; // 7 spasi untuk indentasi
+          }
+          return {
+            tahun: tahunStr,
+            nama_pelatihan: pel.nama_pelatihan,
+            penyelenggara: pel.penyelenggara,
+            lokasi: pel.lokasi
+          };
+        }),
+      pengalaman_kerja: (() => {
+        // Step 1: Expand setiap pengalaman ke array tahun, simpan urutan input
+        const pengalaman = (peg.pengalaman_kerja || []);
+        let expanded: Array<{tahun: number, nama_pekerjaan: string, perusahaan: string, lokasi: string, idx: number}> = [];
+        pengalaman.forEach((pen: any, idx: number) => {
+          const start = pen.tahun_awal ?? null;
+          const end = pen.tahun_akhir ?? pen.tahun_awal ?? null;
+          if (start && end) {
+            for (let t = start; t <= end; t++) {
+              expanded.push({
+                tahun: t,
+                nama_pekerjaan: pen.pengalaman_kerja ?? '',
+                perusahaan: pen.perusahaan ?? '',
+                lokasi: pen.lokasi ?? '',
+                idx
+              });
+            }
+          } else if (start) {
+            expanded.push({
+              tahun: start,
+              nama_pekerjaan: pen.pengalaman_kerja ?? '',
+              perusahaan: pen.perusahaan ?? '',
+              lokasi: pen.lokasi ?? '',
+              idx
+            });
+          }
+        });
+        // Step 2: Sort by tahun ASC, lalu idx ASC (agar pengalaman yang sama di tahun berurutan tetap berurutan)
+        expanded.sort((a, b) => a.tahun - b.tahun || a.idx - b.idx);
+        // Step 3: Kosongkan tahun jika sudah pernah muncul sebelumnya (menggunakan Set)
+        const tahunSudah = new Set<number>();
+        return expanded.map((row) => {
+          let tahunStr: string | number = row.tahun;
+          if (tahunSudah.has(row.tahun)) {
+            tahunStr = "";
+          } else {
+            tahunSudah.add(row.tahun);
+          }
+          return {
+            tahun: tahunStr,
+            nama_pekerjaan: row.nama_pekerjaan,
+            perusahaan: row.perusahaan,
+            lokasi: row.lokasi
+          };
+        });
+      })(),
       // Data tanggal generate CV
       cvGeneratedAt: today,
       cvGeneratedAtFormatted: cvGeneratedAtFormatted,

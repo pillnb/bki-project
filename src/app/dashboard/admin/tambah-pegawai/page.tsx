@@ -26,8 +26,9 @@ interface FormData {
   tahun_pend: string;
 
   // Pengalaman Kerja
-  pengalaman_kerja: Array<{
-    tahun: string;
+    pengalaman_kerja: Array<{
+      tahun_awal: string;
+      tahun_akhir: string;
     pengalaman_kerja: string;
     perusahaan: string;
     lokasi: string;
@@ -252,7 +253,8 @@ export default function TambahPegawaiForm() {
         tahun_pend: formData.tahun_pend ? parseInt(formData.tahun_pend) : null,
         pengalaman_kerja: formData.pengalaman_kerja.map(exp => ({
           ...exp,
-          tahun: exp.tahun ? parseInt(exp.tahun) : null
+          tahun_awal: exp.tahun_awal ? parseInt(exp.tahun_awal) : null,
+          tahun_akhir: exp.tahun_akhir ? parseInt(exp.tahun_akhir) : null
         })),
         pelatihan: formData.pelatihan?.map?.(pel => ({
           ...pel,
@@ -281,7 +283,8 @@ export default function TambahPegawaiForm() {
     setFormData(prev => ({
       ...prev,
       pengalaman_kerja: [...prev.pengalaman_kerja, {
-        tahun: '',
+    tahun_awal: '',
+    tahun_akhir: '',
         pengalaman_kerja: '',
         perusahaan: '',
         lokasi: ''
@@ -712,11 +715,25 @@ export default function TambahPegawaiForm() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Tahun <span className="text-red-600">*</span>
+                        Tahun Awal <span className="text-red-600">*</span>
                       </label>
                       <input
                         type="number"
-                        value={exp.tahun}
+                        value={exp.tahun_awal}
+                        onChange={(e) => updateExperience(index, 'tahun', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                        placeholder="2020"
+                        min="1900"
+                        max="2030"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Tahun Akhir <span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        type="number"
+                        value={exp.tahun_akhir}
                         onChange={(e) => updateExperience(index, 'tahun', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
                         placeholder="2020"

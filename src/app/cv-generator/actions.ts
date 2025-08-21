@@ -64,8 +64,9 @@ export async function tambahKualifikasi(nup: string, data: KualifikasiData) {
 type PengalamanData = {
   pengalaman_kerja: string;
   perusahaan: string;
-  tahun: number;
-  lokasi: string; // TAMBAHKAN INI
+  tahun_awal: number;
+  tahun_akhir: number;
+  lokasi: string;
 };
 
 export async function tambahPengalaman(nup: string, data: PengalamanData) {
@@ -76,7 +77,8 @@ export async function tambahPengalaman(nup: string, data: PengalamanData) {
       nup,
       pengalaman_kerja: data.pengalaman_kerja,
       perusahaan: data.perusahaan,
-      tahun: data.tahun,
+      tahun_awal: data.tahun_awal,
+      tahun_akhir: data.tahun_akhir,
       lokasi: data.lokasi, // TAMBAHKAN INI
     },
   });
