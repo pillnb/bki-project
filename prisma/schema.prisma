@@ -138,3 +138,17 @@ model SuratTugas {
   wbs                           String?
   status                        StatusSuratTugas    @default(DRAFT)
 }
+
+model GoogleOAuthToken {
+  id          Int      @id @default(autoincrement())
+  ownerEmail  String   // email pemilik Drive (misal admin)
+  accessToken String?
+  refreshToken String?
+  scope       String?
+  tokenType   String?
+  expiryDate  BigInt?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([ownerEmail])
+}

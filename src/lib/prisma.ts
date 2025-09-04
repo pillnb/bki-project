@@ -1,14 +1,14 @@
-import { PrismaClient } from '../generated/prisma';
+// src/lib/prisma.ts
+import { PrismaClient } from "../generated/prisma";
 
-declare global {
-  var prisma: PrismaClient | undefined;
-}
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
-// Mencegah pembuatan instance PrismaClient baru pada setiap hot-reload di mode development
-const prisma = global.prisma || new PrismaClient();
+export const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+  });
 
-if (process.env.NODE_ENV !== 'production') {
-  global.prisma = prisma;
-}
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
 export default prisma;

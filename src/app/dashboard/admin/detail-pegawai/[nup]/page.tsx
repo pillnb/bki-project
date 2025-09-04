@@ -255,7 +255,7 @@ export default function DetailPegawai() {
   return (
     <div className="min-h-screen bg-blue-50">
       {/* Header */}
-      <div className="bg-white shadow border-b border-blue-100">
+      <div className="mx-4 mt-4 bg-white/70 backdrop-blur-md border border-blue-100 rounded-xl shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center gap-4">

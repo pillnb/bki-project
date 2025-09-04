@@ -422,7 +422,7 @@ export default function EditPegawaiForm() {
   return (
     <div className="min-h-screen bg-blue-50">
       {/* Header */}
-      <div className="bg-blue-900 shadow rounded-b-xl">
+      <div className="mx-4 mt-4 bg-blue-900 backdrop-blur-md border border-blue-100 rounded-xl shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4 py-5">
             <Link

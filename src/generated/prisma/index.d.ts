@@ -38,6 +38,11 @@ export type pengalaman_kerja = $Result.DefaultSelection<Prisma.$pengalaman_kerja
  * 
  */
 export type SuratTugas = $Result.DefaultSelection<Prisma.$SuratTugasPayload>
+/**
+ * Model GoogleOAuthToken
+ * 
+ */
+export type GoogleOAuthToken = $Result.DefaultSelection<Prisma.$GoogleOAuthTokenPayload>
 
 /**
  * Enums
@@ -92,7 +97,7 @@ export const StatusSuratTugas: typeof $Enums.StatusSuratTugas
  */
 export class PrismaClient<
   ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  const U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
   ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
@@ -124,13 +129,6 @@ export class PrismaClient<
    * Disconnect from the database
    */
   $disconnect(): $Utils.JsPromise<void>;
-
-  /**
-   * Add a middleware
-   * @deprecated since 4.16.0. For new code, prefer client extensions instead.
-   * @see https://pris.ly/d/extensions
-   */
-  $use(cb: Prisma.Middleware): void
 
 /**
    * Executes a prepared raw query and returns the number of affected rows.
@@ -250,6 +248,16 @@ export class PrismaClient<
     * ```
     */
   get suratTugas(): Prisma.SuratTugasDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.googleOAuthToken`: Exposes CRUD operations for the **GoogleOAuthToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GoogleOAuthTokens
+    * const googleOAuthTokens = await prisma.googleOAuthToken.findMany()
+    * ```
+    */
+  get googleOAuthToken(): Prisma.GoogleOAuthTokenDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -308,8 +316,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.12.0
-   * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
+   * Prisma Client JS version: 6.15.0
+   * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
    */
   export type PrismaVersion = {
     client: string
@@ -694,7 +702,8 @@ export namespace Prisma {
     Proyek: 'Proyek',
     pelatihan: 'pelatihan',
     pengalaman_kerja: 'pengalaman_kerja',
-    SuratTugas: 'SuratTugas'
+    SuratTugas: 'SuratTugas',
+    GoogleOAuthToken: 'GoogleOAuthToken'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -713,7 +722,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "pegawai" | "proyek" | "pelatihan" | "pengalaman_kerja" | "suratTugas"
+      modelProps: "pegawai" | "proyek" | "pelatihan" | "pengalaman_kerja" | "suratTugas" | "googleOAuthToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1087,6 +1096,80 @@ export namespace Prisma {
           }
         }
       }
+      GoogleOAuthToken: {
+        payload: Prisma.$GoogleOAuthTokenPayload<ExtArgs>
+        fields: Prisma.GoogleOAuthTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GoogleOAuthTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleOAuthTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GoogleOAuthTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleOAuthTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.GoogleOAuthTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleOAuthTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GoogleOAuthTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleOAuthTokenPayload>
+          }
+          findMany: {
+            args: Prisma.GoogleOAuthTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleOAuthTokenPayload>[]
+          }
+          create: {
+            args: Prisma.GoogleOAuthTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleOAuthTokenPayload>
+          }
+          createMany: {
+            args: Prisma.GoogleOAuthTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GoogleOAuthTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleOAuthTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.GoogleOAuthTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleOAuthTokenPayload>
+          }
+          update: {
+            args: Prisma.GoogleOAuthTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleOAuthTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.GoogleOAuthTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GoogleOAuthTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GoogleOAuthTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleOAuthTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.GoogleOAuthTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleOAuthTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.GoogleOAuthTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGoogleOAuthToken>
+          }
+          groupBy: {
+            args: Prisma.GoogleOAuthTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GoogleOAuthTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GoogleOAuthTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<GoogleOAuthTokenCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1130,16 +1213,24 @@ export namespace Prisma {
     /**
      * @example
      * ```
-     * // Defaults to stdout
+     * // Shorthand for `emit: 'stdout'`
      * log: ['query', 'info', 'warn', 'error']
      * 
-     * // Emit as events
+     * // Emit as events only
      * log: [
-     *   { emit: 'stdout', level: 'query' },
-     *   { emit: 'stdout', level: 'info' },
-     *   { emit: 'stdout', level: 'warn' }
-     *   { emit: 'stdout', level: 'error' }
+     *   { emit: 'event', level: 'query' },
+     *   { emit: 'event', level: 'info' },
+     *   { emit: 'event', level: 'warn' }
+     *   { emit: 'event', level: 'error' }
      * ]
+     * 
+     * / Emit as events and log to stdout
+     * og: [
+     *  { emit: 'stdout', level: 'query' },
+     *  { emit: 'stdout', level: 'info' },
+     *  { emit: 'stdout', level: 'warn' }
+     *  { emit: 'stdout', level: 'error' }
+     * 
      * ```
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
@@ -1176,6 +1267,7 @@ export namespace Prisma {
     pelatihan?: pelatihanOmit
     pengalaman_kerja?: pengalaman_kerjaOmit
     suratTugas?: SuratTugasOmit
+    googleOAuthToken?: GoogleOAuthTokenOmit
   }
 
   /* Types for Logging */
@@ -1185,10 +1277,15 @@ export namespace Prisma {
     emit: 'stdout' | 'event'
   }
 
-  export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T['emit'] extends 'event' ? T['level'] : never : never
-  export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition> ?
-    GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
-    : never
+  export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
+
+  export type GetLogType<T> = CheckIsLogLevel<
+    T extends LogDefinition ? T['level'] : T
+  >;
+
+  export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition>
+    ? GetLogType<T[number]>
+    : never;
 
   export type QueryEvent = {
     timestamp: Date
@@ -1228,25 +1325,6 @@ export namespace Prisma {
     | 'runCommandRaw'
     | 'findRaw'
     | 'groupBy'
-
-  /**
-   * These options are being passed into the middleware as "params"
-   */
-  export type MiddlewareParams = {
-    model?: ModelName
-    action: PrismaAction
-    args: any
-    dataPath: string[]
-    runInTransaction: boolean
-  }
-
-  /**
-   * The `T` type makes sure, that the `return proceed` is not forgotten in the middleware implementation
-   */
-  export type Middleware<T = any> = (
-    params: MiddlewareParams,
-    next: (params: MiddlewareParams) => $Utils.JsPromise<T>,
-  ) => $Utils.JsPromise<T>
 
   // tested in getLogLevel.test.ts
   export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
@@ -8066,6 +8144,1091 @@ export namespace Prisma {
 
 
   /**
+   * Model GoogleOAuthToken
+   */
+
+  export type AggregateGoogleOAuthToken = {
+    _count: GoogleOAuthTokenCountAggregateOutputType | null
+    _avg: GoogleOAuthTokenAvgAggregateOutputType | null
+    _sum: GoogleOAuthTokenSumAggregateOutputType | null
+    _min: GoogleOAuthTokenMinAggregateOutputType | null
+    _max: GoogleOAuthTokenMaxAggregateOutputType | null
+  }
+
+  export type GoogleOAuthTokenAvgAggregateOutputType = {
+    id: number | null
+    expiryDate: number | null
+  }
+
+  export type GoogleOAuthTokenSumAggregateOutputType = {
+    id: number | null
+    expiryDate: bigint | null
+  }
+
+  export type GoogleOAuthTokenMinAggregateOutputType = {
+    id: number | null
+    ownerEmail: string | null
+    accessToken: string | null
+    refreshToken: string | null
+    scope: string | null
+    tokenType: string | null
+    expiryDate: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GoogleOAuthTokenMaxAggregateOutputType = {
+    id: number | null
+    ownerEmail: string | null
+    accessToken: string | null
+    refreshToken: string | null
+    scope: string | null
+    tokenType: string | null
+    expiryDate: bigint | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GoogleOAuthTokenCountAggregateOutputType = {
+    id: number
+    ownerEmail: number
+    accessToken: number
+    refreshToken: number
+    scope: number
+    tokenType: number
+    expiryDate: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GoogleOAuthTokenAvgAggregateInputType = {
+    id?: true
+    expiryDate?: true
+  }
+
+  export type GoogleOAuthTokenSumAggregateInputType = {
+    id?: true
+    expiryDate?: true
+  }
+
+  export type GoogleOAuthTokenMinAggregateInputType = {
+    id?: true
+    ownerEmail?: true
+    accessToken?: true
+    refreshToken?: true
+    scope?: true
+    tokenType?: true
+    expiryDate?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GoogleOAuthTokenMaxAggregateInputType = {
+    id?: true
+    ownerEmail?: true
+    accessToken?: true
+    refreshToken?: true
+    scope?: true
+    tokenType?: true
+    expiryDate?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GoogleOAuthTokenCountAggregateInputType = {
+    id?: true
+    ownerEmail?: true
+    accessToken?: true
+    refreshToken?: true
+    scope?: true
+    tokenType?: true
+    expiryDate?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GoogleOAuthTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GoogleOAuthToken to aggregate.
+     */
+    where?: GoogleOAuthTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoogleOAuthTokens to fetch.
+     */
+    orderBy?: GoogleOAuthTokenOrderByWithRelationInput | GoogleOAuthTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GoogleOAuthTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoogleOAuthTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoogleOAuthTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GoogleOAuthTokens
+    **/
+    _count?: true | GoogleOAuthTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GoogleOAuthTokenAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GoogleOAuthTokenSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GoogleOAuthTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GoogleOAuthTokenMaxAggregateInputType
+  }
+
+  export type GetGoogleOAuthTokenAggregateType<T extends GoogleOAuthTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateGoogleOAuthToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGoogleOAuthToken[P]>
+      : GetScalarType<T[P], AggregateGoogleOAuthToken[P]>
+  }
+
+
+
+
+  export type GoogleOAuthTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GoogleOAuthTokenWhereInput
+    orderBy?: GoogleOAuthTokenOrderByWithAggregationInput | GoogleOAuthTokenOrderByWithAggregationInput[]
+    by: GoogleOAuthTokenScalarFieldEnum[] | GoogleOAuthTokenScalarFieldEnum
+    having?: GoogleOAuthTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GoogleOAuthTokenCountAggregateInputType | true
+    _avg?: GoogleOAuthTokenAvgAggregateInputType
+    _sum?: GoogleOAuthTokenSumAggregateInputType
+    _min?: GoogleOAuthTokenMinAggregateInputType
+    _max?: GoogleOAuthTokenMaxAggregateInputType
+  }
+
+  export type GoogleOAuthTokenGroupByOutputType = {
+    id: number
+    ownerEmail: string
+    accessToken: string | null
+    refreshToken: string | null
+    scope: string | null
+    tokenType: string | null
+    expiryDate: bigint | null
+    createdAt: Date
+    updatedAt: Date
+    _count: GoogleOAuthTokenCountAggregateOutputType | null
+    _avg: GoogleOAuthTokenAvgAggregateOutputType | null
+    _sum: GoogleOAuthTokenSumAggregateOutputType | null
+    _min: GoogleOAuthTokenMinAggregateOutputType | null
+    _max: GoogleOAuthTokenMaxAggregateOutputType | null
+  }
+
+  type GetGoogleOAuthTokenGroupByPayload<T extends GoogleOAuthTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GoogleOAuthTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GoogleOAuthTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GoogleOAuthTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], GoogleOAuthTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GoogleOAuthTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ownerEmail?: boolean
+    accessToken?: boolean
+    refreshToken?: boolean
+    scope?: boolean
+    tokenType?: boolean
+    expiryDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["googleOAuthToken"]>
+
+  export type GoogleOAuthTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ownerEmail?: boolean
+    accessToken?: boolean
+    refreshToken?: boolean
+    scope?: boolean
+    tokenType?: boolean
+    expiryDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["googleOAuthToken"]>
+
+  export type GoogleOAuthTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ownerEmail?: boolean
+    accessToken?: boolean
+    refreshToken?: boolean
+    scope?: boolean
+    tokenType?: boolean
+    expiryDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["googleOAuthToken"]>
+
+  export type GoogleOAuthTokenSelectScalar = {
+    id?: boolean
+    ownerEmail?: boolean
+    accessToken?: boolean
+    refreshToken?: boolean
+    scope?: boolean
+    tokenType?: boolean
+    expiryDate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GoogleOAuthTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ownerEmail" | "accessToken" | "refreshToken" | "scope" | "tokenType" | "expiryDate" | "createdAt" | "updatedAt", ExtArgs["result"]["googleOAuthToken"]>
+
+  export type $GoogleOAuthTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GoogleOAuthToken"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      ownerEmail: string
+      accessToken: string | null
+      refreshToken: string | null
+      scope: string | null
+      tokenType: string | null
+      expiryDate: bigint | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["googleOAuthToken"]>
+    composites: {}
+  }
+
+  type GoogleOAuthTokenGetPayload<S extends boolean | null | undefined | GoogleOAuthTokenDefaultArgs> = $Result.GetResult<Prisma.$GoogleOAuthTokenPayload, S>
+
+  type GoogleOAuthTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GoogleOAuthTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GoogleOAuthTokenCountAggregateInputType | true
+    }
+
+  export interface GoogleOAuthTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GoogleOAuthToken'], meta: { name: 'GoogleOAuthToken' } }
+    /**
+     * Find zero or one GoogleOAuthToken that matches the filter.
+     * @param {GoogleOAuthTokenFindUniqueArgs} args - Arguments to find a GoogleOAuthToken
+     * @example
+     * // Get one GoogleOAuthToken
+     * const googleOAuthToken = await prisma.googleOAuthToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GoogleOAuthTokenFindUniqueArgs>(args: SelectSubset<T, GoogleOAuthTokenFindUniqueArgs<ExtArgs>>): Prisma__GoogleOAuthTokenClient<$Result.GetResult<Prisma.$GoogleOAuthTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GoogleOAuthToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GoogleOAuthTokenFindUniqueOrThrowArgs} args - Arguments to find a GoogleOAuthToken
+     * @example
+     * // Get one GoogleOAuthToken
+     * const googleOAuthToken = await prisma.googleOAuthToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GoogleOAuthTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, GoogleOAuthTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GoogleOAuthTokenClient<$Result.GetResult<Prisma.$GoogleOAuthTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GoogleOAuthToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleOAuthTokenFindFirstArgs} args - Arguments to find a GoogleOAuthToken
+     * @example
+     * // Get one GoogleOAuthToken
+     * const googleOAuthToken = await prisma.googleOAuthToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GoogleOAuthTokenFindFirstArgs>(args?: SelectSubset<T, GoogleOAuthTokenFindFirstArgs<ExtArgs>>): Prisma__GoogleOAuthTokenClient<$Result.GetResult<Prisma.$GoogleOAuthTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GoogleOAuthToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleOAuthTokenFindFirstOrThrowArgs} args - Arguments to find a GoogleOAuthToken
+     * @example
+     * // Get one GoogleOAuthToken
+     * const googleOAuthToken = await prisma.googleOAuthToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GoogleOAuthTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, GoogleOAuthTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__GoogleOAuthTokenClient<$Result.GetResult<Prisma.$GoogleOAuthTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GoogleOAuthTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleOAuthTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GoogleOAuthTokens
+     * const googleOAuthTokens = await prisma.googleOAuthToken.findMany()
+     * 
+     * // Get first 10 GoogleOAuthTokens
+     * const googleOAuthTokens = await prisma.googleOAuthToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const googleOAuthTokenWithIdOnly = await prisma.googleOAuthToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GoogleOAuthTokenFindManyArgs>(args?: SelectSubset<T, GoogleOAuthTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoogleOAuthTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GoogleOAuthToken.
+     * @param {GoogleOAuthTokenCreateArgs} args - Arguments to create a GoogleOAuthToken.
+     * @example
+     * // Create one GoogleOAuthToken
+     * const GoogleOAuthToken = await prisma.googleOAuthToken.create({
+     *   data: {
+     *     // ... data to create a GoogleOAuthToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends GoogleOAuthTokenCreateArgs>(args: SelectSubset<T, GoogleOAuthTokenCreateArgs<ExtArgs>>): Prisma__GoogleOAuthTokenClient<$Result.GetResult<Prisma.$GoogleOAuthTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GoogleOAuthTokens.
+     * @param {GoogleOAuthTokenCreateManyArgs} args - Arguments to create many GoogleOAuthTokens.
+     * @example
+     * // Create many GoogleOAuthTokens
+     * const googleOAuthToken = await prisma.googleOAuthToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GoogleOAuthTokenCreateManyArgs>(args?: SelectSubset<T, GoogleOAuthTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GoogleOAuthTokens and returns the data saved in the database.
+     * @param {GoogleOAuthTokenCreateManyAndReturnArgs} args - Arguments to create many GoogleOAuthTokens.
+     * @example
+     * // Create many GoogleOAuthTokens
+     * const googleOAuthToken = await prisma.googleOAuthToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GoogleOAuthTokens and only return the `id`
+     * const googleOAuthTokenWithIdOnly = await prisma.googleOAuthToken.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GoogleOAuthTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, GoogleOAuthTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoogleOAuthTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GoogleOAuthToken.
+     * @param {GoogleOAuthTokenDeleteArgs} args - Arguments to delete one GoogleOAuthToken.
+     * @example
+     * // Delete one GoogleOAuthToken
+     * const GoogleOAuthToken = await prisma.googleOAuthToken.delete({
+     *   where: {
+     *     // ... filter to delete one GoogleOAuthToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GoogleOAuthTokenDeleteArgs>(args: SelectSubset<T, GoogleOAuthTokenDeleteArgs<ExtArgs>>): Prisma__GoogleOAuthTokenClient<$Result.GetResult<Prisma.$GoogleOAuthTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GoogleOAuthToken.
+     * @param {GoogleOAuthTokenUpdateArgs} args - Arguments to update one GoogleOAuthToken.
+     * @example
+     * // Update one GoogleOAuthToken
+     * const googleOAuthToken = await prisma.googleOAuthToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GoogleOAuthTokenUpdateArgs>(args: SelectSubset<T, GoogleOAuthTokenUpdateArgs<ExtArgs>>): Prisma__GoogleOAuthTokenClient<$Result.GetResult<Prisma.$GoogleOAuthTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GoogleOAuthTokens.
+     * @param {GoogleOAuthTokenDeleteManyArgs} args - Arguments to filter GoogleOAuthTokens to delete.
+     * @example
+     * // Delete a few GoogleOAuthTokens
+     * const { count } = await prisma.googleOAuthToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GoogleOAuthTokenDeleteManyArgs>(args?: SelectSubset<T, GoogleOAuthTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GoogleOAuthTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleOAuthTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GoogleOAuthTokens
+     * const googleOAuthToken = await prisma.googleOAuthToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GoogleOAuthTokenUpdateManyArgs>(args: SelectSubset<T, GoogleOAuthTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GoogleOAuthTokens and returns the data updated in the database.
+     * @param {GoogleOAuthTokenUpdateManyAndReturnArgs} args - Arguments to update many GoogleOAuthTokens.
+     * @example
+     * // Update many GoogleOAuthTokens
+     * const googleOAuthToken = await prisma.googleOAuthToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GoogleOAuthTokens and only return the `id`
+     * const googleOAuthTokenWithIdOnly = await prisma.googleOAuthToken.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GoogleOAuthTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, GoogleOAuthTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoogleOAuthTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GoogleOAuthToken.
+     * @param {GoogleOAuthTokenUpsertArgs} args - Arguments to update or create a GoogleOAuthToken.
+     * @example
+     * // Update or create a GoogleOAuthToken
+     * const googleOAuthToken = await prisma.googleOAuthToken.upsert({
+     *   create: {
+     *     // ... data to create a GoogleOAuthToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GoogleOAuthToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GoogleOAuthTokenUpsertArgs>(args: SelectSubset<T, GoogleOAuthTokenUpsertArgs<ExtArgs>>): Prisma__GoogleOAuthTokenClient<$Result.GetResult<Prisma.$GoogleOAuthTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GoogleOAuthTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleOAuthTokenCountArgs} args - Arguments to filter GoogleOAuthTokens to count.
+     * @example
+     * // Count the number of GoogleOAuthTokens
+     * const count = await prisma.googleOAuthToken.count({
+     *   where: {
+     *     // ... the filter for the GoogleOAuthTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends GoogleOAuthTokenCountArgs>(
+      args?: Subset<T, GoogleOAuthTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GoogleOAuthTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GoogleOAuthToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleOAuthTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GoogleOAuthTokenAggregateArgs>(args: Subset<T, GoogleOAuthTokenAggregateArgs>): Prisma.PrismaPromise<GetGoogleOAuthTokenAggregateType<T>>
+
+    /**
+     * Group by GoogleOAuthToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleOAuthTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GoogleOAuthTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GoogleOAuthTokenGroupByArgs['orderBy'] }
+        : { orderBy?: GoogleOAuthTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GoogleOAuthTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGoogleOAuthTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GoogleOAuthToken model
+   */
+  readonly fields: GoogleOAuthTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GoogleOAuthToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GoogleOAuthTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GoogleOAuthToken model
+   */
+  interface GoogleOAuthTokenFieldRefs {
+    readonly id: FieldRef<"GoogleOAuthToken", 'Int'>
+    readonly ownerEmail: FieldRef<"GoogleOAuthToken", 'String'>
+    readonly accessToken: FieldRef<"GoogleOAuthToken", 'String'>
+    readonly refreshToken: FieldRef<"GoogleOAuthToken", 'String'>
+    readonly scope: FieldRef<"GoogleOAuthToken", 'String'>
+    readonly tokenType: FieldRef<"GoogleOAuthToken", 'String'>
+    readonly expiryDate: FieldRef<"GoogleOAuthToken", 'BigInt'>
+    readonly createdAt: FieldRef<"GoogleOAuthToken", 'DateTime'>
+    readonly updatedAt: FieldRef<"GoogleOAuthToken", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GoogleOAuthToken findUnique
+   */
+  export type GoogleOAuthTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+    /**
+     * Filter, which GoogleOAuthToken to fetch.
+     */
+    where: GoogleOAuthTokenWhereUniqueInput
+  }
+
+  /**
+   * GoogleOAuthToken findUniqueOrThrow
+   */
+  export type GoogleOAuthTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+    /**
+     * Filter, which GoogleOAuthToken to fetch.
+     */
+    where: GoogleOAuthTokenWhereUniqueInput
+  }
+
+  /**
+   * GoogleOAuthToken findFirst
+   */
+  export type GoogleOAuthTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+    /**
+     * Filter, which GoogleOAuthToken to fetch.
+     */
+    where?: GoogleOAuthTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoogleOAuthTokens to fetch.
+     */
+    orderBy?: GoogleOAuthTokenOrderByWithRelationInput | GoogleOAuthTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GoogleOAuthTokens.
+     */
+    cursor?: GoogleOAuthTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoogleOAuthTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoogleOAuthTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GoogleOAuthTokens.
+     */
+    distinct?: GoogleOAuthTokenScalarFieldEnum | GoogleOAuthTokenScalarFieldEnum[]
+  }
+
+  /**
+   * GoogleOAuthToken findFirstOrThrow
+   */
+  export type GoogleOAuthTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+    /**
+     * Filter, which GoogleOAuthToken to fetch.
+     */
+    where?: GoogleOAuthTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoogleOAuthTokens to fetch.
+     */
+    orderBy?: GoogleOAuthTokenOrderByWithRelationInput | GoogleOAuthTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GoogleOAuthTokens.
+     */
+    cursor?: GoogleOAuthTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoogleOAuthTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoogleOAuthTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GoogleOAuthTokens.
+     */
+    distinct?: GoogleOAuthTokenScalarFieldEnum | GoogleOAuthTokenScalarFieldEnum[]
+  }
+
+  /**
+   * GoogleOAuthToken findMany
+   */
+  export type GoogleOAuthTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+    /**
+     * Filter, which GoogleOAuthTokens to fetch.
+     */
+    where?: GoogleOAuthTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoogleOAuthTokens to fetch.
+     */
+    orderBy?: GoogleOAuthTokenOrderByWithRelationInput | GoogleOAuthTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GoogleOAuthTokens.
+     */
+    cursor?: GoogleOAuthTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoogleOAuthTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoogleOAuthTokens.
+     */
+    skip?: number
+    distinct?: GoogleOAuthTokenScalarFieldEnum | GoogleOAuthTokenScalarFieldEnum[]
+  }
+
+  /**
+   * GoogleOAuthToken create
+   */
+  export type GoogleOAuthTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+    /**
+     * The data needed to create a GoogleOAuthToken.
+     */
+    data: XOR<GoogleOAuthTokenCreateInput, GoogleOAuthTokenUncheckedCreateInput>
+  }
+
+  /**
+   * GoogleOAuthToken createMany
+   */
+  export type GoogleOAuthTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GoogleOAuthTokens.
+     */
+    data: GoogleOAuthTokenCreateManyInput | GoogleOAuthTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GoogleOAuthToken createManyAndReturn
+   */
+  export type GoogleOAuthTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many GoogleOAuthTokens.
+     */
+    data: GoogleOAuthTokenCreateManyInput | GoogleOAuthTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GoogleOAuthToken update
+   */
+  export type GoogleOAuthTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+    /**
+     * The data needed to update a GoogleOAuthToken.
+     */
+    data: XOR<GoogleOAuthTokenUpdateInput, GoogleOAuthTokenUncheckedUpdateInput>
+    /**
+     * Choose, which GoogleOAuthToken to update.
+     */
+    where: GoogleOAuthTokenWhereUniqueInput
+  }
+
+  /**
+   * GoogleOAuthToken updateMany
+   */
+  export type GoogleOAuthTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GoogleOAuthTokens.
+     */
+    data: XOR<GoogleOAuthTokenUpdateManyMutationInput, GoogleOAuthTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which GoogleOAuthTokens to update
+     */
+    where?: GoogleOAuthTokenWhereInput
+    /**
+     * Limit how many GoogleOAuthTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GoogleOAuthToken updateManyAndReturn
+   */
+  export type GoogleOAuthTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update GoogleOAuthTokens.
+     */
+    data: XOR<GoogleOAuthTokenUpdateManyMutationInput, GoogleOAuthTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which GoogleOAuthTokens to update
+     */
+    where?: GoogleOAuthTokenWhereInput
+    /**
+     * Limit how many GoogleOAuthTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GoogleOAuthToken upsert
+   */
+  export type GoogleOAuthTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+    /**
+     * The filter to search for the GoogleOAuthToken to update in case it exists.
+     */
+    where: GoogleOAuthTokenWhereUniqueInput
+    /**
+     * In case the GoogleOAuthToken found by the `where` argument doesn't exist, create a new GoogleOAuthToken with this data.
+     */
+    create: XOR<GoogleOAuthTokenCreateInput, GoogleOAuthTokenUncheckedCreateInput>
+    /**
+     * In case the GoogleOAuthToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GoogleOAuthTokenUpdateInput, GoogleOAuthTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * GoogleOAuthToken delete
+   */
+  export type GoogleOAuthTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+    /**
+     * Filter which GoogleOAuthToken to delete.
+     */
+    where: GoogleOAuthTokenWhereUniqueInput
+  }
+
+  /**
+   * GoogleOAuthToken deleteMany
+   */
+  export type GoogleOAuthTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GoogleOAuthTokens to delete
+     */
+    where?: GoogleOAuthTokenWhereInput
+    /**
+     * Limit how many GoogleOAuthTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GoogleOAuthToken without action
+   */
+  export type GoogleOAuthTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleOAuthToken
+     */
+    select?: GoogleOAuthTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleOAuthToken
+     */
+    omit?: GoogleOAuthTokenOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8188,6 +9351,21 @@ export namespace Prisma {
   export type SuratTugasScalarFieldEnum = (typeof SuratTugasScalarFieldEnum)[keyof typeof SuratTugasScalarFieldEnum]
 
 
+  export const GoogleOAuthTokenScalarFieldEnum: {
+    id: 'id',
+    ownerEmail: 'ownerEmail',
+    accessToken: 'accessToken',
+    refreshToken: 'refreshToken',
+    scope: 'scope',
+    tokenType: 'tokenType',
+    expiryDate: 'expiryDate',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GoogleOAuthTokenScalarFieldEnum = (typeof GoogleOAuthTokenScalarFieldEnum)[keyof typeof GoogleOAuthTokenScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -8291,6 +9469,20 @@ export namespace Prisma {
    * Reference to a field of type 'StatusSuratTugas[]'
    */
   export type ListEnumStatusSuratTugasFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusSuratTugas[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt'
+   */
+  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt[]'
+   */
+  export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
     
 
 
@@ -8903,6 +10095,80 @@ export namespace Prisma {
     spi?: StringNullableWithAggregatesFilter<"SuratTugas"> | string | null
     wbs?: StringNullableWithAggregatesFilter<"SuratTugas"> | string | null
     status?: EnumStatusSuratTugasWithAggregatesFilter<"SuratTugas"> | $Enums.StatusSuratTugas
+  }
+
+  export type GoogleOAuthTokenWhereInput = {
+    AND?: GoogleOAuthTokenWhereInput | GoogleOAuthTokenWhereInput[]
+    OR?: GoogleOAuthTokenWhereInput[]
+    NOT?: GoogleOAuthTokenWhereInput | GoogleOAuthTokenWhereInput[]
+    id?: IntFilter<"GoogleOAuthToken"> | number
+    ownerEmail?: StringFilter<"GoogleOAuthToken"> | string
+    accessToken?: StringNullableFilter<"GoogleOAuthToken"> | string | null
+    refreshToken?: StringNullableFilter<"GoogleOAuthToken"> | string | null
+    scope?: StringNullableFilter<"GoogleOAuthToken"> | string | null
+    tokenType?: StringNullableFilter<"GoogleOAuthToken"> | string | null
+    expiryDate?: BigIntNullableFilter<"GoogleOAuthToken"> | bigint | number | null
+    createdAt?: DateTimeFilter<"GoogleOAuthToken"> | Date | string
+    updatedAt?: DateTimeFilter<"GoogleOAuthToken"> | Date | string
+  }
+
+  export type GoogleOAuthTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    ownerEmail?: SortOrder
+    accessToken?: SortOrderInput | SortOrder
+    refreshToken?: SortOrderInput | SortOrder
+    scope?: SortOrderInput | SortOrder
+    tokenType?: SortOrderInput | SortOrder
+    expiryDate?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GoogleOAuthTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    ownerEmail?: string
+    AND?: GoogleOAuthTokenWhereInput | GoogleOAuthTokenWhereInput[]
+    OR?: GoogleOAuthTokenWhereInput[]
+    NOT?: GoogleOAuthTokenWhereInput | GoogleOAuthTokenWhereInput[]
+    accessToken?: StringNullableFilter<"GoogleOAuthToken"> | string | null
+    refreshToken?: StringNullableFilter<"GoogleOAuthToken"> | string | null
+    scope?: StringNullableFilter<"GoogleOAuthToken"> | string | null
+    tokenType?: StringNullableFilter<"GoogleOAuthToken"> | string | null
+    expiryDate?: BigIntNullableFilter<"GoogleOAuthToken"> | bigint | number | null
+    createdAt?: DateTimeFilter<"GoogleOAuthToken"> | Date | string
+    updatedAt?: DateTimeFilter<"GoogleOAuthToken"> | Date | string
+  }, "id" | "ownerEmail">
+
+  export type GoogleOAuthTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    ownerEmail?: SortOrder
+    accessToken?: SortOrderInput | SortOrder
+    refreshToken?: SortOrderInput | SortOrder
+    scope?: SortOrderInput | SortOrder
+    tokenType?: SortOrderInput | SortOrder
+    expiryDate?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GoogleOAuthTokenCountOrderByAggregateInput
+    _avg?: GoogleOAuthTokenAvgOrderByAggregateInput
+    _max?: GoogleOAuthTokenMaxOrderByAggregateInput
+    _min?: GoogleOAuthTokenMinOrderByAggregateInput
+    _sum?: GoogleOAuthTokenSumOrderByAggregateInput
+  }
+
+  export type GoogleOAuthTokenScalarWhereWithAggregatesInput = {
+    AND?: GoogleOAuthTokenScalarWhereWithAggregatesInput | GoogleOAuthTokenScalarWhereWithAggregatesInput[]
+    OR?: GoogleOAuthTokenScalarWhereWithAggregatesInput[]
+    NOT?: GoogleOAuthTokenScalarWhereWithAggregatesInput | GoogleOAuthTokenScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"GoogleOAuthToken"> | number
+    ownerEmail?: StringWithAggregatesFilter<"GoogleOAuthToken"> | string
+    accessToken?: StringNullableWithAggregatesFilter<"GoogleOAuthToken"> | string | null
+    refreshToken?: StringNullableWithAggregatesFilter<"GoogleOAuthToken"> | string | null
+    scope?: StringNullableWithAggregatesFilter<"GoogleOAuthToken"> | string | null
+    tokenType?: StringNullableWithAggregatesFilter<"GoogleOAuthToken"> | string | null
+    expiryDate?: BigIntNullableWithAggregatesFilter<"GoogleOAuthToken"> | bigint | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"GoogleOAuthToken"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GoogleOAuthToken"> | Date | string
   }
 
   export type pegawaiCreateInput = {
@@ -9580,6 +10846,87 @@ export namespace Prisma {
     status?: EnumStatusSuratTugasFieldUpdateOperationsInput | $Enums.StatusSuratTugas
   }
 
+  export type GoogleOAuthTokenCreateInput = {
+    ownerEmail: string
+    accessToken?: string | null
+    refreshToken?: string | null
+    scope?: string | null
+    tokenType?: string | null
+    expiryDate?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GoogleOAuthTokenUncheckedCreateInput = {
+    id?: number
+    ownerEmail: string
+    accessToken?: string | null
+    refreshToken?: string | null
+    scope?: string | null
+    tokenType?: string | null
+    expiryDate?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GoogleOAuthTokenUpdateInput = {
+    ownerEmail?: StringFieldUpdateOperationsInput | string
+    accessToken?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    tokenType?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryDate?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GoogleOAuthTokenUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ownerEmail?: StringFieldUpdateOperationsInput | string
+    accessToken?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    tokenType?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryDate?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GoogleOAuthTokenCreateManyInput = {
+    id?: number
+    ownerEmail: string
+    accessToken?: string | null
+    refreshToken?: string | null
+    scope?: string | null
+    tokenType?: string | null
+    expiryDate?: bigint | number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GoogleOAuthTokenUpdateManyMutationInput = {
+    ownerEmail?: StringFieldUpdateOperationsInput | string
+    accessToken?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    tokenType?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryDate?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GoogleOAuthTokenUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ownerEmail?: StringFieldUpdateOperationsInput | string
+    accessToken?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    tokenType?: NullableStringFieldUpdateOperationsInput | string | null
+    expiryDate?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -10200,6 +11547,79 @@ export namespace Prisma {
     _max?: NestedEnumStatusSuratTugasFilter<$PrismaModel>
   }
 
+  export type BigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+  }
+
+  export type GoogleOAuthTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    ownerEmail?: SortOrder
+    accessToken?: SortOrder
+    refreshToken?: SortOrder
+    scope?: SortOrder
+    tokenType?: SortOrder
+    expiryDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GoogleOAuthTokenAvgOrderByAggregateInput = {
+    id?: SortOrder
+    expiryDate?: SortOrder
+  }
+
+  export type GoogleOAuthTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    ownerEmail?: SortOrder
+    accessToken?: SortOrder
+    refreshToken?: SortOrder
+    scope?: SortOrder
+    tokenType?: SortOrder
+    expiryDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GoogleOAuthTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    ownerEmail?: SortOrder
+    accessToken?: SortOrder
+    refreshToken?: SortOrder
+    scope?: SortOrder
+    tokenType?: SortOrder
+    expiryDate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GoogleOAuthTokenSumOrderByAggregateInput = {
+    id?: SortOrder
+    expiryDate?: SortOrder
+  }
+
+  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
+  }
+
   export type pegawaiCreateroleInput = {
     set: string[]
   }
@@ -10811,6 +12231,14 @@ export namespace Prisma {
     deleteMany?: pegawaiScalarWhereInput | pegawaiScalarWhereInput[]
   }
 
+  export type NullableBigIntFieldUpdateOperationsInput = {
+    set?: bigint | number | null
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -11044,6 +12472,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusSuratTugasFilter<$PrismaModel>
     _max?: NestedEnumStatusSuratTugasFilter<$PrismaModel>
+  }
+
+  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+  }
+
+  export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
   export type pelatihanCreateWithoutPegawaiInput = {

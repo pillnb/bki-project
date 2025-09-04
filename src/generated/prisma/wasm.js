@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.12.0
- * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
+ * Prisma Client JS version: 6.15.0
+ * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
  */
 Prisma.prismaVersion = {
-  client: "6.12.0",
-  engine: "8047c96bbd92db98a2abc7c9323ce77c02c89dbc"
+  client: "6.15.0",
+  engine: "85179d7826409ee107a6ba334b5e305ae3fba9fb"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -214,6 +214,18 @@ exports.Prisma.SuratTugasScalarFieldEnum = {
   status: 'status'
 };
 
+exports.Prisma.GoogleOAuthTokenScalarFieldEnum = {
+  id: 'id',
+  ownerEmail: 'ownerEmail',
+  accessToken: 'accessToken',
+  refreshToken: 'refreshToken',
+  scope: 'scope',
+  tokenType: 'tokenType',
+  expiryDate: 'expiryDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -251,7 +263,8 @@ exports.Prisma.ModelName = {
   Proyek: 'Proyek',
   pelatihan: 'pelatihan',
   pengalaman_kerja: 'pengalaman_kerja',
-  SuratTugas: 'SuratTugas'
+  SuratTugas: 'SuratTugas',
+  GoogleOAuthToken: 'GoogleOAuthToken'
 };
 
 /**
