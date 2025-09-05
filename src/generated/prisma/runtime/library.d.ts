@@ -82,12 +82,12 @@ export declare type Args<T, F extends Operation> = T extends {
         types: {
             operations: {
                 [K in F]: {
-                    args: unknown;
+                    args: any;
                 };
             };
         };
     };
-} ? T[symbol]['types']['operations'][F]['args'] : unknown;
+} ? T[symbol]['types']['operations'][F]['args'] : any;
 
 export declare type Args_3<T, F extends Operation> = Args<T, F>;
 
@@ -184,15 +184,15 @@ export declare type ClientArgs = {
 export declare type ClientBuiltInProp = keyof DynamicClientExtensionThisBuiltin<never, never, never>;
 
 export declare type ClientOptionDef = undefined | {
-    [K in string]: unknown;
+    [K in string]: any;
 };
 
 export declare type ClientOtherOps = {
-    $queryRaw<T = unknown>(query: TemplateStringsArray | Sql, ...values: unknown[]): PrismaPromise<T>;
+    $queryRaw<T = unknown>(query: TemplateStringsArray | Sql, ...values: any[]): PrismaPromise<T>;
     $queryRawTyped<T>(query: TypedSql<unknown[], T>): PrismaPromise<T[]>;
-    $queryRawUnsafe<T = unknown>(query: string, ...values: unknown[]): PrismaPromise<T>;
-    $executeRaw(query: TemplateStringsArray | Sql, ...values: unknown[]): PrismaPromise<number>;
-    $executeRawUnsafe(query: string, ...values: unknown[]): PrismaPromise<number>;
+    $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): PrismaPromise<T>;
+    $executeRaw(query: TemplateStringsArray | Sql, ...values: any[]): PrismaPromise<number>;
+    $executeRawUnsafe(query: string, ...values: any[]): PrismaPromise<number>;
     $runCommandRaw(command: InputJsonObject): PrismaPromise<JsonObject>;
 };
 
@@ -397,8 +397,8 @@ declare class DbNull extends NullTypesEnumValue {
 }
 
 export declare const Debug: typeof debugCreate & {
-    enable(namespace: unknown): void;
-    disable(): unknown;
+    enable(namespace: any): void;
+    disable(): any;
     enabled(namespace: string): boolean;
     log: (...args: string[]) => void;
     formatters: {};
@@ -414,7 +414,7 @@ export declare const Debug: typeof debugCreate & {
  * debug('Hello World')
  * ```
  */
-declare function debugCreate(namespace: string): ((...args: unknown[]) => void) & {
+declare function debugCreate(namespace: string): ((...args: any[]) => void) & {
     color: string;
     enabled: boolean;
     namespace: string;
@@ -643,7 +643,7 @@ export declare class Decimal {
     static exp(n: Decimal.Value): Decimal;
     static floor(n: Decimal.Value): Decimal;
     static hypot(...n: Decimal.Value[]): Decimal;
-    static isDecimal(object: unknown): object is Decimal;
+    static isDecimal(object: any): object is Decimal;
     static ln(n: Decimal.Value): Decimal;
     static log(n: Decimal.Value, base?: Decimal.Value): Decimal;
     static log2(n: Decimal.Value): Decimal;
@@ -746,8 +746,8 @@ export declare type DevTypeMapDef = {
 };
 
 export declare type DevTypeMapFnDef = {
-    args: unknown;
-    result: unknown;
+    args: any;
+    result: any;
     payload: OperationPayload;
 };
 
@@ -955,8 +955,8 @@ export declare type DynamicQueryExtensionArgs<Q_, TypeMap extends TypeMapDef> = 
     [K in keyof Q_]: K extends '$allOperations' ? (args: {
         model?: string;
         operation: string;
-        args: unknown;
-        query: (args: unknown) => PrismaPromise<any>;
+        args: any;
+        query: (args: any) => PrismaPromise<any>;
     }) => Promise<any> : K extends '$allModels' ? {
         [P in keyof Q_[K] | keyof TypeMap['model'][keyof TypeMap['model']]['operations'] | '$allOperations']?: P extends '$allOperations' ? DynamicQueryExtensionCb<TypeMap, 'model', keyof TypeMap['model'], keyof TypeMap['model'][keyof TypeMap['model']]['operations']> : P extends keyof TypeMap['model'][keyof TypeMap['model']]['operations'] ? DynamicQueryExtensionCb<TypeMap, 'model', keyof TypeMap['model'], P> : never;
     } : K extends TypeMap['meta']['modelProps'] ? {
@@ -982,7 +982,7 @@ export declare type DynamicResultExtensionArgs<R_, TypeMap extends TypeMapDef> =
     [K in keyof R_]: {
         [P in keyof R_[K]]?: {
             needs?: DynamicResultExtensionNeeds<TypeMap, ModelKey<TypeMap, K>, R_[K][P]>;
-            compute(data: DynamicResultExtensionData<TypeMap, ModelKey<TypeMap, K>, R_[K][P]>): unknown;
+            compute(data: DynamicResultExtensionData<TypeMap, ModelKey<TypeMap, K>, R_[K][P]>): any;
         };
     };
 };
@@ -1093,7 +1093,7 @@ declare interface EngineConfig {
         PrismaClientUnknownRequestError: typeof PrismaClientUnknownRequestError;
         PrismaClientInitializationError: typeof PrismaClientInitializationError;
         PrismaClientKnownRequestError: typeof PrismaClientKnownRequestError;
-        debug: (...args: unknown[]) => void;
+        debug: (...args: any[]) => void;
         engineVersion: string;
         clientVersion: string;
     };
@@ -1255,7 +1255,7 @@ export declare interface ExtendsHook<Variant extends 'extends' | 'define', TypeM
         extends: DynamicClientExtensionThis<Call<TypeMapCb, {
             extArgs: MergedArgs;
         }>, TypeMapCb, MergedArgs>;
-        define: (client: unknown) => {
+        define: (client: any) => {
             $extends: {
                 extArgs: Args;
             };
@@ -1495,7 +1495,7 @@ export declare type GetFindResult<P extends OperationPayload, A, GlobalOmitOptio
         };
     } ? O : K extends '_count' ? Count<P['objects']> : never;
 } & (A extends {
-    include: unknown;
+    include: any;
 } & Record<string, unknown> ? DefaultSelection<P, A & {
     omit: A['omit'];
 }, GlobalOmitOptions> : unknown) : DefaultSelection<P, A, GlobalOmitOptions>;
@@ -1520,13 +1520,13 @@ export declare type GetPayloadResultExtensionKeys<R extends InternalArgs['result
 
 export declare type GetPayloadResultExtensionObject<R extends InternalArgs['result'][string]> = {
     [K in GetPayloadResultExtensionKeys<R>]: R[K] extends () => {
-        compute: (...args: unknown) => infer C;
+        compute: (...args: any) => infer C;
     } ? C : never;
 };
 
 export declare function getPrismaClient(config: GetPrismaClientConfig): {
     new (optionsArg?: PrismaClientOptions): {
-        _originalClient: unknown;
+        _originalClient: any;
         _runtimeDataModel: RuntimeDataModel;
         _requestHandler: RequestHandler;
         _connectionPromise?: Promise<any> | undefined;
@@ -1548,9 +1548,9 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          * A fully constructed/applied Client that references the parent
          * PrismaClient. This is used for Client extensions only.
          */
-        _appliedParent: unknown;
+        _appliedParent: any;
         _createPrismaPromise: PrismaPromiseFactory;
-        $on<E extends ExtendedEventType>(eventType: E, callback: EventCallback<E>): unknown;
+        $on<E extends ExtendedEventType>(eventType: E, callback: EventCallback<E>): any;
         $connect(): Promise<void>;
         /**
          * Disconnect from the database
@@ -1568,7 +1568,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          * @param values
          * @returns
          */
-        $executeRaw(query: TemplateStringsArray | Sql, ...values: unknown[]): PrismaPromise_2<unknown, any>;
+        $executeRaw(query: TemplateStringsArray | Sql, ...values: any[]): PrismaPromise_2<unknown, any>;
         /**
          * Unsafe counterpart of `$executeRaw` that is susceptible to SQL injections
          * @see https://github.com/prisma/prisma/issues/7142
@@ -1597,7 +1597,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          * @param values
          * @returns
          */
-        $queryRaw(query: TemplateStringsArray | Sql, ...values: unknown[]): PrismaPromise_2<unknown, any>;
+        $queryRaw(query: TemplateStringsArray | Sql, ...values: any[]): PrismaPromise_2<unknown, any>;
         /**
          * Counterpart to $queryRaw, that returns strongly typed results
          * @param typedSql
@@ -1638,7 +1638,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
          * @param options to set timeouts (callback)
          * @returns
          */
-        $transaction(input: unknown, options?: unknown): Promise<any>;
+        $transaction(input: any, options?: any): Promise<any>;
         /**
          * Runs the middlewares over params before executing a request
          * @param internalParams
@@ -1785,7 +1785,7 @@ declare type GlobalOmitOptions = {
 
 declare type HandleErrorParams = {
     args: JsArgs;
-    error: unknown;
+    error: any;
     clientMethod: string;
     callsite?: CallSite;
     transaction?: PrismaPromiseTransaction;
@@ -1973,9 +1973,9 @@ export declare type ITXClientDenyList = (typeof denylist)[number];
 export declare const itxClientDenyList: readonly (string | symbol)[];
 
 declare interface Job {
-    resolve: (data: unknown) => void;
-    reject: (data: unknown) => void;
-    request: unknown;
+    resolve: (data: any) => void;
+    reject: (data: any) => void;
+    request: any;
 }
 
 /**
@@ -2157,7 +2157,7 @@ declare type LogLevel = 'info' | 'query' | 'warn' | 'error';
  */
 export declare function makeStrictEnum<T extends Record<PropertyKey, string | number>>(definition: T): T;
 
-export declare function makeTypedQueryFactory(sql: string): (...values: unknown[]) => TypedSql<any[], unknown>;
+export declare function makeTypedQueryFactory(sql: string): (...values: any[]) => TypedSql<any[], unknown>;
 
 declare type MappedError = {
     kind: 'GenericJs';
@@ -2297,7 +2297,7 @@ declare class MergedExtensionsList {
     getAllComputedFields(dmmfModelName: string): ComputedFieldsMap | undefined;
     getAllClientExtensions(): ClientArg | undefined;
     getAllModelExtensions(dmmfModelName: string): ModelArg | undefined;
-    getAllQueryCallbacks(jsModelName: string, operation: string): unknown;
+    getAllQueryCallbacks(jsModelName: string, operation: string): any;
     getAllBatchQueryCallbacks(): BatchQueryOptionsCb[];
 }
 
@@ -2586,10 +2586,10 @@ export declare type Path<O, P, Default = never> = O extends unknown ? P extends 
 export declare type Payload<T, F extends Operation = never> = T extends {
     [K: symbol]: {
         types: {
-            payload: unknown;
+            payload: any;
         };
     };
-} ? T[symbol]['types']['payload'] : unknown;
+} ? T[symbol]['types']['payload'] : any;
 
 export declare type PayloadToResult<P, O extends Record_2<any, any> = RenameAndNestPayloadKeys<P>> = {
     [K in keyof O]?: O[K][K] extends any[] ? PayloadToResult<O[K][K][number]>[] : O[K][K] extends object ? PayloadToResult<O[K][K]> : O[K][K];
@@ -2735,7 +2735,7 @@ declare interface PrismaPromise_2<TResult, TSpec extends PrismaOperationSpec<unk
      * @param onrejected same as regular promises
      * @param transaction transaction options
      */
-    catch<R = never>(onrejected?: ((reason: unknown) => R | PromiseLike<R>) | undefined | null, transaction?: PrismaPromiseTransaction): Promise<TResult | R>;
+    catch<R = never>(onrejected?: ((reason: any) => R | PromiseLike<R>) | undefined | null, transaction?: PrismaPromiseTransaction): Promise<TResult | R>;
     /**
      * Extension of the original `.finally` function
      * @param onfinally same as regular promises
@@ -3153,15 +3153,15 @@ declare class RequestHandler {
     private logEmitter?;
     constructor(client: Client, logEmitter?: LogEmitter);
     request(params: RequestParams): Promise<any>;
-    mapQueryEngineResult({ dataPath, unpacker }: RequestParams, response: QueryEngineResultData<any>): unknown;
+    mapQueryEngineResult({ dataPath, unpacker }: RequestParams, response: QueryEngineResultData<any>): any;
     /**
      * Handles the error and logs it, logging the error is done synchronously waiting for the event
      * handlers to finish.
      */
     handleAndLogRequestError(params: HandleErrorParams): never;
     handleRequestError({ error, clientMethod, callsite, transaction, args, modelName, globalOmit, }: HandleErrorParams): never;
-    sanitizeMessage(message: unknown): unknown;
-    unpack(data: unknown, dataPath: string[], unpacker?: Unpacker): unknown;
+    sanitizeMessage(message: any): any;
+    unpack(data: unknown, dataPath: string[], unpacker?: Unpacker): any;
     get [Symbol.toStringTag](): string;
 }
 
@@ -3182,7 +3182,7 @@ declare type RequestParams = {
     callsite?: CallSite;
     transaction?: PrismaPromiseTransaction;
     extensions: MergedExtensionsList;
-    args?: unknown;
+    args?: any;
     headers?: Record<string, string>;
     unpacker?: Unpacker;
     otelParentCtx?: Context;
@@ -3209,7 +3209,7 @@ declare function resolveDatasourceUrl({ inlineDatasources, overrideDatasources, 
 export declare type Result<T, A, F extends Operation> = T extends {
     [K: symbol]: {
         types: {
-            payload: unknown;
+            payload: any;
         };
     };
 } ? GetResult<T[symbol]['types']['payload'], A, F> : GetResult<{
@@ -3262,7 +3262,7 @@ export declare type ResultArgs = {
     };
 };
 
-export declare type ResultArgsFieldCompute = (model: unknown) => unknown;
+export declare type ResultArgsFieldCompute = (model: any) => unknown;
 
 export declare type ResultFieldDefinition = {
     needs?: {
@@ -3284,7 +3284,7 @@ declare type ResultNode = {
     fieldType: FieldType;
 };
 
-export declare type Return<T> = T extends (...args: unknown[]) => infer R ? R : T;
+export declare type Return<T> = T extends (...args: any[]) => infer R ? R : T;
 
 export declare type RuntimeDataModel = {
     readonly models: Record<string, RuntimeModel>;
@@ -3858,7 +3858,7 @@ declare type UnknownErrorParams = {
 
 export declare type UnknownTypedSql = TypedSql<unknown[], unknown>;
 
-declare type Unpacker = (data: unknown) => any;
+declare type Unpacker = (data: any) => any;
 
 export declare type UnwrapPayload<P> = {} extends P ? unknown : {
     [K in keyof P]: P[K] extends {
@@ -3969,7 +3969,7 @@ declare function validator<C, M extends Exclude<keyof C, `$${string}`>, O extend
  */
 export declare type Value = unknown;
 
-export declare function warnEnvConflicts(envPaths: unknown): void;
+export declare function warnEnvConflicts(envPaths: any): void;
 
 export declare const warnOnce: (key: string, message: string, ...args: unknown[]) => void;
 

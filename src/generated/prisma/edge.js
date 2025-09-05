@@ -249,7 +249,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\vasky\\bki-cv\\src\\generated\\prisma",
+      "value": "C:\\Users\\darre\\Downloads\\bki-project\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -263,7 +263,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\vasky\\bki-cv\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\darre\\Downloads\\bki-project\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
