@@ -87,6 +87,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import prisma from '@/lib/prisma';
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 // API untuk membuat Surat Tugas (POST)
 export async function POST(req: NextRequest) {
   try {

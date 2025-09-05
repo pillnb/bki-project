@@ -11,7 +11,7 @@ export const runtime = "nodejs"; // Prisma butuh Node
 export const dynamic = "force-dynamic"; // jangan pernah di-SSG
 
 async function getCurrentPegawai() {
-  const cookieStore = await cookies(); // sinkron, jangan pakai await
+  const cookieStore = await cookies();
   const nik = cookieStore.get("nik")?.value;
   if (!nik) return null;
   return prisma.pegawai.findFirst({

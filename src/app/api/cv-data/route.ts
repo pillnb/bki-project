@@ -3,6 +3,9 @@ import { NextResponse } from "next/server";
 import { getPegawaiByNik } from "../../dashboard/pegawai/data-diri";
 import { getKualifikasiByNup, getPengalamanKerjaByNup } from "../../cv-generator/data-cv";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export async function GET() {
     try {
         const cookieStore = await cookies();
