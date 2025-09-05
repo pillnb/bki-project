@@ -11,6 +11,9 @@ const Docxtemplater = require("docxtemplater");
 const ImageModule = require("docxtemplater-image-module-free");
 import fs from "fs";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   try {
     // 1. Ambil nup dari body (jika ada) atau dari cookie (default)
@@ -188,10 +191,10 @@ export async function POST(request: NextRequest) {
       pendidikan: peg.pendidikan,
       tahun_pend: peg.tahun_pend,
       pelatihan: (peg.pelatihan || [])
-        .filter((pel) => pel.status === "VALID")
+        .filter((pel: typeof peg.pelatihan[0]) => pel.status === "VALID")
         .slice()
-        .sort((a, b) => (a.tahun ?? 0) - (b.tahun ?? 0))
-        .map((pel, idx, arr) => {
+        .sort((a: typeof peg.pelatihan[0], b: typeof peg.pelatihan[0]) => (a.tahun ?? 0) - (b.tahun ?? 0))
+        .map((pel: typeof peg.pelatihan[0], idx: number, arr: typeof peg.pelatihan) => {
           let tahunStr: string | number = "";
           if (idx === 0 || pel.tahun !== arr[idx - 1].tahun) {
             tahunStr = pel.tahun ?? "";

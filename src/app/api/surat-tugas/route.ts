@@ -351,10 +351,10 @@ export async function GET(req: NextRequest) {
         });
 
         // Tambahkan informasi peran user dalam setiap surat tugas
-        const enrichedSuratTugas = allSuratTugas.map(surat => ({
+        const enrichedSuratTugas = allSuratTugas.map((surat: typeof allSuratTugas[0]) => ({
             ...surat,
             userRole: {
-                isTeamMember: surat.timInspektor.some(tim => tim.nup === userNup),
+                isTeamMember: surat.timInspektor.some((tim: typeof surat.timInspektor[0]) => tim.nup === userNup),
                 isLeadInspector: surat.leadInspectorId === userId,
                 isKoordinator: surat.koordinatorId === userId,
                 isSeniorManager: surat.seniorManagerId === userId,

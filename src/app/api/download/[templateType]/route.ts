@@ -5,6 +5,9 @@ import prisma from '@/lib/prisma';
 import ExcelJS from 'exceljs';
 import path from 'path';
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest, props: { params: Promise<{ templateType: string }> }) {
   const params = await props.params;
   const { templateType } = params;
@@ -46,9 +49,9 @@ export async function GET(req: NextRequest, props: { params: Promise<{ templateT
     let rowIndex = 0;
 
     if (templateType === 'fq183') {
-      allPegawai.forEach(pegawai => {
+      allPegawai.forEach((pegawai: typeof allPegawai[0]) => {
         if (pegawai.pelatihan.length > 0) { 
-          pegawai.pelatihan.forEach(item => {
+          pegawai.pelatihan.forEach((item: typeof pegawai.pelatihan[0]) => {
             rowIndex++;
             dataToInsert.push([
               rowIndex,
@@ -66,9 +69,9 @@ export async function GET(req: NextRequest, props: { params: Promise<{ templateT
         }
       });
     } else if (templateType === 'fq140') {
-      allPegawai.forEach(pegawai => {
+      allPegawai.forEach((pegawai: typeof allPegawai[0]) => {
         if (pegawai.pelatihan.length > 0) {
-          pegawai.pelatihan.forEach(item => {
+          pegawai.pelatihan.forEach((item: typeof pegawai.pelatihan[0]) => {
             rowIndex++;
             dataToInsert.push([
               rowIndex,

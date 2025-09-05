@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
       orderBy: { id_pelatihan: "desc" }, // ganti dari updatedAt -> id_pelatihan
     });
 
-    const data = rows.map((r) => ({
+    const data = rows.map((r: typeof rows[0]) => ({
       ...r,
       status: computeTrainingStatus({
         fileUrl: r.file_sertifikat ?? undefined,

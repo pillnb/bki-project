@@ -90,7 +90,7 @@ export async function GET() {
     const isKoorIndustri = me.jabatan === KOOR_JABATAN_BY_BIDANG.Industri;
     const isKoorMarine = me.jabatan === KOOR_JABATAN_BY_BIDANG.Marine;
 
-    const menungguKoorFiltered = menungguKoor.filter((s) => {
+    const menungguKoorFiltered = menungguKoor.filter((s: typeof menungguKoor[0]) => {
       if (s.koordinatorId && s.koordinatorId === me.id) return true;
       if (!s.koordinatorId) {
         if (s.bidang_pekerjaan === "Energi" && isKoorEnergi) return true;
@@ -103,29 +103,29 @@ export async function GET() {
     const isSM = me.jabatan === JABATAN_SM;
     const isKACAB = me.jabatan === JABATAN_KACAB;
 
-    const menungguSmFiltered = menungguSm.filter((s) => {
+    const menungguSmFiltered = menungguSm.filter((s: typeof menungguSm[0]) => {
       if (s.seniorManagerId && s.seniorManagerId === me.id) return true;
       if (!s.seniorManagerId && isSM) return true;
       return false;
     });
 
-    const menungguKacabFiltered = menungguKacab.filter((s) => {
+    const menungguKacabFiltered = menungguKacab.filter((s: typeof menungguKacab[0]) => {
       if (s.kepalaCabangId && s.kepalaCabangId === me.id) return true;
       if (!s.kepalaCabangId && isKACAB) return true;
       return false;
     });
 
     const result = [
-      ...menungguLead.map((x) => ({ queue: "MENUNGGU_LEAD" as const, ...x })),
-      ...menungguKoorFiltered.map((x) => ({
+      ...menungguLead.map((x: typeof menungguLead[0]) => ({ queue: "MENUNGGU_LEAD" as const, ...x })),
+      ...menungguKoorFiltered.map((x: typeof menungguKoorFiltered[0]) => ({
         queue: "MENUNGGU_KOORDINATOR" as const,
         ...x,
       })),
-      ...menungguSmFiltered.map((x) => ({
+      ...menungguSmFiltered.map((x: typeof menungguSmFiltered[0]) => ({
         queue: "MENUNGGU_SM" as const,
         ...x,
       })),
-      ...menungguKacabFiltered.map((x) => ({
+      ...menungguKacabFiltered.map((x: typeof menungguKacabFiltered[0]) => ({
         queue: "MENUNGGU_KACAB" as const,
         ...x,
       })),
