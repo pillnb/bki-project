@@ -36,14 +36,14 @@ export async function GET(req: NextRequest) {
     const data = rows.map((r) => ({
       ...r,
       status: computeTrainingStatus({
-        fileUrl: (r as any).file_sertifikat,
-        tanggalKadaluarsa: (r as any).masa_berlaku,
+        fileUrl: r.file_sertifikat ?? undefined,
+        tanggalKadaluarsa: r.masa_berlaku?.toISOString(),
       }),
     }));
 
     return NextResponse.json(data);
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message || "Gagal mengambil data training" }, { status: 500 });
+  } catch (e: unknown) {
+    return NextResponse.json({ error: (e as Error)?.message || "Gagal mengambil data training" }, { status: 500 });
   }
 }
 
@@ -75,8 +75,8 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(saved);
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message || "Create training gagal" }, { status: 500 });
+  } catch (e: unknown) {
+    return NextResponse.json({ error: (e as Error)?.message || "Create training gagal" }, { status: 500 });
   }
 }
 
@@ -117,8 +117,8 @@ export async function PATCH(req: NextRequest) {
     });
 
     return NextResponse.json(updated);
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message || "Update training gagal" }, { status: 500 });
+  } catch (e: unknown) {
+    return NextResponse.json({ error: (e as Error)?.message || "Update training gagal" }, { status: 500 });
   }
 }
 
@@ -131,7 +131,7 @@ export async function DELETE(req: NextRequest) {
 
     await prisma.pelatihan.delete({ where: { id_pelatihan: id } });
     return NextResponse.json({ ok: true });
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message || "Hapus training gagal" }, { status: 500 });
+  } catch (e: unknown) {
+    return NextResponse.json({ error: (e as Error)?.message || "Hapus training gagal" }, { status: 500 });
   }
 }

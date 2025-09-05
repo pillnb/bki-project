@@ -1,39 +1,57 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-import prisma from '@/lib/prisma';
-const QRCode = require('qrcode');
-const PizZip = require('pizzip');
-const Docxtemplater = require('docxtemplater');
-const ImageModule = require('docxtemplater-image-module-free');
-import fs from 'fs';
+import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import prisma from "@/lib/prisma";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const QRCode = require("qrcode");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const PizZip = require("pizzip");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const Docxtemplater = require("docxtemplater");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const ImageModule = require("docxtemplater-image-module-free");
+import fs from "fs";
 
 export async function POST(request: NextRequest) {
-
   try {
     // 1. Ambil nup dari body (jika ada) atau dari cookie (default)
     let nup: string | undefined = undefined;
     let nik: string | undefined = undefined;
-    let body: any = undefined;
+    let body: Record<string, unknown> | undefined = undefined;
     try {
       body = await request.json();
-      if (body && body.nup) {
+      if (body && typeof body.nup === 'string') {
         nup = body.nup;
       }
-    } catch (e) {
+    } catch {
       // body kosong atau bukan JSON, abaikan
     }
     if (!nup) {
       // fallback: ambil dari cookie
       const cookieStore = await cookies();
       const allCookies = await cookieStore;
-      nik = allCookies.get ? allCookies.get('nik')?.value : undefined;
-      if (!nik) return NextResponse.json({ error: 'Unauthorized: NIK not found' }, { status: 401 });
+      nik = allCookies.get ? allCookies.get("nik")?.value : undefined;
+      if (!nik)
+        return NextResponse.json(
+          { error: "Unauthorized: NIK not found" },
+          { status: 401 }
+        );
       // Ambil NUP dari pegawai
-      const pegawaiUser = await prisma.pegawai.findFirst({ where: { nik }, select: { nup: true } });
-      if (!pegawaiUser?.nup) return NextResponse.json({ error: 'Pegawai/NUP not found' }, { status: 404 });
+      const pegawaiUser = await prisma.pegawai.findFirst({
+        where: { nik },
+        select: { nup: true },
+      });
+      if (!pegawaiUser?.nup)
+        return NextResponse.json(
+          { error: "Pegawai/NUP not found" },
+          { status: 404 }
+        );
       nup = pegawaiUser.nup;
     }
-    if (!nup) return NextResponse.json({ error: 'NUP tidak ditemukan' }, { status: 400 });
+    if (!nup)
+      return NextResponse.json(
+        { error: "NUP tidak ditemukan" },
+        { status: 400 }
+      );
 
     // 2. Query data pegawai beserta relasi
     const pegawai = await prisma.pegawai.findUnique({
@@ -43,7 +61,7 @@ export async function POST(request: NextRequest) {
         pengalaman_kerja: true,
       },
     });
-    if (!pegawai) return new NextResponse('Not found', { status: 404 });
+    if (!pegawai) return new NextResponse("Not found", { status: 404 });
 
     // 3. Update cvGeneratedAt
     const now = new Date();
@@ -56,34 +74,38 @@ export async function POST(request: NextRequest) {
     const qrData = JSON.stringify({
       nama_pegawai: pegawai.nama_pegawai,
       nup,
-      perusahaan: 'PT. BKI Komersil Balikpapan',
+      perusahaan: "PT. BKI Komersil Balikpapan",
       generatedAt: now.toISOString(),
     });
     const qrSignature = await QRCode.toDataURL(qrData);
 
     // 5. Isi template DOCX (pakai docxtemplater + pizzip)
-    const templatePath = process.cwd() + '/src/app/api/cv/generate/template_cv.docx';
+    const templatePath =
+      process.cwd() + "/src/app/api/cv/generate/template_cv.docx";
     const templateBuffer = fs.readFileSync(templatePath);
     const zip = new PizZip(templateBuffer);
 
     // Improved base64 parser for image module (sesuai dokumentasi)
     const base64Regex = /^(?:data:)?image\/(png|jpg|jpeg|svg|svg\+xml);base64,/;
-    const validBase64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
-    
-    function base64Parser(tagValue: any) {
+    const validBase64 =
+      /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
+
+    function base64Parser(tagValue: unknown) {
       if (typeof tagValue !== "string" || !base64Regex.test(tagValue)) {
         return false;
       }
       const stringBase64 = tagValue.replace(base64Regex, "");
       if (!validBase64.test(stringBase64)) {
-        throw new Error("Error parsing base64 data, your data contains invalid characters");
+        throw new Error(
+          "Error parsing base64 data, your data contains invalid characters"
+        );
       }
-      
+
       // For nodejs, return a Buffer
       if (typeof Buffer !== "undefined" && Buffer.from) {
         return Buffer.from(stringBase64, "base64");
       }
-      
+
       // For browsers, return a string (of binary content)
       const binaryString = window.atob(stringBase64);
       const len = binaryString.length;
@@ -96,10 +118,10 @@ export async function POST(request: NextRequest) {
     }
 
     const imageOptions = {
-      getImage(tagValue: any) {
+      getImage(tagValue: unknown) {
         return base64Parser(tagValue);
       },
-      getSize(img: any, tagValue: any, tagName: any, context: any) {
+      getSize() {
         return [100, 100];
       },
     };
@@ -117,31 +139,41 @@ export async function POST(request: NextRequest) {
 
     // Data mapping sesuai placeholder
     const peg = pegawai;
-    
+
     // Format tanggal CV generated (misal: 14 Juli 2025)
-    function formatTanggalIndo(date: any) {
-      if (!date) return '-';
+    function formatTanggalIndo(date: string | Date | null | undefined) {
+      if (!date) return "-";
       const bulan = [
-        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
       ];
       const d = new Date(date);
-      const day = d.getDate().toString().padStart(2, '0');
+      const day = d.getDate().toString().padStart(2, "0");
       return `${day} ${bulan[d.getMonth()]} ${d.getFullYear()}`;
     }
 
     // Gunakan tanggal sekarang untuk tanggal generate CV
     const today = new Date();
     const cvGeneratedAtFormatted = formatTanggalIndo(today);
-    
+
     // Format tanggal lahir
-    let birthDate = '-';
+    let birthDate = "-";
     if (peg.tanggal_lahir) {
       const dob = new Date(peg.tanggal_lahir);
-      birthDate = dob.toLocaleDateString('id-ID', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
+      birthDate = dob.toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
       });
     }
 
@@ -156,7 +188,7 @@ export async function POST(request: NextRequest) {
       pendidikan: peg.pendidikan,
       tahun_pend: peg.tahun_pend,
       pelatihan: (peg.pelatihan || [])
-        .filter(pel => pel.status === 'VALID')
+        .filter((pel) => pel.status === "VALID")
         .slice()
         .sort((a, b) => (a.tahun ?? 0) - (b.tahun ?? 0))
         .map((pel, idx, arr) => {
@@ -170,33 +202,48 @@ export async function POST(request: NextRequest) {
             tahun: tahunStr,
             nama_pelatihan: pel.nama_pelatihan,
             penyelenggara: pel.penyelenggara,
-            lokasi: pel.lokasi
+            lokasi: pel.lokasi,
           };
         }),
       pengalaman_kerja: (() => {
         // Step 1: Expand setiap pengalaman ke array tahun, simpan urutan input
-        const pengalaman = (peg.pengalaman_kerja || []);
-        let expanded: Array<{tahun: number, nama_pekerjaan: string, perusahaan: string, lokasi: string, idx: number}> = [];
-        pengalaman.forEach((pen: any, idx: number) => {
+        const pengalaman = peg.pengalaman_kerja || [];
+        const expanded: Array<{
+          tahun: number;
+          nama_pekerjaan: string;
+          perusahaan: string;
+          lokasi: string;
+          idx: number;
+        }> = [];
+        pengalaman.forEach((pen: {
+          id_pengalaman: number;
+          nup: string | null;
+          lokasi: string | null;
+          pegawaiId: number | null;
+          pengalaman_kerja: string | null;
+          tahun_awal: number | null;
+          tahun_akhir: number | null;
+          perusahaan: string | null;
+        }, idx: number) => {
           const start = pen.tahun_awal ?? null;
           const end = pen.tahun_akhir ?? pen.tahun_awal ?? null;
           if (start && end) {
             for (let t = start; t <= end; t++) {
               expanded.push({
                 tahun: t,
-                nama_pekerjaan: pen.pengalaman_kerja ?? '',
-                perusahaan: pen.perusahaan ?? '',
-                lokasi: pen.lokasi ?? '',
-                idx
+                nama_pekerjaan: pen.pengalaman_kerja ?? "",
+                perusahaan: pen.perusahaan ?? "",
+                lokasi: pen.lokasi ?? "",
+                idx,
               });
             }
           } else if (start) {
             expanded.push({
               tahun: start,
-              nama_pekerjaan: pen.pengalaman_kerja ?? '',
-              perusahaan: pen.perusahaan ?? '',
-              lokasi: pen.lokasi ?? '',
-              idx
+              nama_pekerjaan: pen.pengalaman_kerja ?? "",
+              perusahaan: pen.perusahaan ?? "",
+              lokasi: pen.lokasi ?? "",
+              idx,
             });
           }
         });
@@ -215,7 +262,7 @@ export async function POST(request: NextRequest) {
             tahun: tahunStr,
             nama_pekerjaan: row.nama_pekerjaan,
             perusahaan: row.perusahaan,
-            lokasi: row.lokasi
+            lokasi: row.lokasi,
           };
         });
       })(),
@@ -228,20 +275,24 @@ export async function POST(request: NextRequest) {
       // qr_image: qrSignature      // alternatif placeholder (barcode dinonaktifkan)
     };
 
-    console.log('CV Generated At:', cvGeneratedAtFormatted); // untuk debugging
-    console.log('QR Signature format:', qrSignature.substring(0, 50) + '...'); // untuk debugging
+    console.log("CV Generated At:", cvGeneratedAtFormatted); // untuk debugging
+    console.log("QR Signature format:", qrSignature.substring(0, 50) + "..."); // untuk debugging
 
     doc.render(docData);
-    const generatedBuffer = doc.getZip().generate({ type: 'nodebuffer' });
-    
+    const generatedBuffer = doc.getZip().generate({ type: "nodebuffer" });
+
     return new NextResponse(generatedBuffer, {
       headers: {
-        'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'Content-Disposition': 'attachment; filename="cv_pegawai.docx"'
-      }
+        "Content-Type":
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "Content-Disposition": 'attachment; filename="cv_pegawai.docx"',
+      },
     });
   } catch (err) {
-    console.error('CV Generator API error:', err);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error("CV Generator API error:", err);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }

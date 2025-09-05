@@ -13,7 +13,8 @@ async function getCurrentPegawai() {
   });
 }
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
+export async function POST(req: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   try {
     const me = await getCurrentPegawai();
     if (!me) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

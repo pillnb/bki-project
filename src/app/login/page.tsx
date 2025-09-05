@@ -57,8 +57,8 @@ export default function LoginPage() {
         setError('Gagal mendapatkan data pengguna.');
       }
       
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError((err as Error).message);
     } finally {
       setIsLoading(false);
     }
@@ -136,6 +136,7 @@ export default function LoginPage() {
                     onClick={() => setShowPassword((prev) => !prev)}
                     aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
                   >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/eye.png"
                       alt={showPassword ? "Hide password" : "Show password"}

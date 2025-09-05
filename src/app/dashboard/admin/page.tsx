@@ -1,9 +1,7 @@
 
 import InfoAdminCard from './InfoAdminCard';
 import AdminDashboardClient from './AdminDashboardClient';
-import Link from 'next/link';
-import { Plus } from 'lucide-react';
-import LogoutButton from './LogoutButton';
+// import Link from 'next/link';
 
 export default function AdminDashboard() {
   return (

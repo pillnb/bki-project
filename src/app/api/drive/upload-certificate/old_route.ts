@@ -73,7 +73,7 @@
 //   return google.drive({ version: "v3", auth });
 // }
 
-// async function getOrCreateFolder(drive: any, name: string, parentId: string) {
+// async function getOrCreateFolder(drive: unknown, name: string, parentId: string) {
 //   const safe = sanitize(name);
 //   const q = [
 //     "mimeType='application/vnd.google-apps.folder'",
@@ -198,7 +198,7 @@
 //       trainingFolderId,
 //       userFolderId,
 //     });
-//   } catch (e: any) {
+//   } catch (e: unknown) {
 //     console.error("Upload to Drive failed:", e?.message || e);
 //     return NextResponse.json(
 //       { error: e?.message || "Gagal upload ke Google Drive" },

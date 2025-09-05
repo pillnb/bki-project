@@ -50,8 +50,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ nup:
     if (error instanceof Error) {
       console.error('API Error - Gagal mengambil data pegawai:', error.message, error.stack);
       // Prisma error code check (optional chaining)
-      // @ts-ignore
-      if (typeof error === 'object' && error !== null && 'code' in error && (error as any).code === 'P2025') {
+      if (typeof error === 'object' && error !== null && 'code' in error && (error as { code: string }).code === 'P2025') {
         return NextResponse.json({ error: 'Data pegawai tidak ditemukan' }, { status: 404 });
       }
       return NextResponse.json({ error: error.message }, { status: 500 });
@@ -68,7 +67,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
   try {
     const body = await req.json();
 
-    const pegawaiData: any = {
+    const pegawaiData: unknown = {
       nama_pegawai: body.nama_pegawai,
       nik: body.nik,
       email: body.email,
@@ -87,15 +86,16 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
     };
 
     if (body.password) {
-      pegawaiData.password = body.password; // Sebaiknya di-hash
+      (pegawaiData as { password?: string }).password = body.password; // Sebaiknya di-hash
     }
 
     // ✅ PERBAIKAN: Increased timeout and optimized transaction
     const result = await prisma.$transaction(async (tx) => {
       // 1. Update data utama pegawai
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const updatedPegawai = await tx.pegawai.update({
         where: { nup },
-        data: pegawaiData,
+        data: pegawaiData as Parameters<typeof tx.pegawai.update>[0]['data'],
         include: {
           pengalaman_kerja: true,
           pelatihan: true,
@@ -115,7 +115,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
           select: { id_pelatihan: true } // Only select needed fields
         });
 
-        const incomingIds = incomingPelatihan.map((p: any) => p.id_pelatihan).filter(Boolean);
+        const incomingIds = incomingPelatihan.map((p: unknown) => (p as { id_pelatihan?: number }).id_pelatihan).filter(Boolean);
         const existingIds = existingPelatihan.map((p) => p.id_pelatihan);
 
         // Delete operations first
@@ -129,29 +129,43 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
         }
 
         // Create new records
-        const toCreate = incomingPelatihan.filter((p: any) => !p.id_pelatihan);
+        const toCreate = incomingPelatihan.filter((p: unknown) => !(p as { id_pelatihan?: number }).id_pelatihan);
         if (toCreate.length > 0) {
           operations.push(
             tx.pelatihan.createMany({
-              data: toCreate.map((pel: any) => ({
-                nup,
-                nama_pelatihan: pel.nama_pelatihan,
-                penyelenggara: pel.penyelenggara,
-                lokasi: pel.lokasi,
-                nomor_sertifikat: pel.nomor_sertifikat,
-                tahun: pel.tahun ? parseInt(pel.tahun, 10) : null,
-                tanggal_awal: pel.tanggal_awal ? new Date(pel.tanggal_awal) : null,
-                tanggal_akhir: pel.tanggal_akhir ? new Date(pel.tanggal_akhir) : null,
-                masa_berlaku: pel.masa_berlaku ? new Date(pel.masa_berlaku) : null,
-                status: mapStatusPelatihan(pel.status),
-                keterangan_utilisasi: pel.keterangan_utilisasi,
-              })),
+              data: toCreate.map((pel: unknown) => {
+                const pelData = pel as {
+                  nama_pelatihan?: string;
+                  penyelenggara?: string;
+                  lokasi?: string;
+                  nomor_sertifikat?: string;
+                  tahun?: string | number;
+                  tanggal_awal?: string;
+                  tanggal_akhir?: string;
+                  masa_berlaku?: string;
+                  status?: string;
+                  keterangan_utilisasi?: string;
+                };
+                return {
+                  nup,
+                  nama_pelatihan: pelData.nama_pelatihan,
+                  penyelenggara: pelData.penyelenggara,
+                  lokasi: pelData.lokasi,
+                  nomor_sertifikat: pelData.nomor_sertifikat,
+                  tahun: pelData.tahun ? parseInt(String(pelData.tahun), 10) : null,
+                  tanggal_awal: pelData.tanggal_awal ? new Date(pelData.tanggal_awal) : null,
+                  tanggal_akhir: pelData.tanggal_akhir ? new Date(pelData.tanggal_akhir) : null,
+                  masa_berlaku: pelData.masa_berlaku ? new Date(pelData.masa_berlaku) : null,
+                  status: mapStatusPelatihan(pelData.status || ''),
+                  keterangan_utilisasi: pelData.keterangan_utilisasi,
+                };
+              }),
             })
           );
         }
 
         // Update existing records
-        const toUpdate = incomingPelatihan.filter((p: any) => p.id_pelatihan);
+        const toUpdate = incomingPelatihan.filter((p: unknown) => (p as { id_pelatihan?: number }).id_pelatihan);
         for (const pel of toUpdate) {
           operations.push(
             tx.pelatihan.update({
@@ -183,7 +197,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
           select: { id_pengalaman: true } // Only select needed fields
         });
         
-        const incomingExpIds = incomingExp.map((e: any) => e.id_pengalaman).filter(Boolean);
+        const incomingExpIds = incomingExp.map((e: unknown) => (e as { id_pengalaman?: number }).id_pengalaman).filter(Boolean);
         const existingExpIds = existingExp.map((e) => e.id_pengalaman);
 
         // Delete operations
@@ -197,23 +211,31 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
         }
 
         // Create new records
-        const expToCreate = incomingExp.filter((e: any) => !e.id_pengalaman);
+        const expToCreate = incomingExp.filter((e: unknown) => !(e as { id_pengalaman?: number }).id_pengalaman);
         if (expToCreate.length > 0) {
           operations.push(
             tx.pengalaman_kerja.createMany({
-              data: expToCreate.map((exp: any) => ({
-                nup,
-                pengalaman_kerja: exp.pengalaman_kerja,
-                perusahaan: exp.perusahaan,
-                tahun: exp.tahun ? parseInt(exp.tahun, 10) : null,
-                lokasi: exp.lokasi,
-              })),
+              data: expToCreate.map((exp: unknown) => {
+                const expData = exp as {
+                  pengalaman_kerja?: string;
+                  perusahaan?: string;
+                  tahun?: string | number;
+                  lokasi?: string;
+                };
+                return {
+                  nup,
+                  pengalaman_kerja: expData.pengalaman_kerja,
+                  perusahaan: expData.perusahaan,
+                  tahun: expData.tahun ? parseInt(String(expData.tahun), 10) : null,
+                  lokasi: expData.lokasi,
+                };
+              }),
             })
           );
         }
         
         // Update existing records
-        const expToUpdate = incomingExp.filter((e: any) => e.id_pengalaman);
+        const expToUpdate = incomingExp.filter((e: unknown) => (e as { id_pengalaman?: number }).id_pengalaman);
         for (const exp of expToUpdate) {
           operations.push(
             tx.pengalaman_kerja.update({

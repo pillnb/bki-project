@@ -1,20 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import prisma from '@/lib/prisma';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const QRCode = require('qrcode');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const PizZip = require('pizzip');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const Docxtemplater = require('docxtemplater');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const ImageModule = require('docxtemplater-image-module-free');
 import fs from 'fs';
-import path from 'path';
 
 // Import untuk PDF conversion
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const libre = require('libreoffice-convert');
 
 // Wrapper
 async function convertToPdf(inputBuffer: Buffer) {
   return await new Promise<Buffer>((resolve, reject) => {
-    const maybe = libre.convert(inputBuffer, '.pdf', undefined, (err: any, done: Buffer) => {
+    const maybe = libre.convert(inputBuffer, '.pdf', undefined, (err: unknown, done: Buffer) => {
       if (err) return reject(err);
       resolve(done);
     });
@@ -27,7 +31,7 @@ async function convertToPdf(inputBuffer: Buffer) {
 }
 
 export async function POST(request: NextRequest, props: { params: Promise<{ nup: string }> }) {
-  const params = await props.params; {
+  await props.params; 
   try {
     // Parse request body untuk mendapatkan format yang diinginkan
     const body = await request.json();
@@ -111,7 +115,32 @@ export async function POST(request: NextRequest, props: { params: Promise<{ nup:
 }
 
 // Fungsi terpisah untuk generate DOCX buffer
-async function generateDocxBuffer(pegawai: any, qrSignature: any) {
+async function generateDocxBuffer(pegawaiData: unknown, qrSignature?: string) {
+  const pegawai = pegawaiData as {
+    nama_pegawai?: string;
+    tempat_lahir?: string;
+    tanggal_lahir?: string;
+    agama?: string;
+    warga_negara?: string;
+    jabatan?: string;
+    jenjang_pend?: string;
+    pendidikan?: string;
+    tahun_pend?: string;
+    pelatihan?: Array<{
+      tahun?: number;
+      nama_pelatihan?: string;
+      penyelenggara?: string;
+      lokasi?: string;
+      status?: string;
+    }>;
+    pengalaman_kerja?: Array<{
+      tahun_awal?: number;
+      tahun_akhir?: number;
+      pengalaman_kerja?: string;
+      perusahaan?: string;
+      lokasi?: string;
+    }>;
+  };
   const templatePath = process.cwd() + '/src/app/api/cv/generate/template_cv.docx';
   const templateBuffer = fs.readFileSync(templatePath);
   const zip = new PizZip(templateBuffer);
@@ -120,7 +149,7 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
   const base64Regex = /^(?:data:)?image\/(png|jpg|jpeg|svg|svg\+xml);base64,/;
   const validBase64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
   
-  function base64Parser(tagValue: any) {
+  function base64Parser(tagValue: unknown) {
     if (typeof tagValue !== "string" || !base64Regex.test(tagValue)) {
       return false;
     }
@@ -144,10 +173,10 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
   }
 
   const imageOptions = {
-    getImage(tagValue: any) {
+    getImage(tagValue: unknown) {
       return base64Parser(tagValue);
     },
-    getSize(img: any, tagValue: any, tagName: any, context: any) {
+    getSize() {
       return [100, 100];
     },
   };
@@ -164,13 +193,13 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
   });
 
   // Format tanggal Indonesia
-  function formatTanggalIndo(date: any) {
+  function formatTanggalIndo(date: unknown) {
     if (!date) return '-';
     const bulan = [
       'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
       'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
     ];
-    const d = new Date(date);
+    const d = new Date(date as string | number | Date);
     const day = d.getDate().toString().padStart(2, '0');
     return `${day} ${bulan[d.getMonth()]} ${d.getFullYear()}`;
   }
@@ -227,10 +256,11 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
     })(),
     pengalaman_kerja: (() => {
       const pengalaman = (pegawai.pengalaman_kerja || []);
-      let tahunSet = new Set<number>();
-  pengalaman.forEach((pen: any) => {
-        const start = pen.tahun_awal ?? null;
-        const end = pen.tahun_akhir ?? pen.tahun_awal ?? null;
+      const tahunSet = new Set<number>();
+  pengalaman.forEach((pen: unknown) => {
+        const penData = pen as { tahun_awal?: number; tahun_akhir?: number };
+        const start = penData.tahun_awal ?? null;
+        const end = penData.tahun_akhir ?? penData.tahun_awal ?? null;
         if (start && end) {
           for (let t = start; t <= end; t++) {
             tahunSet.add(t);
@@ -240,24 +270,25 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
         }
       });
       const tahunArr = Array.from(tahunSet).sort((a, b) => a - b);
-      let result: Array<{tahun: number, nama_pekerjaan: string, perusahaan: string, lokasi: string}> = [];
+      const result: Array<{tahun: number, nama_pekerjaan: string, perusahaan: string, lokasi: string}> = [];
       tahunArr.forEach(tahun => {
-  pengalaman.forEach((pen: any) => {
-          const start = pen.tahun_awal ?? null;
-          const end = pen.tahun_akhir ?? pen.tahun_awal ?? null;
+  pengalaman.forEach((pen: unknown) => {
+          const penData = pen as { tahun_awal?: number; tahun_akhir?: number; pengalaman_kerja?: string; perusahaan?: string; lokasi?: string };
+          const start = penData.tahun_awal ?? null;
+          const end = penData.tahun_akhir ?? penData.tahun_awal ?? null;
           if (start && end && tahun >= start && tahun <= end) {
             result.push({
               tahun,
-              nama_pekerjaan: pen.pengalaman_kerja ?? '',
-              perusahaan: pen.perusahaan ?? '',
-              lokasi: pen.lokasi ?? ''
+              nama_pekerjaan: penData.pengalaman_kerja ?? '',
+              perusahaan: penData.perusahaan ?? '',
+              lokasi: penData.lokasi ?? ''
             });
           } else if (start && !end && tahun === start) {
             result.push({
               tahun,
-              nama_pekerjaan: pen.pengalaman_kerja ?? '',
-              perusahaan: pen.perusahaan ?? '',
-              lokasi: pen.lokasi ?? ''
+              nama_pekerjaan: penData.pengalaman_kerja ?? '',
+              perusahaan: penData.perusahaan ?? '',
+              lokasi: penData.lokasi ?? ''
             });
           }
         });
@@ -267,11 +298,10 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
     cvGeneratedAt: today,
     cvGeneratedAtFormatted: cvGeneratedAtFormatted,
     tanggal_generate: cvGeneratedAtFormatted,
-    // qr_signature: qrSignature,
-    // qr_image: qrSignature     
+    qr_signature: qrSignature,
+    qr_image: qrSignature     
   };
 
   doc.render(docData);
   return doc.getZip().generate({ type: 'nodebuffer' });
-}
 }

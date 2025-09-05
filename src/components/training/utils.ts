@@ -1,33 +1,34 @@
 // src/components/training/utils.ts
-import type { Training } from "./types";
+import type { Training, TrainingStatus } from "./types";
 export { computeTrainingStatus } from "@/lib/trainingStatus";
 
 // normalisasi string biar nggak keganti "null"/"undefined"
-const norm = (v: any) =>
+const norm = (v: unknown) =>
   v !== null && v !== undefined && String(v).trim() !== "" && v !== "null" && v !== "undefined"
     ? String(v).trim()
     : "";
 
 /** Mapper API -> client model (kanonikan field2 ke: id, fileUrl, noSertifikat, dst) */
-export function mapApiTrainingToClient(api: any): Training {
+export function mapApiTrainingToClient(api: unknown): Training {
+  const apiData = api as Record<string, unknown>;
   const fileUrl =
-    norm(api.fileUrl) ||
-    norm(api.file_sertifikat) ||
-    norm(api.webViewLink) ||
-    norm(api.webContentLink);
+    norm(apiData.fileUrl) ||
+    norm(apiData.file_sertifikat) ||
+    norm(apiData.webViewLink) ||
+    norm(apiData.webContentLink);
 
-  const noSertifikat = norm(api.noSertifikat ?? api.nomor_sertifikat);
+  const noSertifikat = norm(apiData.noSertifikat ?? apiData.nomor_sertifikat);
 
   return {
-    id: api.id ?? api.id_pelatihan ?? api.training_id,
-    nama: api.nama ?? api.nama_pelatihan ?? "",
-    penyelenggara: api.penyelenggara ?? "",
-    tanggalMulai: api.tanggalMulai ?? api.tanggal_awal ?? "",
-    tanggalSelesaiEstimasi: api.tanggalSelesaiEstimasi ?? api.tanggal_akhir ?? "",
-    tanggalSelesaiAktual: api.tanggalSelesaiAktual ?? api.tanggal_akhir ?? "",
-    tanggalKadaluarsa: api.tanggalKadaluarsa ?? api.masa_berlaku ?? "",
-    tahun: api.tahun ?? "",
-    status: api.status, // akan distandardkan lagi pakai computeTrainingStatus di caller
+    id: (apiData.id ?? apiData.id_pelatihan ?? apiData.training_id) as number,
+    nama: (apiData.nama ?? apiData.nama_pelatihan ?? "") as string,
+    penyelenggara: (apiData.penyelenggara ?? "") as string,
+    tanggalMulai: (apiData.tanggalMulai ?? apiData.tanggal_awal ?? "") as string,
+    tanggalSelesaiEstimasi: (apiData.tanggalSelesaiEstimasi ?? apiData.tanggal_akhir ?? "") as string,
+    tanggalSelesaiAktual: (apiData.tanggalSelesaiAktual ?? apiData.tanggal_akhir ?? "") as string,
+    tanggalKadaluarsa: (apiData.tanggalKadaluarsa ?? apiData.masa_berlaku ?? "") as string,
+    tahun: (apiData.tahun ? Number(apiData.tahun) : 0) as number,
+    status: (apiData.status || "ON_GOING") as TrainingStatus, // akan distandardkan lagi pakai computeTrainingStatus di caller
 
     fileUrl,
     noSertifikat,

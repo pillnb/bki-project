@@ -38,7 +38,7 @@ export default function CVGeneratorClient({
     startTransition(async () => {
       try {
         const allowed = ["ON_GOING", "VALID", "EXPIRED"] as const;
-        const status = allowed.includes(data.status_override as any)
+        const status = allowed.includes(data.status_override as typeof allowed[number])
           ? (data.status_override as (typeof allowed)[number])
           : undefined;
         await tambahKualifikasi(nup, { ...data, status_override: status });

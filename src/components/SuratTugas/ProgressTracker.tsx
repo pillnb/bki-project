@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
-import { CheckCircle, Clock, FileText, XCircle } from "lucide-react";
+
 import { StatusSuratTugas } from "./types";
+
+import { CheckCircle, XCircle, FileText, Clock } from 'lucide-react';
 
 export default function ProgressTracker({
   status,

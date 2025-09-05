@@ -2,7 +2,7 @@
 export type StatusPelatihan = "ON_GOING" | "VALID" | "EXPIRED";
 
 // nilai string yang dianggap kosong
-function truthy(v: any) {
+function truthy(v: unknown) {
   const s = String(v ?? "").trim();
   return s !== "" && s !== "null" && s !== "undefined" && s !== "-";
 }

@@ -41,8 +41,8 @@ export default function DownloadButton({ setError }: { setError: (msg: string | 
       a.click();
       URL.revokeObjectURL(url);
       a.remove();
-    } catch (e: any) {
-      setError(e?.message || "Gagal download CV");
+    } catch (e: unknown) {
+      setError((e as Error)?.message || "Gagal download CV");
     } finally {
       setIsDownloading(false);
     }

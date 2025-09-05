@@ -123,11 +123,11 @@ export default function TrainingPegawaiClient({ nup, pegawai }: Props) {
       result = result.filter((t) => statusFilter.includes(t.status));
     }
     return result.sort((a, b) => {
-      const aValue = a[sortKey] as any;
-      const bValue = b[sortKey] as any;
+      const aValue = a[sortKey] as unknown;
+      const bValue = b[sortKey] as unknown;
       if (aValue === undefined && bValue === undefined) return 0;
-      if (aValue === undefined) return 1;
-      if (bValue === undefined) return -1;
+      if (aValue === undefined || aValue === null) return 1;
+      if (bValue === undefined || bValue === null) return -1;
       if (aValue < bValue) return sortAsc ? -1 : 1;
       if (aValue > bValue) return sortAsc ? 1 : -1;
       return 0;
@@ -169,7 +169,7 @@ export default function TrainingPegawaiClient({ nup, pegawai }: Props) {
         fileUrl = uploadData.webViewLink || uploadData.webContentLink;
       }
 
-      const payload: any = {
+      const payload: Record<string, unknown> = {
         nup: currentNup,
         nama_pelatihan: addForm.nama,
         penyelenggara: addForm.penyelenggara,
@@ -245,9 +245,9 @@ export default function TrainingPegawaiClient({ nup, pegawai }: Props) {
 
       setTrainings((prev) => prev.map((t) => (t.id === withStatus.id ? withStatus : t)));
       setShowCompleteForm(false);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      alert(e?.message || "Gagal menyelesaikan training");
+      alert((e as Error)?.message || "Gagal menyelesaikan training");
     }
   };
 
@@ -261,8 +261,8 @@ export default function TrainingPegawaiClient({ nup, pegawai }: Props) {
         throw new Error(err?.error || "Gagal menghapus training");
       }
       setTrainings((prev) => prev.filter((x) => x.id !== t.id));
-    } catch (e: any) {
-      alert(e?.message || "Gagal menghapus training");
+    } catch (e: unknown) {
+      alert((e as Error)?.message || "Gagal menghapus training");
     }
   };
 

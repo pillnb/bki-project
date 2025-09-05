@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Upload } from "lucide-react";
+import { File, Upload } from 'lucide-react';
 
 export default function UploadTandaTangan({
   suratId,

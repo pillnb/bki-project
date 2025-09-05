@@ -42,7 +42,7 @@ export async function GET(req: NextRequest, props: { params: Promise<{ templateT
     const templateRow = worksheet.getRow(startRow);
     
     // Kumpulkan semua data yang akan dimasukkan
-    const dataToInsert: any[][] = [];
+    const dataToInsert: unknown[][] = [];
     let rowIndex = 0;
 
     if (templateType === 'fq183') {

@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
     }
 
     // PENTING: Jangan kirim password hash ke client
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _, ...userWithoutPassword } = user;
 
     // Login berhasil, siapkan respons JSON

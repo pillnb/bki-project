@@ -12,7 +12,7 @@ function esc(str: string) {
   return String(str || "").replace(/'/g, "\\'");
 }
 
-async function getOrCreateFolder(drive: any, name: string, parentId: string) {
+async function getOrCreateFolder(drive: unknown, name: string, parentId: string) {
   const safe = sanitize(name);
   const q = [
     "mimeType='application/vnd.google-apps.folder'",
@@ -21,14 +21,20 @@ async function getOrCreateFolder(drive: any, name: string, parentId: string) {
     "trashed=false",
   ].join(" and ");
 
-  const list = await drive.files.list({
+  const driveApi = drive as {
+    files: {
+      list: (params: { q: string; fields?: string; pageSize?: number }) => Promise<{ data: { files?: { id: string; name: string }[] } }>;
+      create: (params: { requestBody: { name: string; mimeType: string; parents: string[] }; fields?: string }) => Promise<{ data: { id?: string } }>;
+    };
+  };
+  const list = await driveApi.files.list({
     q,
     fields: "files(id,name)",
     pageSize: 1,
   });
   if (list.data.files?.length) return list.data.files[0].id as string;
 
-  const created = await drive.files.create({
+  const created = await driveApi.files.create({
     requestBody: { name: safe, mimeType: "application/vnd.google-apps.folder", parents: [parentId] },
     fields: "id,name,parents",
   });
@@ -64,7 +70,7 @@ export async function POST(req: Request) {
 
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-    const mime = (file as any).type || "application/pdf";
+    const mime = (file as { type?: string }).type || "application/pdf";
     const name = sanitize(file.name) || `sertifikat-${Date.now()}.pdf`;
 
     const pt = new PassThrough();
@@ -104,8 +110,9 @@ export async function POST(req: Request) {
       trainingFolderId,
       userFolderId,
     });
-  } catch (e: any) {
-    console.error("Upload to Drive failed:", e?.message || e);
-    return NextResponse.json({ error: e?.message || "Gagal upload ke Google Drive" }, { status: 500 });
+  } catch (e: unknown) {
+    const error = e as Error;
+    console.error("Upload to Drive failed:", error?.message || e);
+    return NextResponse.json({ error: error?.message || "Gagal upload ke Google Drive" }, { status: 500 });
   }
 }

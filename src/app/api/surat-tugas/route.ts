@@ -27,7 +27,7 @@ export async function PUT(req: NextRequest) {
       'transportasi_asal_tujuan', 'transportasi_dinas', 'tiket', 'penginapan', 'keterangan_lain',
       'timInspektor', 'leadInspectorNup'
     ];
-    const dataToUpdate: any = {};
+    const dataToUpdate: Record<string, unknown> = {};
     for (const key of allowedFields) {
       if (key in updateData) {
         dataToUpdate[key] = updateData[key];
@@ -45,7 +45,7 @@ export async function PUT(req: NextRequest) {
     }
 
     // Update leadInspector jika ada
-    if (dataToUpdate.leadInspectorNup) {
+    if (dataToUpdate.leadInspectorNup && typeof dataToUpdate.leadInspectorNup === 'string') {
       const leadInspector = await prisma.pegawai.findUnique({ where: { nup: dataToUpdate.leadInspectorNup }, select: { id: true } });
       if (leadInspector) {
         dataToUpdate.leadInspectorId = leadInspector.id;
@@ -58,11 +58,11 @@ export async function PUT(req: NextRequest) {
       // Cari proyek lama
       const suratLama = await prisma.suratTugas.findUnique({ where: { id }, include: { proyek: true } });
       let proyekId = suratLama?.proyek?.id;
-      let namaProyek = dataToUpdate.pekerjaan || suratLama?.proyek?.namaProyek;
-      let klienProyek = dataToUpdate.klien || suratLama?.proyek?.klien;
-      let lokasiProyek = Array.isArray(dataToUpdate.lokasi_pekerjaan)
+      const namaProyek = (typeof dataToUpdate.pekerjaan === 'string' ? dataToUpdate.pekerjaan : null) || suratLama?.proyek?.namaProyek || '';
+      const klienProyek = (typeof dataToUpdate.klien === 'string' ? dataToUpdate.klien : null) || suratLama?.proyek?.klien || '';
+      const lokasiProyek = Array.isArray(dataToUpdate.lokasi_pekerjaan)
         ? dataToUpdate.lokasi_pekerjaan.join(', ')
-        : suratLama?.proyek?.lokasi;
+        : (suratLama?.proyek?.lokasi || '');
       // Cari proyek yang sesuai
       let proyek = await prisma.proyek.findFirst({ where: { namaProyek } });
       if (!proyek) {
@@ -78,7 +78,7 @@ export async function PUT(req: NextRequest) {
       data: dataToUpdate
     });
     return NextResponse.json({ message: 'Surat tugas berhasil diupdate.', data: updatedSurat });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error saat update surat tugas:', error);
     return NextResponse.json({ error: 'Terjadi kesalahan pada server.' }, { status: 500 });
   }
@@ -121,7 +121,7 @@ export async function POST(req: NextRequest) {
     } = body;
 
     // Validasi dan filter array NUP agar tidak ada yang kosong
-    const pegawaiNupList_valid = Array.isArray(pegawaiNupList) ? pegawaiNupList.filter(nup => nup && nup.trim() !== '') : [];
+    const pegawaiNupList_valid = Array.isArray(pegawaiNupList) ? pegawaiNupList.filter((nup: unknown) => nup && typeof nup === 'string' && nup.trim() !== '') : [];
     
     if (!klien || !pekerjaan || pegawaiNupList_valid.length === 0) {
       return NextResponse.json({ error: 'Klien, Pekerjaan, dan Tim Inspektor tidak boleh kosong.' }, { status: 400 });
@@ -201,13 +201,16 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ message: 'Surat tugas berhasil dibuat!', data: newSuratTugas }, { status: 201 });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error saat membuat surat tugas:", error);
-    if (error.code === 'P2002') {
-      return NextResponse.json({ error: 'Nomor surat sudah ada.' }, { status: 409 });
-    }
-    if (error.code === 'P2025') {
+    if (typeof error === 'object' && error !== null && 'code' in error) {
+      const errorCode = (error as { code: string }).code;
+      if (errorCode === 'P2002') {
+        return NextResponse.json({ error: 'Nomor surat sudah ada.' }, { status: 409 });
+      }
+      if (errorCode === 'P2025') {
         return NextResponse.json({ error: 'Satu atau lebih data (pegawai atau pembuat) tidak ditemukan untuk dihubungkan.' }, { status: 404 });
+      }
     }
     return NextResponse.json({ error: 'Terjadi kesalahan pada server.' }, { status: 500 });
   }
@@ -241,7 +244,6 @@ export async function GET(req: NextRequest) {
 
         const userId = pegawai.id;
         const userNup = pegawai.nup;
-        const userNik = pegawai.nik;
 
         // Ambil parameter query untuk menentukan jenis filter
         const { searchParams } = new URL(req.url);
@@ -377,73 +379,3 @@ export async function GET(req: NextRequest) {
 }
 
 // API untuk mengambil semua surat tugas (untuk admin/supervisor)
-export async function getAllSuratTugas() {
-    try {
-        const allSuratTugas = await prisma.suratTugas.findMany({
-            include: {
-                timInspektor: {
-                    select: {
-                        id: true,
-                        nama_pegawai: true,
-                        nup: true
-                    }
-                },
-                proyek: {
-                    select: {
-                        id: true,
-                        namaProyek: true,
-                        klien: true,
-                        lokasi: true
-                    }
-                },
-                leadInspector: {
-                    select: {
-                        id: true,
-                        nama_pegawai: true,
-                        nup: true
-                    }
-                },
-                koordinator: {
-                    select: {
-                        id: true,
-                        nama_pegawai: true,
-                        nup: true
-                    }
-                },
-                seniorManager: {
-                    select: {
-                        id: true,
-                        nama_pegawai: true,
-                        nup: true
-                    }
-                },
-                kepalaCabang: {
-                    select: {
-                        id: true,
-                        nama_pegawai: true,
-                        nup: true
-                    }
-                },
-                dibuatOleh: {
-                    select: {
-                        id: true,
-                        nama_pegawai: true,
-                        nup: true
-                    }
-                }
-            },
-            orderBy: {
-                createdAt: 'desc'
-            }
-        });
-
-        return NextResponse.json({
-            data: allSuratTugas,
-            totalCount: allSuratTugas.length
-        });
-
-    } catch (error) {
-        console.error("Error saat mengambil semua data surat tugas:", error);
-        return NextResponse.json({ error: 'Terjadi kesalahan pada server.' }, { status: 500 });
-    }
-}

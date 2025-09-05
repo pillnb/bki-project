@@ -23,8 +23,9 @@ function nextStatus(s: string) {
   }
 }
 
-export async function POST(_: Request, { params }: { params: { id: string } }) {
+export async function POST(_: Request, props: { params: Promise<{ id: string }> }) {
   try {
+    const params = await props.params;
     const me = await getCurrentPegawai();
     if (!me) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
@@ -68,7 +69,7 @@ export async function POST(_: Request, { params }: { params: { id: string } }) {
     const updated = await prisma.suratTugas.update({
       where: { id: surat.id },
       data: {
-        status: next as any,
+        status: next as "MENUNGGU_LEAD" | "MENUNGGU_KOORDINATOR" | "MENUNGGU_SM" | "MENUNGGU_KACAB" | "DISETUJUI" | "SELESAI",
         ...stampField,
       },
     });

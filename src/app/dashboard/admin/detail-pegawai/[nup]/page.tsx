@@ -2,7 +2,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft, Edit, Trash2, Mail, Phone, MapPin, Calendar, User, Briefcase, Award, Building, Download, FileText, File, Loader2 } from 'lucide-react';
+
+
+import { ArrowLeft, Award, Briefcase, Download, Edit, File, FileText, Loader2, Mail, Phone, Trash2, User } from 'lucide-react';
 
 interface Kualifikasi {
   id_pelatihan: number;
@@ -57,7 +59,7 @@ interface Pegawai {
 
 interface DeleteModalProps {
   isOpen: boolean;
-  pegawai: any;
+  pegawai: Pegawai | null;
   onClose: () => void;
   onConfirm: () => void;
 }
@@ -106,7 +108,20 @@ export default function DetailPegawai() {
     pegawai: null as Pegawai | null
   });
 
-  const [activityLog, setActivityLog] = useState<{suratTugas: any[]; training: any[]}>({ suratTugas: [], training: [] });
+  const [activityLog, setActivityLog] = useState<{
+    suratTugas: Array<{
+      id?: number;
+      nomor_surat?: string;
+      status?: string;
+      createdAt?: string;
+    }>;
+    training: Array<{
+      id_pelatihan?: number;
+      nama_pelatihan?: string;
+      penyelenggara?: string;
+      tanggal_awal?: string;
+    }>;
+  }>({ suratTugas: [], training: [] });
 
   // State for CV Generator
   const [isDownloading, setIsDownloading] = useState(false);
@@ -165,7 +180,7 @@ export default function DetailPegawai() {
       a.remove();
       window.URL.revokeObjectURL(url);
     }
-  } catch (err) {
+  } catch {
     alert('Gagal download CV!');
   } finally {
     setIsDownloading(false);
@@ -231,8 +246,8 @@ export default function DetailPegawai() {
       alert('Data pegawai berhasil dihapus!');
       setDeleteModal({ isOpen: false, pegawai: null });
       router.push('/dashboard/admin');
-    } catch (err: any) {
-      alert(err.message || 'Terjadi kesalahan saat menghapus data!');
+    } catch (err: unknown) {
+      alert((err as Error).message || 'Terjadi kesalahan saat menghapus data!');
     }
   };
 
@@ -390,7 +405,7 @@ export default function DetailPegawai() {
                 {(pegawai.kualifikasi?.length ?? 0) === 0 ? (
                   <span className="text-sm text-blue-400">(Belum ada data)</span>
                 ) : (
-                  (pegawai.kualifikasi || []).map((kual, index) => (
+                  (pegawai.kualifikasi || []).map((kual) => (
                     <div key={kual.id_pelatihan} className="border-l-4 border-blue-200 pl-4">
                       <div className="flex items-center justify-between mb-2">
                         <h4 className="font-bold text-blue-900">{kual.nama_pelatihan}</h4>

@@ -159,39 +159,52 @@ export default async function PegawaiDashboard() {
                     </td>
                   </tr>
                 ) : (
-                  dataKualifikasi.map((k: any, idx: number) => (
+                  dataKualifikasi.map((k: unknown, idx: number) => {
+                    const kual = k as {
+                      nama_pelatihan?: string;
+                      penyelenggara?: string;
+                      nomor_sertifikat?: string;
+                      tahun?: number;
+                      tanggal_awal?: string;
+                      tanggal_akhir?: string;
+                      masa_berlaku?: string;
+                      status?: string;
+                      keterangan_utilisasi?: string;
+                    };
+                    return (
                     <tr key={idx} className="border-b last:border-b-0">
                       <td className="py-2 px-3 text-black">{idx + 1}</td>
-                      <td className="py-2 px-3 text-black">{k.nama_pelatihan}</td>
-                      <td className="py-2 px-3 text-black">{k.penyelenggara}</td>
-                      <td className="py-2 px-3 text-black">{k.nomor_sertifikat}</td>
-                      <td className="py-2 px-3 text-black">{k.tahun}</td>
-                      <td className="py-2 px-3 text-black">{k.tanggal_awal ? formatDate(k.tanggal_awal) : "-"}</td>
-                      <td className="py-2 px-3 text-black">{k.tanggal_akhir ? formatDate(k.tanggal_akhir) : "-"}</td>
-                      <td className="py-2 px-3 text-black">{k.masa_berlaku ? formatDate(k.masa_berlaku) : "-"}</td>
+                      <td className="py-2 px-3 text-black">{kual.nama_pelatihan}</td>
+                      <td className="py-2 px-3 text-black">{kual.penyelenggara}</td>
+                      <td className="py-2 px-3 text-black">{kual.nomor_sertifikat}</td>
+                      <td className="py-2 px-3 text-black">{kual.tahun}</td>
+                      <td className="py-2 px-3 text-black">{kual.tanggal_awal ? formatDate(kual.tanggal_awal) : "-"}</td>
+                      <td className="py-2 px-3 text-black">{kual.tanggal_akhir ? formatDate(kual.tanggal_akhir) : "-"}</td>
+                      <td className="py-2 px-3 text-black">{kual.masa_berlaku ? formatDate(kual.masa_berlaku) : "-"}</td>
                       <td className="py-2 px-3 text-black whitespace-nowrap">
-                        {k.status === "ON_GOING" && (
+                        {kual.status === "ON_GOING" && (
                           <span className="inline-block px-2 py-1 rounded bg-yellow-100 text-yellow-800 font-semibold text-xs whitespace-nowrap">
                             On Going
                           </span>
                         )}
-                        {k.status === "VALID" && (
+                        {kual.status === "VALID" && (
                           <span className="inline-block px-2 py-1 rounded bg-green-100 text-green-800 font-semibold text-xs whitespace-nowrap">
                             Valid
                           </span>
                         )}
-                        {k.status === "EXPIRED" && (
+                        {kual.status === "EXPIRED" && (
                           <span className="inline-block px-2 py-1 rounded bg-red-100 text-red-800 font-semibold text-xs whitespace-nowrap">
                             Expired
                           </span>
                         )}
-                        {!["ON_GOING", "VALID", "EXPIRED"].includes(k.status) && (
-                          <span className="inline-block whitespace-nowrap">{k.status}</span>
+                        {!["ON_GOING", "VALID", "EXPIRED"].includes(kual.status ?? '') && (
+                          <span className="inline-block whitespace-nowrap">{kual.status}</span>
                         )}
                       </td>
-                      <td className="py-2 px-3 text-black">{k.keterangan_utilisasi}</td>
+                      <td className="py-2 px-3 text-black">{kual.keterangan_utilisasi}</td>
                     </tr>
-                  ))
+                    );
+                  })
                 )}
               </tbody>
             </table>
@@ -219,14 +232,21 @@ export default async function PegawaiDashboard() {
                     </td>
                   </tr>
                 ) : (
-                  dataPengalaman.map((p: any, idx: number) => (
+                  dataPengalaman.map((p: unknown, idx: number) => {
+                    const peng = p as {
+                      pengalaman_kerja?: string;
+                      perusahaan?: string;
+                      tahun?: number;
+                    };
+                    return (
                     <tr key={idx} className="border-b last:border-b-0">
                       <td className="py-2 px-3 text-black">{idx + 1}</td>
-                      <td className="py-2 px-3 text-black">{p.pengalaman_kerja}</td>
-                      <td className="py-2 px-3 text-black">{p.perusahaan}</td>
-                      <td className="py-2 px-3 text-black">{p.tahun}</td>
+                      <td className="py-2 px-3 text-black">{peng.pengalaman_kerja}</td>
+                      <td className="py-2 px-3 text-black">{peng.perusahaan}</td>
+                      <td className="py-2 px-3 text-black">{peng.tahun}</td>
                     </tr>
-                  ))
+                    );
+                  })
                 )}
               </tbody>
             </table>
@@ -250,25 +270,34 @@ export default async function PegawaiDashboard() {
             <div className="text-gray-500 italic">Belum ada Permohonan Surat Tugas yang Diajukan.</div>
           ) : (
             <ul className="divide-y">
-              {historySuratTugas.map((surat: any, idx: number) => {
+              {historySuratTugas.map((surat: unknown, idx: number) => {
+                const suratData = surat as {
+                  id?: number;
+                  proyek?: { klien?: string; namaProyek?: string };
+                  klien?: string;
+                  pekerjaan?: string;
+                  createdAt?: string;
+                  nomor_surat?: string;
+                  status?: string;
+                };
                 // AMBIL DARI RELASI PROYEK DULU
-                const klien = surat?.proyek?.klien ?? surat?.klien ?? "-";
-                const pekerjaan = surat?.proyek?.namaProyek ?? surat?.pekerjaan ?? "-";
+                const klien = suratData?.proyek?.klien ?? suratData?.klien ?? "-";
+                const pekerjaan = suratData?.proyek?.namaProyek ?? suratData?.pekerjaan ?? "-";
 
                 return (
                   <li
-                    key={surat.id || idx}
+                    key={suratData.id || idx}
                     className="py-2 flex flex-col md:flex-row md:items-center md:justify-between gap-2"
                   >
                     <div>
                       <span className="font-semibold text-blue-900">{klien}</span>
                       <span className="ml-2 text-gray-700">{pekerjaan}</span>
-                      <span className="ml-2 text-xs text-gray-500">({formatDate(surat.createdAt)})</span>
-                      {surat.nomor_surat && (
-                        <span className="ml-2 text-xs text-gray-500">No: {surat.nomor_surat}</span>
+                      <span className="ml-2 text-xs text-gray-500">({formatDate(suratData.createdAt)})</span>
+                      {suratData.nomor_surat && (
+                        <span className="ml-2 text-xs text-gray-500">No: {suratData.nomor_surat}</span>
                       )}
                     </div>
-                    <div className="flex gap-2 items-center">{statusBadge(surat.status)}</div>
+                    <div className="flex gap-2 items-center">{statusBadge(suratData.status)}</div>
                   </li>
                 );
               })}
@@ -288,26 +317,35 @@ export default async function PegawaiDashboard() {
             <div className="text-gray-500 italic">Tidak ada training yang sedang berlangsung.</div>
           ) : (
             <ul className="divide-y">
-              {historyTraining.map((training: any, idx: number) => (
+              {historyTraining.map((training: unknown, idx: number) => {
+                const trainingData = training as {
+                  id_pelatihan?: number;
+                  nama_pelatihan?: string;
+                  penyelenggara?: string;
+                  tanggal_awal?: string;
+                  nomor_sertifikat?: string;
+                };
+                return (
                 <li
-                  key={training.id_pelatihan || idx}
+                  key={trainingData.id_pelatihan || idx}
                   className="py-2 flex flex-col md:flex-row md:items-center md:justify-between gap-2"
                 >
                   <div>
-                    <span className="font-semibold text-blue-900">{training.nama_pelatihan}</span>
-                    <span className="ml-2 text-gray-700">{training.penyelenggara}</span>
+                    <span className="font-semibold text-blue-900">{trainingData.nama_pelatihan}</span>
+                    <span className="ml-2 text-gray-700">{trainingData.penyelenggara}</span>
                     <span className="ml-2 text-xs text-gray-500">
-                      ({training.tanggal_awal ? formatDate(training.tanggal_awal) : "-"})
+                      ({trainingData.tanggal_awal ? formatDate(trainingData.tanggal_awal) : "-"})
                     </span>
                   </div>
                   <div className="flex gap-2 items-center">
                     <span className="px-2 py-1 rounded text-xs font-semibold bg-yellow-100 text-yellow-800">On Going</span>
-                    {training.nomor_sertifikat && (
-                      <span className="text-xs text-gray-500 ml-2">No: {training.nomor_sertifikat}</span>
+                    {trainingData.nomor_sertifikat && (
+                      <span className="text-xs text-gray-500 ml-2">No: {trainingData.nomor_sertifikat}</span>
                     )}
                   </div>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           )}
         </div>

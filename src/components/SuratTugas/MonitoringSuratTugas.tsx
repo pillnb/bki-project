@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Download, Eye, CheckCircle, User, XCircle } from "lucide-react";
+
 import ProgressTracker from "./ProgressTracker";
 import UploadTandaTangan from "./UploadTandaTangan";
+import { CheckCircle, Download, Eye, User } from 'lucide-react';
+
 import {
   SuratTugasItem,
   StatusSuratTugas,

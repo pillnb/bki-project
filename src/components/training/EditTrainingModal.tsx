@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { X, Save, Loader2 } from "lucide-react";
+import { File, Loader2, Save, X } from 'lucide-react';
 import type { Training } from "./types";
 import { mapApiTrainingToClient, formatDateInput } from "./utils";
 import { validateFile } from "./utils";
@@ -53,7 +53,7 @@ export default function EditTrainingModal({
     setFileError("");
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     setPreviewUrl(null);
-  }, [open, training]);
+  }, [open, training, previewUrl]);
 
   if (!open || !training) return null;
 
@@ -113,14 +113,15 @@ export default function EditTrainingModal({
       const updated = await res.json();
       const mapped = mapApiTrainingToClient(updated);
       onSaved(mapped);
-    } catch (e: any) {
-      alert(e?.message || "Gagal menyimpan perubahan");
+    } catch (e: unknown) {
+      alert((e as Error)?.message || "Gagal menyimpan perubahan");
     } finally {
       setSaving(false);
     }
   };
 
   // handler file
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFileError("");
     const f = e.target.files?.[0] ?? null;

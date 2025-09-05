@@ -1,7 +1,9 @@
 "use client";
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Save, Plus, X } from 'lucide-react';
+
+
+import { ArrowLeft, Plus, Save, X } from 'lucide-react';
 
 interface FormData {
   // Data Pribadi
@@ -56,12 +58,17 @@ interface FormData {
 }
 
 interface PelatihanTagProps {
-  pelatihan: any;
+  pelatihan: {
+    nama_pelatihan?: string;
+    penyelenggara?: string;
+    tahun?: number;
+  };
   index: number;
   onRemove: () => void;
 }
 
-function PelatihanTag({ pelatihan, index, onRemove }: PelatihanTagProps) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function PelatihanTag({ pelatihan, index: _index, onRemove }: PelatihanTagProps) {
   return (
     <div className="bg-green-100 border border-green-300 rounded-lg p-3 mb-2">
       <div className="flex items-start justify-between">
@@ -787,7 +794,7 @@ export default function TambahPegawaiForm() {
               {formData.pengalaman_kerja.length === 0 && (
                 <div className="text-center py-8 text-blue-400">
                   <p>Belum ada pengalaman kerja yang ditambahkan.</p>
-                  <p className="text-sm">Klik tombol "Tambah Pengalaman" untuk menambahkan data.</p>
+                  <p className="text-sm">Klik tombol &quot;Tambah Pengalaman&quot; untuk menambahkan data.</p>
                 </div>
               )}
             </div>
@@ -961,7 +968,7 @@ export default function TambahPegawaiForm() {
               {formData.pelatihan.length === 0 && (
                 <div className="text-center py-8 text-green-400">
                   <p>Belum ada pelatihan yang ditambahkan.</p>
-                  <p className="text-sm">Klik tombol "Tambah Pelatihan" untuk menambahkan data.</p>
+                  <p className="text-sm">Klik tombol &quot;Tambah Pelatihan&quot; untuk menambahkan data.</p>
                 </div>
               )}
             </div>

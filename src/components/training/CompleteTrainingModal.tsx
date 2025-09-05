@@ -81,8 +81,8 @@ export default function CompleteTrainingModal({
 
       // PATCH ke /api/training dengan fileUrl
   await onSubmit(form, fileUrl);
-    } catch (err: any) {
-      setFileError(err?.message || "Gagal upload sertifikat");
+    } catch (err: unknown) {
+      setFileError((err as Error)?.message || "Gagal upload sertifikat");
     }
   };
 

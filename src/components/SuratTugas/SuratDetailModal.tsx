@@ -157,7 +157,24 @@ export default function SuratDetailModal({
         } catch {}
         throw new Error(msg);
       }
-      const updated = (await res.json()) as any;
+      const updated = (await res.json()) as {
+        nomor_surat?: string;
+        proyek?: unknown;
+        klien?: string;
+        pekerjaan?: string;
+        status?: string;
+        tanggal_berangkat?: string;
+        tanggal_kembali?: string;
+        peralatan_inspeksi?: string[];
+        kebutuhan_material?: string[];
+        keterangan_lain?: string;
+        transportasi_operasional?: boolean;
+        transportasi_ditanggung_klien?: boolean;
+        transportasi_asal_tujuan?: boolean;
+        transportasi_dinas?: boolean;
+        tiket?: boolean;
+        penginapan?: boolean;
+      };
 
       const merged: SuratDetail = {
         ...surat,
@@ -184,8 +201,8 @@ export default function SuratDetailModal({
 
       onSaved?.(merged);
       setEdit(false);
-    } catch (e: any) {
-      alert(e?.message || "Gagal menyimpan perubahan");
+    } catch (e: unknown) {
+      alert((e as Error)?.message || "Gagal menyimpan perubahan");
     } finally {
       setSaving(false);
     }

@@ -30,8 +30,8 @@ export default function LupaPasswordPage() {
       
       setMessage(data.message);
 
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError((err as Error).message);
     } finally {
       setIsLoading(false);
     }

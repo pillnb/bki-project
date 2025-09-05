@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { PlusCircle, Trash2 } from "lucide-react";
+
+import { PlusCircle, Trash2 } from 'lucide-react';
+
 import {
   InspectorRow,
   Pegawai,
@@ -597,7 +599,7 @@ export default function SuratTugasForm({
                 <input
                   type="checkbox"
                   name={name}
-                  checked={(formData as any)[name]}
+                  checked={(formData as Record<string, unknown>)[name] as boolean}
                   onChange={handleChange}
                   className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 text-black"
                 />
@@ -615,7 +617,7 @@ export default function SuratTugasForm({
                 <input
                   type="checkbox"
                   name={name}
-                  checked={(formData as any)[name]}
+                  checked={(formData as Record<string, unknown>)[name] as boolean}
                   onChange={handleChange}
                   className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 text-black"
                 />

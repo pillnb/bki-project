@@ -12,7 +12,9 @@ function getStatusKualifikasi(tanggal_akhir: string, masa_berlaku: string) {
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft, Save, Plus, X } from 'lucide-react';
+
+
+import { ArrowLeft, Plus, Save, X } from 'lucide-react';
 
 // Interface untuk form, sudah benar
 interface FormData {
@@ -152,7 +154,7 @@ export default function EditPegawaiForm() {
           if (!dateString) return '';
           try {
             return new Date(dateString).toISOString().split('T')[0];
-          } catch (e) {
+          } catch {
             return '';
           }
         };
@@ -208,8 +210,8 @@ export default function EditPegawaiForm() {
           })) || [],
         });
 
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        setError((err as Error).message);
       } finally {
         setLoading(false);
       }
@@ -314,7 +316,7 @@ export default function EditPegawaiForm() {
     const missingFields = requiredFields.filter(f => !formData[f.key as keyof typeof formData] || (typeof formData[f.key as keyof typeof formData] === 'string' && (formData[f.key as keyof typeof formData] as string).trim() === ''));
 
     // Validasi pelatihan (jika ada pelatihan, cek kolom penting)
-    let pelatihanErrors: string[] = [];
+    const pelatihanErrors: string[] = [];
     formData.pelatihan.forEach((pel, idx) => {
       const pelFields = [
         { key: 'nama_pelatihan', label: 'Nama Pelatihan' },
@@ -326,7 +328,7 @@ export default function EditPegawaiForm() {
         { key: 'tahun', label: 'Tahun' },
       ];
       pelFields.forEach(f => {
-        const value = (pel as any)[f.key];
+        const value = (pel as Record<string, unknown>)[f.key];
         if (!value || (typeof value === 'string' && value.trim() === '')) {
           pelatihanErrors.push(`Pelatihan ${idx + 1}: ${f.label}`);
         }
@@ -334,7 +336,7 @@ export default function EditPegawaiForm() {
     });
 
     // Validasi pengalaman kerja (jika ada pengalaman, cek kolom penting)
-    let pengalamanErrors: string[] = [];
+    const pengalamanErrors: string[] = [];
     formData.pengalaman_kerja.forEach((exp, idx) => {
       const expFields = [
         { key: 'tahun', label: 'Tahun' },
@@ -342,14 +344,14 @@ export default function EditPegawaiForm() {
         { key: 'perusahaan', label: 'Perusahaan' },
       ];
       expFields.forEach(f => {
-        const value = (exp as any)[f.key];
+        const value = (exp as Record<string, unknown>)[f.key];
         if (!value || (typeof value === 'string' && value.trim() === '')) {
           pengalamanErrors.push(`Pengalaman ${idx + 1}: ${f.label}`);
         }
       });
     });
 
-    let errorMessages: string[] = [];
+    const errorMessages: string[] = [];
     if (missingFields.length > 0) {
       errorMessages.push('Kolom wajib belum diisi: ' + missingFields.map(f => f.label).join(', '));
     }
@@ -401,9 +403,9 @@ export default function EditPegawaiForm() {
       alert('Data pegawai berhasil diperbarui!');
       router.push(`/dashboard/admin/detail-pegawai/${nup}`);
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error:', error);
-      alert(error.message || 'Terjadi kesalahan saat menyimpan data!');
+      alert((error as Error).message || 'Terjadi kesalahan saat menyimpan data!');
     } finally {
       setIsSubmitting(false);
     }

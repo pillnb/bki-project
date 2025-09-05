@@ -40,8 +40,8 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json({ ok: true, ownerEmail });
-  } catch (err: any) {
-    console.error("[oauth callback] error:", err?.message || err);
-    return NextResponse.json({ error: err?.message || "OAuth callback failed" }, { status: 500 });
+  } catch (err: unknown) {
+    console.error("[oauth callback] error:", (err as Error)?.message || err);
+    return NextResponse.json({ error: (err as Error)?.message || "OAuth callback failed" }, { status: 500 });
   }
 }

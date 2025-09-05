@@ -30,15 +30,26 @@ export default function ApprovalPage() {
     try {
       const res = await fetch("/api/approvals/my", { cache: "no-store" });
       const json = await res.json();
-      const list: SuratLite[] = (json?.data ?? []).map((x: any) => ({
-        id: x.id,
-        nomor_surat: x.nomor_surat ?? null,
-        status: x.status,
-        bidang_pekerjaan: x.bidang_pekerjaan ?? null,
-        createdAt: x.createdAt,
-        proyek: x.proyek ? { namaProyek: x.proyek.namaProyek, klien: x.proyek.klien } : null,
-        queue: x.queue,
-      }));
+      const list: SuratLite[] = (json?.data ?? []).map((x: unknown) => {
+        const item = x as {
+          id: number;
+          nomor_surat?: string;
+          status: string;
+          bidang_pekerjaan?: string;
+          createdAt: string;
+          proyek?: { namaProyek: string; klien: string };
+          queue: number;
+        };
+        return {
+          id: item.id,
+          nomor_surat: item.nomor_surat ?? null,
+          status: item.status,
+          bidang_pekerjaan: item.bidang_pekerjaan ?? null,
+          createdAt: item.createdAt,
+          proyek: item.proyek ? { namaProyek: item.proyek.namaProyek, klien: item.proyek.klien } : null,
+          queue: item.queue,
+        };
+      });
       setRows(list);
     } catch {
       setRows([]);

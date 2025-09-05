@@ -4,7 +4,7 @@ import React from "react";
 import { Trash2 } from "lucide-react";
 import { Training } from "./types";
 import { formatDate } from "./utils";
-import { hasCertificate } from "./utils";
+// import { hasCertificate } from "./utils";
 import StatusBadge from "./StatusBadge";
 
 type Props = {
@@ -113,15 +113,5 @@ export default function TrainingTable({
         <div className="text-center py-8 text-gray-500">Tidak ada training yang ditemukan.</div>
       )}
     </div>
-  );
-}
-
-function ActionsCell({ row, onComplete, onEdit }: { row: Training; onComplete: () => void; onEdit: () => void }) {
-  const ready = hasCertificate(row);
-
-  return ready ? (
-    <button className="btn btn-sm" onClick={onEdit}>Edit</button>
-  ) : (
-    <button className="btn btn-sm btn-success" onClick={onComplete}>Selesaikan</button>
   );
 }

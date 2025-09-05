@@ -43,7 +43,7 @@ export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }>
 
   const body = await req.json().catch(() => ({}));
 
-  const data: any = {
+  const data: Record<string, unknown> = {
     nomor_surat: body.nomor_surat ?? undefined,
     status: body.status ?? undefined,
     // kolom tambahan sesuai schema

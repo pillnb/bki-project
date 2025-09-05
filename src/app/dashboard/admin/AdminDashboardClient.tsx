@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, Eye, Edit, Trash2, Filter, Download } from 'lucide-react';
+import { Search, Download, Eye, Edit, Trash2 } from 'lucide-react';
+
 
 interface Pegawai {
   nup: string;
@@ -77,7 +78,7 @@ export default function AdminDashboardClient() {
         if (!res.ok) throw new Error('Gagal mengambil data pegawai');
         const data = await res.json();
         setPegawaiData(data);
-      } catch (err) {
+      } catch {
         setPegawaiData([]);
       }
     }
@@ -114,9 +115,10 @@ export default function AdminDashboardClient() {
       a.remove();
       window.URL.revokeObjectURL(url);
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Download error:', error);
-      alert(`Gagal mengunduh file: ${error.message}`);
+      const errorMessage = error instanceof Error ? error.message : 'Terjadi kesalahan';
+      alert(`Gagal mengunduh file: ${errorMessage}`);
     } finally {
       setIsDownloading(false);
     }

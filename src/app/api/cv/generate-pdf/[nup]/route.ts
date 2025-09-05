@@ -1,20 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import prisma from '@/lib/prisma';
-const QRCode = require('qrcode');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const PizZip = require('pizzip');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const Docxtemplater = require('docxtemplater');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const ImageModule = require('docxtemplater-image-module-free');
 import fs from 'fs';
-import path from 'path';
 
 // Import untuk PDF conversion
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const libre = require('libreoffice-convert');
 
 // Wrapper
 async function convertToPdf(inputBuffer: Buffer) {
   return await new Promise<Buffer>((resolve, reject) => {
-    const maybe = libre.convert(inputBuffer, '.pdf', undefined, (err: any, done: Buffer) => {
+    const maybe = libre.convert(inputBuffer, '.pdf', undefined, (err: unknown, done: Buffer) => {
       if (err) return reject(err);
       resolve(done);
     });
@@ -87,17 +89,18 @@ export async function POST(request: NextRequest, props: { params: Promise<{ nup:
     });
 
     // 5. Generate QR-Code untuk tanda tangan digital
-    const qrData = JSON.stringify({
-      nama_pegawai: pegawai.nama_pegawai,
-      nup,
-      perusahaan: 'PT. BKI Komersil Balikpapan',
-      generatedAt: now.toISOString(),
-      generatedBy: 'admin', // tambahan info bahwa di-generate oleh admin
-    });
-    const qrSignature = await QRCode.toDataURL(qrData);
+    // QR Data preparation (commented out as not currently used)
+    // const qrData = JSON.stringify({
+    //   nama_pegawai: pegawai.nama_pegawai,
+    //   nup,
+    //   perusahaan: 'PT. BKI Komersil Balikpapan',
+    //   generatedAt: now.toISOString(),
+    //   generatedBy: 'admin', // tambahan info bahwa di-generate oleh admin
+    // });
+    // const qrSignature = await QRCode.toDataURL(qrData);
 
     // 6. Generate DOCX file
-    const docxBuffer = await generateDocxBuffer(pegawai, qrSignature);
+    const docxBuffer = await generateDocxBuffer(pegawai);
 
     // 7. Jika format PDF, konversi DOCX ke PDF
     if (format === 'pdf') {
@@ -132,7 +135,32 @@ export async function POST(request: NextRequest, props: { params: Promise<{ nup:
 }
 
 // Fungsi terpisah untuk generate DOCX buffer (sama seperti sebelumnya)
-async function generateDocxBuffer(pegawai: any, qrSignature: any) {
+async function generateDocxBuffer(pegawaiData: unknown) {
+  const pegawai = pegawaiData as {
+    nama_pegawai?: string;
+    tempat_lahir?: string;
+    tanggal_lahir?: string;
+    agama?: string;
+    warga_negara?: string;
+    jabatan?: string;
+    jenjang_pend?: string;
+    pendidikan?: string;
+    tahun_pend?: string;
+    pelatihan?: Array<{
+      tahun?: number;
+      nama_pelatihan?: string;
+      penyelenggara?: string;
+      lokasi?: string;
+      status?: string;
+    }>;
+    pengalaman_kerja?: Array<{
+      tahun_awal?: number;
+      tahun_akhir?: number;
+      pengalaman_kerja?: string;
+      perusahaan?: string;
+      lokasi?: string;
+    }>;
+  };
   const templatePath = process.cwd() + '/src/app/api/cv/generate/template_cv.docx';
   const templateBuffer = fs.readFileSync(templatePath);
   const zip = new PizZip(templateBuffer);
@@ -140,7 +168,7 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
   // parser base64 untuk gambar
   const base64Regex = /^(?:data:)?image\/(png|jpg|jpeg|svg|svg\+xml);base64,/;
   const validBase64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
-  function base64Parser(tagValue: any) {
+  function base64Parser(tagValue: unknown) {
     if (typeof tagValue !== "string" || !base64Regex.test(tagValue)) return false;
     const stringBase64 = tagValue.replace(base64Regex, "");
     if (!validBase64.test(stringBase64)) {
@@ -157,7 +185,7 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
   }
 
   const imageModule = new ImageModule({
-    getImage(tagValue: any) {
+    getImage(tagValue: unknown) {
       return base64Parser(tagValue);
     },
     getSize() {
@@ -179,13 +207,13 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
     nullGetter: () => ''
   });
 
-  function formatTanggalIndo(date: any) {
+  function formatTanggalIndo(date: unknown) {
     if (!date) return '-';
     const bulan = [
       'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
       'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
     ];
-    const d = new Date(date);
+    const d = new Date(date as string | number | Date);
     const day = d.getDate().toString().padStart(2, '0');
     return `${day} ${bulan[d.getMonth()]} ${d.getFullYear()}`;
   }
@@ -248,7 +276,13 @@ async function generateDocxBuffer(pegawai: any, qrSignature: any) {
       type Row = { tahun: number, nama_pekerjaan: string, perusahaan: string, lokasi: string, idx: number };
 
       const expanded: Row[] = [];
-      pengalaman.forEach((pen: any, idx: number) => {
+      pengalaman.forEach((pen: {
+        tahun_awal?: number;
+        tahun_akhir?: number;
+        pengalaman_kerja?: string;
+        perusahaan?: string;
+        lokasi?: string;
+      }, idx: number) => {
         const start = pen.tahun_awal ?? null;
         const end = pen.tahun_akhir ?? pen.tahun_awal ?? null;
         if (start && end) {
