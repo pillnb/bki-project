@@ -176,6 +176,9 @@ export default function TrainingPegawaiClient({ nup, pegawai }: Props) {
         tanggal_awal: addForm.tanggalMulai,
         tanggal_akhir: addForm.sudahSelesai ? addForm.tanggalSelesaiAktual : addForm.tanggalSelesaiEstimasi,
         tahun: Number(addForm.tahun),
+        matrixCategory: addForm.matrixCategory || null,
+        masa_berlaku: addForm.tanggalKadaluarsa || null,
+        pegawaiId: pegawai?.id || null,
       };
 
       if (addForm.sudahSelesai && fileUrl) {

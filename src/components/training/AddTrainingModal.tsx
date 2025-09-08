@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { AddFormData } from "./types";
 import { validateDateRange } from "./utils";
 import { validateFile } from "./utils";
+import { MATRIX_CATEGORIES } from './constants';
 
 export default function AddTrainingModal({
   open,
@@ -24,54 +25,77 @@ export default function AddTrainingModal({
     tanggalSelesaiAktual: "",
     noSertifikat: "",
     file: null,
+    matrixCategory: "",
+    tanggalKadaluarsa: "",
   });
 
   const [dateError, setDateError] = useState("");
-
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-
   const [fileError, setFileError] = useState("");
 
   // --- handler file:
-const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  setFileError("");
-  const f = e.target.files?.[0] ?? null;
-  if (!f) {
-    setAddForm(p => ({ ...p, file: null }));
-    setPreviewUrl(null);
-    return;
-  }
-  const err = validateFile(f);
-  if (err) {
-    setFileError(err);
-    e.currentTarget.value = "";
-    setAddForm(p => ({ ...p, file: null }));
-    setPreviewUrl(null);
-    return;
-  }
-  setAddForm(p => ({ ...p, file: f }));
-  if (previewUrl) URL.revokeObjectURL(previewUrl);
-  setPreviewUrl(URL.createObjectURL(f));
-};
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setDateError("");
-    if (!validateDateRange(addForm.tanggalMulai, addForm.tanggalSelesaiEstimasi)) {
-      setDateError("Tanggal selesai harus sama atau setelah tanggal mulai");
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFileError("");
+    const f = e.target.files?.[0] ?? null;
+    if (!f) {
+      setAddForm(p => ({ ...p, file: null }));
+      setPreviewUrl(null);
       return;
     }
-    await onSubmit(addForm);
-    setAddForm({ nama: "", penyelenggara: "", tanggalMulai: "", tanggalSelesaiEstimasi: "", tahun: "" });
+    const err = validateFile(f);
+    if (err) {
+      setFileError(err);
+      e.currentTarget.value = "";
+      setAddForm(p => ({ ...p, file: null }));
+      setPreviewUrl(null);
+      return;
+    }
+    setAddForm(p => ({ ...p, file: f }));
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    setPreviewUrl(URL.createObjectURL(f));
   };
+
+  // --- START PERBAIKAN ---
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setDateError(""); // Reset error setiap kali submit
+
+    // Validasi 1: Tanggal Selesai Estimasi
+    let validationError = validateDateRange(addForm.tanggalMulai, addForm.tanggalSelesaiEstimasi);
+    if (validationError) {
+      setDateError(validationError);
+      return; // Hentikan jika ada error
+    }
+    
+    // Validasi 2: Tanggal Selesai Aktual (jika checkbox dicentang)
+    if (addForm.sudahSelesai) {
+        validationError = validateDateRange(addForm.tanggalMulai, addForm.tanggalSelesaiAktual);
+        if (validationError) {
+            setDateError(validationError);
+            return; // Hentikan jika ada error
+        }
+        // Validasi 3: Tanggal Kadaluarsa vs Tanggal Selesai Aktual
+        validationError = validateDateRange(addForm.tanggalSelesaiAktual, addForm.tanggalKadaluarsa);
+        if (validationError) {
+            // Ubah pesan error agar lebih spesifik
+            setDateError("Tanggal kadaluarsa tidak boleh sebelum tanggal selesai aktual.");
+            return;
+        }
+    }
+
+    // Jika semua validasi lolos, lanjutkan submit
+    await onSubmit(addForm);
+    onClose(); // Tutup modal setelah berhasil
+  };
+  // --- END PERBAIKAN ---
 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4 overflow-y-auto max-h-screen">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4 overflow-y-auto max-h-[90vh]">
         <h2 className="text-xl font-bold mb-4 text-black">Tambah Training</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1 text-black">
               Nama Training <span className="text-red-600">*</span>
@@ -95,6 +119,24 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               value={addForm.penyelenggara}
               onChange={(e) => setAddForm((p) => ({ ...p, penyelenggara: e.target.value }))}
             />
+          </div>
+          <div className="mb-4">
+              <label htmlFor="matrixCategory" className="block text-sm font-medium text-black mb-1">
+                  Kategori Sertifikasi
+              </label>
+              <select
+                  id="matrixCategory"
+                  name="matrixCategory"
+                  value={addForm.matrixCategory || ''}
+                  onChange={(e) => setAddForm(p => ({ ...p, matrixCategory: e.target.value }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-black focus:ring-blue-500 focus:border-blue-500 bg-white"
+              >
+                  <option value="">-- Pilih Kategori --</option>
+                  {MATRIX_CATEGORIES.map(cat => (
+                      <option key={cat} value={cat}>{cat}</option>
+                  ))}
+              </select>
+              <p className="text-xs text-gray-500 mt-1">Pilih kategori jika sertifikat ini relevan untuk matriks personel.</p>
           </div>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1 text-black">
@@ -122,6 +164,7 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               }
             />
           </div>
+           {dateError && <div className="text-red-500 text-sm -mt-2 mb-2">{dateError}</div>}
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1 text-black">
               Tahun <span className="text-red-600">*</span>
@@ -134,7 +177,6 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               onChange={(e) => setAddForm((p) => ({ ...p, tahun: e.target.value }))}
             />
           </div>
-          {dateError && <div className="text-red-500 text-sm mb-4">{dateError}</div>}
 
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1 text-black">Apakah training sudah selesai?</label>
@@ -160,16 +202,15 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             </div>
           </div>
 
-          {/* kalau sudah selesai = YA, tampilkan field lanjutan */}
           {addForm.sudahSelesai && (
-            <>
+            <div className="space-y-4 border-t pt-4 mt-4">
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-1 text-black">
                   Tanggal Selesai Aktual <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="date"
-                  required
+                  required={addForm.sudahSelesai}
                   className="w-full border border-gray-300 rounded px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                   value={addForm.tanggalSelesaiAktual}
                   onChange={(e) => setAddForm(p => ({ ...p, tanggalSelesaiAktual: e.target.value }))}
@@ -182,28 +223,24 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                 </label>
                 <input
                   type="text"
-                  required
+                  required={addForm.sudahSelesai}
                   className="w-full border border-gray-300 rounded px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                   value={addForm.noSertifikat}
                   onChange={(e) => setAddForm(p => ({ ...p, noSertifikat: e.target.value }))}
                 />
               </div>
-              {addForm.sudahSelesai && (
-              <>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-1 text-black">
                     Tanggal Kadaluarsa Sertifikat <span className="text-red-600">*</span>
                   </label>
                   <input
                     type="date"
-                    required
+                    required={addForm.sudahSelesai}
                     className="w-full border border-gray-300 rounded px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value={addForm.tanggalKadaluarsa || ""}
                     onChange={e => setAddForm(p => ({ ...p, tanggalKadaluarsa: e.target.value }))}
                   />
                 </div>
-              </>
-            )}
 
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-1 text-black">
@@ -212,7 +249,7 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                 <input
                   type="file"
                   accept=".pdf,.png,.jpg,.jpeg"
-                  required
+                  required={addForm.sudahSelesai}
                   className="w-full border border-gray-300 rounded px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                   onChange={handleFileChange}
                 />
@@ -225,17 +262,13 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                   </a>
                 )}
               </div>
-            </>
+            </div>
           )}
           
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-end gap-2 border-t pt-4 mt-4">
             <button
               type="button"
-              onClick={() => {
-                onClose();
-                setAddForm({ nama: "", penyelenggara: "", tanggalMulai: "", tanggalSelesaiEstimasi: "", tahun: "" });
-                setDateError("");
-              }}
+              onClick={onClose}
               className="px-4 py-2 text-gray-600 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
             >
               Batal

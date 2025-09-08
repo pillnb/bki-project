@@ -5,6 +5,7 @@ import { File, Loader2, Save, X } from 'lucide-react';
 import type { Training } from "./types";
 import { mapApiTrainingToClient, formatDateInput } from "./utils";
 import { validateFile } from "./utils";
+import { MATRIX_CATEGORIES } from './constants';
 
 type Props = {
   open: boolean;
@@ -34,6 +35,7 @@ export default function EditTrainingModal({
   const [tanggalSelesaiAktual, setTanggalSelesaiAktual] = React.useState("");
   const [tanggalKadaluarsa, setTanggalKadaluarsa] = React.useState("");
   const [noSertifikat, setNoSertifikat] = React.useState("");
+  const [matrixCategory, setMatrixCategory] = React.useState(""); // <-- 1. State baru ditambahkan
   const [file, setFile] = React.useState<File | null>(null);
   const [fileError, setFileError] = React.useState("");
   const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
@@ -49,6 +51,7 @@ export default function EditTrainingModal({
     setTanggalSelesaiAktual(training.tanggalSelesaiAktual || "");
     setTanggalKadaluarsa(training.tanggalKadaluarsa || "");
     setNoSertifikat(training.noSertifikat || "");
+    setMatrixCategory(training.matrixCategory || ""); // <-- 2. Isi state dari data training
     setFile(null);
     setFileError("");
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -96,6 +99,7 @@ export default function EditTrainingModal({
             tanggal_akhir: (tanggalSelesaiAktual || tanggalSelesaiEstimasi || null),
             masa_berlaku: tanggalKadaluarsa || null,
             nomor_sertifikat: noSertifikat || null,
+            matrixCategory: matrixCategory || null, // <-- 4. Kirim data matrixCategory
             ...(uploadedFileUrl ? { file_url: uploadedFileUrl } : {}),
           },
         }),
@@ -178,6 +182,23 @@ export default function EditTrainingModal({
               onChange={(e) => setPenyelenggara(e.target.value)}
             />
           </Field>
+          
+          {/* --- START PERUBAHAN --- */}
+          {/* 3. Dropdown Kategori Matrix ditambahkan */}
+          <Field label="Kategori Matrix">
+            <select
+                className="w-full rounded-lg border border-blue-200 px-3 py-2 text-blue-900 outline-none focus:ring-2 focus:ring-blue-300 bg-white"
+                value={matrixCategory}
+                onChange={(e) => setMatrixCategory(e.target.value)}
+            >
+                <option value="">-- Pilih Kategori (Jika Ada) --</option>
+                {MATRIX_CATEGORIES.map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                ))}
+            </select>
+            <p className="text-xs text-gray-500 mt-1">Pilih kategori jika sertifikat ini relevan untuk matriks personel.</p>
+          </Field>
+          {/* --- END PERUBAHAN --- */}
 
 
           <Field label="Tanggal Mulai">

@@ -17,9 +17,11 @@ export interface Training {
   nomor_sertifikat?: string;
   webViewLink?: string;
   webContentLink?: string;
+  matrixCategory: string | null;
 }
 
 export interface AddFormData {
+  matrixCategory: string;
   nama: string;
   penyelenggara: string;
   tanggalMulai: string;
@@ -41,6 +43,7 @@ export interface CompleteFormData {
 }
 
 export type PegawaiLite = {
+  id?: number;
   nama_pegawai?: string | null;
   status_pegawai?: string | null;
   nup?: string | null;

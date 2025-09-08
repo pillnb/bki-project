@@ -32,6 +32,7 @@ export function mapApiTrainingToClient(api: unknown): Training {
 
     fileUrl,
     noSertifikat,
+    matrixCategory: norm(apiData.matrixCategory),
   };
 }
 

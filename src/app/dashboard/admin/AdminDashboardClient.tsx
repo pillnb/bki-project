@@ -37,7 +37,7 @@ function DeleteModal({ isOpen, pegawai, onClose, onConfirm }: DeleteModalProps) 
       <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
         <h3 className="text-lg font-bold text-gray-900 mb-4">Konfirmasi Penghapusan</h3>
         <p className="text-gray-700 mb-6">
-          Apakah Anda yakin ingin menghapus data pegawai <strong>{pegawai.nama_pegawai}</strong>? 
+          Apakah Anda yakin ingin menghapus data pegawai <strong>{pegawai.nama_pegawai}</strong>?
           Tindakan ini tidak dapat diurungkan.
         </p>
         <div className="flex gap-3 justify-end">
@@ -96,7 +96,9 @@ export default function AdminDashboardClient() {
     setCurrentPage(1);
   }, [searchTerm, pegawaiData]);
 
-  const handleDownload = async (templateType: 'fq140' | 'fq183') => {
+  // --- START PERUBAHAN ---
+  // 1. Menambahkan 'matrixpersonel' ke dalam tipe
+  const handleDownload = async (templateType: 'fq140' | 'fq183' | 'matrixpersonel') => {
     setIsDownloading(true);
     try {
       const response = await fetch(`/api/download/${templateType}`);
@@ -104,12 +106,19 @@ export default function AdminDashboardClient() {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Gagal mengunduh file.');
       }
-      
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Report_${templateType.toUpperCase()}_Personil.xlsx`;
+      
+      // 2. Menambahkan logika nama file untuk matrix personel
+      let fileName = `Report_${templateType.toUpperCase()}_Personil.xlsx`;
+      if (templateType === 'matrixpersonel') {
+          fileName = 'Report_Matrix_Personel.xlsx';
+      }
+      a.download = fileName;
+
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -123,6 +132,7 @@ export default function AdminDashboardClient() {
       setIsDownloading(false);
     }
   };
+  // --- END PERUBAHAN ---
 
   const totalRows = filteredData.length;
   const totalPages = Math.ceil(totalRows / rowsPerPage);
@@ -206,6 +216,19 @@ export default function AdminDashboardClient() {
                 <Download className="mr-2 h-4 w-4" />
                 {isDownloading ? 'Proses...' : 'Unduh FQ 183'}
             </button>
+            
+            {/* --- START PERUBAHAN --- */}
+            {/* 3. Menambahkan tombol baru untuk Matrix Personel */}
+            <button
+                onClick={() => handleDownload('matrixpersonel')}
+                disabled={isDownloading}
+                className="inline-flex items-center px-4 py-2 bg-sky-600 text-white font-bold rounded-lg hover:bg-sky-700 transition shadow disabled:bg-gray-400"
+            >
+                <Download className="mr-2 h-4 w-4" />
+                {isDownloading ? 'Proses...' : 'Unduh Matrix Personel'}
+            </button>
+            {/* --- END PERUBAHAN --- */}
+
         </div>
       </div>
 

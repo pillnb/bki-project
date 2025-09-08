@@ -39,6 +39,7 @@ export async function GET(req: NextRequest) {
         fileUrl: r.file_sertifikat ?? undefined,
         tanggalKadaluarsa: r.masa_berlaku?.toISOString(),
       }),
+      matrixCategory: r.matrixCategory ?? "",
     }));
 
     return NextResponse.json(data);
@@ -57,9 +58,17 @@ export async function POST(req: NextRequest) {
       tanggalKadaluarsa: body.tanggalKadaluarsa ?? body.masa_berlaku,
     });
 
+    // Cari pegawaiId dari nup
+    let pegawaiId: number | null = null;
+    if (body.nup) {
+      const pegawai = await prisma.pegawai.findUnique({ where: { nup: body.nup } });
+      pegawaiId = pegawai?.id ?? null;
+    }
+
     const saved = await prisma.pelatihan.create({
       data: {
         nup: body.nup,
+        pegawaiId,
         nama_pelatihan: body.nama_pelatihan ?? body.nama,
         penyelenggara: body.penyelenggara,
         tanggal_awal: toDateOrNull(body.tanggal_awal ?? body.tanggalMulai),
@@ -70,6 +79,7 @@ export async function POST(req: NextRequest) {
         tahun: body.tahun ? Number(body.tahun) : null,
         nomor_sertifikat: body.nomor_sertifikat ?? body.noSertifikat ?? null,
         file_sertifikat: body.file_sertifikat ?? body.fileUrl ?? null,
+        matrixCategory: body.matrixCategory ?? null,
         status,
       },
     });
@@ -112,6 +122,7 @@ export async function PATCH(req: NextRequest) {
         tahun: data.tahun !== undefined && data.tahun !== null ? Number(data.tahun) : undefined,
         nomor_sertifikat: data.nomor_sertifikat ?? data.noSertifikat,
         file_sertifikat: data.file_sertifikat ?? data.fileUrl,
+        matrixCategory: data.matrixCategory ?? null,
         status,
       },
     });
