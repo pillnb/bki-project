@@ -15,6 +15,9 @@ export async function getPegawaiByNik(nik: string) {
       agama: true,
       no_telepon: true,
       email: true,
+      jenjang_pend: true,
+      pendidikan: true,
+      tahun_pend: true
     },
   });
 }

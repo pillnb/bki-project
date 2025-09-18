@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
 import ProgressTracker from "./ProgressTracker";
 import UploadTandaTangan from "./UploadTandaTangan";
-import { CheckCircle, Download, Eye, User } from 'lucide-react';
+import { CheckCircle, Download, Eye, User, MapPin } from 'lucide-react';
 
 import {
   SuratTugasItem,
@@ -63,15 +62,15 @@ export default function MonitoringSuratTugas() {
       DRAFT: { color: "bg-gray-100 text-gray-800", label: "Draft" },
       MENUNGGU_LEAD: {
         color: "bg-yellow-100 text-yellow-800",
-        label: "Menunggu Lead",
+        label: "Menunggu Approve Team Leader",
       },
       MENUNGGU_KOORDINATOR: {
         color: "bg-yellow-100 text-yellow-800",
-        label: "Menunggu Koordinator",
+        label: "Menunggu Approve Koordinator Bidang",
       },
       MENUNGGU_SM: {
         color: "bg-yellow-100 text-yellow-800",
-        label: "Menunggu SM",
+        label: "Menunggu Approve SM",
       },
       MENUNGGU_KACAB: {
         color: "bg-yellow-100 text-yellow-800",
@@ -153,10 +152,6 @@ export default function MonitoringSuratTugas() {
 
   return (
     <div className="mt-8 border-t border-gray-300 pt-8">
-      <h2 className="text-xl font-bold text-blue-900 mb-6">
-        Monitoring Permohonan Surat Tugas
-      </h2>
-
       {isLoading ? (
         <div className="flex justify-center items-center py-8">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-900" />
@@ -192,7 +187,15 @@ export default function MonitoringSuratTugas() {
                           "-"
                         )}
                       </p>
-                      <p className="text-xs text-gray-500 mt-1">
+                      {surat.proyek?.lokasi && (
+                        <div className="flex items-center gap-1.5 mt-2">
+                          <MapPin size={12} className="text-gray-400 flex-shrink-0" />
+                          <p className="text-xs text-gray-500">
+                            {surat.proyek.lokasi}
+                          </p>
+                        </div>
+                      )}
+                      <p className="text-xs text-gray-500 mt-2">
                         Diajukan: {formatDateId(surat.createdAt)}
                       </p>
                       {safeStr(surat.nomor_surat) && (
@@ -301,7 +304,7 @@ export default function MonitoringSuratTugas() {
                   onClick={() => setShowDetail(false)}
                   className="text-gray-400 hover:text-gray-600 text-2xl font-bold"
                 >
-                  ×
+                  &times;
                 </button>
               </div>
             </div>
@@ -332,7 +335,7 @@ export default function MonitoringSuratTugas() {
                       {getStatusBadge(selectedSurat.status)}
                     </div>
                   </div>
-                  <div className="md:col-span-2">
+                  <div>
                     <label className="block text-sm font-medium text-gray-700">
                       Pekerjaan
                     </label>
@@ -344,16 +347,14 @@ export default function MonitoringSuratTugas() {
                       )}
                     </p>
                   </div>
-                  {safeStr(selectedSurat.status_pekerjaan) && (
-                    <div className="md:col-span-2">
-                      <label className="block text-sm font-medium text-gray-700">
-                        Status Pekerjaan
-                      </label>
-                      <p className="mt-1 text-sm text-gray-900">
-                        {safeStr(selectedSurat.status_pekerjaan)}
-                      </p>
-                    </div>
-                  )}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Lokasi Pekerjaan
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {safeStr(selectedSurat.proyek?.lokasi, "-")}
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -427,19 +428,13 @@ export default function MonitoringSuratTugas() {
                     <h4 className="text-md font-semibold text-gray-800 mb-3">
                       Peralatan Inspeksi
                     </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    <ul className="list-disc list-inside space-y-1">
                       {selectedSurat.peralatan_inspeksi.map((peralatan, i) => (
-                        <div
-                          key={`${peralatan}-${i}`}
-                          className="flex items-center gap-2"
-                        >
-                          <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                          <span className="text-sm text-gray-900">
-                            {safeStr(peralatan, "-")}
-                          </span>
-                        </div>
+                        <li key={i} className="text-sm text-gray-900">
+                           {safeStr(peralatan, "-")}
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </div>
                 )}
 
@@ -450,42 +445,13 @@ export default function MonitoringSuratTugas() {
                     <h4 className="text-md font-semibold text-gray-800 mb-3">
                       Kebutuhan Material
                     </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    <ul className="list-disc list-inside space-y-1">
                       {selectedSurat.kebutuhan_material.map((m, i) => (
-                        <div
-                          key={`${m}-${i}`}
-                          className="flex items-center gap-2"
-                        >
-                          <div className="w-2 h-2 bg-green-500 rounded-full" />
-                          <span className="text-sm text-gray-900">
-                            {safeStr(m, "-")}
-                          </span>
-                        </div>
+                         <li key={i} className="text-sm text-gray-900">
+                           {safeStr(m, "-")}
+                        </li>
                       ))}
-                    </div>
-                  </div>
-                )}
-
-              {/* Lokasi Pekerjaan */}
-              {Array.isArray(selectedSurat.lokasi_pekerjaan) &&
-                selectedSurat.lokasi_pekerjaan.length > 0 && (
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="text-md font-semibold text-gray-800 mb-3">
-                      Lokasi Pekerjaan
-                    </h4>
-                    <div className="space-y-2">
-                      {selectedSurat.lokasi_pekerjaan.map((lokasi, i) => (
-                        <div
-                          key={`${lokasi}-${i}`}
-                          className="flex items-start gap-2"
-                        >
-                          <div className="w-2 h-2 bg-red-500 rounded-full mt-2" />
-                          <span className="text-sm text-gray-900">
-                            {safeStr(lokasi, "-")}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                    </ul>
                   </div>
                 )}
 
@@ -538,10 +504,8 @@ export default function MonitoringSuratTugas() {
                           className="flex items-center justify-between p-3 bg-white rounded-lg border"
                         >
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                              <span className="text-sm font-medium text-blue-800">
-                                {i + 1}
-                              </span>
+                            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-800 font-semibold">
+                               {nama.charAt(0).toUpperCase()}
                             </div>
                             <div>
                               <p className="text-sm font-medium text-gray-900">
@@ -580,7 +544,7 @@ export default function MonitoringSuratTugas() {
                 {canDownloadDraft(selectedSurat.status) && (
                   <button
                     onClick={() => handleDownloadDraftPDF(selectedSurat.id)}
-                    className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
                   >
                     <Download size={16} />
                     Download Draft PDF
@@ -589,7 +553,7 @@ export default function MonitoringSuratTugas() {
                 {canDownload(selectedSurat.status) && (
                   <button
                     onClick={() => handleDownloadPDF(selectedSurat.id)}
-                    className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                   >
                     <Download size={16} />
                     Download Surat Tugas (PDF)

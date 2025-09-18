@@ -6,6 +6,7 @@ import type { Training } from "./types";
 import { mapApiTrainingToClient, formatDateInput } from "./utils";
 import { validateFile } from "./utils";
 import { MATRIX_CATEGORIES } from './constants';
+import { toast } from "sonner";
 
 type Props = {
   open: boolean;
@@ -117,6 +118,7 @@ export default function EditTrainingModal({
       const updated = await res.json();
       const mapped = mapApiTrainingToClient(updated);
       onSaved(mapped);
+      toast.success("Perubahan berhasil disimpan");
     } catch (e: unknown) {
       alert((e as Error)?.message || "Gagal menyimpan perubahan");
     } finally {

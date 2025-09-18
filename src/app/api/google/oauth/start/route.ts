@@ -1,14 +1,20 @@
-import { NextResponse } from "next/server";
-import { createOAuthClient } from "@/lib/googleOAuth";
+// /api/google/oauth/start/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import { google } from "googleapis";
 
-export const runtime = "nodejs";
+export async function GET(req: NextRequest) {
+  const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID!;
+  const clientSecret = process.env.GOOGLE_OAUTH_CLIENT_SECRET!;
+  const redirectUri = process.env.GOOGLE_OAUTH_REDIRECT_URI!; // ← pakai ENV, bukan origin dinamis
 
-export async function GET() {
-  const oauth = createOAuthClient();
-  const url = oauth.generateAuthUrl({
+  const oauth2 = new google.auth.OAuth2(clientId, clientSecret, redirectUri);
+  const url = oauth2.generateAuthUrl({
     access_type: "offline",
     prompt: "consent",
-    scope: ["https://www.googleapis.com/auth/drive"],
+    scope: ["https://www.googleapis.com/auth/drive.file"],
   });
+
+  // debug sekali aja
+  console.log("[OAUTH] using redirectUri:", redirectUri);
   return NextResponse.redirect(url);
 }

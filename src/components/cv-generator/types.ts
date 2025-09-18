@@ -10,7 +10,10 @@ export type DataDiri = {
   tanggal_lahir?: string | Date | null;
   agama?: string | null;
   warga_negara?: string | null;
-} | null;
+  jenjang_pend?: string | null;
+  pendidikan?: string | null;
+  tahun_pend?: number | null;
+}
 
 export type KualifikasiItem = {
   id_pelatihan: number;

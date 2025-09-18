@@ -106,10 +106,13 @@ model SuratTugas {
   no_service_order              String?
   bidang_pekerjaan              String?
   peralatan_inspeksi            String[]
+  cabang_pinjam                 String?
+  pihak_ketiga                  String?
   kebutuhan_material            String[]
   tanggal_berangkat             DateTime?
   tanggal_kembali               DateTime?
   transportasi_operasional      Boolean             @default(false)
+  nomor_plat_kendaraan          String?
   transportasi_ditanggung_klien Boolean             @default(false)
   transportasi_asal_tujuan      Boolean             @default(false)
   transportasi_dinas            Boolean             @default(false)
@@ -136,7 +139,7 @@ model SuratTugas {
   updatedAt                     DateTime            @updatedAt
   spi                           String?
   wbs                           String?
-  status                        StatusSuratTugas    @default(DRAFT)
+  status                        StatusSuratTugas    @default(MENUNGGU_LEAD)
 }
 
 model GoogleOAuthToken {

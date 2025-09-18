@@ -8,9 +8,9 @@ import { fmt, normalizeStatus } from "./utils";
 export type SuratDetail = {
   id: number;
   nomor_surat: string | null;
-  proyek?: { klien?: string | null; namaProyek?: string | null } | null;
-  klien?: string | null;                 // fallback bila proyek null
-  pekerjaan?: string | null;             // fallback bila proyek null
+  proyek?: { klien?: string | null; namaProyek?: string | null; lokasi?: string | null } | null;
+  klien?: string | null;
+  pekerjaan?: string | null;
   status: StatusSurat | string | null;
   leadInspector?:
     | { nup?: string | null; nama_pegawai?: string | null }
@@ -82,6 +82,7 @@ export default function SuratDetailModal({
   const [nomorSurat, setNomorSurat] = useState("");
   const [klien, setKlien] = useState("");
   const [pekerjaan, setPekerjaan] = useState("");
+  const [lokasi, setLokasi] = useState("");
   const [status, setStatus] = useState<StatusSurat>("DRAFT");
   const [tglBerangkat, setTglBerangkat] = useState("");
   const [tglKembali, setTglKembali] = useState("");
@@ -110,6 +111,7 @@ export default function SuratDetailModal({
     setNomorSurat(surat.nomor_surat || "");
     setKlien(surat.proyek?.klien || surat.klien || "");
     setPekerjaan(surat.proyek?.namaProyek || surat.pekerjaan || "");
+    setLokasi(surat.proyek?.lokasi || "");
     setStatus(normalizeStatus(surat.status));
     setTglBerangkat(toInputDate(surat.tanggal_berangkat));
     setTglKembali(toInputDate(surat.tanggal_kembali));
@@ -135,6 +137,7 @@ export default function SuratDetailModal({
         nomor_surat: nomorSurat || null,
         klien,
         pekerjaan,
+        lokasi,
         status,
         tanggal_berangkat: tglBerangkat || null,
         tanggal_kembali: tglKembali || null,
@@ -162,6 +165,7 @@ export default function SuratDetailModal({
         proyek?: unknown;
         klien?: string;
         pekerjaan?: string;
+        lokasi?: string;
         status?: string;
         tanggal_berangkat?: string;
         tanggal_kembali?: string;
@@ -210,9 +214,7 @@ export default function SuratDetailModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-4">
-      {/* container: max height + header sticky + body scrollable */}
       <div className="w-full max-w-3xl rounded-2xl bg-white shadow-xl flex flex-col max-h-[90vh]">
-        {/* header sticky */}
         <div className="sticky top-0 z-10 flex items-center justify-between border-b bg-white/90 backdrop-blur px-5 py-4 rounded-t-2xl">
           <div>
             <div className="text-xs font-semibold text-blue-500">Detail Surat Tugas</div>
@@ -251,7 +253,6 @@ export default function SuratDetailModal({
           </div>
         </div>
 
-        {/* body scrollable */}
         <div className="flex-1 overflow-y-auto">
           <div className="grid gap-6 px-5 py-5 md:grid-cols-2">
             {/* kiri */}
@@ -281,17 +282,32 @@ export default function SuratDetailModal({
                 )}
               </Labeled>
 
-              <Labeled label="Pekerjaan">
-                {edit ? (
-                  <input
-                    value={pekerjaan}
-                    onChange={(e) => setPekerjaan(e.target.value)}
-                    className="w-full rounded-lg border border-blue-200 px-3 py-2 text-blue-900 outline-none focus:ring-2 focus:ring-blue-300"
-                  />
-                ) : (
-                  <Value>{surat.proyek?.namaProyek || surat.pekerjaan || "-"}</Value>
-                )}
-              </Labeled>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Labeled label="Pekerjaan">
+                  {edit ? (
+                    <input
+                      value={pekerjaan}
+                      onChange={(e) => setPekerjaan(e.target.value)}
+                      className="w-full rounded-lg border border-blue-200 px-3 py-2 text-blue-900 outline-none focus:ring-2 focus:ring-blue-300"
+                    />
+                  ) : (
+                    <Value>{surat.proyek?.namaProyek || surat.pekerjaan || "-"}</Value>
+                  )}
+                </Labeled>
+
+                <Labeled label="Lokasi Pekerjaan">
+                  {edit ? (
+                    <input
+                      value={lokasi}
+                      onChange={(e) => setLokasi(e.target.value)}
+                      className="w-full rounded-lg border border-blue-200 px-3 py-2 text-blue-900 outline-none focus:ring-2 focus:ring-blue-300"
+                      placeholder="Lokasi pengerjaan proyek"
+                    />
+                  ) : (
+                    <Value>{surat.proyek?.lokasi || "-"}</Value>
+                  )}
+                </Labeled>
+              </div>
 
               <Labeled label="Lead Inspector">
                 <Value>
@@ -367,7 +383,6 @@ export default function SuratDetailModal({
             </div>
           </div>
 
-          {/* list & flags */}
           <div className="grid gap-6 px-5 pb-6 md:grid-cols-2">
             <Labeled label="Peralatan Inspeksi">
               {edit ? (

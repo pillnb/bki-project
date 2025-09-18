@@ -1,6 +1,7 @@
 export type Pegawai = {
   nup: string;
   nama_pegawai: string;
+  status_pegawai: string;
 };
 
 export type InspectorRow = {
@@ -32,17 +33,18 @@ export type SuratTugasItem = {
   proyek?: {
     klien?: string;
     namaProyek?: string;
-    lokasi_pekerjaan?: string[];
+    lokasi?: string;
   };
   status: StatusSuratTugas;
-  status_pekerjaan?: string;
   no_service_order?: string;
   spi?: string;
   wbs?: string;
   bidang_pekerjaan?: string;
   peralatan_inspeksi?: string[];
+  cabang_pinjam?: string;
+  pihak_ketiga?: string;
   kebutuhan_material?: string[];
-  lokasi_pekerjaan?: string[];
+  lokasi?: string;
   tanggal_berangkat?: string;
   tanggal_kembali?: string;
   transportasi_operasional?: boolean;
@@ -53,7 +55,13 @@ export type SuratTugasItem = {
   penginapan?: boolean;
   createdAt: string;
   updatedAt: string;
-  leadInspector?: string | { nup?: string; nama_pegawai?: string };
+  leadInspector?: string | { 
+    nup?: string; 
+    nama_pegawai?: string 
+  };
   ttd_lead_inspector?: string;
   timInspektor: TimInspektorItem[];
+  dibuatOleh?: {
+    nama_pegawai: string;
+  };
 };

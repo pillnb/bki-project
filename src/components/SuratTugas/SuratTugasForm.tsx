@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-
+import { toast } from 'sonner';
+import React, { useEffect, useState, useMemo } from "react";
 import { PlusCircle, Trash2 } from 'lucide-react';
-
 import {
   InspectorRow,
   Pegawai,
 } from "./types";
+import { daftarCabang } from "./utils";
+import SearchableSelect from './SearchableSelect';
+import type { ComboboxOption } from './SearchableSelect';
 
 export default function SuratTugasForm({
   onSubmitted,
@@ -15,21 +17,25 @@ export default function SuratTugasForm({
   onSubmitted: () => void;
 }) {
   const [allPegawai, setAllPegawai] = useState<Pegawai[]>([]);
+  const [pegawaiLoading, setPegawaiLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const [formData, setFormData] = useState<{
     klien: string;
     pekerjaan: string;
-    status_pekerjaan: string;
     no_service_order: string;
     spi: string;
     wbs: string;
     bidang_pekerjaan: string;
     peralatan_inspeksi: string[];
-    peralatan_sewa: string;
+    pihak_ketiga: string;
+    cabang_pinjam: string;
     kebutuhan_material: string[];
-    lokasi_pekerjaan: string[];
+    lokasi_pekerjaan: string;
     tanggal_berangkat: string;
     tanggal_kembali: string;
     transportasi_operasional: boolean;
+    nomor_plat_kendaraan: string;
     transportasi_ditanggung_klien: boolean;
     transportasi_asal_tujuan: boolean;
     transportasi_dinas: boolean;
@@ -39,18 +45,19 @@ export default function SuratTugasForm({
   }>({
     klien: "",
     pekerjaan: "",
-    status_pekerjaan: "",
     no_service_order: "",
     spi: "",
     wbs: "",
     bidang_pekerjaan: "",
     peralatan_inspeksi: [],
-    peralatan_sewa: "",
+    pihak_ketiga: "",
+    cabang_pinjam: "",
     kebutuhan_material: [""],
-    lokasi_pekerjaan: [""],
+    lokasi_pekerjaan: "",
     tanggal_berangkat: "",
     tanggal_kembali: "",
     transportasi_operasional: false,
+    nomor_plat_kendaraan: "", 
     transportasi_ditanggung_klien: false,
     transportasi_asal_tujuan: false,
     transportasi_dinas: false,
@@ -61,33 +68,32 @@ export default function SuratTugasForm({
   const [inspectors, setInspectors] = useState<InspectorRow[]>([
     { id: 1, pegawaiNup: "" },
   ]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
       try {
         const res = await fetch("/api/pegawai", { cache: "no-store" });
-        const data = await res.json().catch(() => []);
-        setAllPegawai(Array.isArray(data) ? data : []);
-      } catch {
-        setSubmitMessage("Error: Gagal memuat data pegawai.");
+        if (!res.ok) throw new Error("Gagal memuat data pegawai");
+        const data: Pegawai[] = await res.json().catch(() => []);
+        
+        const allowedStatus = ["PKWT", "PKWTT", "KOMERBA"];
+        const filteredPegawai = data.filter(p => p.status_pegawai && allowedStatus.includes(p.status_pegawai));
+        
+        setAllPegawai(Array.isArray(filteredPegawai) ? filteredPegawai : []);
+      } catch (error) {
+        toast.error(error instanceof Error ? error.message : "Terjadi kesalahan server");
+      } finally {
+        setPegawaiLoading(false);
       }
     })();
   }, []);
 
-  const getAvailablePegawai = (currentId: number) => {
-    const selectedNups = inspectors
-      .filter((i) => i.id !== currentId)
-      .map((i) => i.pegawaiNup)
-      .filter(Boolean);
-    return allPegawai.filter((p) => !selectedNups.includes(p.nup));
-  };
-
-  const getAvailableLeadInspectors = () => {
-    const selectedNups = inspectors.map((i) => i.pegawaiNup).filter(Boolean);
-    return allPegawai.filter((p) => selectedNups.includes(p.nup));
-  };
+  const pegawaiOptions: ComboboxOption[] = useMemo(() => {
+    return allPegawai.map(p => ({
+      value: p.nup,
+      label: `${p.nama_pegawai} (${p.nup})`
+    }));
+  }, [allPegawai]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -96,92 +102,95 @@ export default function SuratTugasForm({
   ) => {
     const { name, value, type } = e.target;
     const isCheckbox = type === "checkbox";
-    setFormData((prev) => ({
-      ...prev,
-      [name]: isCheckbox ? (e.target as HTMLInputElement).checked : value,
-    }));
+    
+    setFormData((prev) => {
+      const newState = {
+        ...prev,
+        [name]: isCheckbox ? (e.target as HTMLInputElement).checked : value,
+      };
+  
+      if (name === "transportasi_operasional" && !(e.target as HTMLInputElement).checked) {
+        newState.nomor_plat_kendaraan = "";
+      }
+  
+      return newState;
+    });
   };
 
   const handleBidangChange = (val: string) =>
     setFormData((prev) => ({ ...prev, bidang_pekerjaan: val }));
 
-  const handleArrayChange = (
-    name: keyof typeof formData,
-    index: number,
-    value: string
-  ) => {
+  const handleArrayChange = (name: "kebutuhan_material", index: number, value: string) => {
     setFormData((prev) => {
-      const arr = Array.isArray(prev[name])
-        ? ([...prev[name]] as string[])
-        : [];
-      arr[index] = value;
-      return { ...prev, [name]: arr };
+      const newArr = [...prev[name]];
+      newArr[index] = value;
+      return { ...prev, [name]: newArr };
     });
   };
 
-  const addArrayItem = (name: keyof typeof formData) =>
+  const addArrayItem = (name: "kebutuhan_material") =>
     setFormData((prev) => ({
       ...prev,
-      [name]: [...((prev[name] as string[]) ?? []), ""],
+      [name]: [...prev[name], ""],
     }));
 
-  const removeArrayItem = (name: keyof typeof formData, index: number) =>
+  const removeArrayItem = (name: "kebutuhan_material", index: number) =>
     setFormData((prev) => ({
       ...prev,
-      [name]: ((prev[name] as string[]) ?? []).filter((_, i) => i !== index),
+      [name]: prev[name].filter((_, i) => i !== index),
     }));
 
   const addInspector = () => {
-    const newId = Math.max(...inspectors.map((i) => i.id), 0) + 1;
+    const newId = (inspectors.length > 0 ? Math.max(...inspectors.map((i) => i.id)) : 0) + 1;
     setInspectors((prev) => [...prev, { id: newId, pegawaiNup: "" }]);
   };
 
   const removeInspector = (id: number) => {
     if (inspectors.length <= 1) return;
-    setInspectors((prev) => prev.filter((i) => i.id !== id));
     const removed = inspectors.find((i) => i.id === id);
+    setInspectors((prev) => prev.filter((i) => i.id !== id));
     if (removed && formData.leadInspector === removed.pegawaiNup) {
       setFormData((prev) => ({ ...prev, leadInspector: "" }));
     }
   };
 
   const updateInspector = (id: number, pegawaiNup: string) => {
+    const oldNup = inspectors.find(i => i.id === id)?.pegawaiNup;
     setInspectors((prev) =>
       prev.map((i) => (i.id === id ? { ...i, pegawaiNup } : i))
     );
-    if (formData.leadInspector && formData.leadInspector === pegawaiNup) {
+    if (formData.leadInspector && formData.leadInspector === oldNup) {
       setFormData((prev) => ({ ...prev, leadInspector: "" }));
     }
   };
 
   const handlePeralatanChange = (checked: boolean, item: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      peralatan_inspeksi: checked
-        ? [...prev.peralatan_inspeksi, item]
-        : prev.peralatan_inspeksi.filter((p) => p !== item),
-    }));
+    setFormData((prev) => {
+        const newPeralatanInspeksi = checked
+            ? [...prev.peralatan_inspeksi, item]
+            : prev.peralatan_inspeksi.filter((p) => p !== item);
+
+        return {
+            ...prev,
+            peralatan_inspeksi: newPeralatanInspeksi,
+            cabang_pinjam: newPeralatanInspeksi.includes("Pinjam cabang lain") ? prev.cabang_pinjam : "",
+            pihak_ketiga: newPeralatanInspeksi.includes("Sewa pihak ke-3") ? prev.pihak_ketiga : "",
+        };
+    });
   };
 
   const validateForm = () => {
     if (!formData.klien || !formData.pekerjaan || !formData.tanggal_berangkat) {
-      setSubmitMessage("Error: Harap isi semua field yang wajib.");
+      toast.error("Harap isi semua field yang wajib diisi (*).");
       return false;
     }
     const selectedInspectors = inspectors.filter((i) => i.pegawaiNup);
     if (selectedInspectors.length === 0) {
-      setSubmitMessage("Error: Pilih minimal satu inspektor.");
+      toast.error("Pilih minimal satu inspektor.");
       return false;
     }
     if (!formData.leadInspector) {
-      setSubmitMessage("Error: Pilih lead inspector dari tim inspektor.");
-      return false;
-    }
-    const selectedNups = selectedInspectors.map((i) => i.pegawaiNup);
-    if (!selectedNups.includes(formData.leadInspector)) {
-      setSubmitMessage(
-        "Error: Lead inspector harus merupakan bagian dari tim inspektor."
-      );
+      toast.error("Pilih lead inspector dari tim inspektor.");
       return false;
     }
     return true;
@@ -192,17 +201,16 @@ export default function SuratTugasForm({
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    setSubmitMessage(null);
 
     try {
       const selectedInspectors = inspectors.filter((i) => i.pegawaiNup);
+      const { leadInspector, ...restOfFormData } = formData;
+
       const payload = {
-        ...formData,
+        ...restOfFormData,
+        leadInspectorNup: leadInspector,
         pegawaiNupList: selectedInspectors.map((i) => i.pegawaiNup),
-        kebutuhan_material: (formData.kebutuhan_material ?? []).filter(
-          Boolean
-        ),
-        lokasi_pekerjaan: (formData.lokasi_pekerjaan ?? []).filter(Boolean),
+        kebutuhan_material: formData.kebutuhan_material.filter(Boolean),
       };
 
       const res = await fetch("/api/surat-tugas", {
@@ -213,56 +221,25 @@ export default function SuratTugasForm({
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        throw new Error(err?.message || "Gagal membuat surat tugas");
+        throw new Error(err?.error || "Gagal membuat surat tugas");
       }
 
-      setSubmitMessage("Surat tugas berhasil diajukan!");
-
-      // reset
-      setFormData({
-        klien: "",
-        pekerjaan: "",
-        status_pekerjaan: "",
-        no_service_order: "",
-        spi: "",
-        wbs: "",
-        bidang_pekerjaan: "",
-        peralatan_inspeksi: [],
-        peralatan_sewa: "",
-        kebutuhan_material: [""],
-        lokasi_pekerjaan: [""],
-        tanggal_berangkat: "",
-        tanggal_kembali: "",
-        transportasi_operasional: false,
-        transportasi_ditanggung_klien: false,
-        transportasi_asal_tujuan: false,
-        transportasi_dinas: false,
-        tiket: false,
-        penginapan: false,
-        leadInspector: "",
-      });
-      setInspectors([{ id: 1, pegawaiNup: "" }]);
+      toast.success("Surat tugas berhasil diajukan!");
       onSubmitted();
+
     } catch (e) {
-      setSubmitMessage(
-        `Error: ${e instanceof Error ? e.message : "Terjadi kesalahan"}`
-      );
+      const errorMessage = e instanceof Error ? e.message : "Terjadi kesalahan";
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const statusPekerjaanOptions = [
-    { value: "belum_mulai", label: "Belum Mulai" },
-    { value: "berjalan", label: "Berjalan" },
-    { value: "telah_selesai", label: "Telah Selesai" },
-  ];
-
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Klien */}
-        <div>
+        <div className="md:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Klien <span className="text-red-500">*</span>
           </label>
@@ -274,27 +251,6 @@ export default function SuratTugasForm({
             placeholder="Nama klien"
             required
           />
-        </div>
-
-        {/* Status Pekerjaan */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Status Pekerjaan <span className="text-red-500">*</span>
-          </label>
-          <select
-            name="status_pekerjaan"
-            value={formData.status_pekerjaan}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-            required
-          >
-            <option value="">Pilih status pekerjaan</option>
-            {statusPekerjaanOptions.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
         </div>
 
         {/* Pekerjaan */}
@@ -357,6 +313,11 @@ export default function SuratTugasForm({
                 placeholder="WBS"
               />
             </div>
+              <div className="md:col-span-3">
+                <p className="text-xs italic text-gray-500">
+                  *hanya perlu isi salah satu antara No. Service Order / SPI / WBS
+                </p>
+            </div>
           </div>
         </div>
       </div>
@@ -401,16 +362,41 @@ export default function SuratTugasForm({
               </label>
             )
           )}
-          {formData.peralatan_inspeksi.includes("Sewa pihak ke-3") && (
+        </div>
+        
+        {formData.peralatan_inspeksi.includes("Pinjam cabang lain") && (
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Pilih Cabang</label>
+            <select
+              name="cabang_pinjam"
+              value={formData.cabang_pinjam}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+              required
+            >
+              <option value="">Pilih Cabang</option>
+              {daftarCabang.map((cabang, index) => (
+                <option key={index} value={`${cabang.tipe} - ${cabang.kota}`}>
+                  {cabang.tipe} - {cabang.kota}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {formData.peralatan_inspeksi.includes("Sewa pihak ke-3") && (
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Nama Vendor</label>
             <input
-              name="peralatan_sewa"
-              value={formData.peralatan_sewa || ""}
+              name="pihak_ketiga"
+              value={formData.pihak_ketiga}
               onChange={handleChange}
               placeholder="Nama vendor sewa..."
-              className="border border-gray-300 p-2 rounded ml-4 text-black"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+              required
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       {/* Kebutuhan Material */}
@@ -452,37 +438,16 @@ export default function SuratTugasForm({
       {/* Lokasi Pekerjaan */}
       <div className="mt-6">
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Lokasi Pekerjaan
+          Lokasi Pekerjaan <span className="text-red-500">*</span>
         </label>
-        {formData.lokasi_pekerjaan.map((item, i) => (
-          <div key={`lok-${i}`} className="flex items-center space-x-2 mb-2">
-            <input
-              value={item}
-              onChange={(e) =>
-                handleArrayChange("lokasi_pekerjaan", i, e.target.value)
-              }
-              className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-              placeholder={`Lokasi ${i + 1}`}
-            />
-            {formData.lokasi_pekerjaan.length > 1 && (
-              <button
-                type="button"
-                onClick={() => removeArrayItem("lokasi_pekerjaan", i)}
-                className="p-2 text-red-600 hover:text-red-800"
-              >
-                <Trash2 size={18} />
-              </button>
-            )}
-          </div>
-        ))}
-        <button
-          type="button"
-          onClick={() => addArrayItem("lokasi_pekerjaan")}
-          className="flex items-center space-x-2 text-blue-600 hover:text-blue-800"
-        >
-          <PlusCircle size={18} />
-          <span>Tambah Lokasi</span>
-        </button>
+        <input
+          name="lokasi_pekerjaan"
+          value={formData.lokasi_pekerjaan}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+          placeholder="Contoh: Balikpapan, Kalimantan Timur"
+          required
+        />
       </div>
 
       {/* Tim Inspektor */}
@@ -492,18 +457,20 @@ export default function SuratTugasForm({
         </label>
         {inspectors.map((inspector) => (
           <div key={inspector.id} className="flex items-center space-x-2 mb-3">
-            <select
-              value={inspector.pegawaiNup}
-              onChange={(e) => updateInspector(inspector.id, e.target.value)}
-              className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-            >
-              <option value="">Pilih Inspektor</option>
-              {getAvailablePegawai(inspector.id).map((p) => (
-                <option key={p.nup} value={p.nup}>
-                  {p.nama_pegawai} ({p.nup})
-                </option>
-              ))}
-            </select>
+            <div className="flex-1">
+              <SearchableSelect
+                isLoading={pegawaiLoading}
+                value={inspector.pegawaiNup}
+                onChange={(value) => updateInspector(inspector.id, value)}
+                options={pegawaiOptions.filter(p => 
+                    !inspectors
+                        .filter(i => i.id !== inspector.id)
+                        .map(i => i.pegawaiNup)
+                        .includes(p.value)
+                )}
+                placeholder="Ketik untuk mencari inspektor..."
+              />
+            </div>
             {inspectors.length > 1 && (
               <button
                 type="button"
@@ -530,20 +497,15 @@ export default function SuratTugasForm({
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Lead Inspector <span className="text-red-500">*</span>
         </label>
-        <select
-          name="leadInspector"
+        <SearchableSelect
+          isLoading={pegawaiLoading}
           value={formData.leadInspector}
-          onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
-          required
-        >
-          <option value="">Pilih Lead Inspector dari Tim</option>
-          {getAvailableLeadInspectors().map((p) => (
-            <option key={p.nup} value={p.nup}>
-              {p.nama_pegawai} ({p.nup})
-            </option>
-          ))}
-        </select>
+          onChange={(value) => setFormData(prev => ({ ...prev, leadInspector: value }))}
+          options={pegawaiOptions.filter(p => 
+              inspectors.map(i => i.pegawaiNup).includes(p.value)
+          )}
+          placeholder="Ketik untuk mencari Lead Inspector..."
+        />
         <p className="text-xs text-gray-500 mt-1">
           Lead inspector harus dipilih dari anggota tim inspektor yang sudah
           ditambahkan di atas.
@@ -577,8 +539,7 @@ export default function SuratTugasForm({
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
           />
           <p className="text-xs text-gray-500 mt-1">
-            Kosongkan jika belum pasti. Bisa diupdate nanti saat menyelesaikan
-            tugas.
+            Kosongkan jika belum pasti.
           </p>
         </div>
       </div>
@@ -590,8 +551,34 @@ export default function SuratTugasForm({
         </label>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="transportasi_operasional"
+                checked={formData.transportasi_operasional}
+                onChange={handleChange}
+                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 text-black"
+              />
+              <span className="text-sm text-gray-700">Transportasi Operasional</span>
+            </label>
+
+            {formData.transportasi_operasional && (
+                <div className="pl-6">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Nomor Plat Kendaraan <span className="text-red-500">*</span>
+                </label>
+                <input
+                    type="text"
+                    name="nomor_plat_kendaraan"
+                    value={formData.nomor_plat_kendaraan}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 rounded-lg text-black"
+                    placeholder="Contoh: B 1234 XYZ"
+                    required
+                />
+                </div>
+            )}            
             {[
-              ["transportasi_operasional", "Transportasi Operasional"],
               ["transportasi_ditanggung_klien", "Transportasi Ditanggung Klien"],
               ["transportasi_asal_tujuan", "Transportasi Asal-Tujuan"],
             ].map(([name, label]) => (
@@ -628,22 +615,10 @@ export default function SuratTugasForm({
         </div>
       </div>
 
-      {submitMessage && (
-        <div
-          className={`mt-6 p-4 rounded-lg ${
-            submitMessage.startsWith("Error")
-              ? "bg-red-100 text-red-700"
-              : "bg-green-100 text-green-700"
-          }`}
-        >
-          {submitMessage}
-        </div>
-      )}
-
       <div className="mt-8">
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || pegawaiLoading}
           className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? "Mengajukan..." : "Ajukan Surat Tugas"}

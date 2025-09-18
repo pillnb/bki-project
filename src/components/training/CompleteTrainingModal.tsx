@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import { CompleteFormData } from "./types";
 import { validateFile } from "./utils";
+import { toast } from "sonner";
 
 export default function CompleteTrainingModal({
   open,
@@ -83,6 +84,7 @@ export default function CompleteTrainingModal({
   await onSubmit(form, fileUrl);
     } catch (err: unknown) {
       setFileError((err as Error)?.message || "Gagal upload sertifikat");
+      toast.success("Sertifikat berhasil diupload");
     }
   };
 

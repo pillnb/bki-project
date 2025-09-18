@@ -47,7 +47,6 @@ export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }>
     nomor_surat: body.nomor_surat ?? undefined,
     status: body.status ?? undefined,
     // kolom tambahan sesuai schema
-    status_pekerjaan: body.status_pekerjaan ?? undefined,
     no_service_order: body.no_service_order ?? undefined,
     bidang_pekerjaan: body.bidang_pekerjaan ?? undefined,
     spi: body.spi ?? undefined,

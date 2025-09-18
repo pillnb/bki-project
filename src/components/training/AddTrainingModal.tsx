@@ -5,6 +5,7 @@ import { AddFormData } from "./types";
 import { validateDateRange } from "./utils";
 import { validateFile } from "./utils";
 import { MATRIX_CATEGORIES } from './constants';
+import { toast } from "sonner";
 
 export default function AddTrainingModal({
   open,
@@ -32,6 +33,7 @@ export default function AddTrainingModal({
   const [dateError, setDateError] = useState("");
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [fileError, setFileError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // --- handler file:
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,11 +61,14 @@ export default function AddTrainingModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setDateError(""); // Reset error setiap kali submit
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
     // Validasi 1: Tanggal Selesai Estimasi
     let validationError = validateDateRange(addForm.tanggalMulai, addForm.tanggalSelesaiEstimasi);
     if (validationError) {
       setDateError(validationError);
+      setIsSubmitting(false);
       return; // Hentikan jika ada error
     }
     
@@ -72,6 +77,7 @@ export default function AddTrainingModal({
         validationError = validateDateRange(addForm.tanggalMulai, addForm.tanggalSelesaiAktual);
         if (validationError) {
             setDateError(validationError);
+            setIsSubmitting(false);
             return; // Hentikan jika ada error
         }
         // Validasi 3: Tanggal Kadaluarsa vs Tanggal Selesai Aktual
@@ -79,12 +85,15 @@ export default function AddTrainingModal({
         if (validationError) {
             // Ubah pesan error agar lebih spesifik
             setDateError("Tanggal kadaluarsa tidak boleh sebelum tanggal selesai aktual.");
+            setIsSubmitting(false);
             return;
         }
     }
 
     // Jika semua validasi lolos, lanjutkan submit
     await onSubmit(addForm);
+    toast.success("Training berhasil ditambahkan");
+    setIsSubmitting(false);
     onClose(); // Tutup modal setelah berhasil
   };
   // --- END PERBAIKAN ---
@@ -167,7 +176,7 @@ export default function AddTrainingModal({
            {dateError && <div className="text-red-500 text-sm -mt-2 mb-2">{dateError}</div>}
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1 text-black">
-              Tahun <span className="text-red-600">*</span>
+              Tahun Training <span className="text-red-600">*</span>
             </label>
             <input
               type="number"
@@ -275,9 +284,10 @@ export default function AddTrainingModal({
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-800 transition-colors"
+              className="px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              disabled={isSubmitting}
             >
-              Tambah
+              {isSubmitting ? "Menyimpan..." : "Tambah"}
             </button>
           </div>
         </form>
