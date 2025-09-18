@@ -60,7 +60,8 @@ export async function addTraining(nup: string, data: TrainingForm) {
 
 // 3. Fungsi updateTraining ditambahkan untuk EditTrainingModal
 export async function updateTraining(id_pelatihan: number, data: Partial<TrainingForm>) {
-    const updateData: { [key: string]: any } = {};
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const updateData: Record<string, any> = {};
 
     // Map fields that exist in the partial data
     if (data.nama_pelatihan !== undefined) updateData.nama_pelatihan = data.nama_pelatihan;
