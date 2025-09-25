@@ -92,7 +92,9 @@ export default function LoginPage() {
                     router.push('/dashboard/admin');
                   } else if (selectedRole === 'pegawai') {
                     router.push('/dashboard/pegawai');
-                  } else {
+                  } else if (selectedRole === 'superadmin') {
+                    router.push('/superadmin');
+                  }  else {
                     setError('Role pengguna tidak valid.');
                   }
                 }}

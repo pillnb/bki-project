@@ -7,6 +7,7 @@ const navItems = [
   { label: "CV Generator", href: "/cv-generator" },
   { label: "Surat Tugas", href: "/surat-tugas" },
   { label: "Training", href: "/training" },
+  { label: "Status Personel", href: "/status-personel" },
 ];
 
 export default function Navbar() {

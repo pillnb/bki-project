@@ -62,6 +62,7 @@ function DeleteModal({ isOpen, pegawai, onClose, onConfirm }: DeleteModalProps) 
 export default function AdminDashboardClient() {
   const [pegawaiData, setPegawaiData] = useState<Pegawai[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState<string[]>([]);
   const [filteredData, setFilteredData] = useState<Pegawai[]>(pegawaiData);
   const [deleteModal, setDeleteModal] = useState({
     isOpen: false,
@@ -86,15 +87,20 @@ export default function AdminDashboardClient() {
   }, []);
 
   useEffect(() => {
-    const filtered = pegawaiData.filter(pegawai =>
-      pegawai.nama_pegawai?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pegawai.jabatan?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pegawai.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pegawai.nup?.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filtered = pegawaiData.filter(pegawai => {
+      const matchSearch =
+        pegawai.nama_pegawai?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        pegawai.jabatan?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        pegawai.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        pegawai.nup?.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchStatus =
+        statusFilter.length === 0 ||
+        (pegawai.status_pegawai && statusFilter.includes(pegawai.status_pegawai));
+      return matchSearch && matchStatus;
+    });
     setFilteredData(filtered);
     setCurrentPage(1);
-  }, [searchTerm, pegawaiData]);
+  }, [searchTerm, statusFilter, pegawaiData]);
 
   // --- START PERUBAHAN ---
   // 1. Menambahkan 'matrixpersonel' ke dalam tipe
@@ -177,6 +183,30 @@ export default function AdminDashboardClient() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+          </div>
+          {/* Filter Status Pegawai */}
+          <div className="flex flex-col gap-1">
+            <label className="text-xs text-blue-900 font-semibold mb-1">Status Pegawai</label>
+            <div className="flex flex-wrap gap-2">
+              {['PKWT', 'PKWTT', 'KOMERBA', 'FREELANCE'].map(status => (
+                <label key={status} className="inline-flex items-center gap-1 text-blue-900 text-xs font-medium">
+                  <input
+                    type="checkbox"
+                    value={status}
+                    checked={statusFilter.includes(status)}
+                    onChange={e => {
+                      if (e.target.checked) {
+                        setStatusFilter(prev => [...prev, status]);
+                      } else {
+                        setStatusFilter(prev => prev.filter(s => s !== status));
+                      }
+                    }}
+                    className="accent-blue-700"
+                  />
+                  {status}
+                </label>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -322,7 +352,8 @@ export default function AdminDashboardClient() {
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
                         pegawai.status_pegawai === 'KOMERBA' ? 'bg-green-100 text-green-800' :
                         pegawai.status_pegawai === 'PKWTT' ? 'bg-yellow-100 text-yellow-800' :
-                        pegawai.status_pegawai === 'PKWT' ? 'bg-yellow-100 text-orange-800' :
+                        pegawai.status_pegawai === 'PKWT' ? 'bg-orange-100 text-orange-800' :
+                        pegawai.status_pegawai === 'FREELANCE' ? 'bg-indigo-100 text-indigo-800' :
                         'bg-blue-100 text-blue-800'
                       }`}>
                         {pegawai.status_pegawai || '-'}

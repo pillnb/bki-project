@@ -626,6 +626,7 @@ export default function TambahPegawaiForm() {
                   <option value="KOMERBA">KOMERBA</option>
                   <option value="PKWTT">PKWTT</option>
                   <option value="PKWT">PKWT</option>
+                  <option value="FREELANCE">FREELANCE</option>
                 </select>
               </div>
             </div>

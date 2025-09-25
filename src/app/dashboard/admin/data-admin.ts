@@ -22,3 +22,26 @@ export async function getAdminByNik(nik: string) {
     },
   });
 }
+
+export async function getSuperadminByNik(nik: string) {
+  return await prisma.pegawai.findFirst({
+    where: {
+      nik,
+      role: { has: 'superadmin' } // role array, cari yang mengandung 'admin'
+    },
+    select: {
+      nup: true,
+      nama_pegawai: true,
+      status_pegawai: true,
+      jabatan: true,
+      tempat_lahir: true,
+      tanggal_lahir: true,
+      alamat: true,
+      warga_negara: true,
+      agama: true,
+      no_telepon: true,
+      email: true,
+      nik: true,
+    },
+  });
+}

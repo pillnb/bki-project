@@ -6,7 +6,6 @@ import path from 'path';
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// --- START: Konfigurasi untuk Matrix Personel ---
 const MATRIX_CATEGORIES = [
     'WI', 'PV', 'ST', 'RE', 'EL', 'PSV', 'CRN', 'IABA', 'MET', 'PF', 'RIG', 'PL',
     'INS', '570', 'PUBT', 'PAA', 'PTP', 'ELT', 'ELV', 'PEM', 'AKU', 'AUD',
@@ -21,10 +20,16 @@ const columnMapping: { [key: string]: string } = {
     'AUD': 'Y', 'MS': 'AA', 'ISM C': 'AB', 'ASD': 'AC', 'NES': 'AD', 'LCS': 'AE', 'OVID': 'AF',
     'UT': 'AH', 'MT': 'AI', 'PT': 'AJ', 'AR': 'AK', 'OR': 'AL', 'PPR': 'AM', 'PAUT': 'AN', 'ECT': 'AO'
 };
-// --- END: Konfigurasi untuk Matrix Personel ---
+
+const ALLOWED_STATUS = ['PKWT', 'PKWTT', 'KOMERBA'];
 
 async function handleMatrixPersonel() {
     const allPegawai = await prisma.pegawai.findMany({
+        where: {
+            status_pegawai: {
+                in: ALLOWED_STATUS
+            }
+        },
         select: {
             nama_pegawai: true,
             pelatihan: {
@@ -39,7 +44,6 @@ async function handleMatrixPersonel() {
         },
     });
 
-    // **DEBUG LOG 1**: Cek data yang diambil dari database
     console.log("Total pegawai yang diproses:", allPegawai.length);
     if (allPegawai.length > 0) {
         console.log("Contoh data pelatihan pegawai pertama:", JSON.stringify(allPegawai[0].pelatihan, null, 2));
@@ -62,34 +66,27 @@ async function handleMatrixPersonel() {
         expired: Object.fromEntries(MATRIX_CATEGORIES.map(cat => [cat, 0])),
     };
 
-    // --- START PERBAIKAN UTAMA ---
-    // 1. Siapkan semua data untuk disisipkan sekaligus
     const rowsToInsert = allPegawai.map((pegawai, index) => {
         return [index + 1, pegawai.nama_pegawai];
     });
 
-    // 2. Sisipkan semua baris data nama & no dalam satu operasi
     if (rowsToInsert.length > 0) {
         worksheet.insertRows(startRow, rowsToInsert);
     }
 
-    // 3. Loop lagi untuk mengisi "V"/"E" dan menyalin style
     allPegawai.forEach((pegawai, index) => {
         const currentRowIndex = startRow + index;
         const newRow = worksheet.getRow(currentRowIndex);
 
-        // Salin style dari baris template
         newRow.eachCell({ includeEmpty: true }, (cell, colNumber) => {
             const templateCell = templateRow.getCell(colNumber);
-            cell.style = { ...templateCell.style }; // Salin style dengan cara yang lebih aman
+            cell.style = { ...templateCell.style };
         });
 
-        // Isi data V/E
         MATRIX_CATEGORIES.forEach(category => {
             const relevantTraining = pegawai.pelatihan.find(t => t.matrixCategory?.trim() === category);
             
             if (relevantTraining) {
-                // **DEBUG LOG 2**: Cek jika ada training yang cocok
                 console.log(`Pegawai: ${pegawai.nama_pegawai}, Kategori: ${category}, Status: ${relevantTraining.status}`);
 
                 const col = columnMapping[category];
@@ -110,7 +107,6 @@ async function handleMatrixPersonel() {
             }
         });
     });
-    // --- END PERBAIKAN UTAMA ---
 
     worksheet.spliceRows(startRow + allPegawai.length, 1);
 
@@ -134,7 +130,6 @@ async function handleMatrixPersonel() {
     return workbook;
 }
 
-// ... Sisa kode GET request tidak berubah ...
 export async function GET(req: NextRequest, props: { params: Promise<{ templateType: string }> }) {
     const params = await props.params;
     const { templateType } = params;
@@ -152,6 +147,11 @@ export async function GET(req: NextRequest, props: { params: Promise<{ templateT
             fileName = `Report_Matrix_Personel.xlsx`;
         } else {
             const allPegawai = await prisma.pegawai.findMany({
+                where: {
+                    status_pegawai: {
+                        in: ALLOWED_STATUS
+                    }
+                },
                 include: {
                     pelatihan: { 
                         orderBy: {

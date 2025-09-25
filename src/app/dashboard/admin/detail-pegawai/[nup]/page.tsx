@@ -324,7 +324,8 @@ export default function DetailPegawai() {
                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
                   pegawai.status_pegawai === 'KOMERBA' ? 'bg-green-100 text-green-800' :
                   pegawai.status_pegawai === 'PKWTT' ? 'bg-yellow-100 text-yellow-800' :
-                  pegawai.status_pegawai === 'PKWT' ? 'bg-yellow-100 text-orange-800' :
+                  pegawai.status_pegawai === 'PKWT' ? 'bg-orange-100 text-orange-800' :
+                  pegawai.status_pegawai === 'FREELANCE' ? 'bg-indigo-100 text-indigo-800' :
                   'bg-blue-100 text-blue-800'
                 }`}>
                   {pegawai.status_pegawai}

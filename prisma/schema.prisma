@@ -21,7 +21,7 @@ model pegawai {
   no_telepon          String?
   email               String?
   password            String
-  role                String[]           @default(["pegawai"])
+  role                String[]            @default(["pegawai"])
   username            String?             @unique(map: "idx_pegawai_username")
   nik                 String?             @db.VarChar(32)
   jenjang_pend        String?
