@@ -14,8 +14,18 @@ function formatTanggalID(d?: Date | string | null) {
   const date = typeof d === "string" ? new Date(d) : d;
   if (isNaN(date.getTime())) return "";
   const bulan = [
-    "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-    "Juli", "Agustus", "September", "Oktober", "November", "Desember",
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
   ];
   return `${date.getDate()} ${bulan[date.getMonth()]} ${date.getFullYear()}`;
 }
@@ -34,9 +44,10 @@ function checkbox(on?: boolean) {
   return on ? "☑" : "☐";
 }
 
-export async function GET(_req: NextRequest, ctx: { params: { id: string } }) {
+export async function GET(_req: NextRequest,{ params }: { params: { id: string } }
+) {
   try {
-    const id = Number(ctx?.params?.id ?? "");
+    const id = Number(params?.id ?? "");
     if (!id || Number.isNaN(id)) {
       return new Response(JSON.stringify({ error: "Param id tidak valid" }), {
         status: 400,
@@ -50,10 +61,13 @@ export async function GET(_req: NextRequest, ctx: { params: { id: string } }) {
     });
 
     if (!st) {
-      return new Response(JSON.stringify({ error: "Surat tugas tidak ditemukan" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ error: "Surat tugas tidak ditemukan" }),
+        {
+          status: 404,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
     const data = {
@@ -86,7 +100,11 @@ export async function GET(_req: NextRequest, ctx: { params: { id: string } }) {
     };
 
     // Load template
-    const templatePath = path.join(process.cwd(), "templates", "template_surattugas.docx");
+    const templatePath = path.join(
+      process.cwd(),
+      "templates",
+      "template_surattugas.docx"
+    );
     const content = await fs.readFile(templatePath, "binary");
     const zip = new PizZip(content);
     const doc = new Docxtemplater(zip, {
@@ -101,10 +119,15 @@ export async function GET(_req: NextRequest, ctx: { params: { id: string } }) {
       doc.render();
     } catch (error: any) {
       console.error("Template rendering error:", error);
-      return new Response(JSON.stringify({ error: "Template gagal dirender. Cek tag di template .docx" }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({
+          error: "Template gagal dirender. Cek tag di template .docx",
+        }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
     const docxBuffer = doc.getZip().generate({ type: "nodebuffer" });
@@ -120,8 +143,10 @@ export async function GET(_req: NextRequest, ctx: { params: { id: string } }) {
       });
     });
 
-    const filename = st.nomor_surat ? `Surat_Tugas_${st.nomor_surat}.pdf` : `Surat_Tugas_${st.id}.pdf`;
-    
+    const filename = st.nomor_surat
+      ? `Surat_Tugas_${st.nomor_surat}.pdf`
+      : `Surat_Tugas_${st.id}.pdf`;
+
     return new Response(new Uint8Array(pdfBuffer), {
       status: 200,
       headers: {
@@ -133,9 +158,12 @@ export async function GET(_req: NextRequest, ctx: { params: { id: string } }) {
     });
   } catch (err: any) {
     console.error("Gagal generate surat tugas:", err);
-    return new Response(JSON.stringify({ error: err?.message || "Gagal generate PDF" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: err?.message || "Gagal generate PDF" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }
