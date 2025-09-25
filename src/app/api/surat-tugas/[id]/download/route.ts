@@ -33,12 +33,12 @@ function checkbox(on?: boolean) {
 }
 
 // API Handler
-export async function GET(
-  _req: NextRequest,
-  ctx: { params: { id: string } }
-) {
+export async function GET(_req: NextRequest,
+  { params }: { params: Promise<{ id: string }> })
+ {
   try {
-    const id = Number(ctx.params.id);
+    const resolvedParams = await params;
+    const id = Number(resolvedParams?.id ?? "");
     if (!id || Number.isNaN(id)) {
       return new Response(JSON.stringify({ error: "Param id tidak valid" }), {
         status: 400,
