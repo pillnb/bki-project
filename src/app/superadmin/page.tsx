@@ -1,17 +1,21 @@
 // src/app/superadmin/page.tsx
-"use client";
+import { Suspense } from "react";
+import SuperAdminContent from "./SuperadminClient";
 
-import { useSearchParams } from "next/navigation";
-import SuperadminLayout from "@/components/superadmin/layout/SuperadminLayout";
-import MonitoringPage from "@/components/superadmin/monitoring/MonitoringPage";
-import SuperadminManage from "@/components/superadmin/users/SuperadminManage";
+// Loading component
+function SuperAdminLoading() {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      <span className="ml-2 text-gray-600">Loading Super Admin...</span>
+    </div>
+  );
+}
 
 export default function SuperadminPage() {
-  const sp = useSearchParams();
-  const tab = sp.get("tab") === "monitor" ? "monitor" : "manage";
   return (
-    <SuperadminLayout>
-      {tab === "monitor" ? <MonitoringPage /> : <SuperadminManage />}
-    </SuperadminLayout>
+    <Suspense fallback={<SuperAdminLoading />}>
+      <SuperAdminContent />
+    </Suspense>
   );
 }
