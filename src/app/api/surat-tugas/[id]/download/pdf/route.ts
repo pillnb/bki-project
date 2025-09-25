@@ -44,7 +44,7 @@ function checkbox(on?: boolean) {
   return on ? "☑" : "☐";
 }
 
-export async function GET(_req: NextRequest,{ params }: { params: { id: string } }
+export async function GET(_req: Request,{ params }: { params: { id: string } }
 ) {
   try {
     const id = Number(params?.id ?? "");
