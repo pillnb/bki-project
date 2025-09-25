@@ -81,7 +81,7 @@ export default function UsersToolbar({
   }, [selectedRoles]);
 
   return (
-    <div className="flex flex-col md:flex-row gap-3 md:items-center">
+    <div className="flex flex-col md:flex-row gap-3 md:items-center text-slate-600">
       {/* Search */}
       <div className="flex items-center gap-2 flex-1">
         <Search className="h-4 w-4 text-slate-600" />

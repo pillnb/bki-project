@@ -63,7 +63,7 @@ export default function SearchAndFilter({
           />
         </div>
 
-        <div className="relative min-w-[180px]" ref={dropdownRef}>
+        <div className="relative min-w-[180px] text-black" ref={dropdownRef}>
           <button
             type="button"
             className="border border-gray-300 rounded-full px-4 py-2 w-full text-left text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between"
