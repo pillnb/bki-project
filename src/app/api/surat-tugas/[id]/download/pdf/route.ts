@@ -43,11 +43,17 @@ function bullets(values?: string[] | null) {
 function checkbox(on?: boolean) {
   return on ? "☑" : "☐";
 }
+// export async function GET(req: NextRequest, props: { params: Promise<{ templateType: string }> }) {
+//   const params = await props.params;
+//   const { templateType } = params;
 
-export async function GET(_req: Request,{ params }: { params: { id: string } }
-) {
+export async function GET(_req: NextRequest,
+  { params }: { params: Promise<{ id: string }> })
+ {
   try {
-    const id = Number(params?.id ?? "");
+    const resolvedParams = await params;
+    const id = Number(resolvedParams?.id ?? "");
+
     if (!id || Number.isNaN(id)) {
       return new Response(JSON.stringify({ error: "Param id tidak valid" }), {
         status: 400,
