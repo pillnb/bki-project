@@ -69,7 +69,7 @@ export default function TrainingTable({
         <tbody>
           {items.map((training, idx) => {
             const d = daysUntil(training.tanggalKadaluarsa);
-            const isWarning = typeof d === "number" && d < 30;
+            const isWarning = typeof d === "number" && d < 100;
             const Icon = isWarning ? AlertTriangle : CheckCircle;
             const colorClass =
               d == null ? "hidden" : isWarning ? "text-yellow-500" : "text-green-600";

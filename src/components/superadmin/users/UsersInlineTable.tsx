@@ -389,7 +389,7 @@ export default function UsersInlineTable({
                             Edit
                           </Button>
                           <Link
-                            href={`/dashboard/admin/detail-pegawai/${encodeURIComponent(
+                            href={`/superadmin/detail-pegawai//${encodeURIComponent(
                               r.nup ?? ""
                             )}`}
                             className="inline-flex items-center justify-center px-3 py-2 text-sm bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-md"

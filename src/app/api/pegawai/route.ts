@@ -78,7 +78,8 @@ export async function POST(request: NextRequest) {
         // Relasi pengalaman_kerja dan pelatihan
         pengalaman_kerja: {
           create: (Array.isArray(pengalaman_kerja) ? pengalaman_kerja : []).map((exp) => ({
-            tahun: exp.tahun ? parseInt(exp.tahun) : null,
+            tahun_awal: exp.tahun_awal? parseInt(exp.tahun_awal) : null,
+            tahun_akhir: exp.tahun_akhir? parseInt(exp.tahun_akhir) : null,
             pengalaman_kerja: exp.pengalaman_kerja,
             perusahaan: exp.perusahaan,
             lokasi: exp.lokasi,

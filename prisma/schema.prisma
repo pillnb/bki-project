@@ -37,7 +37,6 @@ model pegawai {
   koorApproverDi      SuratTugas[] @relation("KoorApprover")
   smApproverDi        SuratTugas[] @relation("SmApprover")
   kacabApproverDi     SuratTugas[] @relation("KacabApprover")
-  
 }
 
 model Proyek {

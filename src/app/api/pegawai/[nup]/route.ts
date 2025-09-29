@@ -70,6 +70,13 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
   try {
     const body = await req.json();
 
+    // Ambil id pegawai dari nup
+    const pegawai = await prisma.pegawai.findUnique({ where: { nup }, select: { id: true } });
+    if (!pegawai) {
+      return NextResponse.json({ error: 'Pegawai tidak ditemukan' }, { status: 404 });
+    }
+    const pegawaiId = pegawai.id;
+
     const pegawaiData: unknown = {
       nama_pegawai: body.nama_pegawai,
       nik: body.nik,
@@ -155,6 +162,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
                 };
                 return {
                   nup,
+                  pegawaiId,
                   nama_pelatihan: pelData.nama_pelatihan,
                   penyelenggara: pelData.penyelenggara,
                   lokasi: pelData.lokasi,
@@ -178,6 +186,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
             tx.pelatihan.update({
               where: { id_pelatihan: pel.id_pelatihan },
               data: {
+                pegawaiId,
                 nama_pelatihan: pel.nama_pelatihan,
                 penyelenggara: pel.penyelenggara,
                 lokasi: pel.lokasi,
@@ -228,14 +237,17 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
                 const expData = exp as {
                   pengalaman_kerja?: string;
                   perusahaan?: string;
-                  tahun?: string | number;
+                  tahun_awal?: string | number;
+                  tahun_akhir?: string | number;
                   lokasi?: string;
                 };
                 return {
                   nup,
+                  pegawaiId,
                   pengalaman_kerja: expData.pengalaman_kerja,
                   perusahaan: expData.perusahaan,
-                  tahun: expData.tahun ? parseInt(String(expData.tahun), 10) : null,
+                  tahun_awal: expData.tahun_awal? parseInt(String(expData.tahun_awal), 10) : null,
+                  tahun_akhir: expData.tahun_akhir? parseInt(String(expData.tahun_akhir), 10) : null,
                   lokasi: expData.lokasi,
                 };
               }),
@@ -250,6 +262,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ nup:
             tx.pengalaman_kerja.update({
               where: { id_pengalaman: exp.id_pengalaman },
               data: {
+                pegawaiId,
                 pengalaman_kerja: exp.pengalaman_kerja,
                 perusahaan: exp.perusahaan,
                 tahun_awal: exp.tahun_awal ? parseInt(exp.tahun_awal, 10) : null,

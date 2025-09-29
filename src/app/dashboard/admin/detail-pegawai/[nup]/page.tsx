@@ -25,7 +25,8 @@ interface PengalamanKerja {
   id: number;
   pengalaman_kerja: string; // nama pengalaman/posisi
   perusahaan: string;
-  tahun: number;
+  tahun_awal: number;
+  tahun_akhir: number;
   lokasi: string;
 }
 
@@ -441,7 +442,8 @@ export default function DetailPegawai() {
                     <div key={exp.id || index} className="border-l-4 border-blue-200 pl-4">
                       <div className="flex items-center justify-between mb-2">
                         <h4 className="font-bold text-blue-900">{exp.pengalaman_kerja}</h4>
-                        <span className="text-sm text-blue-400">{exp.tahun || '-'}</span>
+                        <span className="text-sm text-blue-400">{exp.tahun_awal || '-'}</span>
+                        <span className="text-sm text-blue-400">{exp.tahun_akhir || '-'}</span>
                       </div>
                       <p className="text-blue-600 font-bold mb-2">{exp.perusahaan}</p>
                       <p className="text-blue-900 text-sm leading-relaxed">{exp.lokasi || '-'}</p>
