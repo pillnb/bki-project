@@ -37,6 +37,8 @@ model pegawai {
   koorApproverDi      SuratTugas[] @relation("KoorApprover")
   smApproverDi        SuratTugas[] @relation("SmApprover")
   kacabApproverDi     SuratTugas[] @relation("KacabApprover")
+  pengajuanSertifikat    Sertifikat[] @relation("PengajuSertifikat")
+  approvalSertifikat     Sertifikat[] @relation("ApproverSertifikat")
 }
 
 model Proyek {
@@ -153,4 +155,51 @@ model GoogleOAuthToken {
   updatedAt   DateTime @updatedAt
 
   @@unique([ownerEmail])
+}
+
+enum StatusSertifikat {
+  PENDING_APPROVAL  // Baru disubmit, menunggu admin review
+  APPROVED          // Sudah diapprove, nomor & QR sudah digenerate
+  REJECTED          // Ditolak admin
+}
+
+model Sertifikat {
+  id                      Int               @id @default(autoincrement())
+  pengajuId               Int
+  pengaju                 pegawai           @relation("PengajuSertifikat", fields: [pengajuId], references: [id])
+  
+  // Data dari Form Input
+  nomorKontrak            String            
+  kompetensi              String            
+  pasar                   String            
+  kodeProduksiM           String?           
+  kodeProduksiE           String?           
+  jumlahHalaman           Int?              
+  linkLaporan             String            
+  
+  // Data Generated (setelah approve)
+  nomorSertifikat         String?           @unique 
+  qrCodeDriveId           String?           
+  qrCodeUrl               String?           
+  qrCodeImageUrl          String?           
+  
+  // Approval Data
+  status                  StatusSertifikat  @default(PENDING_APPROVAL)
+  approvedBy              Int?              
+  approver                pegawai?          @relation("ApproverSertifikat", fields: [approvedBy], references: [id], onDelete: SetNull)
+  approvedByAdmin         String?           // NUP admin yang approve (jika bukan pegawai)
+  approvedAt              DateTime?
+  rejectedAt              DateTime?
+  keterangan              String?           
+  createdAt               DateTime          @default(now())
+  updatedAt               DateTime          @updatedAt
+  @@index([pengajuId])
+  @@index([status])
+}
+
+model SertifikatCounter {
+  id          Int      @id @default(autoincrement())
+  tahun       String   @unique // '2025', '2026', dst
+  sequence    Int      @default(0) // counter: 1, 2, 3, ...
+  updatedAt   DateTime @updatedAt
 }
