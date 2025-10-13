@@ -164,12 +164,12 @@ export default function AdminDashboardPage() {
                 <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
                   <div>
                     <span className="text-gray-600">Tanggal:</span>
-                    <p className="font-semibold">{new Date(item.createdAt).toLocaleDateString('id-ID')}</p>
+                    <p className="font-semibold text-black">{new Date(item.createdAt).toLocaleDateString('id-ID')}</p>
                   </div>
                   {item.jumlahHalaman && (
                     <div>
                       <span className="text-gray-600">Halaman:</span>
-                      <p className="font-semibold">{item.jumlahHalaman}</p>
+                      <p className="font-semibold text-black">{item.jumlahHalaman}</p>
                     </div>
                   )}
                   <div>
