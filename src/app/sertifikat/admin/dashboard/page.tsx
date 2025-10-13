@@ -205,7 +205,7 @@ export default function AdminDashboardPage() {
                 {item.keterangan && (
                   <div className="mt-4 bg-gray-50 border border-gray-200 rounded-lg p-3">
                     <p className="text-sm font-semibold text-gray-700">Keterangan:</p>
-                    <p className="text-sm text-gray-600">{item.keterangan}</p>
+                    <p className="text-sm text-gray-600 text-black">{item.keterangan}</p>
                   </div>
                 )}
               </div>
