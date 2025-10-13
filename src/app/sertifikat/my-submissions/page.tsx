@@ -4,15 +4,36 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { SertifikatData } from '@/lib/constants/sertifikatConstants';
+import { groupSubmissionsByParentId, getTotalPages } from '@/lib/utils/sertifikatGrouping';
+
+
+// Helper: parsing nomor seperti .../2025-03-06 (page=03, total=06)
+function parseSuffix(nomor: string | null | undefined) {
+  if (!nomor) return null;
+  const m = nomor.match(/-(\d+)-(\d+)$/);
+  if (!m) return null;
+  return { page: Number(m[1]), total: Number(m[2]) };
+}
 
 export default function MySubmissionsPage() {
   const router = useRouter();
   const [submissions, setSubmissions] = useState<SertifikatData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [pengaju, setPengaju] = useState<{ nup: string; nama_pegawai: string; jabatan?: string | null; email?: string | null } | null>(null);
 
   useEffect(() => {
     fetchSubmissions();
+    (async () => {
+      try {
+        const res = await fetch('/api/sertifikat/me');
+        if (!res.ok) return;
+        const j = await res.json();
+        if (j.data) setPengaju(j.data);
+      } catch (e) {
+        // ignore
+      }
+    })();
   }, []);
 
   const fetchSubmissions = async () => {
@@ -62,11 +83,27 @@ export default function MySubmissionsPage() {
     );
   }
 
+  const grouped = groupSubmissionsByParentId(submissions);
+
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
+        {pengaju && (
+          <div className="bg-white rounded-xl shadow p-4 mb-6 border border-blue-50">
+            <div className="text-sm text-gray-600">Sedang login sebagai</div>
+            <div className="flex items-center justify-between mt-2">
+              <div>
+                <div className="font-semibold text-black">{pengaju.nama_pegawai}</div>
+                <div className="text-xs text-gray-500">{pengaju.nup} • {pengaju.jabatan}</div>
+                <div className="text-xs text-gray-500">{pengaju.email}</div>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">Pengajuan Sertifikat Saya</h1>
+          <h1 className="text-3xl font-bold text-gray-800">
+            Pengajuan Sertifikat Saya
+          </h1>
           <button
             onClick={() => router.push('/sertifikat/form')}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition"
@@ -81,11 +118,15 @@ export default function MySubmissionsPage() {
           </div>
         )}
 
-        {submissions.length === 0 ? (
+        {grouped.length === 0 ? (
           <div className="bg-white rounded-xl shadow-lg p-12 text-center">
             <div className="text-gray-400 text-6xl mb-4">📋</div>
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">Belum ada pengajuan</h3>
-            <p className="text-gray-600 mb-6">Buat pengajuan sertifikat pertama Anda</p>
+            <h3 className="text-xl font-semibold text-gray-700 mb-2">
+              Belum ada pengajuan
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Buat pengajuan sertifikat pertama Anda
+            </p>
             <button
               onClick={() => router.push('/sertifikat/form')}
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition"
@@ -95,76 +136,101 @@ export default function MySubmissionsPage() {
           </div>
         ) : (
           <div className="space-y-4">
-            {submissions.map((item) => (
-              <div key={item.id} className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-800">
-                      {item.nomorKontrak}
-                    </h3>
-                    <p className="text-sm text-gray-600">
-                      {item.kodeProduksiM || item.kodeProduksiE} - {item.kompetensi} - {item.pasar}
-                    </p>
-                  </div>
-                  {getStatusBadge(item.status)}
-                </div>
+            {grouped.map((group, idx) => {
+              const first = group[0];
+              const isMultiPage = group.length > 1;
+              const suffix = parseSuffix(first.nomorSertifikat);
+              const totalPages = suffix?.total || group.length;
 
-                <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                  <div>
-                    <span className="text-gray-600">Tanggal Pengajuan:</span>
-                    <p className="font-semibold">{new Date(item.createdAt).toLocaleDateString('id-ID')}</p>
-                  </div>
-                  {item.jumlahHalaman && (
+              return (
+                <div
+                  key={idx}
+                  className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition"
+                >
+                  <div className="flex justify-between items-start mb-4">
                     <div>
-                      <span className="text-gray-600">Jumlah Halaman:</span>
-                      <p className="font-semibold">{item.jumlahHalaman}</p>
+                      <h3 className="text-lg font-semibold text-gray-800">
+                        {first.nomorKontrak}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {first.kodeProduksiM || first.kodeProduksiE} -{' '}
+                        {first.kompetensi} - {first.pasar}
+                      </p>
                     </div>
-                  )}
-                </div>
+                    {getStatusBadge(first.status)}
+                  </div>
 
-                {item.status === 'APPROVED' && item.nomorSertifikat && (
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-1">
-                        <p className="text-sm font-semibold text-gray-700 mb-1">Nomor Sertifikat:</p>
-                        <p className="text-xs font-mono text-gray-800 break-all">{item.nomorSertifikat}</p>
-                      </div>
-                      {item.qrCodeImageUrl && (
-                        <img src={item.qrCodeImageUrl} alt="QR Code" className="w-24 h-24 border border-gray-300 rounded" />
-                      )}
+                  <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
+                    <div>
+                      <span className="text-gray-600">Tanggal Pengajuan:</span>
+                      <p className="font-semibold text-black">
+                        {new Date(first.createdAt).toLocaleDateString('id-ID')}
+                      </p>
                     </div>
-                    {item.qrCodeUrl && (
-                      <a 
-                        href={item.qrCodeUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block"
-                      >
-                        Lihat QR Code →
-                      </a>
+                    {isMultiPage && (
+                      <div>
+                        <span className="text-gray-600 ">Total Halaman:</span>
+                        <p className="font-semibold text-black">{totalPages}</p>
+                      </div>
                     )}
                   </div>
-                )}
 
-                {item.status === 'REJECTED' && item.keterangan && (
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
-                    <p className="text-sm font-semibold text-red-700 mb-1">Alasan Penolakan:</p>
-                    <p className="text-sm text-gray-700">{item.keterangan}</p>
+                  {first.status === 'APPROVED' && first.nomorSertifikat && (
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                      <p className="text-sm font-semibold text-gray-700 mb-3">
+                        Nomor Sertifikat:
+                      </p>
+
+                      <div className="space-y-2">
+                        {group.map((item) => (
+                          <div key={item.id} className="flex items-center justify-between bg-white rounded-lg px-4 py-3 border border-gray-200">
+                            <p className="text-xs font-mono text-gray-800 break-all flex-1 mr-4">
+                              {item.nomorSertifikat}
+                            </p>
+                            {item.qrCodeUrl && (
+                              <a 
+                                href={item.qrCodeUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition"
+                              >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                                </svg>
+                                QR Code
+                              </a>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {first.status === 'REJECTED' && first.keterangan && (
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                      <p className="text-sm font-semibold text-red-700 mb-1">
+                        Alasan Penolakan:
+                      </p>
+                      <p className="text-sm text-gray-700">{first.keterangan}</p>
+                    </div>
+                  )}
+
+                  <div className="pt-4 border-t border-gray-200">
+                    <a
+                      href={first.linkLaporan}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium inline-flex items-center gap-1"
+                    >
+                      <span>Lihat Laporan Inspeksi</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
                   </div>
-                )}
-
-                <div className="pt-4 border-t border-gray-200">
-                  <a 
-                    href={item.linkLaporan} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-                  >
-                    Lihat Laporan Inspeksi →
-                  </a>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

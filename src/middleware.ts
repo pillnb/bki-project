@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const publicPaths = ["/", "/login", "/privacy-policy", "/favicon.ico"];
+const publicPaths = ["/", "/login", "/privacy-policy", "/favicon.ico", "/sertifikat"];
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -11,11 +11,6 @@ export function middleware(req: NextRequest) {
     if (p === "/") return pathname === "/"; 
     return pathname === p || pathname.startsWith(p + "/");
   });
-
-  // kalau sudah login tapi buka /login, arahkan ke dashboard
-  if (nik && pathname === "/login") {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
-  }
 
   // kalau belum login dan bukan halaman public, arahkan ke /login
   if (!nik && !isPublic) {

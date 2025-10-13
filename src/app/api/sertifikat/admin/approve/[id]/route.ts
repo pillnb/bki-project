@@ -54,6 +54,15 @@ export async function POST(
     const jumlahHalaman = sertifikat.jumlahHalaman || 1;
     const results: any[] = [];
 
+     let parentId: number | null = null;
+    // Jika multipage, ambil satu sequence saja untuk digunakan oleh semua halaman
+    let fixedSequence: number | undefined = undefined;
+    if (jumlahHalaman > 1) {
+      // gunakan util untuk ambil sequence tapi tanpa mengubah logic getNextSequence di util
+      // getNextSequence tersedia di utils; import ulang minimal dengan dynamic require
+      const { getNextSequence } = await import('@/lib/utils/sertifikatUtils');
+      fixedSequence = await getNextSequence(String(new Date().getFullYear()));
+    }
     // Loop untuk generate multiple pages jika perlu
     for (let page = 1; page <= jumlahHalaman; page++) {
       try {
@@ -66,7 +75,8 @@ export async function POST(
           pasar: sertifikat.pasar,
           tahun,
           pageNumber: jumlahHalaman > 1 ? page : undefined,
-          totalPages: jumlahHalaman > 1 ? jumlahHalaman : undefined
+          totalPages: jumlahHalaman > 1 ? jumlahHalaman : undefined,
+          fixedSequence: fixedSequence,
         });
 
         // Generate & upload QR Code
@@ -80,6 +90,7 @@ export async function POST(
         const newSertifikat = await prisma.sertifikat.create({
           data: {
             pengajuId: sertifikat.pengajuId,
+            parentId: sertifikat.parentId || null,
             nomorKontrak: sertifikat.nomorKontrak,
             kompetensi: sertifikat.kompetensi,
             pasar: sertifikat.pasar,
@@ -92,13 +103,17 @@ export async function POST(
             qrCodeUrl: qrData.viewUrl,
             qrCodeImageUrl: qrData.imageUrl,
             status: 'APPROVED',
-            approvedBy: null,
             approvedAt: new Date(),
             keterangan
           }
         });
 
         results.push(newSertifikat);
+
+        // Set parentId ke halaman pertama untuk halaman berikutnya
+        if (parentId === null) {
+          parentId = newSertifikat.id;
+        }
 
       } catch (error) {
         console.error(`Failed to generate page ${page}:`, error);
@@ -115,20 +130,37 @@ export async function POST(
     }
 
     // Update original sertifikat to APPROVED (as parent reference)
+    // Jika ada hasil, tetapkan parentId ke semua halaman yang baru dibuat
+    const createdIds = results.map(r => r.id);
+    const parentRefId = results[0]?.id ?? null;
+
+    if (parentRefId && createdIds.length > 0) {
+      await prisma.sertifikat.updateMany({
+        where: { id: { in: createdIds } },
+        data: { parentId: parentRefId },
+      });
+    }
+
+    // Update original sertifikat to APPROVED (as parent reference)
     await prisma.sertifikat.update({
       where: { id: sertifikatId },
       data: {
         status: 'APPROVED',
-        approvedBy: admin.userId,
+        parentId: parentRefId,
         approvedAt: new Date(),
         keterangan: `Parent record - Generated ${jumlahHalaman} sertifikat(s). ${keterangan || ''}`
       }
     });
 
+    // Ambil ulang data hasil yang sudah diperbarui supaya response mengandung parentId
+    const updatedResults = await prisma.sertifikat.findMany({
+      where: { id: { in: createdIds } },
+    });
+
     return NextResponse.json({
       success: true,
       message: `Berhasil approve dan generate ${jumlahHalaman} sertifikat`,
-      data: results
+      data: updatedResults
     });
 
   } catch (error) {

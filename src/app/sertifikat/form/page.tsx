@@ -9,6 +9,8 @@ import {
   KODE_PRODUKSI_M,
   KODE_PRODUKSI_E,
   KODE_E_MULTIPAGE,
+  KODE_PRODUKSI_M_OPTIONS,
+  KODE_PRODUKSI_E_OPTIONS,
 } from "@/lib/constants/sertifikatConstants";
 
 export default function SertifikatFormPage() {
@@ -26,6 +28,24 @@ export default function SertifikatFormPage() {
     jumlahHalaman: "",
     linkLaporan: "",
   });
+
+  const [pengaju, setPengaju] = useState<{ nup: string; nama_pegawai: string; jabatan?: string | null; email?: string | null } | null>(null);
+
+  useEffect(() => {
+    // fetch current pengaju info
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch('/api/sertifikat/me');
+        if (!res.ok) return;
+        const j = await res.json();
+        if (mounted && j.data) setPengaju(j.data);
+      } catch (e) {
+        // ignore
+      }
+    })();
+    return () => { mounted = false };
+  }, []);
 
   // Show halaman field jika pilih kode E tertentu
   const showHalamanField =
@@ -112,6 +132,18 @@ export default function SertifikatFormPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-3xl mx-auto">
+        {pengaju && (
+          <div className="bg-white rounded-xl shadow p-4 mb-6 border border-blue-50">
+            <div className="text-sm text-gray-600">Sedang login sebagai</div>
+            <div className="flex items-center justify-between mt-2">
+              <div>
+                <div className="font-semibold text-black">{pengaju.nama_pegawai}</div>
+                <div className="text-xs text-gray-500">{pengaju.nup} • {pengaju.jabatan}</div>
+                <div className="text-xs text-gray-500">{pengaju.email}</div>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="bg-white rounded-xl shadow-lg p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">
             Form Pengajuan Sertifikat
@@ -129,14 +161,10 @@ export default function SertifikatFormPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, nomorKontrak: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                 required
                 disabled={loading}
-              />
-            </div>
-
-            {/* Kompetensi */}
-            <div>
+                />
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Kompetensi <span className="text-red-500">*</span>
               </label>
@@ -145,7 +173,7 @@ export default function SertifikatFormPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, kompetensi: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                 required
                 disabled={loading}
               >
@@ -168,7 +196,7 @@ export default function SertifikatFormPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, pasar: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                 required
                 disabled={loading}
               >
@@ -191,13 +219,13 @@ export default function SertifikatFormPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, kodeProduksiM: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                 disabled={loading || !!formData.kodeProduksiE}
               >
                 <option value="">Pilih Kode Produksi M</option>
-                {KODE_PRODUKSI_M.map((kode) => (
-                  <option key={kode} value={kode}>
-                    {kode}
+                {KODE_PRODUKSI_M_OPTIONS.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
                   </option>
                 ))}
               </select>
@@ -213,13 +241,13 @@ export default function SertifikatFormPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, kodeProduksiE: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                 disabled={loading || !!formData.kodeProduksiM}
               >
                 <option value="">Pilih Kode Produksi E</option>
-                {KODE_PRODUKSI_E.map((kode) => (
-                  <option key={kode} value={kode}>
-                    {kode}
+                {KODE_PRODUKSI_E_OPTIONS.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
                   </option>
                 ))}
               </select>
@@ -239,7 +267,7 @@ export default function SertifikatFormPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, jumlahHalaman: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                   required
                   disabled={loading}
                   placeholder="Masukkan jumlah halaman (1-200)"
@@ -262,7 +290,7 @@ export default function SertifikatFormPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, linkLaporan: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                 required
                 disabled={loading}
                 placeholder="https://drive.google.com/..."

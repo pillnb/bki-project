@@ -20,14 +20,6 @@ export async function GET(request: NextRequest) {
       where: {
         pengajuId: user.userId
       },
-      include: {
-        approver: {
-          select: {
-            nama_pegawai: true,
-            nup: true
-          }
-        }
-      },
       orderBy: {
         createdAt: 'desc'
       }

@@ -6,8 +6,9 @@ import { verifyAdminToken } from "@/lib/middleware/sertifikatAuth";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     // Verify admin authentication
     const admin = await verifyAdminToken(request);
@@ -19,7 +20,7 @@ export async function POST(
     }
 
     const { keterangan } = await request.json();
-    const sertifikatId = parseInt(params.id);
+  const sertifikatId = parseInt(id);
 
     if (isNaN(sertifikatId)) {
       return NextResponse.json(
@@ -59,7 +60,6 @@ export async function POST(
       where: { id: sertifikatId },
       data: {
         status: "REJECTED",
-        approvedBy: null, // Tidak set foreign key
         approvedByAdmin: admin.nup, // Simpan NUP admin di sini
         rejectedAt: new Date(),
         keterangan: keterangan.trim(),

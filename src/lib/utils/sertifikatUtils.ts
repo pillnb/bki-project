@@ -37,9 +37,14 @@ export async function generateNomorSertifikat(data: {
   tahun: string;
   pageNumber?: number;
   totalPages?: number;
+  /**
+   * Optional: supply a fixed sequence (number) so multiple pages for the same parent
+   * will reuse the same seq4 value. If not provided, a next sequence is fetched.
+   */
+  fixedSequence?: number;
 }): Promise<string> {
   // Get sequence untuk tahun ini
-  const sequence = await getNextSequence(data.tahun);
+  const sequence = typeof data.fixedSequence === 'number' ? data.fixedSequence : await getNextSequence(data.tahun);
   const seq4 = String(sequence).padStart(4, '0');
 
   // Pilih kode produksi (prioritas M, fallback E)

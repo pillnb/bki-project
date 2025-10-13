@@ -39,12 +39,6 @@ export async function GET(request: NextRequest) {
             email: true
           }
         },
-        approver: {
-          select: {
-            nama_pegawai: true,
-            nup: true
-          }
-        }
       },
       orderBy: {
         createdAt: 'desc'

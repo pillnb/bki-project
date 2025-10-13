@@ -38,7 +38,6 @@ model pegawai {
   smApproverDi        SuratTugas[] @relation("SmApprover")
   kacabApproverDi     SuratTugas[] @relation("KacabApprover")
   pengajuanSertifikat    Sertifikat[] @relation("PengajuSertifikat")
-  approvalSertifikat     Sertifikat[] @relation("ApproverSertifikat")
 }
 
 model Proyek {
@@ -167,7 +166,8 @@ model Sertifikat {
   id                      Int               @id @default(autoincrement())
   pengajuId               Int
   pengaju                 pegawai           @relation("PengajuSertifikat", fields: [pengajuId], references: [id])
-  
+  parentId                Int?              // Reference ke halaman pertama/parent
+
   // Data dari Form Input
   nomorKontrak            String            
   kompetensi              String            
@@ -185,14 +185,13 @@ model Sertifikat {
   
   // Approval Data
   status                  StatusSertifikat  @default(PENDING_APPROVAL)
-  approvedBy              Int?              
-  approver                pegawai?          @relation("ApproverSertifikat", fields: [approvedBy], references: [id], onDelete: SetNull)
   approvedByAdmin         String?           // NUP admin yang approve (jika bukan pegawai)
   approvedAt              DateTime?
   rejectedAt              DateTime?
   keterangan              String?           
   createdAt               DateTime          @default(now())
   updatedAt               DateTime          @updatedAt
+  @@index([parentId])
   @@index([pengajuId])
   @@index([status])
 }
