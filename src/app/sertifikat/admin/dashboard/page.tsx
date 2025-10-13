@@ -239,7 +239,7 @@ export default function AdminDashboardPage() {
                 value={keterangan}
                 onChange={(e) => setKeterangan(e.target.value)}
                 placeholder={modalAction === 'approve' ? 'Keterangan (opsional)' : 'Alasan penolakan (wajib)'}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                 rows={4}
                 required={modalAction === 'reject'}
               />
