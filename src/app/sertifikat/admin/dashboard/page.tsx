@@ -197,7 +197,7 @@ export default function AdminDashboardPage() {
           <div className="flex items-center justify-between">
             <h1 className="text-3xl font-bold text-gray-800 mb-4">Admin Dashboard</h1>
             <div className="flex items-center gap-3">
-              <button onClick={openCounterModal} className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm">Edit Counter</button>
+              <button onClick={openCounterModal} className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm">Atur No Urut</button>
               <button onClick={async () => {
                 try {
                   const res = await fetch('/api/sertifikat/admin/export');
@@ -316,9 +316,40 @@ export default function AdminDashboardPage() {
                         {group.map(item => (
                           <div key={item.id} className="flex items-center justify-between bg-white rounded-lg px-4 py-3 border border-gray-200">
                             <p className="text-xs font-mono text-gray-800 break-all flex-1 mr-4">{item.nomorSertifikat}</p>
-                            {item.qrCodeUrl && (
-                              <a href={item.qrCodeUrl} target="_blank" rel="noopener noreferrer" className="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition">QR Code</a>
-                            )}
+                            <div className="flex items-center gap-2">
+                              {item.qrCodeUrl && (
+                                <a href={item.qrCodeUrl} target="_blank" rel="noopener noreferrer" className="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition">QR Code</a>
+                              )}
+                              <button
+                                type="button"
+                                onClick={async () => {
+                                  if (!confirm('Hapus sertifikat ini? Nomor urut akan dikembalikan.')) return;
+                                  try {
+                                    const res = await fetch(`/api/sertifikat/admin/delete/${item.id}`, { method: 'POST' });
+                                    if (!res.ok) {
+                                      const j = await res.json().catch(() => ({}));
+                                      return alert(j.error || 'Gagal menghapus');
+                                    }
+                                    // Refresh
+                                    await fetchSubmissions();
+                                    await fetchCounts();
+                                  } catch (e) {
+                                    console.error('Delete error', e);
+                                    alert('Terjadi kesalahan saat menghapus');
+                                  }
+                                }}
+                                className="w-8 h-8 inline-flex items-center justify-center rounded-md bg-red-600 hover:bg-red-700 text-white"
+                                title="Hapus sertifikat"
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash2 lucide-trash-2 w-4 h-4" aria-hidden="true">
+                                  <path d="M3 6h18" />
+                                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                  <line x1="10" x2="10" y1="11" y2="17" />
+                                  <line x1="14" x2="14" y1="11" y2="17" />
+                                </svg>
+                              </button>
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -361,7 +392,7 @@ export default function AdminDashboardPage() {
       {showCounterModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-xl shadow-2xl p-6 max-w-md w-full">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Edit Counter Sertifikat</h3>
+            <h3 className="text-xl font-bold text-gray-800 mb-4">Atur Nomor Urut Sertifikat</h3>
 
             <div className="mb-4">
               <label className="block text-sm text-gray-700 mb-2">Tahun</label>
@@ -369,7 +400,7 @@ export default function AdminDashboardPage() {
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm text-gray-700 mb-2">Nilai Counter (angka)</label>
+              <label className="block text-sm text-gray-700 mb-2">Nomor Urut Baru (angka)</label>
               <input type="number" value={counterValue ?? ''} onChange={(e) => setCounterValue(Number(e.target.value))} className="w-full px-3 py-2 border rounded-md text-black" />
               {counterLoading && <div className="text-sm text-gray-500 mt-2">Memuat...</div>}
             </div>
