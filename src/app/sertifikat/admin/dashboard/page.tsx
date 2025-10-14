@@ -198,6 +198,27 @@ export default function AdminDashboardPage() {
             <h1 className="text-3xl font-bold text-gray-800 mb-4">Admin Dashboard</h1>
             <div className="flex items-center gap-3">
               <button onClick={openCounterModal} className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm">Edit Counter</button>
+              <button onClick={async () => {
+                try {
+                  const res = await fetch('/api/sertifikat/admin/export');
+                  if (!res.ok) {
+                    const j = await res.json().catch(() => ({}));
+                    return alert(j.error || 'Gagal mengunduh');
+                  }
+                  const blob = await res.blob();
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = `sertifikat_export_${new Date().toISOString().slice(0,10)}.xlsx`;
+                  document.body.appendChild(a);
+                  a.click();
+                  a.remove();
+                  URL.revokeObjectURL(url);
+                } catch (e) {
+                  console.error('Download error', e);
+                  alert('Terjadi kesalahan saat mengunduh');
+                }
+              }} className="px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm">Download XLSX</button>
             </div>
           </div>
           
