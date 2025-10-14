@@ -17,13 +17,16 @@ export async function GET(request: NextRequest) {
 
     // Get query params untuk filter
     const { searchParams } = new URL(request.url);
-    const status = searchParams.get('status') || 'PENDING_APPROVAL';
+    // Support either single `status` param (legacy) or `statuses` comma-separated list
+    const status = searchParams.get('status');
+    const statusesParam = searchParams.get('statuses');
 
     const whereClause: any = {};
-    
-    if (status === 'all') {
-      // Show all statuses
-    } else {
+
+    if (statusesParam) {
+      const arr = statusesParam.split(',').map(s => s.trim()).filter(Boolean);
+      if (arr.length > 0) whereClause.status = { in: arr };
+    } else if (status && status !== 'all') {
       whereClause.status = status;
     }
 

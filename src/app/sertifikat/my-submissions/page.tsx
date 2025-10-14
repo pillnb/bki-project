@@ -21,6 +21,12 @@ export default function MySubmissionsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [pengaju, setPengaju] = useState<{ nup: string; nama_pegawai: string; jabatan?: string | null; email?: string | null } | null>(null);
+  const [showResubmitModal, setShowResubmitModal] = useState(false);
+  const [editingItem, setEditingItem] = useState<SertifikatData | null>(null);
+  const [formState, setFormState] = useState({
+    nomorKontrak: '', kompetensi: '', pasar: '', kodeProduksiM: '', kodeProduksiE: '', jumlahHalaman: '' as any, linkLaporan: ''
+  });
+  const [resubmitProcessing, setResubmitProcessing] = useState(false);
 
   useEffect(() => {
     fetchSubmissions();
@@ -86,6 +92,7 @@ export default function MySubmissionsPage() {
   const grouped = groupSubmissionsByParentId(submissions);
 
   return (
+    <>
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {pengaju && (
@@ -215,6 +222,25 @@ export default function MySubmissionsPage() {
                     </div>
                   )}
 
+                  {first.status === 'REJECTED' && (
+                    <div className="pt-4 border-t border-gray-200 flex gap-3">
+                      <button onClick={() => {
+                        // open resubmit modal prefilled with first record
+                        setEditingItem(first);
+                        setFormState({
+                          nomorKontrak: first.nomorKontrak || '',
+                          kompetensi: first.kompetensi || '',
+                          pasar: first.pasar || '',
+                          kodeProduksiM: first.kodeProduksiM || '',
+                          kodeProduksiE: first.kodeProduksiE || '',
+                          jumlahHalaman: first.jumlahHalaman ? String(first.jumlahHalaman) : '',
+                          linkLaporan: first.linkLaporan || ''
+                        });
+                        setShowResubmitModal(true);
+                      }} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold">Ajukan Ulang</button>
+                    </div>
+                  )}
+
                   <div className="pt-4 border-t border-gray-200">
                     <a
                       href={first.linkLaporan}
@@ -235,5 +261,88 @@ export default function MySubmissionsPage() {
         )}
       </div>
     </div>
+    {/* Resubmit Modal */}
+    {showResubmitModal && editingItem && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="bg-white rounded-xl shadow-2xl p-6 max-w-2xl w-full">
+          <h3 className="text-xl font-bold text-gray-800 mb-4">Ajukan Ulang Pengajuan</h3>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-gray-700 mb-1">Nomor PO/WO/SO/KONTRAK</label>
+              <input value={formState.nomorKontrak} onChange={(e) => setFormState(s => ({ ...s, nomorKontrak: e.target.value }))} className="w-full px-3 py-2 border rounded-md text-black" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-700 mb-1">Kompetensi (L##)</label>
+              <input value={formState.kompetensi} onChange={(e) => setFormState(s => ({ ...s, kompetensi: e.target.value }))} className="w-full px-3 py-2 border rounded-md text-black" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-700 mb-1">Pasar (P#)</label>
+              <input value={formState.pasar} onChange={(e) => setFormState(s => ({ ...s, pasar: e.target.value }))} className="w-full px-3 py-2 border rounded-md text-black" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-700 mb-1">Jumlah Halaman</label>
+              <input value={formState.jumlahHalaman} onChange={(e) => setFormState(s => ({ ...s, jumlahHalaman: e.target.value }))} className="w-full px-3 py-2 border rounded-md text-black" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-700 mb-1">Kode Produksi (M)</label>
+              <input value={formState.kodeProduksiM} onChange={(e) => setFormState(s => ({ ...s, kodeProduksiM: e.target.value }))} className="w-full px-3 py-2 border rounded-md text-black" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-700 mb-1">Kode Produksi (E)</label>
+              <input value={formState.kodeProduksiE} onChange={(e) => setFormState(s => ({ ...s, kodeProduksiE: e.target.value }))} className="w-full px-3 py-2 border rounded-md text-black" />
+            </div>
+            <div className="col-span-2">
+              <label className="block text-sm text-gray-700 mb-1">Link Laporan (Google Drive)</label>
+              <input value={formState.linkLaporan} onChange={(e) => setFormState(s => ({ ...s, linkLaporan: e.target.value }))} className="w-full px-3 py-2 border rounded-md text-black" />
+            </div>
+          </div>
+
+          <div className="flex gap-3 mt-6">
+            <button onClick={() => setShowResubmitModal(false)} className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-lg">Batal</button>
+            <button onClick={async () => {
+              // submit update
+              setResubmitProcessing(true);
+              try {
+                const payload = {
+                  nomorKontrak: formState.nomorKontrak,
+                  kompetensi: formState.kompetensi,
+                  pasar: formState.pasar,
+                  kodeProduksiM: formState.kodeProduksiM || null,
+                  kodeProduksiE: formState.kodeProduksiE || null,
+                  jumlahHalaman: formState.jumlahHalaman ? Number(formState.jumlahHalaman) : null,
+                  linkLaporan: formState.linkLaporan
+                };
+
+                const res = await fetch(`/api/sertifikat/update/${editingItem!.id}`, {
+                  method: 'PUT',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+                });
+
+                if (!res.ok) {
+                  const j = await res.json().catch(() => ({}));
+                  alert(j.error || 'Gagal mengajukan ulang');
+                  setResubmitProcessing(false);
+                  return;
+                }
+
+                // success
+                setShowResubmitModal(false);
+                setEditingItem(null);
+                await fetchSubmissions();
+                alert('Pengajuan berhasil diajukan ulang');
+              } catch (e) {
+                console.error('Resubmit error', e);
+                alert('Terjadi kesalahan');
+              } finally {
+                setResubmitProcessing(false);
+              }
+            }} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-semibold">{resubmitProcessing ? 'Mengirim...' : 'Ajukan Ulang'}</button>
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   );
 }

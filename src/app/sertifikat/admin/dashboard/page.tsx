@@ -13,6 +13,7 @@ export default function AdminDashboardPage() {
   const [pendingCount, setPendingCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [filter, setFilter] = useState<'PENDING_APPROVAL' | 'all'>('PENDING_APPROVAL');
+  const [selectedStatuses, setSelectedStatuses] = useState<string[]>(['PENDING_APPROVAL']);
   const [selectedItem, setSelectedItem] = useState<SertifikatData | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [modalAction, setModalAction] = useState<'approve' | 'reject'>('approve');
@@ -29,6 +30,11 @@ export default function AdminDashboardPage() {
   }, [filter]);
 
   useEffect(() => {
+    // when selected statuses change and we're viewing 'all', refresh
+    if (filter === 'all') fetchSubmissions();
+  }, [selectedStatuses]);
+
+  useEffect(() => {
     // fetch counts once on mount
     fetchCounts();
   }, []);
@@ -36,7 +42,13 @@ export default function AdminDashboardPage() {
   const fetchSubmissions = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/sertifikat/admin/pending?status=${filter}`);
+      let url = '/api/sertifikat/admin/pending';
+      if (filter === 'PENDING_APPROVAL') url += '?status=PENDING_APPROVAL';
+      if (filter === 'all') {
+        const qs = selectedStatuses.length ? `?statuses=${encodeURIComponent(selectedStatuses.join(','))}` : '';
+        url += qs;
+      }
+      const res = await fetch(url);
       
       if (!res.ok) {
         if (res.status === 403) {
@@ -244,6 +256,28 @@ export default function AdminDashboardPage() {
               Semua ({totalCount})
             </button>
           </div>
+          {filter === 'all' && (
+            <div className="mt-3 bg-white border border-gray-100 rounded-md p-3">
+              <div className="text-sm text-gray-700 mb-2 font-bold">Status:</div>
+              <div className="flex gap-4 text-gray-700">
+                {[
+                  { value: 'PENDING_APPROVAL', label: 'Pending' },
+                  { value: 'APPROVED', label: 'Approved' },
+                  { value: 'REJECTED', label: 'Rejected' }
+                ].map(opt => (
+                  <label key={opt.value} className="inline-flex items-center gap-2 text-sm">
+                    <input type="checkbox" checked={selectedStatuses.includes(opt.value)} onChange={(e) => {
+                      setSelectedStatuses(s => {
+                        if (e.target.checked) return Array.from(new Set([...s, opt.value]));
+                        return s.filter(x => x !== opt.value);
+                      });
+                    }} />
+                    <span>{opt.label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {loading ? (
