@@ -1,6 +1,7 @@
 // app/api/sertifikat/admin/approve/[id]/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
+export const runtime = 'nodejs';
 import { prisma } from '@/lib/prisma';
 import { verifyAdminToken } from '@/lib/middleware/sertifikatAuth';
 import { generateNomorSertifikat } from '@/lib/utils/sertifikatUtils';
