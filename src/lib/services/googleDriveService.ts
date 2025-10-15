@@ -32,13 +32,15 @@ Link laporan inspeksi: ${data.linkLaporan}`;
   /**
    * Generate QR Code image from external API
    */
-  private static async generateQRCodeImage(content: string): Promise<Buffer> {
+  // Return raw bytes (Uint8Array) instead of relying on global Buffer
+  private static async generateQRCodeImage(content: string): Promise<Uint8Array> {
     const primaryUrl = `https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=${encodeURIComponent(content)}`;
-    
+
     try {
       const response = await fetch(primaryUrl);
       if (response.ok) {
-        return Buffer.from(await response.arrayBuffer());
+        const ab = await response.arrayBuffer();
+        return new Uint8Array(ab);
       }
     } catch (error) {
       console.warn('Primary QR service failed, trying fallback...', error);
@@ -47,12 +49,13 @@ Link laporan inspeksi: ${data.linkLaporan}`;
     // Fallback to alternative service
     const fallbackUrl = `https://quickchart.io/qr?size=512&text=${encodeURIComponent(content)}`;
     const response = await fetch(fallbackUrl);
-    
+
     if (!response.ok) {
       throw new Error(`QR Code generation failed: ${response.statusText}`);
     }
 
-    return Buffer.from(await response.arrayBuffer());
+    const ab = await response.arrayBuffer();
+    return new Uint8Array(ab);
   }
 
   /**

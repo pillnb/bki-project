@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { PassThrough } from "stream";
 import { getDriveForOwner } from "@/lib/getDrive";
 
 export const dynamic = "force-dynamic";
@@ -69,16 +68,18 @@ export async function POST(req: Request) {
     const trainingFolderId = await getOrCreateFolder(drive, trainingFolderName, userFolderId);
 
     const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    // avoid using global Buffer (may not exist in some runtimes) - use Uint8Array
+    const uint8 = new Uint8Array(arrayBuffer);
     const mime = (file as { type?: string }).type || "application/pdf";
     const name = sanitize(file.name) || `sertifikat-${Date.now()}.pdf`;
 
-    const pt = new PassThrough();
-    pt.end(buffer);
+    // Create a Readable stream from the Uint8Array without referencing Buffer
+    const { Readable } = await import('stream');
+    const stream = Readable.from(uint8);
 
     const uploaded = await drive.files.create({
       requestBody: { name, parents: [trainingFolderId], mimeType: mime },
-      media: { mimeType: mime, body: pt },
+      media: { mimeType: mime, body: stream },
       fields: "id,name,parents,webViewLink,webContentLink",
     });
 
