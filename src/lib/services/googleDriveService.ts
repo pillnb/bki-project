@@ -1,6 +1,7 @@
 // lib/services/googleDriveService.ts
 
 import { getDriveForOwner } from '@/lib/getDrive';
+import { Readable } from 'stream';
 
 interface QRCodeData {
   nomorSertifikat: string;
@@ -87,7 +88,6 @@ Link laporan inspeksi: ${data.linkLaporan}`;
       const fileName = this.sanitizeFilename(data.nomorSertifikat);
 
       // Upload langsung dengan drive.files.create
-      const { Readable } = await import('stream');
       console.log('[gdrive] Readable.from available=', typeof Readable?.from === 'function');
       const stream = Readable.from(imageBuffer);
       console.log('[gdrive] created Readable stream from Uint8Array');
