@@ -315,7 +315,7 @@ export default function AdminDashboardPage() {
                       <span className="text-gray-600">Tanggal:</span>
                       <p className="font-semibold text-black">{new Date(first.createdAt).toLocaleDateString('id-ID')}</p>
                     </div>
-                    {isMultiPage && (
+                    {(isMultiPage || first.status === 'PENDING_APPROVAL') && (
                       <div>
                         <span className="text-gray-600">Total Halaman:</span>
                         <p className="font-semibold text-black">{totalPages}</p>
