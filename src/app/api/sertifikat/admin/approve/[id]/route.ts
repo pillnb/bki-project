@@ -11,18 +11,30 @@ export async function POST(
   context: { params: Promise<{ id: string }> }
 ) {
   try {
+    // Debug: runtime/environment snapshot
+    console.log('[approve] runtime env snapshot:', {
+      NODE_ENV: process.env.NODE_ENV,
+      VERCEL: process.env.VERCEL,
+      VERCEL_ENV: process.env.VERCEL_ENV,
+      GOOGLE_OAUTH_OWNER_EMAIL: Boolean(process.env.GOOGLE_OAUTH_OWNER_EMAIL),
+      GOOGLE_DRIVE_QR_FOLDER_ID: Boolean(process.env.GOOGLE_DRIVE_QR_FOLDER_ID),
+    });
+
     // Verify admin authentication
     const admin = await verifyAdminToken(request);
     if (!admin) {
+      console.log('[approve] verifyAdminToken -> unauthorized');
       return NextResponse.json(
         { error: 'Unauthorized - Admin only' },
         { status: 403 }
       );
     }
 
-    const { keterangan } = await request.json()
-    const { id } = await context.params              // await dulu
+  const { keterangan } = await request.json()
+  const { id } = await context.params              // await dulu
     const sertifikatId = Number(id)
+
+  console.log('[approve] request for sertifikatId=', sertifikatId, 'keterangan=', keterangan);
 
     if (isNaN(sertifikatId)) {
       return NextResponse.json(
@@ -58,10 +70,16 @@ export async function POST(
     // Jika multipage, ambil satu sequence saja untuk digunakan oleh semua halaman
     let fixedSequence: number | undefined = undefined;
     if (jumlahHalaman > 1) {
-      // gunakan util untuk ambil sequence tapi tanpa mengubah logic getNextSequence di util
-      // getNextSequence tersedia di utils; import ulang minimal dengan dynamic require
-      const { getNextSequence } = await import('@/lib/utils/sertifikatUtils');
-      fixedSequence = await getNextSequence(String(new Date().getFullYear()));
+      try {
+        // gunakan util untuk ambil sequence tapi tanpa mengubah logic getNextSequence di util
+        // getNextSequence tersedia di utils; import ulang minimal dengan dynamic require
+        const { getNextSequence } = await import('@/lib/utils/sertifikatUtils');
+        fixedSequence = await getNextSequence(String(new Date().getFullYear()));
+        console.log('[approve] fixedSequence for multipage=', fixedSequence);
+      } catch (e) {
+        console.error('[approve] failed to get fixedSequence:', e);
+        throw e;
+      }
     }
     // Loop untuk generate multiple pages jika perlu
     for (let page = 1; page <= jumlahHalaman; page++) {
@@ -81,12 +99,25 @@ export async function POST(
 
         // Generate & upload QR Code
         // Dynamically import the GoogleDriveService to ensure Node-only globals
+        console.log('[approve] importing GoogleDriveService...');
+        const importStart = Date.now();
         const { GoogleDriveService } = await import('@/lib/services/googleDriveService');
-        const qrData = await GoogleDriveService.uploadQRCode({
-          nomorSertifikat,
-          createdAt: new Date(),
-          linkLaporan: sertifikat.linkLaporan
-        });
+        console.log('[approve] GoogleDriveService imported in', Date.now() - importStart, 'ms');
+
+        let qrData: any = null;
+        try {
+          console.log('[approve] uploading QR for nomor=', nomorSertifikat);
+          const uploadStart = Date.now();
+          qrData = await GoogleDriveService.uploadQRCode({
+            nomorSertifikat,
+            createdAt: new Date(),
+            linkLaporan: sertifikat.linkLaporan
+          });
+          console.log('[approve] uploadQRCode returned in', Date.now() - uploadStart, 'ms', 'qrData=', qrData);
+        } catch (uploadErr) {
+          console.error('[approve] uploadQRCode error:', uploadErr && (uploadErr as Error).message, uploadErr);
+          throw uploadErr;
+        }
 
         // Create new sertifikat record for this page
         const newSertifikat = await prisma.sertifikat.create({
@@ -110,7 +141,8 @@ export async function POST(
           }
         });
 
-        results.push(newSertifikat);
+  console.log('[approve] prisma.create succeeded id=', newSertifikat.id);
+  results.push(newSertifikat);
 
         // Set parentId ke halaman pertama untuk halaman berikutnya
         if (parentId === null) {
