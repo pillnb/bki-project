@@ -5,7 +5,6 @@ export const runtime = 'nodejs';
 import { prisma } from '@/lib/prisma';
 import { verifyAdminToken } from '@/lib/middleware/sertifikatAuth';
 import { generateNomorSertifikat } from '@/lib/utils/sertifikatUtils';
-import { GoogleDriveService } from '@/lib/services/googleDriveService';
 
 export async function POST(
   request: NextRequest,
@@ -81,6 +80,8 @@ export async function POST(
         });
 
         // Generate & upload QR Code
+        // Dynamically import the GoogleDriveService to ensure Node-only globals
+        const { GoogleDriveService } = await import('@/lib/services/googleDriveService');
         const qrData = await GoogleDriveService.uploadQRCode({
           nomorSertifikat,
           createdAt: new Date(),
