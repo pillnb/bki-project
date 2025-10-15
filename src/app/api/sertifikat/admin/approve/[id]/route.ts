@@ -20,9 +20,35 @@ export async function POST(
       GOOGLE_DRIVE_QR_FOLDER_ID: Boolean(process.env.GOOGLE_DRIVE_QR_FOLDER_ID),
     });
 
+    // Log request basics
+    try {
+      console.log('[approve] request method=', request.method);
+      // headers is a Headers object - convert to plain record for logging
+      const headersObj: Record<string,string> = {};
+      for (const [k,v] of Array.from(request.headers.entries())) headersObj[k]=v;
+      console.log('[approve] request headers keys=', Object.keys(headersObj));
+    } catch (hErr) {
+      console.warn('[approve] failed to read request headers:', hErr);
+    }
+
+    // Debug Buffer and Node info
+    try {
+      console.log('[approve] node version=', process.version, 'platform=', process.platform);
+      console.log('[approve] Buffer present=', typeof Buffer !== 'undefined', 'Buffer.from type=', typeof (Buffer as any)?.from);
+      console.log('[approve] globalThis.Buffer present=', typeof (globalThis as any).Buffer !== 'undefined');
+    } catch (bErr) {
+      console.warn('[approve] failed to inspect Buffer/globalThis:', bErr);
+    }
+
     // Verify admin authentication
-    const admin = await verifyAdminToken(request);
-    if (!admin) {
+    let adminResult;
+    try {
+      adminResult = await verifyAdminToken(request);
+    } catch (authErr) {
+      console.error('[approve] verifyAdminToken threw error:', authErr && (authErr as Error).message, authErr);
+      return NextResponse.json({ error: 'Unauthorized - Admin check failed' }, { status: 403 });
+    }
+    if (!adminResult) {
       console.log('[approve] verifyAdminToken -> unauthorized');
       return NextResponse.json(
         { error: 'Unauthorized - Admin only' },
