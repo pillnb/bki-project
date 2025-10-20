@@ -67,12 +67,14 @@ export default function MySubmissionsPage() {
     const styles = {
       PENDING_APPROVAL: 'bg-yellow-100 text-yellow-800',
       APPROVED: 'bg-green-100 text-green-800',
-      REJECTED: 'bg-red-100 text-red-800'
+      REJECTED: 'bg-red-100 text-red-800',
+      CANCEL: 'bg-red-100 text-red-800'
     };
     const labels = {
       PENDING_APPROVAL: 'Menunggu Persetujuan',
       APPROVED: 'Disetujui',
-      REJECTED: 'Ditolak'
+      REJECTED: 'Ditolak',
+      CANCEL: 'Dibatalkan'
     };
     return (
       <span className={`px-3 py-1 rounded-full text-xs font-semibold ${styles[status as keyof typeof styles]}`}>
@@ -182,8 +184,8 @@ export default function MySubmissionsPage() {
                     )}
                   </div>
 
-                  {first.status === 'APPROVED' && first.nomorSertifikat && (
-                    <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                  {(first.status === 'APPROVED' || first.status === 'CANCEL') && first.nomorSertifikat && (
+                    <div className={`${first.status === 'APPROVED' ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'} border rounded-lg p-4 mb-4`}>
                       <p className="text-sm font-semibold text-gray-700 mb-3">
                         Nomor Sertifikat:
                       </p>

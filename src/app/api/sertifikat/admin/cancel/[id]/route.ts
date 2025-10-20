@@ -25,25 +25,38 @@ export async function POST(
       return NextResponse.json({ error: 'Sertifikat tidak ditemukan' }, { status: 404 });
     }
 
-    if (sertifikat.status !== 'PENDING_APPROVAL') {
-      return NextResponse.json({ error: 'Sertifikat sudah diproses sebelumnya' }, { status: 400 });
-    }
+    // Determine group key: parentId if present, otherwise this item's id
+    const groupKey = sertifikat.parentId || sertifikat.id;
 
-    const updated = await prisma.sertifikat.update({
-      where: { id: sertifikatId },
+    // Find all records in the same group (parentId === groupKey OR id === groupKey)
+    const whereClause = {
+      OR: [
+        { parentId: groupKey },
+        { id: groupKey }
+      ]
+    } as any;
+
+    // read optional keterangan from body
+    let body: any = {};
+    try {
+      body = await request.json();
+    } catch (e) {
+      // ignore, body may be empty
+    }
+    const keterangan = (body && typeof body.keterangan === 'string' && body.keterangan.trim()) ? body.keterangan.trim() : 'Dibatalkan oleh admin';
+
+    // Update all matching records to CANCEL
+    const updateResult = await prisma.sertifikat.updateMany({
+      where: whereClause,
       data: {
-        // cast to any because Prisma client enum types may differ in generated types
         status: 'CANCEL' as any,
         approvedByAdmin: admin.nup,
-        keterangan: 'Dibatalkan oleh admin',
+        keterangan,
         updatedAt: new Date()
-      },
-      include: {
-        pengaju: { select: { nup: true, nama_pegawai: true } }
       }
     });
 
-    return NextResponse.json({ success: true, message: 'Pengajuan dibatalkan', data: updated });
+    return NextResponse.json({ success: true, message: `Berhasil membatalkan ${updateResult.count} sertifikat dalam grup`, count: updateResult.count });
 
   } catch (error) {
     console.error('Cancel sertifikat error:', error);
