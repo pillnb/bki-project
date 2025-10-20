@@ -162,7 +162,7 @@ export const KODE_PRODUKSI_E_OPTIONS = [
 export const KODE_E_MULTIPAGE = ['E10', 'E17', 'E25', 'E46', 'E47', 'E48'];
 
 // Types
-export type StatusSertifikat = 'PENDING_APPROVAL' | 'APPROVED' | 'REJECTED';
+export type StatusSertifikat = 'PENDING_APPROVAL' | 'APPROVED' | 'REJECTED' | 'CANCEL';
 
 export interface SertifikatData {
   id: number;

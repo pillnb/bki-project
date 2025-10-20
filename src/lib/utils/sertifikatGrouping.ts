@@ -3,7 +3,7 @@ import { SertifikatData } from '@/lib/constants/sertifikatConstants';
 export function groupSubmissionsByParentId(submissions: SertifikatData[]): SertifikatData[][] {
   // Filter valid submissions
   const validSubmissions = submissions.filter(s => {
-    if (s.status === 'PENDING_APPROVAL' || s.status === 'REJECTED') {
+    if (s.status === 'PENDING_APPROVAL' || s.status === 'REJECTED' || s.status === 'CANCEL') {
       return true;
     }
     return s.status === 'APPROVED' && !!s.nomorSertifikat;

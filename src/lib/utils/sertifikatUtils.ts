@@ -68,9 +68,19 @@ export async function generateNomorSertifikat(data: {
 
 export function validateGoogleDriveLink(url: string): boolean {
   const patterns = [
+    // Google Drive file/view URLs
     /^https:\/\/drive\.google\.com\/file\/d\/[A-Za-z0-9_-]+/,
+    // Google Docs / Sheets / Slides
     /^https:\/\/docs\.google\.com\/(document|spreadsheets|presentation)\/d\/[A-Za-z0-9_-]+/,
-    /^https:\/\/drive\.google\.com\/open\?id=[A-Za-z0-9_-]+/
+    // Legacy open?id= links
+    /^https:\/\/drive\.google\.com\/open\?id=[A-Za-z0-9_-]+/,
+    // Google Drive folder links
+    /^https:\/\/drive\.google\.com\/drive\/folders\/[A-Za-z0-9_-]+/,
+    /^https:\/\/drive\.google\.com\/drive\/u\/\d+\/folders\/[A-Za-z0-9_-]+/,
+    // OneDrive / SharePoint common short and full share links
+    /^https:\/\/1drv\.ms\//,
+    /^https:\/\/[A-Za-z0-9-]+\.sharepoint\.com\/[:A-Za-z0-9_\-@\/\.\?=,&%]+/,
+    /^https:\/\/[A-Za-z0-9-]+\-my\.sharepoint\.com\/[:A-Za-z0-9_\-@\/\.\?=,&%]+/
   ];
 
   return patterns.some(pattern => pattern.test(url));

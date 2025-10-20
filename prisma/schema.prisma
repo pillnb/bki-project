@@ -160,6 +160,7 @@ enum StatusSertifikat {
   PENDING_APPROVAL  // Baru disubmit, menunggu admin review
   APPROVED          // Sudah diapprove, nomor & QR sudah digenerate
   REJECTED          // Ditolak admin
+  CANCEL            // Terdapat kesalahan sehingga perlu dibatalkan
 }
 
 model Sertifikat {

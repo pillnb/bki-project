@@ -146,7 +146,7 @@ export default function SertifikatFormPage() {
         )}
         <div className="bg-white rounded-xl shadow-lg p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">
-            Form Pengajuan Sertifikat
+            Pengajuan Nomor Sertifikat
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -270,7 +270,7 @@ export default function SertifikatFormPage() {
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                   required
                   disabled={loading}
-                  placeholder="Masukkan jumlah halaman (1-200)"
+                  placeholder="Masukkan jumlah halaman"
                 />
                 <p className="text-xs text-gray-600 mt-1">
                   Kode produksi {formData.kodeProduksiE} memerlukan jumlah
@@ -297,6 +297,9 @@ export default function SertifikatFormPage() {
               />
               <p className="text-xs text-gray-600 mt-1">
                 Link Google Drive atau Google Docs
+              </p>
+              <p className="text-xs text-gray-500 mt-1 bg-gray-50 p-2 rounded-md">
+                Mohon pastikan: jika halaman sertifikat lebih dari 1, upload link harus berupa folder yang berisi semua file halaman tersebut.
               </p>
             </div>
 

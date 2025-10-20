@@ -144,6 +144,23 @@ export default function AdminDashboardPage() {
     setShowModal(true);
   };
 
+  const handleCancel = async (item: SertifikatData) => {
+    if (!item) return;
+    if (!confirm('Batalkan pengajuan ini? Status akan berubah menjadi Cancel.')) return;
+    try {
+      const res = await fetch(`/api/sertifikat/admin/cancel/${item.id}`, { method: 'POST' });
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}));
+        return alert(j.error || 'Gagal membatalkan');
+      }
+      await fetchSubmissions();
+      await fetchCounts();
+    } catch (e) {
+      console.error('Cancel error', e);
+      alert('Terjadi kesalahan saat membatalkan');
+    }
+  };
+
   const handleAction = async () => {
     if (!selectedItem) return;
     
@@ -186,12 +203,14 @@ export default function AdminDashboardPage() {
     const styles = {
       PENDING_APPROVAL: 'bg-yellow-100 text-yellow-800',
       APPROVED: 'bg-green-100 text-green-800',
-      REJECTED: 'bg-red-100 text-red-800'
+      REJECTED: 'bg-red-100 text-red-800',
+      CANCEL: 'bg-gray-100 text-gray-800'
     };
     const labels = {
       PENDING_APPROVAL: 'Pending',
       APPROVED: 'Approved',
-      REJECTED: 'Rejected'
+      REJECTED: 'Rejected',
+      CANCEL: 'Cancelled'
     };
     return (
       <span className={`px-3 py-1 rounded-full text-xs font-semibold ${styles[status as keyof typeof styles]}`}>
@@ -246,6 +265,16 @@ export default function AdminDashboardPage() {
               Pending ({pendingCount})
             </button>
             <button
+              onClick={() => { setFilter('all'); setSelectedStatuses(['CANCEL']); }}
+              className={`px-4 py-2 rounded-lg font-semibold transition ${
+                selectedStatuses.includes('CANCEL') && filter === 'all'
+                  ? 'bg-gray-700 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              Cancelled
+            </button>
+            <button
               onClick={() => setFilter('all')}
               className={`px-4 py-2 rounded-lg font-semibold transition ${
                 filter === 'all'
@@ -263,7 +292,8 @@ export default function AdminDashboardPage() {
                 {[
                   { value: 'PENDING_APPROVAL', label: 'Pending' },
                   { value: 'APPROVED', label: 'Approved' },
-                  { value: 'REJECTED', label: 'Rejected' }
+                  { value: 'REJECTED', label: 'Rejected' },
+                  { value: 'CANCEL', label: 'Cancelled' }
                 ].map(opt => (
                   <label key={opt.value} className="inline-flex items-center gap-2 text-sm">
                     <input type="checkbox" checked={selectedStatuses.includes(opt.value)} onChange={(e) => {
@@ -332,6 +362,7 @@ export default function AdminDashboardPage() {
                     <div className="flex gap-3 pt-4 border-t border-gray-200">
                       <button onClick={() => openModal(group.find(g => g.status === 'PENDING_APPROVAL') as SertifikatData, 'approve')} className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-semibold transition">✓ Approve</button>
                       <button onClick={() => openModal(group.find(g => g.status === 'PENDING_APPROVAL') as SertifikatData, 'reject')} className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg font-semibold transition">✗ Reject</button>
+                      <button onClick={() => handleCancel(group.find(g => g.status === 'PENDING_APPROVAL') as SertifikatData)} className="flex-1 bg-gray-400 hover:bg-gray-500 text-white py-2 px-4 rounded-lg font-semibold transition">— Cancel</button>
                     </div>
                   )}
 
