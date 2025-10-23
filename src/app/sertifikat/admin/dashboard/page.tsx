@@ -322,6 +322,34 @@ export default function AdminDashboardPage() {
               >
                 Download XLSX
               </button>
+              <button
+                onClick={async () => {
+                  try {
+                    const res = await fetch("/api/sertifikat/export-detailed");
+                    if (!res.ok) {
+                      const j = await res.json().catch(() => ({}));
+                      return alert(j.error || "Gagal mengunduh");
+                    }
+                    const blob = await res.blob();
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `perkembangan_proyek_export_${new Date()
+                      .toISOString()
+                      .slice(0, 10)}.xlsx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(url);
+                  } catch (e) {
+                    console.error("Download error", e);
+                    alert("Terjadi kesalahan saat mengunduh");
+                  }
+                }}
+                className="px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm"
+              >
+                Download Perkembangan Proyek
+              </button>
             </div>
           </div>
 
