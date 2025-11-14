@@ -61,6 +61,17 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    const [seniorManager, kepalaCabang] = await Promise.all([
+      prisma.pegawai.findFirst({
+        where: { jabatan: { equals: "Senior Manager Operasi", mode: "insensitive" } },
+        select: { id: true }
+      }),
+      prisma.pegawai.findFirst({
+        where: { jabatan: { equals: "Kepala Cabang", mode: "insensitive" } },
+        select: { id: true }
+      }),
+    ]);
+
     let proyek = await prisma.proyek.findFirst({
       where: { namaProyek: pekerjaan },
     });
@@ -101,6 +112,8 @@ export async function POST(req: NextRequest) {
         pihak_ketiga: pihak_ketiga || null,
         proyekId: proyek.id,
         leadInspectorId: leadInspectorId,
+        seniorManagerId: seniorManager?.id ?? null,
+        kepalaCabangId:  kepalaCabang?.id  ?? null,
         timInspektor: {
           connect: pegawaiNupList_valid.map((nup: string) => ({ nup })),
         },

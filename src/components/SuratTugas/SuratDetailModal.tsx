@@ -45,6 +45,8 @@ type Props = {
   surat?: SuratDetail | null;
   onSaved?: (updated: SuratDetail) => void;
   canEdit?: boolean;
+  extraSections?: React.ReactNode;
+
 };
 
 function toInputDate(v?: string | null) {
@@ -74,6 +76,7 @@ export default function SuratDetailModal({
   surat,
   onSaved,
   canEdit = true,
+  extraSections
 }: Props) {
   const [edit, setEdit] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -463,6 +466,7 @@ export default function SuratDetailModal({
               )}
             </Labeled>
           </div>
+          {extraSections}
         </div>
       </div>
     </div>
