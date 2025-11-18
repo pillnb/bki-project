@@ -1,94 +1,106 @@
+// src/components/SuratTugas/DownloadButtons.tsx
 "use client";
-import { useState } from "react";
-import { FileText, File } from "lucide-react";
-import { toast } from "sonner";
+
+import React from "react";
+import { FileText, File, FileCheck2 } from "lucide-react";
+
+type Props = {
+  id: string | number;
+  nomorSurat?: string | null;
+  status?: string | null;
+
+  // opsional: kalau dikirim dari parent, pakai itu. kalau tidak, komponen ini handle sendiri.
+  onDownloadPDF?: (id: string, filename?: string) => void;
+  onDownloadDocx?: (id: string, filename?: string) => void;
+  onDownloadFinal?: (id: string, filename?: string) => void;
+
+  isDownloading?: boolean;
+  downloadType?: "pdf" | "docx" | "final" | null;
+
+  className?: string;
+};
 
 export default function DownloadButtons({
-  suratId,
-  variant = "compact",
-}: {
-  suratId: string;
-  variant?: "compact" | "detailed";
-}) {
-  const [kind, setKind] = useState<null | "pdf" | "docx">(null);
-  const busy = kind !== null;
-  const base =
-    "flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed";
+  id,
+  nomorSurat = null,
+  onDownloadPDF,
+  onDownloadDocx,
+  onDownloadFinal,
+  isDownloading = false,
+  downloadType = null,
+  className = "",
+}: Props) {
+  const strId = String(id);
 
-  async function download(t: "pdf" | "docx") {
-    if (busy) return;
-    setKind(t);
-    try {
-      const url =
-        t === "pdf"
-          ? `/api/surat-tugas/${suratId}/download/pdf`
-          : `/api/surat-tugas/${suratId}/download`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const blob = await res.blob();
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download =
-        t === "pdf"
-          ? `Draft Surat Tugas - ${suratId}.pdf`
-          : `surat-tugas-${suratId}.docx`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      toast.success(`Surat Tugas (${t.toUpperCase()}) berhasil diunduh`);
-    } catch {
-      toast.error(`Gagal mengunduh ${t.toUpperCase()}`);
-    } finally {
-      setKind(null);
-    }
+  // fallback internal downloaders kalau parent tidak ngasih handler
+  const dlPDF = async () => {
+    if (onDownloadPDF) return onDownloadPDF(strId, buildName("pdf"));
+    await genericFetch(`/api/surat-tugas/${strId}/download/pdf`, buildName("pdf"));
+  };
+
+  const dlDOCX = async () => {
+    if (onDownloadDocx) return onDownloadDocx(strId, buildName("docx"));
+    await genericFetch(`/api/surat-tugas/${strId}/download`, buildName("docx"));
+  };
+
+  const dlFINAL = async () => {
+    if (onDownloadFinal) return onDownloadFinal(strId, buildName("docx", true));
+    await genericFetch(`/api/surat-tugas/${strId}/download/final`, buildName("docx", true));
+  };
+
+  function buildName(ext: "pdf" | "docx", isFinal = false) {
+    const base = nomorSurat?.trim() ? nomorSurat.trim() : `surat-tugas-${strId}`;
+    return isFinal ? `${base}-FINAL.${ext}` : `${base}.${ext}`;
   }
 
-  if (variant === "compact") {
-    return (
-      <div className="flex gap-2">
-        <button
-          onClick={() => download("pdf")}
-          disabled={busy}
-          className={`${base} bg-red-50 text-red-700 hover:bg-red-100 text-sm`}
-          title="Download PDF"
-        >
-          <FileText size={16} />
-          {kind === "pdf" && (
-            <div className="w-3 h-3 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
-          )}
-        </button>
-        <button
-          onClick={() => download("docx")}
-          disabled={busy}
-          className={`${base} bg-blue-50 text-blue-700 hover:bg-blue-100 text-sm`}
-          title="Download DOCX"
-        >
-          <File size={16} />
-          {kind === "docx" && (
-            <div className="w-3 h-3 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-          )}
-        </button>
-      </div>
-    );
+  async function genericFetch(url: string, filename: string) {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Gagal download (${res.status})`);
+    const blob = await res.blob();
+    const href = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = href;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(href);
   }
+
+  const spinner = (
+    <span className="inline-block h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+  );
 
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className={`flex items-center gap-2 ${className}`}>
+      {/* PDF */}
       <button
-        onClick={() => download("pdf")}
-        disabled={busy}
-        className={`${base} bg-red-600 text-white hover:bg-red-700`}
+        onClick={dlPDF}
+        disabled={isDownloading}
+        title="Download PDF"
+        className="p-2 rounded-lg text-red-700 bg-red-50 hover:bg-red-100 disabled:opacity-50"
       >
-        <FileText size={18} />{" "}
-        {kind === "pdf" ? "Downloading PDF..." : "Download PDF"}
+        {isDownloading && downloadType === "pdf" ? spinner : <FileText size={16} />}
       </button>
+
+      {/* DOCX (draft/normal) */}
       <button
-        onClick={() => download("docx")}
-        disabled={busy}
-        className={`${base} bg-blue-600 text-white hover:bg-blue-700`}
+        onClick={dlDOCX}
+        disabled={isDownloading}
+        title="Download DOCX"
+        className="p-2 rounded-lg text-blue-700 bg-blue-50 hover:bg-blue-100 disabled:opacity-50"
       >
-        <File size={18} />{" "}
-        {kind === "docx" ? "Downloading DOCX..." : "Download DOCX"}
+        {isDownloading && downloadType === "docx" ? spinner : <File size={16} />}
+      </button>
+
+      {/* DOCX FINAL (tetap bisa diunduh tanpa syarat status/nomor) */}
+      <button
+        onClick={dlFINAL}
+        disabled={isDownloading}
+        title="Download DOCX Final"
+        className="p-2 rounded-lg text-violet-700 bg-violet-50 hover:bg-violet-100 disabled:opacity-50"
+      >
+        {isDownloading && downloadType === "final" ? spinner : <FileCheck2 size={16} />}
       </button>
     </div>
   );

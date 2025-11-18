@@ -2,14 +2,7 @@
 "use client";
 
 import React, { useMemo } from "react";
-import {
-  Eye,
-  FileText,
-  File,
-  MapPin,
-  Calendar,
-  User,
-} from "lucide-react";
+import { Eye, MapPin, Calendar, User } from "lucide-react";
 
 import ProgressTracker from "./ProgressTracker";
 import type { SuratTugasItem, StatusSuratTugas } from "./types";
@@ -20,6 +13,7 @@ import {
   formatDateId,
 } from "./helpers";
 import { normalizeStatus } from "./utils";
+import DownloadButtons from "@/components/SuratTugas/DownloadButtons";
 
 type Props = {
   surat: SuratTugasItem;
@@ -31,11 +25,11 @@ type Props = {
   // auth
   currentUserNup: string;
 
-  // download (dibikin optional supaya gak error kalau belum dipakai)
+  // download state
   onDownloadPDF?: (id: string, filename?: string) => void;
   onDownloadDocx?: (id: string, filename?: string) => void;
   isDownloading?: boolean;
-  downloadType?: "pdf" | "docx" | null;
+  downloadType?: "pdf" | "docx" | "final" | null; // tambahkan "final"
 };
 
 const statusLabel: Record<StatusSuratTugas, string> = {
@@ -75,13 +69,14 @@ export default function SuratCard({
   const status = normalizeStatus(surat.status);
   const leadNup = getLeadInspectorNup(surat.leadInspector) || "";
 
-    console.groupCollapsed(`[DEBUG][SuratCard] lead check - ${surat.id}`);
-    console.log("leadInspector raw:", surat.leadInspector);
-    console.log("leadInspector.nup:", (surat.leadInspector as any)?.nup);
-    console.log("resolved leadNup (helpers):", leadNup);
-    console.log("currentUserNup:", currentUserNup);
-    console.log("timInspektor:", surat.timInspektor);
-    console.groupEnd();
+  // DEBUG lead
+  console.groupCollapsed(`[DEBUG][SuratCard] lead check - ${surat.id}`);
+  console.log("leadInspector raw:", surat.leadInspector);
+  console.log("leadInspector.nup:", (surat.leadInspector as any)?.nup);
+  console.log("resolved leadNup (helpers):", leadNup);
+  console.log("currentUserNup:", currentUserNup);
+  console.log("timInspektor:", surat.timInspektor);
+  console.groupEnd();
 
   const isLead = useMemo(() => {
     const a = (currentUserNup || "").trim();
@@ -89,14 +84,11 @@ export default function SuratCard({
     return !!a && !!b && a === b;
   }, [currentUserNup, leadNup]);
 
-  // aturan approve: cuma muncul aktif untuk MENUNGGU_LEAD dan user = lead
   const canApprove = isLead && status === "MENUNGGU_LEAD";
 
-  // nama lead yg enak dibaca
   const leadName =
     getInspectorNameByNup(leadNup, surat.timInspektor) || leadNup || "-";
 
-  // LOG DEVTOOLS
   console.debug("[SuratCard Approve DBG]", {
     id: surat.id,
     currentUserNup,
@@ -138,16 +130,16 @@ export default function SuratCard({
           {leadName !== "-" && (
             <div className="flex items-center gap-1 mt-2">
               <User size={14} className="text-blue-600" />
-              <p className="text-xs text-blue-700">
-                Lead Inspector: {leadName}
-              </p>
+              <p className="text-xs text-blue-700">Lead Inspector: {leadName}</p>
             </div>
           )}
         </div>
 
-        {/* KANAN: Status badge + buttons */}
+        {/* KANAN: Status badge + actions */}
         <div className="flex items-center gap-2 shrink-0">
-          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusClass[status]}`}>
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-semibold ${statusClass[status]}`}
+          >
             {statusLabel[status]}
           </span>
 
@@ -177,31 +169,17 @@ export default function SuratCard({
             <Eye size={16} />
           </button>
 
-          {/* DOWNLOADS */}
-          <button
-            onClick={() => onDownloadPDF?.(surat.id)}
-            disabled={!!isDownloading}
-            title="Download PDF"
-            className="p-2 rounded-lg text-red-700 bg-red-50 hover:bg-red-100 disabled:opacity-50"
-          >
-            {isDownloading && downloadType === "pdf" ? (
-              <span className="inline-block h-4 w-4 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
-            ) : (
-              <FileText size={16} />
-            )}
-          </button>
-          <button
-            onClick={() => onDownloadDocx?.(surat.id)}
-            disabled={!!isDownloading}
-            title="Download DOCX"
-            className="p-2 rounded-lg text-blue-700 bg-blue-50 hover:bg-blue-100 disabled:opacity-50"
-          >
-            {isDownloading && downloadType === "docx" ? (
-              <span className="inline-block h-4 w-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-            ) : (
-              <File size={16} />
-            )}
-          </button>
+          {/* DOWNLOADS: PDF, DOCX, DOCX FINAL */}
+          <DownloadButtons
+            id={String(surat.id)}
+            status={status}
+            nomorSurat={surat.nomor_surat ?? null}
+            onDownloadPDF={(id) => onDownloadPDF?.(id)}
+            onDownloadDocx={(id) => onDownloadDocx?.(id)}
+            isDownloading={isDownloading}
+            downloadType={downloadType}
+            className="!gap-2"
+          />
         </div>
       </div>
 
@@ -236,15 +214,25 @@ export default function SuratCard({
         )}
       </div>
 
-      {/* DEBUG PANEL VISUAL (aktifkan dengan NEXT_PUBLIC_DEBUG=true) */}
+      {/* DEBUG PANEL VISUAL */}
       {process.env.NEXT_PUBLIC_DEBUG === "true" && (
         <div className="mt-4 rounded-md border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900">
           <div className="font-semibold mb-1">DEBUG Approve</div>
-          <div>currentUserNup: <b>{currentUserNup || "(kosong)"}</b></div>
-          <div>leadNup: <b>{leadNup || "(kosong)"}</b></div>
-          <div>status: <b>{status}</b></div>
-          <div>isLead: <b>{String(isLead)}</b></div>
-          <div>canApprove: <b>{String(canApprove)}</b></div>
+          <div>
+            currentUserNup: <b>{currentUserNup || "(kosong)"}</b>
+          </div>
+          <div>
+            leadNup: <b>{leadNup || "(kosong)"}</b>
+          </div>
+          <div>
+            status: <b>{status}</b>
+          </div>
+          <div>
+            isLead: <b>{String(isLead)}</b>
+          </div>
+          <div>
+            canApprove: <b>{String(canApprove)}</b>
+          </div>
         </div>
       )}
     </div>

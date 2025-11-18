@@ -51,7 +51,7 @@ export default function MonitoringPage() {
     (async () => {
       try {
         setLoading(true);
-        const res = await fetch("/api/surat-tugas?showAll=true", {
+        const res = await fetch("/api/surat-tugas?scope=admin&showAll=true", {
           cache: "no-store",
           signal: ac.signal,
         });

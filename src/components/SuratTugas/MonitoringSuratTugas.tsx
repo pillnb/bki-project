@@ -231,7 +231,7 @@ export default function MonitoringSuratTugas() {
                 downloadType={downloadType}
                 onApproved={async (id) => {
                   try {
-                    // BE endpoint kamu, sesuaikan:
+                    // BE endpoint
                     const res = await fetch(`/api/surat-tugas/${id}/approve`, {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
