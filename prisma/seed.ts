@@ -1,76 +1,111 @@
-import { PrismaClient, StatusPelatihan } from '../src/generated/prisma';
-import * as bcrypt from 'bcrypt';
-import pegawaiData from './pegawai.json';
-import kualifikasiData from './kualifikasi.json';
+import { PrismaClient } from '@prisma/client'; 
+// import * as bcrypt from 'bcrypt'; // Tidak perlu import ini dulu kalau tidak dipakai
+// import pegawaiData from './pegawai.json';
+// import kualifikasiData from './kualifikasi.json';
 
 const prisma = new PrismaClient();
 
 async function main() {
+  
+  // ==========================================
+  // BAGIAN 1 & 2: DATA LAMA (SKIP / DIBEKUKAN)
+  // ==========================================
+  // Kita matikan kode ini supaya data yang sudah kamu edit di DB tidak terganggu/terduplikasi.
+  
+  console.log('⏩ Bagian Pegawai & Kualifikasi di-SKIP (Data sudah ada di DB).');
+
+  /* // --- KODE LAMA DISIMPAN SEBAGAI ARSIP SAJA ---
+  
   console.log('🌱 Mulai seeding data pegawai...');
-
-  // Hash default password
   const hashedPassword = await bcrypt.hash('password123', 10);
-
-  // Import data dari pegawai.json
-  const pegawaiToCreate = pegawaiData.map(p => ({
-    nup: p.nup,
-    nama_pegawai: p.nama_pegawai,
-    jabatan: p.jabatan,
-    tempat_lahir: p.tempat_lahir ?? null,
-    tanggal_lahir: p.tanggal_lahir ? new Date(p.tanggal_lahir) : null,
-    alamat: p.alamat ?? null,
-    warga_negara: p.warga_negara ?? null,
-    agama: p.agama ?? null,
-    no_telepon: p.no_telepon ?? null,
-    email: p.email ?? null,
-    nik: p.nik ?? null,
-    tandaTanganUrl: p.tandaTanganUrl ?? null,
-    status_pegawai: p.status_pegawai ?? 'PKWTT',
-    username: p.nik,
-    password: hashedPassword,
-  }));
-
+  const pegawaiToCreate = pegawaiData.map(p => ({ ... }));
   await prisma.pegawai.createMany({ data: pegawaiToCreate, skipDuplicates: true });
-  console.log('✅ Seed pegawai selesai.');
 
-  console.log('🌱 Mulai seeding data kualifikasi (pelatihan)...');
-  const today = new Date();
+  console.log('🌱 Mulai seeding data kualifikasi...');
+  // ... logika looping kualifikasi ...
+  */
 
-  const createOps = kualifikasiData.map(k => {
-    const awal    = k.tanggal_awal    ? new Date(k.tanggal_awal)    : null;
-    const berlaku = k.masa_berlaku    ? new Date(k.masa_berlaku)    : null;
-    const akhir   = k.tanggal_akhir   ? new Date(k.tanggal_akhir)   : null;
-    const status: StatusPelatihan = (berlaku && berlaku < today)
-      ? StatusPelatihan.EXPIRED
-      : StatusPelatihan.VALID;
 
-    return prisma.pelatihan.create({
-      data: {
-        nup:                  k.nup                  ?? null,
-        nama_pelatihan:       k.nama_pelatihan       ?? null,
-        penyelenggara:        k.penyelenggara        ?? null,
-        lokasi:               k.lokasi               ?? null,
-        nomor_sertifikat:     k.nomor_sertifikat     ?? null,
-        file_sertifikat:      k.file_sertifikat      ?? null,
-        tanggal_awal:         awal,
-        masa_berlaku:         berlaku,
-        keterangan_utilisasi: k.keterangan_utilisasi ?? null,
-        tahun:                k.tahun                ?? null,
-        tanggal_akhir:        akhir,
-        status,
-        pegawai: {
-          connect: { nup: k.pegawai.connect.nup }
-        }
-      }
+  // ==========================================
+  // BAGIAN 3: HANYA SEED MODULES BARU
+  // ==========================================
+  console.log('🌱 Mulai seeding module emergent...');
+
+  const modules = [
+    {
+      name: "Tool Management",
+      description: "Manage inventory and tools",
+      icon: "Wrench",
+      path: "/tools",
+      externalUrl: null,
+      roles: ["SuperAdmin", "Admin", "User", "Management"],
+      isActive: true
+    },
+    {
+      name: "Assignment Letters",
+      description: "Create and manage assignment letters",
+      icon: "FileText",
+      path: "/surat-tugas",
+      externalUrl: null,
+      roles: ["SuperAdmin", "Admin", "Management"],
+      isActive: true
+    },
+    {
+      name: "Curriculum Vitae",
+      description: "Employee CV management",
+      icon: "User",
+      path: "/cv",
+      externalUrl: null,
+      roles: ["SuperAdmin", "Admin", "User", "Management"],
+      isActive: true
+    },
+    {
+      name: "Marketing",
+      description: "Marketing campaigns",
+      icon: "TrendingUp",
+      path: "/marketing",
+      externalUrl: null,
+      roles: ["SuperAdmin", "Admin", "Management"],
+      isActive: false
+    },
+    {
+      name: "KPI Dashboard",
+      description: "Key Performance Indicators",
+      icon: "BarChart3",
+      path: "/kpi",
+      externalUrl: null,
+      roles: ["SuperAdmin", "Admin", "Management"],
+      isActive: false
+    }
+  ];
+
+  for (const mod of modules) {
+    // Cek dulu biar gak duplikat
+    const existing = await prisma.moduleAccess.findFirst({
+        where: { name: mod.name }
     });
-  });
 
-  const results = await Promise.allSettled(createOps);
-  const successCount = results.filter(r => r.status === 'fulfilled').length;
-  console.log(`✅ Berhasil menambahkan ${successCount} data kualifikasi.`);
+    if (!existing) {
+        await prisma.moduleAccess.create({
+          data: {
+            name: mod.name,
+            description: mod.description,
+            icon: mod.icon,
+            path: mod.path,
+            externalUrl: mod.externalUrl,
+            roles: mod.roles,
+            isActive: mod.isActive
+          }
+        });
+        console.log(`   + Created module: ${mod.name}`);
+    } else {
+        console.log(`   . Module exists (skip): ${mod.name}`);
+    }
+  }
+  console.log('✅ Seed module emergent selesai.');
+
 
   await prisma.$disconnect();
-  console.log('✨ Seeding selesai!');
 }
 
 main().catch(e => {

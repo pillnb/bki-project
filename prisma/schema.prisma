@@ -38,6 +38,9 @@ model pegawai {
   smApproverDi        SuratTugas[] @relation("SmApprover")
   kacabApproverDi     SuratTugas[] @relation("KacabApprover")
   pengajuanSertifikat    Sertifikat[] @relation("PengajuSertifikat")
+
+  loansCreated        Loan[]        @relation("LoanCreator")
+  calibrationsCreated Calibration[] @relation("CalibrationCreator")
 }
 
 model Proyek {
@@ -202,4 +205,132 @@ model SertifikatCounter {
   tahun       String   @unique // '2025', '2026', dst
   sequence    Int      @default(0) // counter: 1, 2, 3, ...
   updatedAt   DateTime @updatedAt
+}
+
+enum ToolCondition {
+  Good
+  Damaged
+}
+
+enum EmergentRole {
+  SuperAdmin
+  Admin
+  User
+  Management
+}
+
+// INTEGRASI SISTEM EMERGENT (Inventory & Dashboard)
+
+// Pengganti bki_modules (Menu Management)
+model ModuleAccess {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  icon        String?
+  path        String
+  externalUrl String?  @map("external_url")
+  isActive    Boolean  @default(true) @map("is_active")
+  roles       String[] // Array role yang diizinkan akses modul ini
+
+  @@map("bki_modules")
+}
+
+// Pengganti em_tools
+model Tool {
+  id                        String        @id @default(uuid())
+  equipmentName             String        @map("equipment_name")
+  brandType                 String        @map("brand_type")
+  serialNo                  String        @map("serial_no")
+  inventoryCode             String        @map("inventory_code")
+  assetNumber               String?       @map("asset_number")
+  periodicInspectionDate    DateTime?     @map("periodic_inspection_date") @db.Date
+  calibrationDate           DateTime?     @map("calibration_date") @db.Date
+  calibrationValidityMonths Int           @default(12) @map("calibration_validity_months")
+  condition                 ToolCondition // Menggunakan Enum
+  description               String?
+  equipmentLocation         String        @map("equipment_location")
+  calibrationCertificate    String?       @map("calibration_certificate") // Path file
+  equipmentManual           String?       @map("equipment_manual") // Path file
+  
+  createdAt                 DateTime      @default(now()) @map("created_at")
+  updatedAt                 DateTime      @updatedAt @map("updated_at")
+
+  @@map("em_tools")
+}
+
+// Pengganti em_stock_items
+model StockItem {
+  id                  String   @id @default(uuid())
+  itemName            String   @map("item_name")
+  brandSpecifications String   @map("brand_specifications")
+  availableQuantity   Int      @default(0) @map("available_quantity")
+  unit                String
+  description         String?
+  purchaseReceipt     String?  @map("purchase_receipt") // Path file
+  
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  @@map("em_stock_items")
+}
+
+// Pengganti em_calibrations
+model Calibration {
+  id                 String        @id @default(uuid())
+  deviceName         String        @map("device_name")
+  serialNo           String        @map("serial_no")
+  calibrationDate    DateTime      @map("calibration_date") @db.Date
+  calibrationExpiry  DateTime      @map("calibration_expiry_date") @db.Date
+  deviceCondition    ToolCondition? @map("device_condition")
+  calibrationAgency  String?       @map("calibration_agency")
+  calibrationLocation String?      @map("calibration_location")
+  personName         String?       @map("person_name") // Nama manual jika needed
+  
+  // Relasi ke Pegawai (User yang input)
+  createdByPegawaiId Int?          @map("created_by_pegawai_id")
+  createdBy          pegawai?      @relation("CalibrationCreator", fields: [createdByPegawaiId], references: [id])
+  
+  createdAt          DateTime      @default(now()) @map("created_at")
+
+  @@map("em_calibrations")
+}
+
+// Pengganti em_loans (Parent)
+model Loan {
+  id              String     @id @default(uuid())
+  borrowerName    String     @map("borrower_name") // Bisa nama manual atau ambil dari relasi pegawai
+  loanDate        DateTime   @map("loan_date") @db.Date
+  returnDate      DateTime   @map("return_date") @db.Date
+  
+  // Project info (Tetap String agar fleksibel seperti request emergent, 
+  // tapi kamu bisa hubungkan ke model Proyek lama jika mau)
+  projectName     String     @map("project_name") 
+  wbsProjectNo    String     @map("wbs_project_no")
+  projectLocation String     @map("project_location")
+
+  // Relasi ke Pegawai (Siapa yang input data ini/Admin)
+  createdByPegawaiId Int?    @map("created_by_pegawai_id")
+  createdBy          pegawai? @relation("LoanCreator", fields: [createdByPegawaiId], references: [id])
+  
+  items           LoanItem[] 
+  
+  createdAt       DateTime   @default(now()) @map("created_at")
+  updatedAt       DateTime   @updatedAt @map("updated_at")
+
+  @@map("em_loans")
+}
+
+// Pengganti em_loan_items (Child)
+model LoanItem {
+  id            String        @id @default(uuid())
+  loanId        String        @map("loan_id")
+  loan          Loan          @relation(fields: [loanId], references: [id], onDelete: Cascade)
+  
+  equipmentName String        @map("equipment_name")
+  serialNo      String        @map("serial_no")
+  condition     ToolCondition
+
+  createdAt     DateTime      @default(now()) @map("created_at")
+
+  @@map("em_loan_items")
 }
